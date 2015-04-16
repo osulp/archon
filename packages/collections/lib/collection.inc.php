@@ -2355,7 +2355,10 @@ abstract class Collections_Collection
     */
    public $CollectionIdentifier = '';
 
-   /** @var string */
+  /** @var string */
+  public $ArkID = '';
+
+  /** @var string */
    public $Title = '';
 
    /** @var string */

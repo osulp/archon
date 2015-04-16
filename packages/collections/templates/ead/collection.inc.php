@@ -57,7 +57,12 @@ if ($objCollection->RepositoryID) {
    }
 }
 
-$identifier = "ArchonInternalCollectionID:" . $objCollection->ID;        //tweak if you wish to set a different identifier attribute on the eadid
+$ark_identifier = '';
+$ark_url = '';
+if ($objCollection->ArkID) {
+  $ark_identifier = 'identifier="'.$objCollection->ArkID.'"';
+  $ark_url = 'url="http://nwda-db.wsulibs.wsu.edu/findaid/ark:/'.$objCollection->ArkID.'"';
+}
 
 if ($objCollection->CollectionIdentifier) {
    $collectionidentifier = ($objCollection->Classification) ? $objCollection->Classification->toString(LINK_NONE, true, false, true, false) . "/" . $objCollection->getString('CollectionIdentifier') : $objCollection->getString('CollectionIdentifier');
@@ -65,7 +70,7 @@ if ($objCollection->CollectionIdentifier) {
    $collectionidentifier = $objCollection->ID;
 }
 ?>
-      <eadid encodinganalog="856$u" mainagencycode="<?php echo($objCollection->Repository->Country->ISOAlpha2) ?>-<?php echo($objCollection->Repository->Code); ?>" countrycode="<?php echo($objCollection->Repository->Country->ISOAlpha2) ?>" identifier="<?php echo($identifier); ?>"><?php echo($collectionidentifier); ?></eadid>
+      <eadid countrycode="us" encodinganalog="identifier" mainagencycode="orcsar" <?php echo $ark_identifier.' ' .$ark_url; ?>><?php echo($collectionidentifier); ?></eadid>
       <filedesc>
       <?php
       if ($objCollection->Title) {

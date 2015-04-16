@@ -775,11 +775,11 @@
 				<phrase name='acquisition_custodialhistory' regularexpression=''>
 					Use this field to provide information on changes of ownership or custody of the material being described, from the time it left the possession of the creator until it was acquired by the repository, that is significant for understanding its authenticity, integrity, and interpretation (See DACS Rule 5.1 for more information).
 				</phrase>
-				<phrase name='books' regularexpression=''>
+                <phrase name='arkid' regularexpression=''>
+                    The ARK identifier for this collection.
+                </phrase>
+                <phrase name='books' regularexpression=''>
 					Open this section to link books records to the collection.
-				</phrase>
-				<phrase name='classificationid' regularexpression=''>
-					Use this drop-down to select a 'classification,' such as a record groups, into which you may sort materials to relate them by provenance, function, or general subject.  When a classification is selected, a list of associated subclassifications (if any) will appear, so that the collections may be further sorted into subgroups.
 				</phrase>
 				<phrase name='collectionidentifier' regularexpression=''>
 					Use this field to record a unique identifier assigned to the collection.  (If the classification manger is being used by your repository, the information recorded here is used in conjunction with the classification ids selected above to constitute the unique identifier.)
@@ -1049,7 +1049,10 @@
 					
 					Are you sure?
 				</phrase>
-				<phrase name='books' regularexpression=''>
+                <phrase name='arkid' regularexpression=''>
+                    ARK ID:
+                </phrase>
+                <phrase name='books' regularexpression=''>
 					Book(s)
 				</phrase>
 				<phrase name='classificationid' regularexpression=''>

@@ -54,7 +54,12 @@ echo("<h1 id='titleheader'>" . $_ARCHON->PublicInterface->Title . "</h1>\n");
          ?>
          <div class='ccardcontent'><span class='ccardlabel'>Extent:</span> <?php echo(preg_replace('/\.(\d)0/', ".$1", $objCollection->getString('Extent'))) . " "; ?><?php echo( is_null($objCollection->ExtentUnit)? '' : $objCollection->ExtentUnit->toString()); ?>
          </div>
-   <?php
+      <?php
+      if ($objCollection->ArkID) {
+        ?>
+        <div class='ccardcontent'><span class='ccardlabel'>ARK ID:</span> <?php echo($objCollection->ArkID); ?></div>
+        <?php
+      }
 }
 
 if($objCollection->AltExtentStatement)
