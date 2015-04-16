@@ -116,6 +116,7 @@ CREATE TABLE tblCollections_Collections (
   Enabled BIT NOT NULL DEFAULT '0',
   RepositoryID INT NOT NULL DEFAULT '0',
   ClassificationID INT NOT NULL DEFAULT '0',
+  ArkID VARCHAR(25) NULL DEFAULT NULL,
   CollectionIdentifier varchar(50) NULL DEFAULT NULL,
   Title varchar(150) NOT NULL,
   SortTitle varchar(150) NOT NULL,

@@ -17,8 +17,6 @@
  * @author Chris Rishel
  */
 
-
-
 // ***********************************************
 // * Database Configuration                      *
 // ***********************************************
@@ -78,7 +76,7 @@
    //       $_ARCHON->db->ServerAddrses = '127.0.0.1';
    //
 
-   $_ARCHON->db->ServerAddress = 'localhost';
+   $_ARCHON->db->ServerAddress = $_SERVER['DB_HOST'];
 
    // ### REQUIRED ###
    // ********************************************
@@ -97,7 +95,7 @@
    //       $_ARCHON->db->ServerAddress = 'ArchonWebUser';
    //
 
-   $_ARCHON->db->Login = 'ArchonWebUser';
+   $_ARCHON->db->Login = $_SERVER['DB_USER'];
 
    // ### REQUIRED ###
    // ********************************************
@@ -116,7 +114,7 @@
    //       $_ARCHON->db->Password = 'Archon';
    //
 
-   $_ARCHON->db->Password = 'Archon';
+   $_ARCHON->db->Password = $_SERVER['DB_PASS'];
 
    // ### REQUIRED ###
    // ********************************************
@@ -142,7 +140,7 @@
    //       $_ARCHON->db->DatabaseName = 'Archon';
    //
 
-   $_ARCHON->db->DatabaseName = 'Archon';
+   $_ARCHON->db->DatabaseName = $_SERVER['DB_NAME'];
 
 
 
