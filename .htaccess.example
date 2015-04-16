@@ -1,0 +1,4 @@
+SetEnv DB_HOST localhost
+SetEnv DB_USER ArchonWebUser
+SetEnv DB_PASS Archon
+SetEnv DB_NAME Archon
