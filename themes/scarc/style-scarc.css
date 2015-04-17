@@ -153,13 +153,13 @@ h4.catalogue-pagetitle {
 
 a:link {
 		color: #C34500;    /* old orange: #D85FA1A;   */
-		font-weight: bold;
+		/* font-weight: bold; */
 		/* text-decoration:none; */
 }
 
 a:visited {
 		color: #C34500;   /* old darker orange: #FF7D4A;   */
-		font-weight: bold;
+		/* font-weight: bold; */
 		/* text-decoration: none; */
 }
 
@@ -451,7 +451,7 @@ img.block_rectangle {
 	/*
 	border: 1px solid red;
 	*/
-	padding-top: 10px; 
+	/* padding-top: 10px; */ 
 	padding-left: 0px; 
 	/*
 	text-align: right;
@@ -464,6 +464,8 @@ img.block_rectangle {
 	/*
 	border: 1px solid green;
 	*/
+	float: left;
+	margin-top: 10px;
 }
 
 a.header-blacktop:link {
@@ -1801,5 +1803,27 @@ td {
 	text-transform: uppercase;
 }
 
+#researchblock {
+    float: right;
+    font-size: 0.8em;
+    width: 30em;
+    margin-right: 5px;
+    padding-top: 0;
+    color: #FFF;
+    text-align: right;
+    margin-top: 5px;
+}
 
+#researchblock a {
+    color: #FFF;
+    font-weight: normal;
+}
 
+#browsebyblock {
+    width: 58em;
+    margin: 1em auto;
+    padding: 1em;
+    background-color: white;
+    text-align: left;
+    overflow: hidden;
+}

@@ -87,10 +87,6 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
       <script type="text/javascript" src="<?php echo($_ARCHON->PublicInterface->ThemeJavascriptPath); ?>/jquery.scrollTo-min.js"></script>
       <?php echo($_ARCHON->getJavascriptTags('jquery.jgrowl.min')); ?>
       <?php echo($_ARCHON->getJavascriptTags('archon')); ?>
-
-
-
-
        <script type="text/javascript">
          /* <![CDATA[ */
          imagePath = '<?php echo($_ARCHON->PublicInterface->ImagePath); ?>';
@@ -127,76 +123,157 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
       }
       ?>
    </head>
-   <body>
-   <div id="header-blacktop">
-  <div id="header-blacktop-container">
-    <div id="header-blacktop-text"><a href="http://library.oregonstate.edu" class="header-blacktop">OSU Libraries</a></div>
-  </div>
-</div>
-<div id="header-title"><a href="http://oregonstate.edu" class="nostyle"><img id="osu-tag" src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/osu-tag.gif" width="101" height="119"
+  <body>
+    <div id="header-blacktop">
+      <div id="header-blacktop-container">
+        <div id="header-blacktop-text"><a href="http://library.oregonstate.edu" class="header-blacktop">OSU Libraries</a></div>
+        <div id="researchblock">
+          <?php
+          if($_ARCHON->Security->isAuthenticated())
+          {
+            echo("<span class='bold'>Welcome, " . $_ARCHON->Security->Session->User->toString() . "</span>");
+
+            if($_ARCHON->Security->userHasAdministrativeAccess())
+            {
+              echo(" | <a href='?p=admin' rel='external'>Admin</a>&nbsp;");
+            }
+            else
+            {
+              echo (" | <a href='?p=core/account'>My Account</a>");
+            }
+
+            $logoutURI = preg_replace('/(&|\\?)f=([\\w])*/', '', $_SERVER['REQUEST_URI']);
+            $Logout = (encoding_strpos($logoutURI, '?') !== false) ? '&amp;f=logout' : '?f=logout';
+            $strLogout = encode($logoutURI, ENCODE_HTML) . $Logout;
+            echo(" | <a href='$strLogout'>Logout</a>");
+          }
+          elseif($_ARCHON->config->ForceHTTPS)
+          {
+            echo("<a href='?p=core/login'>Log In</a>");
+          }
+          else
+          {
+            echo("<a href='?p=core/login'>Log In</a>");
+//            echo("<a href='#' onclick='$(window).scrollTo(\"#archoninfo\"); if($(\"#userlogin\").is(\":visible\")) $(\"#loginlink\").html(\"Log In\"); else $(\"#loginlink\").html(\"Hide\"); $(\"#userlogin\").slideToggle(\"normal\"); $(\"#ArchonLoginField\").focus(); return false;'>Log In</a>");
+          }
+
+          if(!$_ARCHON->Security->userHasAdministrativeAccess())
+          {
+            $emailpage = defined('PACKAGE_COLLECTIONS') ? "collections/research" : "core/contact";
+
+            echo(" | <a href='?p={$emailpage}&amp;f=email&amp;referer=" . urlencode($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) . "'>Contact Us</a> ");
+            if($_ARCHON->Security->isAuthenticated())
+            {
+              echo(" | <a href='?p=core/account&amp;f=account'>My Account</a>");
+            }
+            if(defined('PACKAGE_COLLECTIONS'))
+            {
+              $_ARCHON->Security->Session->ResearchCart->getCart();
+              $EntryCount = $_ARCHON->Security->Session->ResearchCart->getCartCount();
+              $class = $_ARCHON->Repository->ResearchFunctionality & RESEARCH_COLLECTIONS ? '' : 'hidewhenempty';
+              $hidden = ($_ARCHON->Repository->ResearchFunctionality & RESEARCH_COLLECTIONS || $EntryCount) ? '' : "style='display:none'";
+
+              echo("<span id='viewcartlink' class='$class' $hidden>| <a href='?p=collections/research&amp;f=cart&amp;referer=" . urlencode($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) . "'>View Cart (<span id='cartcount'>$EntryCount</span>)</a></span>");
+            }
+          }
+          ?>
+        </div>
+      </div>
+
+    </div>
+    <div id="header-title"><a href="http://oregonstate.edu" class="nostyle"><img id="osu-tag" src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/osu-tag.gif" width="101" height="119"
                                                                              alt="Oregon State University"
                                                                              title="Oregon State University" /></a><a href="index.html" class="nostyle"><img id="scarc-title" src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/scarc-header-title.jpg" width="843" height="98"
                                                                                                                                                              alt="Special Collections &amp; Archives Research Center"
                                                                                                                                                              title="Special Collections &amp; Archives Research Center" /></a></div>
-<div id="header-nav">
-  <ul id="nav">
-    <li><a href="?p=collections/collections">Collections</a><ul>
-        <li><a href="?p=collections/collections&browse">All Collections</a></li>
-        <li><a href="">    University History</a></li>
-        <li><a href="">    Natural Resources</a></li>
-        <li><a href="">    Multicultural Archives</a></li>
-        <li><a href="">    History of Science</a></li>
-        <li><a href="">    Local History</a></li>
+    <div id="header-nav">
+      <ul id="nav">
+        <li><a href="?p=collections/collections">Collections</a><ul>
+            <li><a href="?p=collections/collections&browse">All Collections</a></li>
+            <li><a href="">    University History</a></li>
+            <li><a href="">    Natural Resources</a></li>
+            <li><a href="">    Multicultural Archives</a></li>
+            <li><a href="">    History of Science</a></li>
+            <li><a href="">    Local History</a></li>
+          </ul>
+        </li>
+        <li><a href="">Digital Resources</a><ul>
+            <li><a href="">University History</a></li>
+            <li><a href="">History of Science</a></li>
+            <li><a href="">Linus Pauling Online</a></li>
+            <li><a href="">Oregon Multicultural Archives</a></li>
+            <li><a href="">Natural Resources</a></li>
+            <li><a href="">Online Audio/Video</a></li>
+            <li><a href="">Social Media</a></li>
+          </ul>
+        </li>
+        <li><a href="?f=about-us">About Us</a><ul>
+            <li><a href="?f=about-us#mission-statement">Mission Statement</a></li>
+            <li><a href="?f=about-us#department-history">Department History</a></li>
+            <li><a href="?f=about-us#staff">Staff</a></li>
+            <li><a href="?f=using-our-collections">Using Our Collections</a></li>
+            <li><a href="?f=facilities">Facilities</a></li>
+            <li><a href="?f=faq">Frequently Asked Questions</a></li>
+          </ul>
+        </li>
+        <li><a href="?f=services">Services</a><ul>
+            <li><a href="?f=faq">Frequently Asked Questions</a></li>
+            <li><a href="?f=donate-materials">Donating Materials</a></li>
+            <li><a href="?f=facilities">Facilities</a></li>
+            <li><a href="?f=instruction-and-outreach">Instruction and Outreach</a></li>
+            <li><a href="?f=records-management">Records Management</a></li>
+            <li><a href="?f=reference">Reference</a></li>
+            <li><a href="?f=duplication">Reproduction &amp; Use</a></li>
+          </ul>
+        </li>
+        <li><a href="?f=ask-an-archivist">Ask An Archivist</a></li>
       </ul>
-    </li>
-    <li><a href="">Digital Resources</a><ul>
-        <li><a href="">University History</a></li>
-        <li><a href="">History of Science</a></li>
-        <li><a href="">Linus Pauling Online</a></li>
-        <li><a href="">Oregon Multicultural Archives</a></li>
-        <li><a href="">Natural Resources</a></li>
-        <li><a href="">Online Audio/Video</a></li>
-        <li><a href="">Social Media</a></li>
-      </ul>
-    </li>
-    <li><a href="?f=about-us">About Us</a><ul>
-        <li><a href="?f=about-us#mission-statement">Mission Statement</a></li>
-        <li><a href="?f=about-us#department-history">Department History</a></li>
-        <li><a href="?f=about-us#staff">Staff</a></li>
-        <li><a href="?f=using-our-collections">Using Our Collections</a></li>
-        <li><a href="?f=facilities">Facilities</a></li>
-        <li><a href="?f=faq">Frequently Asked Questions</a></li>
-      </ul>
-    </li>
-    <li><a href="?f=services">Services</a><ul>
-        <li><a href="?f=faq">Frequently Asked Questions</a></li>
-        <li><a href="?f=donate-materials">Donating Materials</a></li>
-        <li><a href="?f=facilities">Facilities</a></li>
-        <li><a href="?f=instruction-and-outreach">Instruction and Outreach</a></li>
-        <li><a href="?f=records-management">Records Management</a></li>
-        <li><a href="?f=reference">Reference</a></li>
-        <li><a href="?f=duplication">Reproduction &amp; Use</a></li>
-      </ul>
-    </li>
-    <li><a href="?f=ask-an-archivist">Ask An Archivist</a></li>
-  </ul>
-  <div id="search">
-<!--    <form name="gs" method="get" action="http://www.google.com/search"><input name="sitesearch" value="http://scarc.library.oregonstate.edu" type="hidden" /><input name="q" id="search-field" class="search-field" type="text" /><input class="button" value="Search" title="Search" type="submit" /></form>-->
-    <form action="index.php" accept-charset="UTF-8" method="get" onsubmit="if(!this.q.value) { alert('Please enter search terms.'); return false; } else { return true; }">
-      <div>
-        <input type="hidden" name="p" value="core/search" />
-        <input type="text" size="25" class="search-field" title="search" maxlength="150" name="q" id="qfa" value="<?php echo(encode($_ARCHON->QueryString, ENCODE_HTML)); ?>" tabindex="100" />
-        <input type="submit" value="Search" tabindex="300" class='button' title="Search" />
-        <?php
-        if(defined('PACKAGE_COLLECTIONS') && CONFIG_COLLECTIONS_SEARCH_BOX_LISTS)
-        {
-          ?>
-          <input type="hidden" name="content" value="1" />
-        <?php
-        }
-        ?>
+      <div id="search">
+    <!--    <form name="gs" method="get" action="http://www.google.com/search"><input name="sitesearch" value="http://scarc.library.oregonstate.edu" type="hidden" /><input name="q" id="search-field" class="search-field" type="text" /><input class="button" value="Search" title="Search" type="submit" /></form>-->
+        <form action="index.php" accept-charset="UTF-8" method="get" onsubmit="if(!this.q.value) { alert('Please enter search terms.'); return false; } else { return true; }">
+          <div>
+            <input type="hidden" name="p" value="core/search" />
+            <input type="text" size="25" class="search-field" title="search" maxlength="150" name="q" id="qfa" value="<?php echo(encode($_ARCHON->QueryString, ENCODE_HTML)); ?>" tabindex="100" />
+            <input type="submit" value="Search" tabindex="300" class='button' title="Search" />
+            <?php
+            if(defined('PACKAGE_COLLECTIONS') && CONFIG_COLLECTIONS_SEARCH_BOX_LISTS)
+            {
+              ?>
+              <input type="hidden" name="content" value="1" />
+            <?php
+            }
+            ?>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
+  <?php
+  $arrP = explode('/', $_REQUEST['p']);
+  $TitleClass = $arrP[0] == 'collections' && $arrP[1] != 'classifications' ? 'currentBrowseLink' : 'browseLink';
+  $ClassificationsClass = $arrP[1] == 'classifications' ? 'currentBrowseLink' : 'browseLink';
+  $SubjectsClass = $arrP[0] == 'subjects' ? 'currentBrowseLink' : 'browseLink';
+  $CreatorsClass = $arrP[0] == 'creators' ? 'currentBrowseLink' : 'browseLink';
+  $DigitalLibraryClass = $arrP[0] == 'digitallibrary' ? 'currentBrowseLink' : 'browseLink';
+  ?>
+  <div id="browsebyblock">
+    <span id="browsebyspan">
+       Browse:
+    </span>
+    <span class="<?php echo($TitleClass); ?>">
+       <a href="?p=collections/collections" onclick="js_highlighttoplink(this.parentNode); return true;">Collections</a>
+    </span>
+    <span class="<?php echo($DigitalLibraryClass); ?>">
+       <a href="?p=digitallibrary/digitallibrary" onclick="js_highlighttoplink(this.parentNode); return true;">Digital Content</a>
+    </span>
+    <span class="<?php echo($SubjectsClass); ?>">
+       <a href="?p=subjects/subjects" onclick="js_highlighttoplink(this.parentNode); return true;">Subjects</a>
+    </span>
+    <span class="<?php echo($CreatorsClass); ?>">
+       <a href="?p=creators/creators" onclick="js_highlighttoplink(this.parentNode); return true;">Creators</a>
+    </span>
+    <span class="<?php echo($ClassificationsClass); ?>">
+       <a href="?p=collections/classifications" onclick="js_highlighttoplink(this.parentNode); return true;">Record Groups</a>
+    </span>
+    <span style="font-size: x-small;font-style: italic; margin-left:5em"> **This is here temporarily until we decide how to incorporate**</span>
   </div>
-</div>
 <div id="main">
