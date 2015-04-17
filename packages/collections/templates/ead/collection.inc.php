@@ -61,7 +61,7 @@ $ark_identifier = '';
 $ark_url = '';
 if ($objCollection->ArkID) {
   $ark_identifier = 'identifier="'.$objCollection->ArkID.'"';
-  $ark_url = 'url="http://nwda-db.wsulibs.wsu.edu/findaid/ark:/'.$objCollection->ArkID.'"';
+  $ark_url = 'url="http://archiveswest.orbiscascade.org/ark:/'.$objCollection->ArkID.'"';
 }
 
 if ($objCollection->CollectionIdentifier) {
