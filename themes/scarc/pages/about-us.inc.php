@@ -39,24 +39,24 @@
         </table>
         <h2>Quick Links</h2><a name="quick-links"></a><table>
           <tr>
-            <td><span style="font-weight: bold"><a href="copyright.html">Copyright</a></span></td>
+            <td><span style="font-weight: bold"><a href="?f=copyright">Copyright</a></span></td>
             <td><span style="font-weight: bold"><a href="#department-history">Department History</a></span></td>
-            <td><span style="font-weight: bold"><a href="donate-materials.html">Donating or Transferring Materials</a></span></td>
+            <td><span style="font-weight: bold"><a href="?f=donate-materials">Donating or Transferring Materials</a></span></td>
           </tr>
           <tr>
-            <td><span style="font-weight: bold"><a href="facilities.html">Facilities</a></span></td>
-            <td><span style="font-weight: bold"><a href="faq.html">Frequently Asked Questions</a></span></td>
-            <td><span style="font-weight: bold"><a href="instruction-and-outreach.html">Instruction Program</a></span></td>
+            <td><span style="font-weight: bold"><a href="?f=facilities">Facilities</a></span></td>
+            <td><span style="font-weight: bold"><a href="?f=faq">Frequently Asked Questions</a></span></td>
+            <td><span style="font-weight: bold"><a href="?f=instruction-and-outreach">Instruction Program</a></span></td>
           </tr>
           <tr>
-            <td><span style="font-weight: bold"><a href="reference.html">Research Tips</a></span></td>
-            <td><span style="font-weight: bold"><a href="residentscholar.html">Resident Scholar Program</a></span></td>
-            <td><span style="font-weight: bold"><a href="duplication.html">Reproduction &amp; Use</a></span></td>
+            <td><span style="font-weight: bold"><a href="?f=reference">Research Tips</a></span></td>
+            <td><span style="font-weight: bold"><a href="?f=residentscholar">Resident Scholar Program</a></span></td>
+            <td><span style="font-weight: bold"><a href="?f=duplication">Reproduction &amp; Use</a></span></td>
           </tr>
           <tr>
-            <td><span style="font-weight: bold"><a href="using-our-collections.html">Rules for Using Our Collections</a></span></td>
+            <td><span style="font-weight: bold"><a href="?f=using-our-collections">Rules for Using Our Collections</a></span></td>
             <td><span style="font-weight: bold"><a href="#staff">Staff</a></span></td>
-            <td><span style="font-weight: bold"><a href="internship.html">Student Internship Program</a></span></td>
+            <td><span style="font-weight: bold"><a href="?f=internship">Student Internship Program</a></span></td>
           </tr>
         </table>
         <h2>Mission Statement</h2><a name="mission-statement"></a><p>The OSU Libraries Special Collections and Archives Research Center (SCARC) stimulates
@@ -99,13 +99,13 @@
           the life and work of scientists and historians.
         </p>
         <p>Today, the Special Collections &amp; Archives Research Center spans the 3rd and 5th floors
-          of the Valley Library, housing more than <a href="coll/index.html">1,000 archival collections</a> and tens of thousands of rare books and fine bindings.  SCARC is committed to promoting
+          of the Valley Library, housing more than <a href="?p=collections/collections">1,000 archival collections</a> and tens of thousands of rare books and fine bindings.  SCARC is committed to promoting
           public access to the department’s holdings through tours, educational opportunities,
           and community outreach and continues to support and develop a robust, publicly-available
-          web presence including <a href="http://oregonexplorer.info">Oregon Explorer</a>, the <a href="university-history.html">University History portal</a>, and <a href="http://pauling.library.oregonstate.edu">Linus Pauling Online</a>, among <a href="digital-resources.html">other resources</a>.
+          web presence including <a href="http://oregonexplorer.info">Oregon Explorer</a>, the <a href="university-history.html">University History portal</a>, and <a href="http://pauling.library.oregonstate.edu">Linus Pauling Online</a>, among <a href="?f=digital-resources">other resources</a>.
         </p>
         <p>For additional information about our location and the services available to patrons
-          and researchers, please visit our <a href="facilities.html">Facilities</a> and <a href="services.html">Services</a> pages.  For any other questions, see our <a href="faq.html">FAQ</a>  or <a href="ask-an-archivist">contact us directly</a>.
+          and researchers, please visit our <a href="?f=facilities">Facilities</a> and <a href="?f=services">Services</a> pages.  For any other questions, see our <a href="?f=faq">FAQ</a>  or <a href="?f=ask-an-archivist">contact us directly</a>.
         </p>
         <h2>Staff</h2><a name="staff"></a><table>
           <tr>

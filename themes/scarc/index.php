@@ -29,6 +29,7 @@ $pages = array(
   'facilities2',
   'facilities-panorama',
   'ask-an-archivist',
+  'visiting-guide',
 );
 if(isset($_REQUEST['f']) && in_array($_REQUEST['f'], $pages))
 {
