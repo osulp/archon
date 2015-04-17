@@ -13,88 +13,22 @@ if($_ARCHON->Script == 'packages/collections/pub/findingaid.php')
    require("fafooter.inc.php");
    return;
 }
-
 ?>
-
 </div>
-<div id="bottom">
-   <br/>
-   <hr id="footerhr" />
-   <div id="userbox" class="smround">
-      <?php
-      if($_ARCHON->Security->isAuthenticated())
-      {
-         $logoutURI = preg_replace('/(&|\\?)f=([\\w])*/', '', $_SERVER['REQUEST_URI']);
-         $Logout = (encoding_strpos($logoutURI, '?') !== false) ? '&amp;f=logout' : '?f=logout';
-         ?>
-      <div id="userinfo">
-         You are logged in as <?php echo($_ARCHON->Security->Session->User->toString()); ?>.<br/>
-            <?php
-            if($_ARCHON->Security->userHasAdministrativeAccess())
-            {
-               echo("<a href='?p=admin' rel='external'>Admin</a>&nbsp;");
-            }
-            else
-            {
-               echo ("<a href='?p=core/account'>My Account</a>");
-            }
-            ?>
-         <a href='<?php echo(encode($logoutURI, ENCODE_HTML) . $Logout); ?>'>Log Out</a>
-      </div>
-         <?php
-      }
-      elseif($_ARCHON->config->ForceHTTPS)
-      {
-         ?>
-         <div id="userlogincontrols">
-            <a id="loginlink" href="index.php?p=core/login&amp;go=">Log In</a>
-            <a href="?p=core/register">Register</a>
-         </div>
-      <?php
-      }
-      else
-      {
-         ?>
-
-      <div id="userlogincontrols">
-         <a id="loginlink" href="index.php?p=admin/core/login&amp;go=" onclick="if($('#userlogin').is(':visible')) {this.innerHTML = 'Log In';} else {this.innerHTML = 'Hide';} $('#userlogin').slideToggle('normal'); return false;">Log In</a>
-         <a href="?p=core/register">Register</a>
-      </div>
-      <div id="userlogin" style="display:none">&nbsp;
-         <form action="<?php echo(encode($_SERVER['REQUEST_URI'], ENCODE_HTML)); ?>" accept-charset="UTF-8" method="post">
-            <div class='loginpair'>
-               <div class='loginlabel'><label for="ArchonLoginField">Login:</label></div>
-               <div class='logininput'><input id="ArchonLoginField" type="text" name="ArchonLogin" size="20" tabindex="400" /></div>
-            </div>
-            <div class='loginpair'>
-               <div class='loginlabel'><label for="ArchonPasswordField">Password:</label></div>
-               <div class='logininput'><input id="ArchonPasswordField" type="password" name="ArchonPassword" size="20" tabindex="500" /></div>
-            </div>
-            <div id='loginsubmit'>
-               <input type="submit" value="Log in" class="button" tabindex="700" />&nbsp;&nbsp;<label for="RememberMeField"><input id="RememberMeField" type="checkbox" name="RememberMe" value="1" tabindex="600" />Remember me?</label>
-            </div>
-         </form>
-      </div>
-         <?php
-      }
-      ?>
-   </div>
-   <?php
-
-   echo("<div id='contactcontainer'>");
-
-   if($_ARCHON->Repository->URL)
-   {
-      echo("<div id='repositorylink'><a href='{$_ARCHON->Repository->getString('URL')}'>{$_ARCHON->Repository->getString('Name')}</a></div>\n");
-   }
-
-   if($_ARCHON->Repository->Email && !$_ARCHON->Security->userHasAdministrativeAccess())
-   {
-      echo("<div id='emaillink'>Contact Us: <a href='?p=core/contact&amp;f=email&amp;referer=" . urlencode($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) . "'>Email Form</a></div>\n");
-   }
-
-   echo("</div>");
-
-
-   ?>
+<div id="footer">
+  <div id="footer_inner">
+    <div id="footer_left">
+      <p class="footer">
+        © 2015, <a class="footer" href="index.php">Special Collections &amp; Archives Research Center</a><br /><a class="footer" href="http://library.oregonstate.edu">Oregon State University Libraries</a><br /><a class="footer" href="mailto:scarc@oregonstate.edu">scarc@oregonstate.edu</a>    (541) 737-2075 <br />
+        Normal Operating Hours: 10:00-6:00, Mon, Wed-Fri; 10:00-8:00 Tues <br />
+        <br />
+        121 The Valley Library<br />
+        Oregon State University<br />
+        Corvallis, OR 97331-3411 <br /></p>
+    </div>
+    <div id="footer_right">
+      <p class="flinks_left"><a class="footer" href="?f=accolades">Accolades</a><br /><a class="footer" href="?f=copyright">Copyright</a><br /><a class="footer" href="?f=facilities">Facilities</a><br /><a class="footer" href="?f=faq">FAQ</a><br /><a class="footer" href="?f=legacy-award">Pauling Legacy Award</a><br /><a class="footer" href="?f=residentscholar">Resident Scholar Program</a><br /><a class="footer" href="?f=internship">Student Internship Program</a><br /><a class="footer" href="?f=using-our-collections">Using Our Collections</a><br /><a class="footer" href="?f=visiting-guide">Visiting Guide</a><br /></p>
+      <p class="flinks_right"><a class="footer" href="http://www.facebook.com/OSU.SpecColl.Arch">Facebook</a><br /><a class="footer" href="http://www.flickr.com/photos/osuarchives">Flickr</a><br /><a class="footer" href="http://www.flickr.com/photos/osucommons/">Flickr Commons</a> (<a class="footer" href="flickrcommons.html">About</a>)<br /><a class="footer" href="https://pinterest.com/SCARCpinned/">Pinterest</a><br /><a class="footer" href="https://twitter.com/OSU_scarc">Twitter</a><br /></p>
+    </div>
+  </div>
 </div>

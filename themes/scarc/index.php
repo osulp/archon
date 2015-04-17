@@ -7,8 +7,37 @@
  */
 
 isset($_ARCHON) or die();
-echo("<h1 id='titleheader'>" . strip_tags($_ARCHON->PublicInterface->Title) . "</h1>\n");
 
+$pages = array(
+  'about-us',
+  'using-our-collections',
+  'facilities',
+  'faq',
+  'accolades',
+  'copyright',
+  'legacy-award',
+  'residentscholar',
+  'internship',
+  'visiting-guide',
+  'services',
+  'donate-materials',
+  'duplication',
+  'instruction-and-outreach',
+  'records-management',
+  'reference',
+  'facilities1',
+  'facilities2',
+  'facilities-panorama',
+  'ask-an-archivist',
+);
+if(isset($_REQUEST['f']) && in_array($_REQUEST['f'], $pages))
+{
+  $page = $_REQUEST['f'];
+  include "pages/{$page}.inc.php";
+  return;
+}
+
+echo("<h1 id='titleheader'>" . strip_tags($_ARCHON->PublicInterface->Title) . "</h1>\n");
 ?>
 
 <div id='themeindex' class='bground'>
