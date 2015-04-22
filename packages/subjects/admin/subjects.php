@@ -429,7 +429,7 @@ function subjects_ui_main()
    }
 
 
-   $generalSection->insertRow('subject')->insertTextField('Subject', 30, 100)->required();
+   $generalSection->insertRow('subject')->insertTextField('Subject', 50, 200)->required();
    $generalSection->insertRow('subjecttypeid')->insertSelect('SubjectTypeID', 'getAllSubjectTypes');
 
    $parentID = ($_ARCHON->AdministrativeInterface->Object->ParentID) ? $_ARCHON->AdministrativeInterface->Object->ParentID : $_REQUEST['parentid'];
@@ -495,7 +495,7 @@ function subjects_ui_dialog()
 
    //$dialogSection->insertRow('parentsubject')->insertInformation('ParentSubject', '[root]');
 
-   $dialogSection->insertRow('subject')->insertTextField('Subject', 30, 100)->required();
+   $dialogSection->insertRow('subject')->insertTextField('Subject', 50, 200)->required();
 
    $dialogSection->insertRow('subjecttypeid')->insertSelect('SubjectTypeID', 'getAllSubjectTypes');
    $dialogSection->insertRow('subjectsourceid')->insertSelect('SubjectSourceID', 'getAllSubjectSources');

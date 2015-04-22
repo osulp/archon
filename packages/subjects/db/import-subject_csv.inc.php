@@ -40,6 +40,8 @@ if ($_REQUEST['f'] == 'import-' . $UtilityCode) {
       $strCSV = ltrim($strCSV, "\xEF\xBB\xBF");
       $arrAllData = getCSVFromString($strCSV);
 
+      echo count($arrAllData).' entries to import.';
+
       foreach ($arrAllData as $arrData) {
 
         if (!empty($arrData)) {
