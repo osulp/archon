@@ -40,11 +40,12 @@ if ($_REQUEST['f'] == 'import-' . $UtilityCode) {
       $strCSV = ltrim($strCSV, "\xEF\xBB\xBF");
       $arrAllData = getCSVFromString($strCSV);
 
-      echo count($arrAllData).' entries to import.';
+      echo count($arrAllData)." entries to import.<br>\n";
 
       foreach ($arrAllData as $arrData) {
 
-        if (!empty($arrData)) {
+        // # denotes a header row, so we ignore it
+        if (!empty($arrData) && '#' != substr($arrData[0],0,1)) {
           $objSubject = new Subject();
           $objSubject->Subject = $arrData[0];
 
@@ -60,6 +61,19 @@ if ($_REQUEST['f'] == 'import-' . $UtilityCode) {
             $objSubject->SubjectSourceID = $subjectSourcesMap[$subject_source];
           } else {
             echo "Subject Source not found: $subject_source<br>\n";
+          }
+
+          // Controlled Term
+          if (!empty($arrData[3])) {
+            $objSubject->Identifier = $arrData[3];
+          }
+
+          // Roles - a semicolon delimited list of roles
+          if (!empty($arrData[4])) {
+            $roles = $arrData[4];
+            // trim off the trailing ; if present
+            $roles = (';' == substr($roles,strlen($roles) - 1)) ? substr($roles,0,strlen($roles) - 1) : $roles;
+            $objSubject->Roles = $roles;
           }
 
           $objSubject->dbStore();

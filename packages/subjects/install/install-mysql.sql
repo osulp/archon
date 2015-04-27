@@ -11,6 +11,7 @@ CREATE TABLE tblSubjects_Subjects (
   ModifiedByID int(11) NOT NULL DEFAULT '0',
   Description text,
   Identifier VARCHAR(50) NULL,
+  Roles varchar(200) NULL,
   PRIMARY KEY (ID),
   KEY ParentID (ParentID)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

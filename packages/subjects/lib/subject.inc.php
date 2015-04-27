@@ -294,6 +294,9 @@ abstract class Subjects_Subject
     */
    public $Description = '';
 
+  /** @var string */
+  public $Roles = '';
+
 }
 
 $_ARCHON->mixClasses('Subject', 'Subjects_Subject');
