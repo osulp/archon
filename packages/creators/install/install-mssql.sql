@@ -30,6 +30,7 @@ CREATE TABLE tblCreators_Creators (
   ScriptID INT DEFAULT '0',
   Identifier VARCHAR(50) NULL DEFAULT NULL,
   CreatorSourceID INT NOT NULL DEFAULT '0'
+  Roles VARCHAR(200) NULL DEFAULT NULL,
 );
 
 
