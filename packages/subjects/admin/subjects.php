@@ -438,7 +438,7 @@ function subjects_ui_main()
       $generalSection->insertRow('subjectsourceid')->insertSelect('SubjectSourceID', 'getAllSubjectSources');
    }
 
-   $generalSection->insertRow('identifier')->insertTextField('Identifier', 10, 50);
+   $generalSection->insertRow('identifier')->insertTextField('Identifier', 30, 50);
 
    //@TODO: show root subjectsource if exists
 //    else

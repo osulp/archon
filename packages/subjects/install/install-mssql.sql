@@ -10,7 +10,8 @@ CREATE TABLE tblSubjects_Subjects (
   LastModified INT NOT NULL DEFAULT '0',
   ModifiedByID INT NOT NULL DEFAULT '0',
   Description TEXT NULL,
-  Identifier varchar(50) NULL DEFAULT NULL
+  Identifier varchar(50) NULL DEFAULT NULL,
+  Roles varchar(200) NULL DEFAULT NULL
 );
 
 
