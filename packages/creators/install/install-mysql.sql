@@ -33,6 +33,7 @@ CREATE TABLE tblCreators_Creators (
   ScriptID int(11) DEFAULT '0',
   Identifier VARCHAR(50) DEFAULT NULL,
   CreatorSourceID int(11) NOT NULL DEFAULT '0',
+  Roles VARCHAR(200) DEFAULT NULL,
   PRIMARY KEY (ID)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
