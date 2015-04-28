@@ -3,7 +3,7 @@
 DROP TABLE IF EXISTS tblSubjects_Subjects; 
 CREATE TABLE tblSubjects_Subjects (
   ID int(11) NOT NULL AUTO_INCREMENT,
-  `Subject` varchar(100) NOT NULL DEFAULT '',
+  Subject varchar(200) NOT NULL DEFAULT '',
   SubjectTypeID int(11) NOT NULL DEFAULT '0',
   SubjectSourceID int(11) NOT NULL DEFAULT '0',
   ParentID int(11) NOT NULL DEFAULT '0',
@@ -11,6 +11,7 @@ CREATE TABLE tblSubjects_Subjects (
   ModifiedByID int(11) NOT NULL DEFAULT '0',
   Description text,
   Identifier VARCHAR(50) NULL,
+  Roles varchar(200) NULL,
   PRIMARY KEY (ID),
   KEY ParentID (ParentID)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

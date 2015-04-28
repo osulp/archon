@@ -59,33 +59,7 @@ else
 
       chdir($cwd);
    }
-
-
-   $objCopyrightPhrase = Phrase::getPhrase('copyright', PACKAGE_CORE, 0, PHRASETYPE_ADMIN);
-   $strCopyright = $objCopyrightPhrase ? $objCopyrightPhrase->getPhraseValue() : 'Copyright &copy;$1 <a href="http://www.uiuc.edu/">The University of Illinois at Urbana-Champaign</a>';
-   $strCopyright = str_replace('$1', $_ARCHON->CopyrightYear, $strCopyright);
    ?>
-<div id="archoninfo">
-   Page Generated in: <?php echo(round(microtime(true) - $_ARCHON->StartTime, 3)); ?> seconds (using <?php echo($_ARCHON->QueryLog->QueryCount); ?> queries).<br/>
-
-      <?php
-      if(function_exists('memory_get_usage') && function_exists('memory_get_peak_usage'))
-      {
-         ?>
-   Using <?php echo(round(memory_get_usage()/1048576,2)); ?>MB of memory. (Peak of <?php echo(round(memory_get_peak_usage()/1048576,2)); ?>MB.)<br/>
-         <?php
-      }
-      ?>
-   <br/>
-   Powered by <a href='<?php echo($_ARCHON->ArchonURL); ?>'>Archon</a> Version <?php echo($_ARCHON->Version); if($_ARCHON->Revision){echo(" rev-".$_ARCHON->Revision);} ?><br/>
-      <?php echo($strCopyright); ?>
-   <br/>
-      <?php
-
-      ?>
-
-
-</div>
 </body>
 </html>
    <?php

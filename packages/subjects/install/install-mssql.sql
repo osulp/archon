@@ -3,14 +3,15 @@
 IF EXISTS(SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'tblSubjects_Subjects') DROP TABLE tblSubjects_Subjects; 
 CREATE TABLE tblSubjects_Subjects (
   ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-  Subject varchar(100) NOT NULL DEFAULT '',
+  Subject varchar(200) NOT NULL DEFAULT '',
   SubjectTypeID INT NOT NULL DEFAULT '0',
   SubjectSourceID INT NOT NULL DEFAULT '0',
   ParentID INT NOT NULL DEFAULT '0',
   LastModified INT NOT NULL DEFAULT '0',
   ModifiedByID INT NOT NULL DEFAULT '0',
   Description TEXT NULL,
-  Identifier varchar(50) NULL DEFAULT NULL
+  Identifier varchar(50) NULL DEFAULT NULL,
+  Roles varchar(200) NULL DEFAULT NULL
 );
 
 

@@ -386,6 +386,8 @@ abstract class Creators_Creator
     */
    public $Identifier = '';
 
+  /** @var string  */
+  public $Roles = '';
    /**
     * @var string
     */
