@@ -254,7 +254,7 @@ function collections_ui_main()
 //   $booksSection->setAestheticRelationArguments(array(), MODULE_BOOKS, 'collections');
 
    $otherSection = $_ARCHON->AdministrativeInterface->insertSection('other');
-   $otherSection->insertRow('other_otherurl')->insertTextField('OtherURL', 50, 200);
+   $otherSection->insertRow('other_otherurl')->insertTextArea('OtherURL', 10, 70);
    $otherSection->insertRow('other_othernote')->insertTextArea('OtherNote', 10, 70);
    $otherSection->insertRow('books')->insertAdvancedSelect('Books',
            array(
