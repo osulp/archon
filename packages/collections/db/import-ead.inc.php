@@ -427,6 +427,17 @@ if ($_REQUEST['f'] == 'import-' . $UtilityCode)
             }
          }
 
+        // Otherfindaid
+        // Only pull in the one with the A8 identifier & dump the contents into the OtherURL field in the collections table.
+        $kids = $xml->archdesc->children();
+        foreach ($kids as $ElementName => $kid) {
+          if ('otherfindaid' == $ElementName) {
+            $attrs = $kid->attributes();
+            if ($attrs && 'a8' == strtolower($attrs->id)) {
+              $objCollection->OtherURL = import_ead_extracttext($kid);
+            }
+          }
+        }
 
          if (!$objCollection->Title)
          {
