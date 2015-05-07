@@ -77,8 +77,13 @@ if ($_REQUEST['f'] == 'import-' . $UtilityCode) {
           }
 
           // Roles - a semicolon delimited list of roles
-          if (!empty($arrData[4])) {
-            $roles = $arrData[4];
+          $roles = '';
+          for ($i = 4; $i < 11; $i++) {
+            if (!empty($arrData[$i])) {
+              $roles .= $arrData[$i].';';
+            }
+          }
+          if (strlen($roles) > 0) {
             // trim off the trailing ; if present
             $roles = (';' == substr($roles,strlen($roles) - 1)) ? substr($roles,0,strlen($roles) - 1) : $roles;
             $objCreator->Roles = $roles;
