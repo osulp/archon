@@ -44,7 +44,7 @@ if($objCollection->Title)
 if($objCollection->Classification)
 {
   ?>
-  <div class='ccardcontent'><span class='ccardlabel'>ID:</span> <?php echo($objCollection->Classification->toString(LINK_NONE, true, false, true, false)); ?>/<?php echo($objCollection->getString('CollectionIdentifier')); ?></div>
+  <div class='ccardcontent'><span class='ccardlabel'>ID:</span> <?php echo($objCollection->Classification->toString(LINK_NONE, true, false, true, false)); ?> <?php echo($objCollection->getString('CollectionIdentifier')); ?></div>
 <?php
 }
 

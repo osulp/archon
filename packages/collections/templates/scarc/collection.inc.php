@@ -56,7 +56,7 @@ echo("<h1 id='titleheader'>" . strip_tags($_ARCHON->PublicInterface->Title) . "<
    <?php if($objCollection->PredominantDates)
    { ?><p><span class="bold">Predominant Dates:</span><?php echo($objCollection->PredominantDates); ?></p><?php } ?>
       <?php if($objCollection->Classification)
-      { ?><p><span class='bold'>ID:</span> <?php echo($objCollection->Classification->toString(LINK_NONE, true, false, true, false)); ?>/<?php echo($objCollection->getString('CollectionIdentifier')); ?></p><?php } ?>
+      { ?><p><span class='bold'>ID:</span> <?php echo($objCollection->Classification->toString(LINK_NONE, true, false, true, false)); ?> <?php echo($objCollection->getString('CollectionIdentifier')); ?></p><?php } ?>
    <?php if(!empty($objCollection->PrimaryCreator))
    { ?><p><span class='bold'>Primary Creator:</span> <?php echo($objCollection->PrimaryCreator->toString(LINK_TOTAL)); ?></p><?php }
    
