@@ -18,7 +18,7 @@ if(!$in_Book)
 
    $_ARCHON->PublicInterface->Title = $strCollectionsTitle;
    $_ARCHON->PublicInterface->addNavigation($_ARCHON->PublicInterface->Title, "?p={$_REQUEST['p']}");
-   $_ARCHON->PublicInterface->Title .= ' | ' . $_ARCHON->Repository->Name;
+//   $_ARCHON->PublicInterface->Title .= ' | ' . $_ARCHON->Repository->Name;
 }
 else
 {

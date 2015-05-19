@@ -22,7 +22,7 @@ $strSubjectsTitle = $objSubjectsTitlePhrase ? $objSubjectsTitlePhrase->getPhrase
 
 $_ARCHON->PublicInterface->Title = $strSubjectsTitle;
 $_ARCHON->PublicInterface->addNavigation($_ARCHON->PublicInterface->Title, "?p={$_REQUEST['p']}");
-$_ARCHON->PublicInterface->Title .= ' | ' . $_ARCHON->Repository->Name;
+//$_ARCHON->PublicInterface->Title .= ' | ' . $_ARCHON->Repository->Name;
 
 if($in_SubjectTypeID)
 {

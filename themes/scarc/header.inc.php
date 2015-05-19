@@ -40,7 +40,7 @@ if(defined('PACKAGE_COLLECTIONS'))
       $RepositoryName = $_ARCHON->Repository ? $_ARCHON->Repository->getString('Name') : '';
    }
 
-   $_ARCHON->PublicInterface->Title = $_ARCHON->PublicInterface->Title ? $_ARCHON->PublicInterface->Title . ' | ' . $RepositoryName : $RepositoryName;
+//   $_ARCHON->PublicInterface->Title = $_ARCHON->PublicInterface->Title ? $_ARCHON->PublicInterface->Title . ' | ' . $RepositoryName : $RepositoryName;
 
    if($_ARCHON->QueryString && $_ARCHON->Script == 'packages/core/pub/search.php')
    {
@@ -51,7 +51,7 @@ else
 {
    $RepositoryName = $_ARCHON->Repository ? $_ARCHON->Repository->getString('Name') : 'Archon';
 
-   $_ARCHON->PublicInterface->Title = $_ARCHON->PublicInterface->Title ? $_ARCHON->PublicInterface->Title . ' | ' . $RepositoryName : $RepositoryName;
+//   $_ARCHON->PublicInterface->Title = $_ARCHON->PublicInterface->Title ? $_ARCHON->PublicInterface->Title . ' | ' . $RepositoryName : $RepositoryName;
 
    if($_ARCHON->QueryString)
    {
