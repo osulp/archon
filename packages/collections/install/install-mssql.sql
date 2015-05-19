@@ -98,7 +98,7 @@ CREATE TABLE tblCollections_CollectionLocationIndex (
   ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
   CollectionID INT NOT NULL DEFAULT '0',
   LocationID INT NOT NULL DEFAULT '0',
-  Content varchar(255) NULL DEFAULT NULL,
+  Content varchar(500) NULL DEFAULT NULL,
   RangeValue varchar(25) NULL DEFAULT NULL,
   Section varchar(25) NULL DEFAULT NULL,
   Shelf varchar(25) NULL DEFAULT NULL,

@@ -106,7 +106,7 @@ CREATE TABLE tblCollections_CollectionLocationIndex (
   ID int(11) NOT NULL AUTO_INCREMENT,
   CollectionID int(11) NOT NULL DEFAULT '0',
   LocationID int(11) NOT NULL DEFAULT '0',
-  Content varchar(255) DEFAULT NULL,
+  Content varchar(500) DEFAULT NULL,
   RangeValue varchar(25) DEFAULT NULL,
   Section varchar(25) DEFAULT NULL,
   Shelf varchar(25) DEFAULT NULL,
