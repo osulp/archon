@@ -22,7 +22,6 @@ $objCreatorsTitlePhrase = Phrase::getPhrase('creators_title', PACKAGE_CREATORS, 
 $strCreatorsTitle = $objCreatorsTitlePhrase ? $objCreatorsTitlePhrase->getPhraseValue(ENCODE_HTML) : 'Browse by Creator';
 $_ARCHON->PublicInterface->Title = $strCreatorsTitle;
 $_ARCHON->PublicInterface->addNavigation($_ARCHON->PublicInterface->Title, "?p={$_REQUEST['p']}");
-//$_ARCHON->PublicInterface->Title .= ' | '.$_ARCHON->Repository->Name;
 
 
 if($in_Char)
