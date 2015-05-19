@@ -34,12 +34,6 @@ echo("<h1 id='titleheader'>" . $_ARCHON->PublicInterface->Title . "</h1>\n");
 <div id='ccardleft'>        <!--begin div ccardleft -->
 <div id="ccardpublic" class='mdround'>  <!-- begin div ccardcontents -->
 <?php
-if($objCollection->Title)
-{
-  ?>
-  <div class='ccardcontent'><span class='ccardlabel'>Title:</span> <?php echo($objCollection->toString()); ?></div>
-<?php
-}
 
 if($objCollection->Classification)
 {

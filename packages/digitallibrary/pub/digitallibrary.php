@@ -14,7 +14,6 @@ $strDLTitle = $objDLTitlePhrase ? $objDLTitlePhrase->getPhraseValue(ENCODE_HTML)
 
 $_ARCHON->PublicInterface->Title = $strDLTitle;
 $_ARCHON->PublicInterface->addNavigation($_ARCHON->PublicInterface->Title, "?p={$_REQUEST['p']}");
-$_ARCHON->PublicInterface->Title .= ' | ' . $_ARCHON->Repository->Name;
 
 $in_Char = isset($_REQUEST['char']) ? $_REQUEST['char'] : NULL;
 

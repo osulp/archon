@@ -18,7 +18,6 @@ if(!$in_Book)
 
    $_ARCHON->PublicInterface->Title = $strCollectionsTitle;
    $_ARCHON->PublicInterface->addNavigation($_ARCHON->PublicInterface->Title, "?p={$_REQUEST['p']}");
-   $_ARCHON->PublicInterface->Title .= ' | ' . $_ARCHON->Repository->Name;
 }
 else
 {
@@ -80,20 +79,6 @@ function collections_main($ShowBooks)
       $arrCollectionCount = $_ARCHON->countCollections(true, false, $_SESSION['Archon_RepositoryID']);
       $vars['strSubTitle'] = $strBrowseHoldingsBeginning.":";
    }
-
-      if(!empty($arrCollectionCount['#']))
-      {
-         $href = "?p={$_REQUEST['p']}&amp;char=" . urlencode('#');
-         if($ShowBooks)
-         {
-            $href .= "&amp;books";
-         }
-         $content .= "<a href='$href'>-#-</a>" . INDENT;
-      }
-      else
-      {
-         $content .= "-#-" . INDENT;
-      }
 
       for($i = 65; $i < 91; $i++)
       {
