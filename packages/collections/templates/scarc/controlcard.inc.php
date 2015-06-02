@@ -477,10 +477,30 @@ $repositoryid = $objCollection->RepositoryID;
   <?php
   }
 
-?>
+  if($objCollection->DigitalContent)
+  {
+    ?>
+    <div class='ccardcontent'><span class='ccardlabel'><a href='#' onclick="toggleDisplay('docsandfiles'); return false;"><img id='docsandfilesImage' src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif' alt='expand icon' /> On-Line Documents/Files</a></span><br/>
+      <div class='ccardshowlist' style="display: none;" id="docsandfilesResults">
+        <?php
+        if($objCollection->DigitalContent)
+        {
+          echo("<br/><span class='bold'>Documents and Files:</span><br/>&nbsp;" . $_ARCHON->createStringFromDigitalContentArray($objCollection->DigitalContent, "<br/>\n&nbsp;", LINK_TOTAL));
+        }
+        ?>
+      </div>
+    </div>
+  <?php
+  }
+
+
+  ?>
   </div> <!-- end ccardpublic -->
   <?php
 
+  /**
+   * Staff Section
+   */
   if($_ARCHON->Security->verifyPermissions(MODULE_COLLECTIONS, READ))
   {
     ?>
@@ -534,60 +554,43 @@ $repositoryid = $objCollection->RepositoryID;
 
 <div class="col-md-3">
   <?php
-
-  if($objCollection->DigitalContent || $containsImages)
-  {
+  if ($containsImages) {
     ?>
-    <div class='ccardcontent'><span class='ccardlabel'><a href='#' onclick="toggleDisplay('digitalcontent'); return false;"><img id='digitalcontentImage' src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif' alt='expand icon' /> On-line Images/Records</a></span><br/>
-      <div class='ccardshowlist' style="display: none;" id="digitalcontentResults">
-        <?php
-        if($containsImages)
-        {
-          echo("<span class='bold'><a href='index.php?p=digitallibrary/thumbnails&amp;collectionid={$objCollection->ID}'>Images</a></span> (browse thumbnails)<br/>\n\n");
-        }
-        if($objCollection->DigitalContent)
-        {
-          echo("<br/><span class='bold'>Documents and Files:</span><br/>&nbsp;" . $_ARCHON->createStringFromDigitalContentArray($objCollection->DigitalContent, "<br/>\n&nbsp;", LINK_TOTAL));
-        }
-        ?>
-      </div>
+    <div class='ccardshowlist' id="digitalcontentResults">
+      <?php foreach ($collectionImages as $img) {  echo $img; } ?>
     </div>
   <?php
   }
 
-  if(!empty($objCollection->Subjects))
-  {
-  $GenreSubjectTypeID = $_ARCHON->getSubjectTypeIDFromString('Genre/Form of Material');
+  if (!empty($objCollection->Subjects)) {
+    $GenreSubjectTypeID = $_ARCHON->getSubjectTypeIDFromString('Genre/Form of Material');
 
-  foreach($objCollection->Subjects as $objSubject)
-  {
-  if($objSubject->SubjectTypeID == $GenreSubjectTypeID)
-  {
-  $arrGenres[$objSubject->ID] = $objSubject;
-  }
-  else
-  {
-  $arrSubjects[$objSubject->ID] = $objSubject;
-  }
-  }
+    foreach ($objCollection->Subjects as $objSubject) {
+      if ($objSubject->SubjectTypeID == $GenreSubjectTypeID) {
+        $arrGenres[$objSubject->ID] = $objSubject;
+      }
+      else {
+        $arrSubjects[$objSubject->ID] = $objSubject;
+      }
+    }
 
-  if(!empty($arrSubjects))
-  {
+    if (!empty($arrSubjects)) {
+      ?>
+      <div class='ccardcontent'><span class='ccardlabel'><a href='#' onclick="toggleDisplay('subjects'); return false;"><img
+              id='subjectsImage' src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif' alt='expand icon'/> Subjects</a></span><br/>
+        <div class='ccardshowlist' style='display: none' id='subjectsResults'><?php echo($_ARCHON->createStringFromSubjectArray($arrSubjects, "<br/>\n", LINK_TOTAL)); ?></div>
+      </div>
+    <?php
+    }
+    if (!empty($arrGenres)) {
+      ?>
+      <div class='ccardcontent'><span class='ccardlabel'><a href='#' onclick="toggleDisplay('genres'); return false;"><img
+              id='genresImage' src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif' alt='expand icon'/> Forms of Material</a></span><br/>
+        <div class='ccardshowlist' style='display: none' id='genresResults'><?php echo($_ARCHON->createStringFromSubjectArray($arrGenres, "<br/>\n", LINK_TOTAL)); ?></div>
+      </div>
+    <?php
+    }
+  }
   ?>
-  <div class='ccardcontent'><span class='ccardlabel'><a href='#' onclick="toggleDisplay('subjects'); return false;"><img id='subjectsImage' src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif' alt='expand icon' /> Subjects</a></span><br/>
-    <div class='ccardshowlist' style='display: none' id='subjectsResults'><?php echo($_ARCHON->createStringFromSubjectArray($arrSubjects, "<br/>\n", LINK_TOTAL)); ?></div>
-  </div>
-<?php
-}
-if(!empty($arrGenres))
-{
-  ?>
-  <div class='ccardcontent'><span class='ccardlabel'><a href='#' onclick="toggleDisplay('genres'); return false;"><img id='genresImage' src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif' alt='expand icon' /> Forms of Material</a></span><br/>
-    <div class='ccardshowlist' style='display: none' id='genresResults'><?php echo($_ARCHON->createStringFromSubjectArray($arrGenres, "<br/>\n", LINK_TOTAL)); ?></div>
-  </div>
-<?php
-}
-}?>
 </div>
-
 </div>

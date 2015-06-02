@@ -1858,3 +1858,11 @@ td {
     padding-top: 10px;
     color: #c34500;
 }
+
+#digitalcontentResults {
+    margin-bottom: 10px;
+}
+
+#digitalcontentResults .digcontentfile {
+    width: 95%;
+}
