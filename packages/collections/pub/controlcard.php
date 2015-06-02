@@ -47,11 +47,11 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
                                <a class="thumbimglink" href="?p=digitallibrary/digitalcontent&amp;id='.$objFile->DigitalContentID.'" title="'.$objDigitalContent->getString('Title', 30).'" rel="#mediumPreview">
                                   <img class="digcontentfile" src="'.$objFile->getFileURL(DIGITALLIBRARY_FILE_PREVIEWSHORT).'" alt="'.$objFile->getString('Title').'"/>
                                </a>
-                            </div>
-                            <div class="thumbnailcaption">
-                               <a href="?p=digitallibrary/digitalcontent&amp;id='.$objFile->DigitalContentID.'">'.$objDigitalContent->getString('Title', 30).'</a>
-                            </div>
-                        </div>';
+                            </div>'.
+//                            <div class="thumbnailcaption">
+//                               <a href="?p=digitallibrary/digitalcontent&amp;id='.$objFile->DigitalContentID.'">'.$objDigitalContent->getString('Title', 30).'</a>
+//                            </div>
+                        '</div>';
                 $collectionImages[] = $img;
             }
             else

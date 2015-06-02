@@ -29,7 +29,7 @@ $repositoryid = $objCollection->RepositoryID;
 ?>
 <div id="scarc-controlcard" class="row" xmlns="http://www.w3.org/1999/html">
 <!-- Left Column -->
-<div class="col-md-2">
+<div class="col-md-3">
   <div id="ccardprintcontact" class="smround">
     <p><a href="?p=collections/controlcard&amp;id=<?php echo $objCollection->ID; ?>&amp;templateset=print&amp;disabletheme=1"><img
         src="<?php echo $_ARCHON->PublicInterface->ImagePath; ?>/printer.png" alt="Printer-friendly" /></a> <a
@@ -50,7 +50,7 @@ $repositoryid = $objCollection->RepositoryID;
     if(!empty($objCollection->Content))
     {
     ?>
-    <div class='ccardcontent'><span class='ccardlabel'><a href='?p=collections/findingaid&amp;id=<?php echo($objCollection->ID); ?>&amp;q=<?php echo($_ARCHON->QueryStringURL); ?>'>Detailed Description</a></span><br/>
+    <div class='ccardcontent'><span class='ccardlabel'>Container List</span><br/>
       <?php
       $DisableTheme = $_ARCHON->PublicInterface->DisableTheme;
       $_ARCHON->PublicInterface->DisableTheme = true;
@@ -80,7 +80,7 @@ $repositoryid = $objCollection->RepositoryID;
     </div>
 </div>
 
-<div class="col-md-7">
+<div class="col-md-6">
 
   <h1 id='titleheader'><?php echo $_ARCHON->PublicInterface->Title; ?></h1>
   <div id="ccardpublic" class='mdround'>  <!-- begin div ccardcontents -->
@@ -551,13 +551,13 @@ $repositoryid = $objCollection->RepositoryID;
 
 ?>
 </div>
-
 <div class="col-md-3">
   <?php
   if ($containsImages) {
     ?>
     <div class='ccardshowlist' id="digitalcontentResults">
       <?php foreach ($collectionImages as $img) {  echo $img; } ?>
+<!--      <br /><a href="index.php?p=digitallibrary/digitalcontent&id=--><?php //?><!--">Information and Credits</a>-->
     </div>
   <?php
   }

@@ -16,7 +16,7 @@ body {
 }
 
 h1 {
-    font-size: 2em;
+    font-size: 1.8em;
     margin-top: 0;
 }
 
@@ -591,6 +591,7 @@ img#scarc-title {
 	width: 18em;
 	left: -999em;
 	padding-bottom: .8em;
+    z-index: 10;
 
 	background-color: #E8E9EB;
 	border-left: 1px solid #36465F;
@@ -1865,4 +1866,5 @@ td {
 
 #digitalcontentResults .digcontentfile {
     width: 95%;
+    margin-bottom: 5px;
 }
