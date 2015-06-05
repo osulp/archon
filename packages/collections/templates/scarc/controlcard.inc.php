@@ -387,24 +387,6 @@ $repositoryid = $objCollection->RepositoryID;
   <?php
   }
 
-  if($objCollection->RelatedMaterials || $objCollection->RelatedMaterialsURL)
-  {
-    ?>
-    <div class='ccardcontent'><span class='ccardlabel'>Related Materials:</span>
-      <?php
-      if($objCollection->RelatedMaterials)
-      {
-        echo($objCollection->getString('RelatedMaterials'));
-      }
-      if($objCollection->RelatedMaterialsURL)
-      {
-        echo("<br/>For more information please see <a href='{$objCollection->getString('RelatedMaterialsURL')}'>{$objCollection->getString('RelatedMaterialsURL')}</a>.");
-      }
-      ?>
-    </div>
-  <?php
-  }
-
 
   if($objCollection->RelatedPublications)
   {
@@ -591,6 +573,28 @@ $repositoryid = $objCollection->RepositoryID;
     <?php
     }
   }
+
+  if($objCollection->RelatedMaterials || $objCollection->RelatedMaterialsURL)
+  {
+    ?>
+    <div class='ccardcontent'><span class='ccardlabel'><a href='#' onclick="toggleDisplay('relatedMats'); return false;"><img
+            id='relatedMatsImage' src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif' alt='expand icon'/> Related Materials:</a></span><br />
+      <div class='ccardshowlist' style='display: none' id='relatedMatsResults'>
+      <?php
+      if($objCollection->RelatedMaterials)
+      {
+        echo($objCollection->getString('RelatedMaterials'));
+      }
+      if($objCollection->RelatedMaterialsURL)
+      {
+        echo("<br/>For more information please see <a href='{$objCollection->getString('RelatedMaterialsURL')}'>{$objCollection->getString('RelatedMaterialsURL')}</a>.");
+      }
+      ?>
+      </div>
+    </div>
+  <?php
+  }
+
   ?>
 </div>
 </div>
