@@ -65,11 +65,11 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
       <title><?php echo(strip_tags($_ARCHON->PublicInterface->Title)); ?></title>
+     <link rel="stylesheet"  href="themes/<?php echo($_ARCHON->PublicInterface->Theme); ?>/css/bootstrap.min.css" >
      <link rel="stylesheet" type="text/css" href="themes/<?php echo($_ARCHON->PublicInterface->Theme); ?>/style-scarc.css" />
 <!--      <link rel="stylesheet" type="text/css" href="themes/--><?php //echo($_ARCHON->PublicInterface->Theme); ?><!--/style.css" />-->
       <link rel="stylesheet" type="text/css" href="<?php echo($_ARCHON->PublicInterface->ThemeJavascriptPath); ?>/cluetip/jquery.cluetip.css" />
       <link rel="stylesheet" type="text/css" href="<?php echo($_ARCHON->PublicInterface->ThemeJavascriptPath); ?>/jgrowl/jquery.jgrowl.css" />
-
       <link rel="icon" type="image/ico" href="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/archon.ico"/>
       <!--[if lte IE 7]>
         <link rel="stylesheet" type="text/css" href="themes/<?php echo($_ARCHON->PublicInterface->Theme); ?>/ie.css" />
@@ -177,11 +177,8 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
       </div>
 
     </div>
-    <div id="header-title"><a href="http://oregonstate.edu" class="nostyle"><img id="osu-tag" src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/osu-tag.gif" width="101" height="119"
-                                                                             alt="Oregon State University"
-                                                                             title="Oregon State University" /></a><a href="index.html" class="nostyle"><img id="scarc-title" src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/scarc-header-title.jpg" width="843" height="98"
-                                                                                                                                                             alt="Special Collections &amp; Archives Research Center"
-                                                                                                                                                             title="Special Collections &amp; Archives Research Center" /></a></div>
+    <div id="header-title"><a href="http://oregonstate.edu" class="nostyle"><img id="osu-tag"
+       src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/osu-tag.gif" width="101" height="119" alt="Oregon State University" title="Oregon State University" /></a><h1 class="scarctitle">Special Collections & Archives<br />Research Center</h1></div>
     <div id="header-nav">
       <ul id="nav">
         <li><a href="?p=collections/collections">Collections</a><ul>
