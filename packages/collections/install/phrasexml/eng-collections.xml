@@ -546,210 +546,333 @@
 				</phrase>
 			</phrasetype>
 			<phrasetype name='Public Phrase'>
-				<phrase name='classifications_browserecordgroups' regularexpression=''>
-					Browse Record Groups
-				</phrase>
-				<phrase name='classifications_goback' regularexpression=''>
-					Go Back
-				</phrase>
-				<phrase name='classifications_nomaterials' regularexpression=''>
-					No materials are classified under $1
-				</phrase>
-				<phrase name='classifications_recordsfiledunder' regularexpression=''>
-					Records filed under "$1"
-				</phrase>
-				<phrase name='classifications_recordsrelatingtitle' regularexpression=''>
-					Records Relating to $1
-				</phrase>
-				<phrase name='classifications_subgroupsunder' regularexpression=''>
-					Subgroups under $1
-				</phrase>
-				<phrase name='classifications_title' regularexpression=''>
-					Browse by Record Group
-				</phrase>
-				<phrase name='collections_beginningwith' regularexpression=''>
-					Beginning With "$1"
-				</phrase>
-				<phrase name='collections_booksbeginningtitle' regularexpression=''>
-					Books Beginning with $1
-				</phrase>
-				<phrase name='collections_booksbeginningwith' regularexpression=''>
-					Of Type "$1" Beginning with "$2"
-				</phrase>
-				<phrase name='collections_booksbeginningwithlist' regularexpression=''>
-					Books Beginning With "$1"
-				</phrase>
-				<phrase name='collections_browsebooksbeginning' regularexpression=''>
-					Browse Books Beginning With
-				</phrase>
-				<phrase name='collections_browseholdingsbeginning' regularexpression=''>
-					Browse Holdings Beginning With
-				</phrase>
-				<phrase name='collections_holdingsbeginningtitle' regularexpression=''>
-					Holdings Beginning with $1
-				</phrase>
-				<phrase name='collections_holdingsbeginningwithlist' regularexpression=''>
-					Holdings Beginning With "$1"
-				</phrase>
-				<phrase name='collections_title' regularexpression=''>
-					Browse By Collection Title
-				</phrase>
-				<phrase name='findingaid_findingaid' regularexpression=''>
-					Finding Aid
-				</phrase>
-				<phrase name='marc_marcrecord' regularexpression=''>
-					MARC Record
-				</phrase>
-				<phrase name='marc_rawmarc' regularexpression=''>
-					Raw MARC Output
-				</phrase>
-				<phrase name='marc_recordforBook' regularexpression=''>
-					MARC Record For Book: $1
-				</phrase>
-				<phrase name='marc_recordforcollection' regularexpression=''>
-					MARC Record For Collection: $1
-				</phrase>
-				<phrase name='marc_title' regularexpression=''>
-					$1: MARC Record
-				</phrase>
-				<phrase name='research_carttitle' regularexpression=''>
-					My Research Cart
-				</phrase>
-				<phrase name='research_email_cartappend' regularexpression=''>
-					Your 'cart' currently holds the following materials.  This list will be appended to your email message.
-				</phrase>
-				<phrase name='research_email_ext' regularexpression=''>
-					Ext
-				</phrase>
-				<phrase name='research_email_fromaddress' regularexpression=''>
-					Your Email Address
-				</phrase>
-				<phrase name='research_email_fromname' regularexpression=''>
-					Your Name
-				</phrase>
-				<phrase name='research_email_fromphone' regularexpression=''>
-					Your Phone Number
-				</phrase>
-				<phrase name='research_email_marked' regularexpression=''>
-					Fields marked with an asterisk (&lt;span style="color: red;"&gt;*&lt;/span&gt;) are required.
-				</phrase>
-				<phrase name='research_email_message' regularexpression=''>
-					Your Message
-				</phrase>
-				<phrase name='research_email_sendemail' regularexpression=''>
-					Send Email
-				</phrase>
-				<phrase name='research_email_subject' regularexpression=''>
-					Subject
-				</phrase>
-				<phrase name='research_email_title' regularexpression=''>
-					Send Email
-				</phrase>
-				<phrase name='research_verify_nav' regularexpression=''>
-					My Research Request Cart
-				</phrase>
-				<phrase name='research_verify_title' regularexpression=''>
-					Verify Research Appointment
-				</phrase>
-				<phrase name='researcher_accounttitle' regularexpression=''>
-					Edit My Account
-				</phrase>
-				<phrase name='researcher_address' regularexpression=''>
-					Address
-				</phrase>
-				<phrase name='researcher_city' regularexpression=''>
-					City
-				</phrase>
-				<phrase name='researcher_confirmemail' regularexpression=''>
-					Confirm E-mail
-				</phrase>
-				<phrase name='researcher_confirmpassword' regularexpression=''>
-					Confirm Password
-				</phrase>
-				<phrase name='researcher_email' regularexpression=''>
-					E-mail
-				</phrase>
-				<phrase name='researcher_firstname' regularexpression=''>
-					First Name
-				</phrase>
-				<phrase name='researcher_lastname' regularexpression=''>
-					Last Name
-				</phrase>
-				<phrase name='researcher_marked' regularexpression=''>
-					Fields marked with an asterisk (&lt;span style="color:red"&gt;*&lt;/span&gt;) are required.
-				</phrase>
-				<phrase name='researcher_password' regularexpression=''>
-					Password
-				</phrase>
-				<phrase name='researcher_phone' regularexpression=''>
-					Phone Number
-				</phrase>
-				<phrase name='researcher_phoneext' regularexpression=''>
-					Ext
-				</phrase>
-				<phrase name='researcher_privacynote' regularexpression=''>
-					Privacy Note
-				</phrase>
-				<phrase name='researcher_registertitle' regularexpression=''>
-					Register a Researcher Account
-				</phrase>
-				<phrase name='researcher_researchertypeid' regularexpression=''>
-					Classify Yourself
-				</phrase>
-				<phrase name='researcher_selectone' regularexpression=''>
-					(Select One)
-				</phrase>
-				<phrase name='researcher_state' regularexpression=''>
-					State
-				</phrase>
-				<phrase name='researcher_submit' regularexpression=''>
-					Submit
-				</phrase>
-				<phrase name='researcher_thankyou' regularexpression=''>
-					Thank you for registering.
-				</phrase>
-				<phrase name='researcher_zipcode' regularexpression=''>
-					ZIP
-				</phrase>
-				<phrase name='researcher_zipplusfour' regularexpression=''>
-					+4
-				</phrase>
-				<phrase name='search_bookcollection' regularexpression=''>
-					Book Collection
-				</phrase>
-				<phrase name='search_classrecordsandmans' regularexpression=''>
-					Records and Manuscripts
-				</phrase>
-				<phrase name='search_inboxlist' regularexpression=''>
-					Results Found Within Box List
-				</phrase>
-				<phrase name='search_items' regularexpression=''>
-					Series, Boxes, Folders or Items
-				</phrase>
-				<phrase name='search_matches' regularexpression=''>
-					Matches
-				</phrase>
-				<phrase name='search_noclassification' regularexpression=''>
-					No Classification
-				</phrase>
-				<phrase name='search_plainrecordsandmans' regularexpression=''>
-					Records and Manuscripts
-				</phrase>
-				<phrase name='search_searchingfindingaid' regularexpression=''>
-					Searching within the finding aid for $1
-				</phrase>
-				<phrase name='search_searchingforcontent' regularexpression=''>
-					Searching for $1
-				</phrase>
-				<phrase name='search_searchingforlocation' regularexpression=''>
-					Searching for $1
-				</phrase>
-				<phrase name='tostring_addto' regularexpression=''>
-					Add to your cart.
-				</phrase>
-				<phrase name='tostring_remove' regularexpression=''>
-					Remove from your cart.
-				</phrase>
+                <phrase name='access_notes' regularexpression=''>
+                    Access Notes:
+                </phrase>
+                <phrase name='acquired' regularexpression=''>
+                    Acquired:
+                </phrase>
+                <phrase name='acquisition_note' regularexpression=''>
+                    Acquisition Note:
+                </phrase>
+                <phrase name='appraisal_notes' regularexpression=''>
+                    Appraisal Notes:
+                </phrase>
+                <phrase name='ark_id' regularexpression=''>
+                    ARK ID:
+                </phrase>
+                <phrase name='arrangement' regularexpression=''>
+                    Arrangement
+                </phrase>
+                <phrase name='bio_historical_notes' regularexpression=''>
+                    Biographical / Historical Notes
+                </phrase>
+                <phrase name='books' regularexpression=''>
+                    Books
+                </phrase>
+                <phrase name='classifications_browserecordgroups' regularexpression=''>
+                    Browse Record Groups
+                </phrase>
+                <phrase name='classifications_goback' regularexpression=''>
+                    Go Back
+                </phrase>
+                <phrase name='classifications_nomaterials' regularexpression=''>
+                    No materials are classified under $1
+                </phrase>
+                <phrase name='classifications_recordsfiledunder' regularexpression=''>
+                    Records filed under "$1"
+                </phrase>
+                <phrase name='classifications_recordsrelatingtitle' regularexpression=''>
+                    Records Relating to $1
+                </phrase>
+                <phrase name='classifications_subgroupsunder' regularexpression=''>
+                    Subgroups under $1
+                </phrase>
+                <phrase name='classifications_title' regularexpression=''>
+                    Browse by Record Group
+                </phrase>
+                <phrase name='coll_alt_extents' regularexpression=''>
+                    More Extent Information:
+                </phrase>
+                <phrase name='collection_id' regularexpression=''>
+                    ID:
+                </phrase>
+                <phrase name='collection_material_type' regularexpression=''>
+                    Collection Material Type:
+                </phrase>
+                <phrase name='collections_beginningwith' regularexpression=''>
+                    Beginning With "$1"
+                </phrase>
+                <phrase name='collections_booksbeginningtitle' regularexpression=''>
+                    Books Beginning with $1
+                </phrase>
+                <phrase name='collections_booksbeginningwith' regularexpression=''>
+                    Of Type "$1" Beginning with "$2"
+                </phrase>
+                <phrase name='collections_booksbeginningwithlist' regularexpression=''>
+                    Books Beginning With "$1"
+                </phrase>
+                <phrase name='collections_browsebooksbeginning' regularexpression=''>
+                    Browse Books Beginning With
+                </phrase>
+                <phrase name='collections_browseholdingsbeginning' regularexpression=''>
+                    Browse Holdings Beginning With
+                </phrase>
+                <phrase name='collections_holdingsbeginningtitle' regularexpression=''>
+                    Holdings Beginning with $1
+                </phrase>
+                <phrase name='collections_holdingsbeginningwithlist' regularexpression=''>
+                    Holdings Beginning With "$1"
+                </phrase>
+                <phrase name='collections_title' regularexpression=''>
+                    Browse By Collection Title
+                </phrase>
+                <phrase name='container_list' regularexpression=''>
+                    Container List
+                </phrase>
+                <phrase name='creators' regularexpression=''>
+                    Creators
+                </phrase>
+                <phrase name='email_us' regularexpression=''>
+                    Email Us
+                </phrase>
+                <phrase name='extent' regularexpression=''>
+                    Extent:
+                </phrase>
+                <phrase name='finding_aid_revisions' regularexpression=''>
+                    Finding Aid Revisions:
+                </phrase>
+                <phrase name='findingaid_findingaid' regularexpression=''>
+                    Finding Aid
+                </phrase>
+                <phrase name='forms_of_material' regularexpression=''>
+                    Forms of Material
+                </phrase>
+                <phrase name='languages_of_materials' regularexpression=''>
+                    Languages of Materials
+                </phrase>
+                <phrase name='marc_marcrecord' regularexpression=''>
+                    MARC Record
+                </phrase>
+                <phrase name='marc_rawmarc' regularexpression=''>
+                    Raw MARC Output
+                </phrase>
+                <phrase name='marc_recordforBook' regularexpression=''>
+                    MARC Record For Book: $1
+                </phrase>
+                <phrase name='marc_recordforcollection' regularexpression=''>
+                    MARC Record For Collection: $1
+                </phrase>
+                <phrase name='marc_title' regularexpression=''>
+                    $1: MARC Record
+                </phrase>
+                <phrase name='more_information' regularexpression=''>
+                    More Information:
+                </phrase>
+                <phrase name='online_docs_files' regularexpression=''>
+                    Online Documents / Files:
+                </phrase>
+                <phrase name='other_find_aid' regularexpression=''>
+                    Other Finding Aid:
+                </phrase>
+                <phrase name='other_formats' regularexpression=''>
+                    Other Formats:
+                </phrase>
+                <phrase name='other_information' regularexpression=''>
+                    Other
+                </phrase>
+                <phrase name='other_note' regularexpression=''>
+                    Other Note:
+                </phrase>
+                <phrase name='predominant_dates' regularexpression=''>
+                    Predominant Dates:
+                </phrase>
+                <phrase name='preferred_citation' regularexpression=''>
+                    Preferred Citation:
+                </phrase>
+                <phrase name='printer_friendly' regularexpression=''>
+                    Printer Friendly
+                </phrase>
+                <phrase name='processed_accessions' regularexpression=''>
+                    and Processed Accessions
+                </phrase>
+                <phrase name='processing_note' regularexpression=''>
+                    Processing Note:
+                </phrase>
+                <phrase name='related_materials' regularexpression=''>
+                    Related Materials
+                </phrase>
+                <phrase name='related_publications' regularexpression=''>
+                    Related Publications:
+                </phrase>
+                <phrase name='repository' regularexpression=''>
+                    Repository:
+                </phrase>
+                <phrase name='research_carttitle' regularexpression=''>
+                    My Research Cart
+                </phrase>
+                <phrase name='research_email_cartappend' regularexpression=''>
+                    Your 'cart' currently holds the following materials.  This list will be appended to your email message.
+                </phrase>
+                <phrase name='research_email_ext' regularexpression=''>
+                    Ext
+                </phrase>
+                <phrase name='research_email_fromaddress' regularexpression=''>
+                    Your Email Address
+                </phrase>
+                <phrase name='research_email_fromname' regularexpression=''>
+                    Your Name
+                </phrase>
+                <phrase name='research_email_fromphone' regularexpression=''>
+                    Your Phone Number
+                </phrase>
+                <phrase name='research_email_marked' regularexpression=''>
+                    Fields marked with an asterisk (&lt;span style="color: red;"&gt;*&lt;/span&gt;) are required.
+                </phrase>
+                <phrase name='research_email_message' regularexpression=''>
+                    Your Message
+                </phrase>
+                <phrase name='research_email_sendemail' regularexpression=''>
+                    Send Email
+                </phrase>
+                <phrase name='research_email_subject' regularexpression=''>
+                    Subject
+                </phrase>
+                <phrase name='research_email_title' regularexpression=''>
+                    Send Email
+                </phrase>
+                <phrase name='research_verify_nav' regularexpression=''>
+                    My Research Request Cart
+                </phrase>
+                <phrase name='research_verify_title' regularexpression=''>
+                    Verify Research Appointment
+                </phrase>
+                <phrase name='researcher_accounttitle' regularexpression=''>
+                    Edit My Account
+                </phrase>
+                <phrase name='researcher_address' regularexpression=''>
+                    Address
+                </phrase>
+                <phrase name='researcher_city' regularexpression=''>
+                    City
+                </phrase>
+                <phrase name='researcher_confirmemail' regularexpression=''>
+                    Confirm E-mail
+                </phrase>
+                <phrase name='researcher_confirmpassword' regularexpression=''>
+                    Confirm Password
+                </phrase>
+                <phrase name='researcher_email' regularexpression=''>
+                    E-mail
+                </phrase>
+                <phrase name='researcher_firstname' regularexpression=''>
+                    First Name
+                </phrase>
+                <phrase name='researcher_lastname' regularexpression=''>
+                    Last Name
+                </phrase>
+                <phrase name='researcher_marked' regularexpression=''>
+                    Fields marked with an asterisk (&lt;span style="color:red"&gt;*&lt;/span&gt;) are required.
+                </phrase>
+                <phrase name='researcher_password' regularexpression=''>
+                    Password
+                </phrase>
+                <phrase name='researcher_phone' regularexpression=''>
+                    Phone Number
+                </phrase>
+                <phrase name='researcher_phoneext' regularexpression=''>
+                    Ext
+                </phrase>
+                <phrase name='researcher_privacynote' regularexpression=''>
+                    Privacy Note
+                </phrase>
+                <phrase name='researcher_registertitle' regularexpression=''>
+                    Register a Researcher Account
+                </phrase>
+                <phrase name='researcher_researchertypeid' regularexpression=''>
+                    Classify Yourself
+                </phrase>
+                <phrase name='researcher_selectone' regularexpression=''>
+                    (Select One)
+                </phrase>
+                <phrase name='researcher_state' regularexpression=''>
+                    State
+                </phrase>
+                <phrase name='researcher_submit' regularexpression=''>
+                    Submit
+                </phrase>
+                <phrase name='researcher_thankyou' regularexpression=''>
+                    Thank you for registering.
+                </phrase>
+                <phrase name='researcher_zipcode' regularexpression=''>
+                    ZIP
+                </phrase>
+                <phrase name='researcher_zipplusfour' regularexpression=''>
+                    +4
+                </phrase>
+                <phrase name='rights' regularexpression=''>
+                    Rights:
+                </phrase>
+                <phrase name='scope_and_contents' regularexpression=''>
+                    Scope and Content Notes
+                </phrase>
+                <phrase name='search_bookcollection' regularexpression=''>
+                    Book Collection
+                </phrase>
+                <phrase name='search_classrecordsandmans' regularexpression=''>
+                    Records and Manuscripts
+                </phrase>
+                <phrase name='search_inboxlist' regularexpression=''>
+                    Results Found Within Box List
+                </phrase>
+                <phrase name='search_items' regularexpression=''>
+                    Series, Boxes, Folders or Items
+                </phrase>
+                <phrase name='search_matches' regularexpression=''>
+                    Matches
+                </phrase>
+                <phrase name='search_noclassification' regularexpression=''>
+                    No Classification
+                </phrase>
+                <phrase name='search_plainrecordsandmans' regularexpression=''>
+                    Records and Manuscripts
+                </phrase>
+                <phrase name='search_searchingfindingaid' regularexpression=''>
+                    Searching within the finding aid for $1
+                </phrase>
+                <phrase name='search_searchingforcontent' regularexpression=''>
+                    Searching for $1
+                </phrase>
+                <phrase name='search_searchingforlocation' regularexpression=''>
+                    Searching for $1
+                </phrase>
+                <phrase name='staff_info' regularexpression=''>
+                    Staff Information
+                </phrase>
+                <phrase name='statement_on_access' regularexpression=''>
+                    Statement on Access:
+                </phrase>
+                <phrase name='storage_locations' regularexpression=''>
+                    Storage Locations:
+                </phrase>
+                <phrase name='subjects' regularexpression=''>
+                    Subjects
+                </phrase>
+                <phrase name='technical_notes' regularexpression=''>
+                    Technical Notes:
+                </phrase>
+                <phrase name='tostring_addto' regularexpression=''>
+                    Add to your cart.
+                </phrase>
+                <phrase name='tostring_remove' regularexpression=''>
+                    Remove from your cart.
+                </phrase>
+                <phrase name='unprocessed_materials' regularexpression=''>
+                    Unprocessed Materials
+                </phrase>
+                <phrase name='view_cart' regularexpression=''>
+                    View Cart
+                </phrase>
 			</phrasetype>
 		</module>
 		<module script='collections'>
