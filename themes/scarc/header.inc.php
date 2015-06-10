@@ -10,13 +10,6 @@ isset($_ARCHON) or die();
 // *** This is now a configuration directive. Please set in the Configuration Manager ***
 //$_ARCHON->PublicInterface->EscapeXML = false;
 
-
-if($_ARCHON->Script == 'packages/collections/pub/findingaid.php')
-{
-   require("faheader.inc.php");
-   return;
-}
-
 $_ARCHON->PublicInterface->Header->OnLoad .= "externalLinks();";
 
 if($_ARCHON->Error)

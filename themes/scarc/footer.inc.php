@@ -8,11 +8,6 @@
 
 isset($_ARCHON) or die();
 
-if($_ARCHON->Script == 'packages/collections/pub/findingaid.php')
-{
-   require("fafooter.inc.php");
-   return;
-}
 ?>
 </div>
 <div id="footer">
