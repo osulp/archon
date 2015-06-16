@@ -970,9 +970,9 @@ function import_ead_storecontent($CollectionID, $ParentID, $RepositoryID, $Eleme
                $LevelContainerID = $arrLevelContainerMap[encoding_strtolower(trim((string) $containerType))];
 
                $LevelContainerIdentifier = import_ead_extracttext($containerElement);
-               if (strlen($LevelContainerIdentifier) > 10)
+               if (strlen($LevelContainerIdentifier) > 25)
                {
-                  $LevelContainerIdentifier = encoding_substr($LevelContainerIdentifier, 0, 10);
+                  $LevelContainerIdentifier = encoding_substr($LevelContainerIdentifier, 0, 25);
                }
 
                if ($LevelContainerID && $LevelContainerIdentifier)

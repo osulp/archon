@@ -98,7 +98,7 @@ UPDATE tblCollections_Content SET SortOrder = (SELECT Count FROM cmax WHERE cmax
 ALTER TABLE tblCollections_Content DROP INDEX LevelContainerNumber;
 
 -- Make LevelContainerNumbers into VARCHARS
-ALTER TABLE tblCollections_Content CHANGE LevelContainerNumber LevelContainerIdentifier VARCHAR( 10 ) NOT NULL;
+ALTER TABLE tblCollections_Content CHANGE LevelContainerNumber LevelContainerIdentifier VARCHAR( 25 ) NOT NULL;
 
 -- Drop Temp Tables
 DROP TABLE cmax;

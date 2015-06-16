@@ -690,7 +690,7 @@ function collectioncontent_ui_main()
       {
 
          $generalSection->insertRow('levelcontainerid')->insertSelect('LevelContainerID', 'getAllLevelContainers')->required();
-         $generalSection->insertRow('levelcontaineridentifier')->insertTextField('LevelContainerIdentifier', 5, 10)->required();
+         $generalSection->insertRow('levelcontaineridentifier')->insertTextField('LevelContainerIdentifier', 15, 25)->required();
          $generalSection->insertRow('title')->insertNameField('Title');
          $generalSection->getRow('title')->setEnableConditions('LevelContainerID', $arrPhysOnlyLCIDs, true, true);
          $generalSection->insertRow('privatetitle')->insertNameField('PrivateTitle');
