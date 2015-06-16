@@ -1868,3 +1868,22 @@ td {
     width: 95%;
     margin-bottom: 5px;
 }
+
+dt.faitem {
+    margin: 5px 0;
+    font-size: 1.1em;
+}
+
+dl.faitem {
+    margin-left: 15px;
+}
+
+dl.faitem dt.faitem {
+    margin-top: 10px;
+}
+
+dd.faitemcontent {
+    /*padding: 5px;*/
+    /*margin-bottom: 5px;*/
+}
+

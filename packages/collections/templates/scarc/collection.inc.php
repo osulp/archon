@@ -28,6 +28,8 @@ $repositoryid = $objCollection->RepositoryID;
 
 $printerFriendly = $_ARCHON->getPhrase('printer_friendly', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)->getPhraseValue(ENCODE_HTML);
 $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)->getPhraseValue(ENCODE_HTML);
+
+//print_r( $_ARCHON);
 ?>
   <div id="scarc-controlcard" class="row" xmlns="http://www.w3.org/1999/html">
   <div class="col-md-3">
@@ -92,6 +94,19 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
 
   <div id="ccardpublic" class='mdround'>  <!-- begin div ccardcontents -->
   <?php
+
+  /**
+   * Abstract
+   */
+  if ($objCollection->Abstract) {
+    ?>
+    <div class='ccardcontent'>
+      <div id='CollectionAbstractResults'>
+        <?php echo($objCollection->getString('Abstract')); ?>
+      </div>
+    </div>
+  <?php
+  }
 
   /**
    * Creator
@@ -164,19 +179,6 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
       <div class='ccardshowlist' style='display:none'
            id='CollectionAltExtentResults'>
         <?php echo($objCollection->AltExtentStatement); ?>
-      </div>
-    </div>
-  <?php
-  }
-
-  /**
-   * Abstract
-   */
-  if ($objCollection->Abstract) {
-    ?>
-    <div class='ccardcontent'>
-      <div id='CollectionAbstractResults'>
-        <?php echo($objCollection->getString('Abstract')); ?>
       </div>
     </div>
   <?php
@@ -265,168 +267,106 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
   /**
    * More Information
    */
-  ?>
-  <h2><?php echo $_ARCHON->getPhrase('more_information', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
-      ->getPhraseValue(ENCODE_HTML); ?></h2>
-
-  <div class="ccardshowlist">
-    <?php
-    if ($objCollection->Arrangement) {
-      ?>
-      <div class='ccardcontent'><span class='ccardlabel'><a href='#'
-                                                            onclick="toggleDisplay('CollectionArrangement'); return false;"><img
-              id='CollectionArrangementImage'
-              src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif'
-              alt='expand icon'/>
-            <?php echo $_ARCHON->getPhrase('arrangement', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
-              ->getPhraseValue(ENCODE_HTML); ?>
-          </a></span>
-
-        <div class='ccardshowlist' style='display:none'
-             id='CollectionArrangementResults'>
-          <?php echo($objCollection->getString('Arrangement')); ?>
-        </div>
-      </div>
-    <?php
-    }
-
-    if ($objCollection->PreferredCitation) {
-      ?>
-      <div class='ccardcontent'><span
-          class='ccardlabel'><?php echo $_ARCHON->getPhrase('preferred_citation', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
-            ->getPhraseValue(ENCODE_HTML); ?></span> <?php
-        echo($objCollection->getString('PreferredCitation')); ?></div>
-    <?php
-    }
-    if ($objCollection->AcquisitionSource || $objCollection->AcquisitionMethod) {
-      ?>
-      <div class='ccardcontent'><span
-          class='ccardlabel'><?php echo $_ARCHON->getPhrase('acquisition_note', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
-            ->getPhraseValue(ENCODE_HTML); ?> </span>
-        <?php
-        if ($objCollection->AcquisitionSource) {
-          echo("&nbsp;<em>Source:</em> " . $objCollection->getString('AcquisitionSource') . ".<br/>");
-        }
-        if ($objCollection->AcquisitionMethod) {
-          echo($objCollection->getString('AcquisitionMethod'));
-        }
-        ?>
-      </div>
-    <?php
-    }
-
-    if ($objCollection->AcquisitionDate || $objCollection->AccrualInfo) {
-      ?>
-      <div class='ccardcontent'><span
-          class='ccardlabel'><?php echo $_ARCHON->getPhrase('acquired', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
-            ->getPhraseValue(ENCODE_HTML); ?></span>
-        <?php
-        if ($objCollection->AcquisitionDate) {
-
-          if ($objCollection->AcquisitionDateMonth <> "00") {
-            echo($objCollection->AcquisitionDateMonth . '/');
-          }
-          if ($objCollection->AcquisitionDateDay <> "00") {
-            echo($objCollection->AcquisitionDateDay . '/');
-          }
-          echo($objCollection->AcquisitionDateYear . ".  ");
-        }
-        if ($objCollection->AccrualInfo) {
-          echo($objCollection->getString('AccrualInfo'));
-        }
-        ?>
-      </div>
-    <?php
-    }
-
-    if ($objCollection->ProcessingInformation) {
-      ?>
-      <div class='ccardcontent'><span
-          class='ccardlabel'><?php echo $_ARCHON->getPhrase('processing_note', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
-            ->getPhraseValue(ENCODE_HTML); ?></span> <?php
-        echo($objCollection->getString('ProcessingInformation')); ?></div>
-    <?php
-    }
-
-    if (!empty($objCollection->Languages)) {
-      ?>
-      <div class='ccardcontent'><span
-          class='ccardlabel'><?php echo $_ARCHON->getPhrase('languages_of_materials', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
-            ->getPhraseValue(ENCODE_HTML); ?></a></span><br/>
-
-        <div
-          class='ccardshowlist'><?php echo($_ARCHON->createStringFromLanguageArray($objCollection->Languages, "<br/>\n", LINK_TOTAL)); ?></div>
-      </div>
-    <?php
-    }
+  if ($objCollection->Arrangement) {
     ?>
-  </div>
+    <div class='ccardcontent'><span class='ccardlabel'><a href='#'
+                                                          onclick="toggleDisplay('CollectionArrangement'); return false;"><img
+            id='CollectionArrangementImage'
+            src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif'
+            alt='expand icon'/>
+          <?php echo $_ARCHON->getPhrase('arrangement', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+            ->getPhraseValue(ENCODE_HTML); ?>
+        </a></span>
+
+      <div class='ccardshowlist' style='display:none'
+           id='CollectionArrangementResults'>
+        <?php echo($objCollection->getString('Arrangement')); ?>
+      </div>
+    </div>
   <?php
+  }
 
-  if(!empty($objCollection->Content))
-  { ?> <hr style="width: 70%" class='center' /> <h2 style='text-align:left'><a name="boxfolder"></a>Box and Folder Listing</h2> <?php } ?>
+  if ($objCollection->PreferredCitation) {
+    ?>
+    <div class='ccardcontent'><span
+        class='ccardlabel'><?php echo $_ARCHON->getPhrase('preferred_citation', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+          ->getPhraseValue(ENCODE_HTML); ?></span> <?php
+      echo($objCollection->getString('PreferredCitation')); ?></div>
   <?php
-  if(!$_ARCHON->PublicInterface->DisableTheme)
-  {
-    $_ARCHON->PublicInterface->DisableTheme = true;
-
-    $arrLinks = array();
-    foreach($arrRootContent as $ID => $objContent)
-    {
-      if($ID != $in_RootContentID && $objContent->enabled())
-      {
-        $strLink = "[<a href='?p=collections/findingaid&amp;id=$objCollection->ID&amp;q=$_ARCHON->QueryStringURL&amp;rootcontentid=$ID#id$ID'>" . $objContent->toString() . "</a>]";
+  }
+  if ($objCollection->AcquisitionSource || $objCollection->AcquisitionMethod) {
+    ?>
+    <div class='ccardcontent'><span
+        class='ccardlabel'><?php echo $_ARCHON->getPhrase('acquisition_note', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+          ->getPhraseValue(ENCODE_HTML); ?> </span>
+      <?php
+      if ($objCollection->AcquisitionSource) {
+        echo("&nbsp;<em>Source:</em> " . $objCollection->getString('AcquisitionSource') . ".<br/>");
       }
-      else
-      {
-        $strLink = '[' . $objContent->toString() . ']';
+      if ($objCollection->AcquisitionMethod) {
+        echo($objCollection->getString('AcquisitionMethod'));
       }
-
-      $arrLinks[] = $strLink;
-    }
-
-    $strDivision = reset($arrRootContent)->LevelContainer ? reset($arrRootContent)->LevelContainer->getString('LevelContainer') : '';
-    $strFindingAidLinks = "<br/><span class='bold'>Browse by $strDivision:</span><br/><br/>\n";
-    $strFindingAidLinks .= implode(",<br/>\n", $arrLinks);
-
-    if($in_RootContentID)
-    {
-      $strFindingAidLinks .= ",<br/>\n" . "[<a href='?p=collections/findingaid&amp;id=$objCollection->ID&amp;q=$_ARCHON->QueryStringURL'>" . All . "</a>]<br/>\n";
-    }
-    else
-    {
-      $strFindingAidLinks .= ",<br/>\n[All]<br/>\n";
-    }
-
-
-    $_ARCHON->PublicInterface->DisableTheme = false;
-  }
-  else
-  {
-    $strFindingAidLinks = '';
+      ?>
+    </div>
+  <?php
   }
 
-  echo($strFindingAidLinks . "<br/>\n");
+  if ($objCollection->AcquisitionDate || $objCollection->AccrualInfo) {
+    ?>
+    <div class='ccardcontent'><span
+        class='ccardlabel'><?php echo $_ARCHON->getPhrase('acquired', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+          ->getPhraseValue(ENCODE_HTML); ?></span>
+      <?php
+      if ($objCollection->AcquisitionDate) {
 
-  $contentCount = $objCollection->countContent();
-  if($contentCount > 0)
-  {
-    echo("<dl>#CONTENT#</dl>");
+        if ($objCollection->AcquisitionDateMonth <> "00") {
+          echo($objCollection->AcquisitionDateMonth . '/');
+        }
+        if ($objCollection->AcquisitionDateDay <> "00") {
+          echo($objCollection->AcquisitionDateDay . '/');
+        }
+        echo($objCollection->AcquisitionDateYear . ".  ");
+      }
+      if ($objCollection->AccrualInfo) {
+        echo($objCollection->getString('AccrualInfo'));
+      }
+      ?>
+    </div>
+  <?php
   }
 
-  if($contentCount > 20)
-  {
-    echo($strFindingAidLinks . "\n");
+  if ($objCollection->ProcessingInformation) {
+    ?>
+    <div class='ccardcontent'><span
+        class='ccardlabel'><?php echo $_ARCHON->getPhrase('processing_note', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+          ->getPhraseValue(ENCODE_HTML); ?></span> <?php
+      echo($objCollection->getString('ProcessingInformation')); ?></div>
+  <?php
   }
 
+  if (!empty($objCollection->Languages)) {
+    ?>
+    <div class='ccardcontent'><span
+        class='ccardlabel'><?php echo $_ARCHON->getPhrase('languages_of_materials', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+          ->getPhraseValue(ENCODE_HTML); ?></a></span><br/>
+
+      <div
+        class='ccardshowlist'><?php echo($_ARCHON->createStringFromLanguageArray($objCollection->Languages, "<br/>\n", LINK_TOTAL)); ?></div>
+    </div>
+  <?php
+  }
+  ?>
+  <?php
 
   /**
    * OTHER
    *
    */
-  if (!empty($objCollection->AcquisitionDate) || !empty($objCollection->AccrualInfo) || !empty($objCollection->AccessRestrictions) || !empty($objCollection->UseRestrictions) || !empty($objCollection->PhysicalAccessNote) || !empty($objCollection->TechnicalAccessNote) || !empty($objCollection->AcquisitionSource) || !empty($objCollection->AcquisitionMethod) || !empty($objCollection->AppraisalInformation) || !empty($objCollection->OrigCopiesNote) || !empty($objCollection->OrigCopiesURL) || !empty($objCollection->RelatedMaterials) || !empty($objCollection->RelatedMaterialsURL) || !empty($objCollection->RelatedPublications) || !empty($objCollection->PreferredCitation) || !empty($objCollection->ProcessingInfo) || !empty($objCollection->RevisionHistory) || !empty($objCollection->MaterialType)) {
+  if ( !empty($objCollection->UseRestrictions) || !empty($objCollection->PhysicalAccess) || !empty($objCollection->TechnicalAccess)
+    || !empty($objCollection->AppraisalInformation) || !empty($objCollection->OrigCopiesNote) || !empty($objCollection->OrigCopiesURL)
+    || !empty($objCollection->RelatedPublications) || !empty($objCollection->RevisionHistory) || !empty($objCollection->OtherNote)
+    || !empty($objCollection->DigitalContent) || !empty($objCollection->MaterialType) || !empty($objCollection->Books)) {
     ?>
-    <hr/>
     <div class='ccardcontent'><span class='ccardlabel'><a href='#'
                                                           onclick="toggleDisplay('otherinformation'); return false;"><img
             id='otherinformationImage'
@@ -437,15 +377,6 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
       <div class='ccardshowlist' style='display:none'
            id='otherinformationResults'>
         <?php
-        if ($objCollection->PredominantDates) {
-          ?>
-          <div class='ccardcontent'><span
-              class='ccardlabel'><?php echo $_ARCHON->getPhrase('predominant_dates', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
-                ->getPhraseValue(ENCODE_HTML); ?></span> <?php echo($objCollection->PredominantDates); ?>
-          </div>
-        <?php
-        }
-
         if (!empty($objCollection->Repository) && ($objCollection->Repository != $_ARCHON->Repository)) {
           ?>
           <div class='ccardcontent'><span
@@ -569,6 +500,22 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
         <?php
         }
 
+        if ($objCollection->Books) {
+          ?>
+          <div class='ccardcontent'><span class='bold'><a href='#'
+                                                          onclick="toggleDisplay('LinkedBooks'); return false;"><img
+                  id='LinkedBooksImage'
+                  src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif'
+                  alt='expand icon'/> <?php echo $_ARCHON->getPhrase('books', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+                  ->getPhraseValue(ENCODE_HTML); ?> </a></span><br/>
+
+            <div class='ccardshowlist' style='display: none'
+                 id='LinkedBooksResults'><?php echo($_ARCHON->createStringFromBookArray($objCollection->Books, "<br/>\n", LINK_TOTAL)); ?></div>
+          </div>
+
+        <?php
+        }
+
         if (!empty($arrDisplayAccessions)) {
           ?>
           <div class='ccardcontent'><span class='ccardlabel'><a href='#'
@@ -596,27 +543,73 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
         <?php
         }
 
-        if ($objCollection->Books) {
-          ?>
-          <div class='ccardcontent'><span class='bold'><a href='#'
-                                                          onclick="toggleDisplay('LinkedBooks'); return false;"><img
-                  id='LinkedBooksImage'
-                  src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif'
-                  alt='expand icon'/> <?php echo $_ARCHON->getPhrase('books', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
-                  ->getPhraseValue(ENCODE_HTML); ?> </a></span><br/>
-
-            <div class='ccardshowlist' style='display: none'
-                 id='LinkedBooksResults'><?php echo($_ARCHON->createStringFromBookArray($objCollection->Books, "<br/>\n", LINK_TOTAL)); ?></div>
-          </div>
-
-        <?php
-        }
 
         ?>
       </div>
     </div> <!-- ending admininfo content -->
   <?php
   }
+
+  /**
+   * Container List
+   */
+  if(!empty($objCollection->Content))
+  { ?> <hr style="width: 70%" class='center' /> <h2 style='text-align:left'><a name="boxfolder"></a><?php echo $_ARCHON->getPhrase('container_list', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+      ->getPhraseValue(ENCODE_HTML); ?></h2> <?php } ?>
+  <?php
+  if(!$_ARCHON->PublicInterface->DisableTheme)
+  {
+    $_ARCHON->PublicInterface->DisableTheme = true;
+
+    $arrLinks = array();
+    foreach($arrRootContent as $ID => $objContent)
+    {
+      if($ID != $in_RootContentID && $objContent->enabled())
+      {
+        $strLink = "[<a href='?p=collections/findingaid&amp;id=$objCollection->ID&amp;q=$_ARCHON->QueryStringURL&amp;rootcontentid=$ID#id$ID'>" . $objContent->toString() . "</a>]";
+      }
+      else
+      {
+        $strLink = '[' . $objContent->toString() . ']';
+      }
+
+      $arrLinks[] = $strLink;
+    }
+
+    $strDivision = reset($arrRootContent)->LevelContainer ? reset($arrRootContent)->LevelContainer->getString('LevelContainer') : '';
+    $strFindingAidLinks = "<br/><span class='bold'>Browse by $strDivision:</span><br/><br/>\n";
+    $strFindingAidLinks .= implode(",<br/>\n", $arrLinks);
+
+    if($in_RootContentID)
+    {
+      $strFindingAidLinks .= ",<br/>\n" . "[<a href='?p=collections/findingaid&amp;id=$objCollection->ID&amp;q=$_ARCHON->QueryStringURL'>" . All . "</a>]<br/>\n";
+    }
+    else
+    {
+      $strFindingAidLinks .= ",<br/>\n[All]<br/>\n";
+    }
+
+
+    $_ARCHON->PublicInterface->DisableTheme = false;
+  }
+  else
+  {
+    $strFindingAidLinks = '';
+  }
+
+  echo($strFindingAidLinks . "<br/>\n");
+
+  $contentCount = $objCollection->countContent();
+  if($contentCount > 0)
+  {
+    echo("<dl>#CONTENT#</dl>");
+  }
+
+  if($contentCount > 20)
+  {
+    echo($strFindingAidLinks . "\n");
+  }
+
 
   ?>
   </div>

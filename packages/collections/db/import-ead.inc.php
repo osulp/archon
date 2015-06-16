@@ -739,6 +739,17 @@ if ($_REQUEST['f'] == 'import-' . $UtilityCode)
 function import_ead_extracttext($XML)
 {
    $text = trim((string) $XML);
+
+  if (!is_null($XML) && $XML->extref){
+    // parse out the extref and look for a link if present
+    $attrs = $XML->extref->attributes();
+    foreach ($attrs as $k=>$v) {
+      if ('href' == $k) {
+        $text = '<a href="'.$v.'">'.(string)$XML->extref.'</a>';
+      }
+    }
+  }
+
    if ($text)
    {
       $c = $XML->children();
@@ -767,11 +778,28 @@ function import_ead_extracttext($XML)
       {
          // if there are elements within paragraphs, the tags will be removed
          // and the string inside will be extracted
+
          $c = $p->children();
          if (!empty($c))
          {
-            $str = (string) $p->asXML();
-            $str = bbcode_ead_decode($str);
+           $str = (string) $p->asXML();
+           $str = bbcode_ead_decode($str);
+
+           $matches = array();
+           if (preg_match_all('/<(\w+) render="(\w+)" .*>(.*)?<\/\\1>/i',$str, $matches, PREG_SET_ORDER)) {
+             foreach ($matches as $match) {
+                $old_str = $match[0];
+                if ('italic' == $match[2]) {
+                  $new_str = '[i]'.$match[3].'[/i]';
+                } else if ('bold' == $match[2]) {
+                  $new_str = '[b]'.$match[3].'[/b]';
+                } else {
+                  echo "Unknown title type: ".$match[2]."\n";
+                  $new_str = $match[3];
+                }
+                $str = str_replace($old_str, $new_str, $str);
+             }
+           }
             $p = trim(preg_replace('/<(.+?)>/ismu', '', $str));
          }
          else
