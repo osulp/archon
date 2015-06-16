@@ -31,7 +31,7 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
 ?>
   <div id="scarc-controlcard" class="row" xmlns="http://www.w3.org/1999/html">
   <div class="col-md-3">
-    <div id="ccardprintcontact" class="smround">
+    <div id="ccardprintcontact" class="smround" data-spy="affix" data-offset-top="230">
       <p><a
           href="?p=collections/controlcard&amp;id=<?php echo $objCollection->ID; ?>&amp;templateset=print&amp;disabletheme=1"><img
             src="<?php echo $_ARCHON->PublicInterface->ImagePath; ?>/printer.png"
@@ -60,7 +60,7 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
       <?php
       if (!empty($objCollection->Content)) {
         ?>
-        <div class='ccardcontent'><span
+        <div class="ccardcontent"><span
             class='ccardlabel'><?php echo $_ARCHON->getPhrase('container_list', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
               ->getPhraseValue(ENCODE_HTML); ?></span><br/>
           <?php
