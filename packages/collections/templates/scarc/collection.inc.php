@@ -551,63 +551,58 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
   /**
    * Container List
    */
-  if(!empty($objCollection->Content))
-  { ?> <hr style="width: 70%" class='center' /> <h2 style='text-align:left'><a name="boxfolder"></a><?php echo $_ARCHON->getPhrase('container_list', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
-      ->getPhraseValue(ENCODE_HTML); ?></h2> <?php } ?>
+  if (!empty($objCollection->Content)) {
+    ?>
+    <hr style="width: 70%" class='center'/>
+    <div class="container-list">
+      <h2 style='text-align:left'><a
+          name="boxfolder"></a><?php echo $_ARCHON->getPhrase('container_list', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+          ->getPhraseValue(ENCODE_HTML); ?></h2> <?php
+
+      // Build the array of finding aid links
+      if (!$_ARCHON->PublicInterface->DisableTheme) {
+        $_ARCHON->PublicInterface->DisableTheme = TRUE;
+
+        $arrLinks = array();
+        foreach ($arrRootContent as $ID => $objContent) {
+          if ($ID != $in_RootContentID && $objContent->enabled()) {
+            $strLink = "[<a href='?p=collections/findingaid&amp;id=$objCollection->ID&amp;q=$_ARCHON->QueryStringURL&amp;rootcontentid=$ID#id$ID'>" . $objContent->toString() . "</a>]";
+          }
+          else {
+            $strLink = '[' . $objContent->toString() . ']';
+          }
+          $arrLinks[] = $strLink;
+        }
+
+        $strDivision = reset($arrRootContent)->LevelContainer ? reset($arrRootContent)->LevelContainer->getString('LevelContainer') : '';
+        $strFindingAidLinks = '<h3>Browse by ' . $strDivision . '</h3>';
+        $strFindingAidLinks .= implode("<br/>\n", $arrLinks);
+
+        if ($in_RootContentID) {
+          $strFindingAidLinks .= "<br/>\n" . "[<a href='?p=collections/findingaid&amp;id=$objCollection->ID&amp;q=$_ARCHON->QueryStringURL'>" . All . "</a>]<br/>\n";
+        }
+        else {
+          $strFindingAidLinks .= "<br/>\n[All]<br/>\n";
+        }
+        $_ARCHON->PublicInterface->DisableTheme = FALSE;
+      }
+      else {
+        $strFindingAidLinks = '';
+      }
+
+      // Display the links above and below the container list content
+      echo('<div class="falinks">'.$strFindingAidLinks . "</div>\n");
+      $contentCount = $objCollection->countContent();
+      if ($contentCount > 0) {
+        echo("<dl>#CONTENT#</dl>");
+      }
+      if ($contentCount > 20) {
+        echo('<div class="falinks">'.$strFindingAidLinks . "</div>\n");
+      }
+      ?>
+    </div>
   <?php
-  if(!$_ARCHON->PublicInterface->DisableTheme)
-  {
-    $_ARCHON->PublicInterface->DisableTheme = true;
-
-    $arrLinks = array();
-    foreach($arrRootContent as $ID => $objContent)
-    {
-      if($ID != $in_RootContentID && $objContent->enabled())
-      {
-        $strLink = "[<a href='?p=collections/findingaid&amp;id=$objCollection->ID&amp;q=$_ARCHON->QueryStringURL&amp;rootcontentid=$ID#id$ID'>" . $objContent->toString() . "</a>]";
-      }
-      else
-      {
-        $strLink = '[' . $objContent->toString() . ']';
-      }
-
-      $arrLinks[] = $strLink;
-    }
-
-    $strDivision = reset($arrRootContent)->LevelContainer ? reset($arrRootContent)->LevelContainer->getString('LevelContainer') : '';
-    $strFindingAidLinks = "<br/><span class='bold'>Browse by $strDivision:</span><br/><br/>\n";
-    $strFindingAidLinks .= implode(",<br/>\n", $arrLinks);
-
-    if($in_RootContentID)
-    {
-      $strFindingAidLinks .= ",<br/>\n" . "[<a href='?p=collections/findingaid&amp;id=$objCollection->ID&amp;q=$_ARCHON->QueryStringURL'>" . All . "</a>]<br/>\n";
-    }
-    else
-    {
-      $strFindingAidLinks .= ",<br/>\n[All]<br/>\n";
-    }
-
-
-    $_ARCHON->PublicInterface->DisableTheme = false;
   }
-  else
-  {
-    $strFindingAidLinks = '';
-  }
-
-  echo($strFindingAidLinks . "<br/>\n");
-
-  $contentCount = $objCollection->countContent();
-  if($contentCount > 0)
-  {
-    echo("<dl>#CONTENT#</dl>");
-  }
-
-  if($contentCount > 20)
-  {
-    echo($strFindingAidLinks . "\n");
-  }
-
 
   ?>
   </div>

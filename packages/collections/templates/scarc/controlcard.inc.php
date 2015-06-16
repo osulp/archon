@@ -567,7 +567,6 @@ if ( !empty($objCollection->UseRestrictions) || !empty($objCollection->PhysicalA
  */
 if ($_ARCHON->Security->verifyPermissions(MODULE_COLLECTIONS, READ)) {
   ?>
-  <hr/>
   <div id='ccardstaff' class='mdround'>
     <h2><?php echo $_ARCHON->getPhrase('staff_info', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
         ->getPhraseValue(ENCODE_HTML); ?></h2>
