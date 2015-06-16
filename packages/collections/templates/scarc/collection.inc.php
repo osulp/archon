@@ -28,8 +28,6 @@ $repositoryid = $objCollection->RepositoryID;
 
 $printerFriendly = $_ARCHON->getPhrase('printer_friendly', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)->getPhraseValue(ENCODE_HTML);
 $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)->getPhraseValue(ENCODE_HTML);
-
-//print_r( $_ARCHON);
 ?>
   <div id="scarc-controlcard" class="row" xmlns="http://www.w3.org/1999/html">
   <div class="col-md-3">
