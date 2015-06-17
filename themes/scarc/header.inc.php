@@ -93,7 +93,15 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
                collapseTimer:    0,                // milliseconds before auto collapse; default is 0 (don't re-collape)
                userCollapseText: '[collapse]'      // text for collaspe link
             });
+            resize_left_column();
+            $(window).resize(function () {
+              resize_left_column();
+            });
          });
+
+         function resize_left_column() {
+           $('#ccardprintcontact').width($('#fa-left-column').width());
+         }
 
          function js_highlighttoplink(selectedSpan)
          {

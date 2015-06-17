@@ -61,8 +61,8 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
     if (!empty($objCollection->Content)) {
       ?>
       <div class='ccardcontent'><span
-          class='ccardlabel'><?php echo $_ARCHON->getPhrase('container_list', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
-            ->getPhraseValue(ENCODE_HTML); ?></span><br/>
+          class='ccardlabel'><a href="?p=collections/findingaid&amp;id=<?php echo $objCollection->ID; ?>&amp;q=<?php echo $_ARCHON->QueryStringURL; ?>#boxfolder"><?php echo
+          $_ARCHON->getPhrase('container_list', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)->getPhraseValue(ENCODE_HTML); ?></a></span><br/>
         <?php
         $DisableTheme = $_ARCHON->PublicInterface->DisableTheme;
         $_ARCHON->PublicInterface->DisableTheme = true;
@@ -70,7 +70,7 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
         foreach ($objCollection->Content as $ID => $objContent) {
           if (!$objContent->ParentID) {
             if ($objContent->enabled()) {
-              echo("<span class='ccardserieslist'><a href='?p=collections/findingaid&amp;id=$objCollection->ID&amp;q=$_ARCHON->QueryStringURL&amp;rootcontentid=$ID#id$ID'>" . $objContent->toString() . "</a></span><br/>\n");
+              echo("<div class='ccardserieslist'><a href='?p=collections/findingaid&amp;id=$objCollection->ID&amp;q=$_ARCHON->QueryStringURL&amp;rootcontentid=$ID#id$ID'>" . $objContent->toString() . "</a></div>\n");
             }
             else {
               $objInfoRestrictedPhrase = Phrase::getPhrase('informationrestricted', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
@@ -79,6 +79,7 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
             }
           }
         }
+        echo '<div class="ccardserieslist"><a href="?p=collections/findingaid&amp;id='.$objCollection->ID.'&amp;q='.$_ARCHON->QueryStringURL.'#boxfolder">Entire Container List</a></div>';
         $_ARCHON->PublicInterface->DisableTheme = $DisableTheme;
         ?>
       </div>

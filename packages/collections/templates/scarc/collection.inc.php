@@ -30,7 +30,7 @@ $printerFriendly = $_ARCHON->getPhrase('printer_friendly', PACKAGE_COLLECTIONS, 
 $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)->getPhraseValue(ENCODE_HTML);
 ?>
   <div id="scarc-controlcard" class="row" xmlns="http://www.w3.org/1999/html">
-  <div class="col-md-3">
+  <div id="fa-left-column" class="col-md-3">
     <div id="ccardprintcontact" class="smround" data-spy="affix" data-offset-top="230">
       <p><a
           href="?p=collections/controlcard&amp;id=<?php echo $objCollection->ID; ?>&amp;templateset=print&amp;disabletheme=1"><img
@@ -61,8 +61,8 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
       if (!empty($objCollection->Content)) {
         ?>
         <div class="ccardcontent"><span
-            class='ccardlabel'><?php echo $_ARCHON->getPhrase('container_list', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
-              ->getPhraseValue(ENCODE_HTML); ?></span><br/>
+            class='ccardlabel'><a href="#boxfolder"><?php echo $_ARCHON->getPhrase('container_list', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+              ->getPhraseValue(ENCODE_HTML); ?></a></span><br/>
           <?php
           $DisableTheme = $_ARCHON->PublicInterface->DisableTheme;
           $_ARCHON->PublicInterface->DisableTheme = true;
@@ -70,7 +70,7 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
           foreach ($objCollection->Content as $ID => $objContent) {
             if (!$objContent->ParentID) {
               if ($objContent->enabled()) {
-                echo("<span class='ccardserieslist'><a href='?p=collections/findingaid&amp;id=$objCollection->ID&amp;q=$_ARCHON->QueryStringURL&amp;rootcontentid=$ID#id$ID'>" . $objContent->toString() . "</a></span><br/>\n");
+                echo("<div class='ccardserieslist'><a href='?p=collections/findingaid&amp;id=$objCollection->ID&amp;q=$_ARCHON->QueryStringURL&amp;rootcontentid=$ID#id$ID'>" . $objContent->toString() . "</a></div>\n");
               }
               else {
                 $objInfoRestrictedPhrase = Phrase::getPhrase('informationrestricted', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
@@ -79,6 +79,7 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
               }
             }
           }
+          echo '<div class="ccardserieslist"><a href="?p=collections/findingaid&amp;id='.$objCollection->ID.'&amp;q='.$_ARCHON->QueryStringURL.'#boxfolder">Entire Container List</a></div>';
           $_ARCHON->PublicInterface->DisableTheme = $DisableTheme;
           ?>
         </div>
@@ -590,14 +591,9 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
         $strFindingAidLinks = '';
       }
 
-      // Display the links above and below the container list content
-      echo('<div class="falinks">'.$strFindingAidLinks . "</div>\n");
       $contentCount = $objCollection->countContent();
       if ($contentCount > 0) {
         echo("<dl>#CONTENT#</dl>");
-      }
-      if ($contentCount > 20) {
-        echo('<div class="falinks">'.$strFindingAidLinks . "</div>\n");
       }
       ?>
     </div>
