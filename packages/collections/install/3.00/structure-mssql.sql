@@ -83,7 +83,7 @@ UPDATE tblCollections_Content SET SortOrder = (SELECT Count FROM cmax WHERE cmax
 -- Make LevelContainerNumbers into VARCHARS
 DECLARE @defname VARCHAR(100), @cmd VARCHAR(1000); SET @defname = (SELECT name FROM sysobjects so JOIN sysconstraints sc ON so.id = sc.constid WHERE object_name(so.parent_obj) = 'tblCollections_Content' AND so.xtype = 'D' AND sc.colid = (SELECT colid FROM syscolumns WHERE id = object_id('tblCollections_Content') AND name = 'LevelContainerNumber')); SET @cmd = 'ALTER TABLE tblCollections_Content DROP CONSTRAINT ' + @defname; EXEC(@cmd);
 EXEC sp_rename 'tblCollections_Content.LevelContainerNumber', 'LevelContainerIdentifier', 'COLUMN';
-ALTER TABLE tblCollections_Content ALTER COLUMN LevelContainerIdentifier VARCHAR(10) NOT NULL;
+ALTER TABLE tblCollections_Content ALTER COLUMN LevelContainerIdentifier VARCHAR(25) NOT NULL;
 
 -- Drop Temp Tables
 DROP TABLE cmax;

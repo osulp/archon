@@ -194,7 +194,7 @@ CREATE TABLE tblCollections_Content (
   ID int(11) NOT NULL AUTO_INCREMENT,
   CollectionID int(11) NOT NULL DEFAULT '0',
   LevelContainerID int(11) NOT NULL DEFAULT '0',
-  LevelContainerIdentifier varchar(10) NOT NULL,
+  LevelContainerIdentifier varchar(25) NOT NULL,
   Title text,
   PrivateTitle text,
   `Date` varchar(75) DEFAULT NULL,
