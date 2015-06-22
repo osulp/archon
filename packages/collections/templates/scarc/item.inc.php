@@ -47,13 +47,16 @@ if($enabled)
 
       foreach($Content['UserFields'] as $ID => $String)
       {
-         $strUserFields .= $String;
+        // Suppress the 'UnitID field display - Issue #27 - 6/22/15 ME
+        if ('UnitID' != substr($String, 0, 6)) {
+          $strUserFields .= $String;
 
-         if($count != $last)
-         {
+          if($count != $last)
+          {
             $strUserFields .= "</dd>\n<dd class='faitemcontent'>\n";
-         }
-         $count++;
+          }
+          $count++;
+        }
       }
       echo("<dd class='faitemcontent'>" . $strUserFields . "</dd>\n");
    }
