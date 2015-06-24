@@ -67,10 +67,9 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
         <link rel="stylesheet" type="text/css" href="themes/<?php echo($_ARCHON->PublicInterface->Theme); ?>/ie.css" />
         <link rel="stylesheet" type="text/css" href="themes/<?php echo($_ARCHON->PublicInterface->ThemeJavascriptPath); ?>/cluetip/jquery.cluetip.ie.css" />
       <![endif]-->
-
-      <?php echo($_ARCHON->getJavascriptTags('jquery.min')); ?>
-      <?php echo($_ARCHON->getJavascriptTags('jquery-ui.custom.min')); ?>
-      <?php echo($_ARCHON->getJavascriptTags('jquery-expander')); ?>
+     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+     <script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+     <?php echo($_ARCHON->getJavascriptTags('jquery-expander')); ?>
       <script type="text/javascript" src="<?php echo($_ARCHON->PublicInterface->ThemeJavascriptPath); ?>/jquery.hoverIntent.js"></script>
       <script type="text/javascript" src="<?php echo($_ARCHON->PublicInterface->ThemeJavascriptPath); ?>/cluetip/jquery.cluetip.js"></script>
       <script type="text/javascript" src="<?php echo($_ARCHON->PublicInterface->ThemeJavascriptPath); ?>/jquery.scrollTo-min.js"></script>
