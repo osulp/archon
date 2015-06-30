@@ -7,7 +7,7 @@
 function render_container_list($_ARCHON, $objCollection) {
 
   ?>
-  <div id="nav-container-list" class="ccardcontent"><span
+  <div id="nav-container-list" class="ccardcontent" role="navigation"><span
       class='ccardlabel'><a href="#boxfolder"><?php echo $_ARCHON->getPhrase('container_list', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
           ->getPhraseValue(ENCODE_HTML); ?></a></span><br/>
     <?php
@@ -28,7 +28,7 @@ function render_container_list($_ARCHON, $objCollection) {
       }
     }
     if (strlen($content_list) > 0) { ?>
-      <ul class="nav nav-tabs nav-stacked"><?php echo $content_list; ?></ul>
+      <ul class="nav nav-pills nav-stacked containers"><?php echo $content_list; ?></ul>
       <?php
     }
     $_ARCHON->PublicInterface->DisableTheme = $DisableTheme;

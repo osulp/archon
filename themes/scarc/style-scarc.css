@@ -1923,16 +1923,22 @@ ul.container-list {
     position: relative;
 }
 
-ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover {
+ul.containers li.active a, ul.containers li.active a:hover {
     color: #fff;
     background: #385e86;
 }
 
-.nav-tabs>li>a {
+.containers>li>a {
     padding: 3px 5px;
     border-radius: 0;
 }
 
-.nav-tabs {
+.containers {
     border-bottom: none;
+}
+
+@media (max-width: 768px) {
+    .affix {
+        position: static;
+    }
 }
