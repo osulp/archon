@@ -60,7 +60,6 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
       <title><?php echo(strip_tags($_ARCHON->PublicInterface->Title)); ?></title>
      <link rel="stylesheet"  href="themes/<?php echo($_ARCHON->PublicInterface->Theme); ?>/css/bootstrap.min.css" >
      <link rel="stylesheet" type="text/css" href="themes/<?php echo($_ARCHON->PublicInterface->Theme); ?>/style-scarc.css" />
-<!--      <link rel="stylesheet" type="text/css" href="themes/--><?php //echo($_ARCHON->PublicInterface->Theme); ?><!--/style.css" />-->
       <link rel="stylesheet" type="text/css" href="<?php echo($_ARCHON->PublicInterface->ThemeJavascriptPath); ?>/cluetip/jquery.cluetip.css" />
       <link rel="stylesheet" type="text/css" href="<?php echo($_ARCHON->PublicInterface->ThemeJavascriptPath); ?>/jgrowl/jquery.jgrowl.css" />
       <link rel="icon" type="image/ico" href="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/archon.ico"/>
@@ -68,13 +67,14 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
         <link rel="stylesheet" type="text/css" href="themes/<?php echo($_ARCHON->PublicInterface->Theme); ?>/ie.css" />
         <link rel="stylesheet" type="text/css" href="themes/<?php echo($_ARCHON->PublicInterface->ThemeJavascriptPath); ?>/cluetip/jquery.cluetip.ie.css" />
       <![endif]-->
-      <?php echo($_ARCHON->getJavascriptTags('jquery.min')); ?>
-      <?php echo($_ARCHON->getJavascriptTags('jquery-ui.custom.min')); ?>
-      <?php echo($_ARCHON->getJavascriptTags('jquery-expander')); ?>
+     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+     <script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+     <?php echo($_ARCHON->getJavascriptTags('jquery-expander')); ?>
       <script type="text/javascript" src="<?php echo($_ARCHON->PublicInterface->ThemeJavascriptPath); ?>/jquery.hoverIntent.js"></script>
       <script type="text/javascript" src="<?php echo($_ARCHON->PublicInterface->ThemeJavascriptPath); ?>/cluetip/jquery.cluetip.js"></script>
       <script type="text/javascript" src="<?php echo($_ARCHON->PublicInterface->ThemeJavascriptPath); ?>/jquery.scrollTo-min.js"></script>
       <?php echo($_ARCHON->getJavascriptTags('jquery.jgrowl.min')); ?>
+     <script type="text/javascript" src="<?php echo($_ARCHON->PublicInterface->ThemeJavascriptPath); ?>/bootstrap.js"></script>
       <?php echo($_ARCHON->getJavascriptTags('archon')); ?>
        <script type="text/javascript">
          /* <![CDATA[ */
@@ -92,7 +92,15 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
                collapseTimer:    0,                // milliseconds before auto collapse; default is 0 (don't re-collape)
                userCollapseText: '[collapse]'      // text for collaspe link
             });
+            resize_left_column();
+            $(window).resize(function () {
+              resize_left_column();
+            });
          });
+
+         function resize_left_column() {
+           $('#ccardprintcontact').width($('#fa-left-column').width());
+         }
 
          function js_highlighttoplink(selectedSpan)
          {
