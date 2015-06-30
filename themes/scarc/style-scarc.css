@@ -1901,26 +1901,12 @@ div.ccardserieslist {
     margin-bottom: 7px;
 }
 
-li.ccardserieslist {
-    list-style: none;
-    margin-bottom: 3px;
-}
-
-ul.container-list {
-    padding-left: 10px;
-    margin-top: 5px;
-}
-
 .ccardlabel a:link, .ccardlabel a:visited {
     color: #000000;
 }
 
 .ccardlabel a:hover {
     color: #c34500;
-}
-
-#coll-container-list {
-    position: relative;
 }
 
 ul.containers li.active a, ul.containers li.active a:hover {
