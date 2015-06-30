@@ -35,10 +35,10 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
   <div id="fa-left-column" class="col-md-3">
     <div id="ccardprintcontact" class="smround" data-spy="affix" data-offset-top="230">
       <p><a
-          href="?p=collections/controlcard&amp;id=<?php echo $objCollection->ID; ?>&amp;templateset=print&amp;disabletheme=1"><img
+          href="?p=collections/findingaid&amp;id=<?php echo $objCollection->ID; ?>&amp;templateset=print&amp;disabletheme=1"><img
             src="<?php echo $_ARCHON->PublicInterface->ImagePath; ?>/printer.png"
             alt="<?php echo $printerFriendly; ?>"/></a> <a
-          href="?p=collections/controlcard&amp;id=<?php echo $objCollection->ID; ?>&amp;templateset=print&amp;disabletheme=1"><?php echo $printerFriendly; ?></a>
+          href="?p=collections/findingaid&amp;id=<?php echo $objCollection->ID; ?>&amp;templateset=print&amp;disabletheme=1"><?php echo $printerFriendly; ?></a>
       </p>
 
       <p><a
@@ -629,10 +629,10 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
           href='?p=collections/ead&amp;id=<?php echo($objCollection->ID); ?>&amp;templateset=ead&amp;disabletheme=1&amp;output=<?php echo(formatFileName($objCollection->getString('SortTitle', 0, false, false))); ?>'>EAD</a><br/>
         <a href='?p=collections/marc&amp;id=<?php echo($objCollection->ID); ?>'>MARC</a><br/>
         <a
-          href='?p=collections/controlcard&amp;id=<?php echo($objCollection->ID); ?>&amp;templateset=kardexcontrolcard&amp;disabletheme=1'>5
+          href='?p=collections/findingaid&amp;id=<?php echo($objCollection->ID); ?>&amp;templateset=kardexcontrolcard&amp;disabletheme=1'>5
           by 8 Kardex</a><br/>
         <a
-          href='?p=collections/controlcard&amp;id=<?php echo($objCollection->ID); ?>&amp;templateset=draftcontrolcard&amp;disabletheme=1'>Review
+          href='?p=collections/findingaid&amp;id=<?php echo($objCollection->ID); ?>&amp;templateset=draftcontrolcard&amp;disabletheme=1'>Review
           copy/draft</a>
       </div>
     </div>

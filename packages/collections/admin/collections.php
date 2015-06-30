@@ -50,7 +50,7 @@ function collections_ui_main()
    if($_ARCHON->AdministrativeInterface->Object->ID)
    {
       $_ARCHON->AdministrativeInterface->insertHeaderControl(
-              "$(this).attr('href', '?p=collections/controlcard&id={$_ARCHON->AdministrativeInterface->Object->ID}');
+              "$(this).attr('href', '?p=collections/findingaid&id={$_ARCHON->AdministrativeInterface->Object->ID}');
                                     $(this).attr('target', '_blank');", 'publicview', false);
 
       $_ARCHON->AdministrativeInterface->insertHeaderControl("admin_ui_goto('admin/collections/collectioncontent',{displayrootcontent: true, collectionid: {$_ARCHON->AdministrativeInterface->Object->ID}});", 'editcollectioncontent');

@@ -202,7 +202,7 @@ header('Content-type: text/html; charset=UTF-8');
 ?>
 
 
-         <div id='ccardprintcontact'>[<?php echo("<a href='?p=collections/controlcard&amp;id=" . $objCollection->ID . "'>"); ?>Back to Formatted Version</a>]</div>
+         <div id='ccardprintcontact'>[<?php echo("<a href='?p=collections/findingaid&amp;id=" . $objCollection->ID . "'>"); ?>Back to Formatted Version</a>]</div>
 
       </div>  <!-- end ccardtop -->
 
