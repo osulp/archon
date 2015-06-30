@@ -2239,7 +2239,7 @@ abstract class Collections_Collection
             $q = '&amp;q=' . $_ARCHON->QueryStringURL;
          }
 
-         $String .= " <a href='?p=collections/controlcard&amp;id={$this->ID}{$q}'> ";
+         $String .= " <a href='?p=collections/findingaid&amp;id={$this->ID}{$q}'> ";
       }
 
       if($UseSortTitle)

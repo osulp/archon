@@ -26,7 +26,7 @@ function render_container_list($_ARCHON, $objCollection) {
         }
       }
     }
-    echo '<div class="ccardserieslist"><a href="?p=collections/findingaid&amp;id='.$objCollection->ID.'&amp;q='.$_ARCHON->QueryStringURL.'#boxfolder">Entire Container List</a></div>';
+    echo '<div class="ccardserieslist"><a href="#boxfolder">Entire Container List</a></div>';
     $_ARCHON->PublicInterface->DisableTheme = $DisableTheme;
     ?>
   </div>

@@ -74,7 +74,7 @@ if($objCollection->Classification)
 $objFindingAidPhrase = Phrase::getPhrase('findingaid_findingaid', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
 $strFindingAid = $objFindingAidPhrase ? $objFindingAidPhrase->getPhraseValue(ENCODE_HTML) : 'Finding Aid';
 
-$_ARCHON->PublicInterface->addNavigation($objCollection->getString('Title', 30), "?p=collections/controlcard&amp;id=$objCollection->ID");
+$_ARCHON->PublicInterface->addNavigation($objCollection->getString('Title', 30), "?p=collections/findingaid&amp;id=$objCollection->ID");
 $_ARCHON->PublicInterface->addNavigation($strFindingAid, "?p={$_REQUEST['p']}&amp;id=$objCollection->ID");
 
 require_once("header.inc.php");

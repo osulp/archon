@@ -353,7 +353,7 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
       $fields['856']->Indicator1 = 4;
       $fields['856']->Indicator2 = 2;
       $fields['856']->SubFields['3'] = "Control Card";
-      $fields['856']->SubFields['u'] = "http://{$_SERVER['HTTP_HOST']}/{$path}?p=collections/controlcard&amp;id=$objCollection->ID";
+      $fields['856']->SubFields['u'] = "http://{$_SERVER['HTTP_HOST']}/{$path}?p=collections/findingaid&amp;id=$objCollection->ID";
 
       if($fields)
       {
