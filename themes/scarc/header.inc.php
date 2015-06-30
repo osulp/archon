@@ -127,7 +127,7 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
      <![endif]-->
      <?php  echo $_ARCHON->PublicInterface->outputGoogleAnalyticsCode(); ?>
    </head>
-  <body>
+  <body data-spy="scroll" data-target="#nav-container-list">
     <div id="header-blacktop">
       <div id="header-blacktop-container">
         <div id="header-blacktop-text"><a href="http://library.oregonstate.edu" class="header-blacktop">OSU Libraries</a></div>

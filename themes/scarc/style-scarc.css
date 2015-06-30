@@ -13,6 +13,7 @@ body {
 	background: #385e86;  /* old dark blue: #36465F */
 	margin: 0;
 	padding: 0 0;
+    position: relative;
 }
 
 h1 {
@@ -1900,6 +1901,16 @@ div.ccardserieslist {
     margin-bottom: 7px;
 }
 
+li.ccardserieslist {
+    list-style: none;
+    margin-bottom: 3px;
+}
+
+ul.container-list {
+    padding-left: 10px;
+    margin-top: 5px;
+}
+
 .ccardlabel a:link, .ccardlabel a:visited {
     color: #000000;
 }
@@ -1908,3 +1919,20 @@ div.ccardserieslist {
     color: #c34500;
 }
 
+#coll-container-list {
+    position: relative;
+}
+
+ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover {
+    color: #fff;
+    background: #385e86;
+}
+
+.nav-tabs>li>a {
+    padding: 3px 5px;
+    border-radius: 0;
+}
+
+.nav-tabs {
+    border-bottom: none;
+}

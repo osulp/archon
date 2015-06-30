@@ -29,7 +29,7 @@ if($enabled)
 {
    ?>
 
-<dt class='faitem'><a name="id<?php echo($Content['ID']); ?>"></a><?php echo($Content['String']); ?></dt>
+<dt class='faitem' id="id<?php echo($Content['ID']); ?>"><a name="id<?php echo($Content['ID']); ?>"></a><?php echo($Content['String']); ?></dt>
 
    <?php
    if($Content['Description'])
