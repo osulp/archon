@@ -189,15 +189,6 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
        src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/osu-tag.gif" width="101" height="119" alt="Oregon State University" title="Oregon State University" /></a><h1 class="scarctitle">Special Collections & Archives<br />Research Center</h1></div>
     <div id="header-nav">
       <ul id="nav">
-        <li><a href="?p=collections/collections">Collections</a><ul>
-            <li><a href="?p=collections/collections&browse">All Collections</a></li>
-            <li><a href="">    University History</a></li>
-            <li><a href="">    Natural Resources</a></li>
-            <li><a href="">    Multicultural Archives</a></li>
-            <li><a href="">    History of Science</a></li>
-            <li><a href="">    Local History</a></li>
-          </ul>
-        </li>
         <li><a href="">Digital Resources</a><ul>
             <li><a href="">University History</a></li>
             <li><a href="">History of Science</a></li>
@@ -261,19 +252,13 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
        Browse:
     </span>
     <span class="<?php echo($TitleClass); ?>">
-       <a href="?p=collections/collections" onclick="js_highlighttoplink(this.parentNode); return true;">Collections</a>
-    </span>
-    <span class="<?php echo($DigitalLibraryClass); ?>">
-       <a href="?p=digitallibrary/digitallibrary" onclick="js_highlighttoplink(this.parentNode); return true;">Digital Content</a>
-    </span>
-    <span class="<?php echo($SubjectsClass); ?>">
-       <a href="?p=subjects/subjects" onclick="js_highlighttoplink(this.parentNode); return true;">Subjects</a>
-    </span>
-    <span class="<?php echo($CreatorsClass); ?>">
-       <a href="?p=creators/creators" onclick="js_highlighttoplink(this.parentNode); return true;">Creators</a>
-    </span>
+       <a href="?p=collections/collections" onclick="js_highlighttoplink(this.parentNode); return true;">Collection by Title</a>
+    </span>&nbsp; | &nbsp;
     <span class="<?php echo($ClassificationsClass); ?>">
-       <a href="?p=collections/classifications" onclick="js_highlighttoplink(this.parentNode); return true;">Record Groups</a>
+       <a href="?p=collections/classifications" onclick="js_highlighttoplink(this.parentNode); return true;">Collection by Type</a>
+    </span>&nbsp; | &nbsp;
+    <span class="<?php echo($SubjectsClass); ?>">
+       <a href="?p=subjects/subjects" onclick="js_highlighttoplink(this.parentNode); return true;">People, Places, and Topics</a>
     </span>
     <span style="font-size: x-small;font-style: italic; margin-left:5em"> **This is here temporarily until we decide how to incorporate**</span>
   </div>

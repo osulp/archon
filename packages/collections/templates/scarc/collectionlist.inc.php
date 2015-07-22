@@ -26,13 +26,7 @@
 isset($_ARCHON) or die();
 
 echo("<div class='listitem'>");
-if($objCollection->ClassificationID)
-{
-    $objCollection->Classification = New Classification($objCollection->ClassificationID);
-    //$objCollection->Classification->dbLoad(true);
-    echo($_ARCHON->Error);
-    echo($objCollection->Classification->toString(LINK_NONE, true, false, true, false) . ' ');
-}
-echo($objCollection->toString(LINK_TOTAL, true, false) . "</div>\n");
-
-?>
+echo($objCollection->toString(LINK_TOTAL, false, false));
+$objCollection->Classification = New Classification($objCollection->ClassificationID);
+echo($objCollection->Classification->toString(LINK_NONE, true, false, true, false) . ' ' . $objCollection->CollectionIdentifier);
+echo "</div>\n";

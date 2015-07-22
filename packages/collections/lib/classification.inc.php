@@ -287,7 +287,7 @@ abstract class Collections_Classification
 
       if(!$this->ID)
       {
-         $_ARCHON->declareError("Could not convert Classification to string: Classification ID not defined.");
+//         $_ARCHON->declareError("Could not convert Classification to string: Classification ID not defined.");
          return false;
       }
 
