@@ -201,7 +201,7 @@ function collections_search()
                               {
                                  if($objClassification->ID)
                                  {
-                                    $collectionSubstring = $objCollection->getString('CollectionIdentifier') ? '/' . $objCollection->getString('CollectionIdentifier') : '';
+                                    $collectionSubstring = $objCollection->getString('CollectionIdentifier') ? ' ' . $objCollection->getString('CollectionIdentifier') : '';
                                     echo("<dt>" . $objCollection->toString(LINK_TOTAL) . ' ' . $objClassification->toString(LINK_NONE, true, false, true, false) . $collectionSubstring . "</dt>\n");
                                  }
                                  else

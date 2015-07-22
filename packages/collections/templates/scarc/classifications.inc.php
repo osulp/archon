@@ -18,7 +18,7 @@ $arrCollections = $_ARCHON->getCollectionsForClassification($objClassification->
 if ($objClassification->Description)
 {
    echo("<div id='classificationdesc' class='mdround'>{$objClassification->getString('Description')}</div>");
-    
+
 }
 
 if(!empty($arrClassifications))
@@ -29,13 +29,6 @@ if(!empty($arrClassifications))
         $strSubgroupsUnder = $objSubgroupsUnderPhrase ? $objSubgroupsUnderPhrase->getPhraseValue(ENCODE_HTML) : 'Subgroups under $1';
 
 		echo('<div class="listitemhead bold">' . str_replace('$1', $objClassification->toString(LINK_NONE, false, true, false, true, $_ARCHON->PublicInterface->Delimiter), $strSubgroupsUnder) . "</div><br/><br/>\n");
-	}
-	else
-	{
-	    $objBrowseRecordGroupsPhrase = Phrase::getPhrase('classifications_browserecordgroups', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-        $strBrowseRecordGroups = $objBrowseRecordGroupsPhrase ? $objBrowseRecordGroupsPhrase->getPhraseValue(ENCODE_HTML) : 'Browse Record Groups';
-
-	    echo ("<div class='listitemhead bold'>$strBrowseRecordGroups</div><br/><br/>");
 	}
 
 	echo("<div id='classificationlist' class='bground'><div class='listitemcover'></div>");
@@ -60,8 +53,8 @@ if(!empty($arrCollections))
     foreach($arrCollections as $objCollection)
     {
         $output = "<div class='listitem'>";
-        $output .= $objClassification->toString(LINK_NONE, true, false, true, false, " ") . ' ';
-        $output .= $objCollection->toString(LINK_TOTAL, true);
+        $output .= $objCollection->toString(LINK_TOTAL, false);
+        $output .= $objClassification->toString(LINK_NONE, true, false, true, false, " ") . ' ' . $objCollection->CollectionIdentifier;
         $output .= "</div>\n";
 
         echo($output);

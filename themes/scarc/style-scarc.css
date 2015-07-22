@@ -1928,3 +1928,25 @@ ul.containers li.active a, ul.containers li.active a:hover {
         position: static;
     }
 }
+
+dl#CollectionResults {
+    margin-top: 5px;
+}
+
+dl#CollectionResults>dd {
+    margin-left: 15px;
+    margin-bottom: 5px;
+}
+
+dl.CollectionClassEnabledResults dt{
+    margin-top: 7px;
+}
+
+dl.CollectionClassEnabledResults dd{
+    margin-left: 7px;
+}
+
+div#coll-container-list>dl>dd>dl.faitem>dt {
+    font-weight: normal;
+    padding-top: 8px;
+}

@@ -163,28 +163,9 @@ function collections_listAllCollections($Page, $ShowBooks)
 
 
    }
-   if(count($arrCollections) > CONFIG_CORE_PAGINATION_LIMIT)
-   {
-      $morePages = true;
-      array_pop($arrCollections);
-   }
-
-// Set up a URL for any prev/next buttons or in case $Page
-// is too high
-   $paginationURL = 'index.php?p=' . $_REQUEST['p'].'&browse'.$bookurl;
-
-   if(empty($arrCollections) && $Page != 1)
-   {
-      header("Location: $paginationURL");
-   }
-
-
 
    $objViewAllPhrase = Phrase::getPhrase('viewall', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
    $strViewAll = $objViewAllPhrase ? $objViewAllPhrase->getPhraseValue(ENCODE_HTML) : 'View All';
-
-   $_ARCHON->PublicInterface->addNavigation($strViewAll);
-
 
    if(!$_ARCHON->PublicInterface->Templates[$_ARCHON->Package->APRCode][$template])
    {
@@ -212,30 +193,9 @@ function collections_listAllCollections($Page, $ShowBooks)
          }
 
       }
-
-      if($Page > 1 || $morePages)
-      {
-         $pages = '<div class="paginationnav">';
-
-         if($Page > 1)
-         {
-            $prevPage = $Page - 1;
-            $prevURL = encode($paginationURL . "&page=$prevPage", ENCODE_HTML);
-            $pages .= "<span class='paginationprevlink'><a href='$prevURL'>Prev</a></span>";
-         }
-         if($morePages)
-         {
-            $nextPage = $Page + 1;
-            $nextURL = encode($paginationURL . "&page=$nextPage", ENCODE_HTML);
-            $pages .= "<span class='paginationnextlink'><a href='$nextURL'>Next</a></span>";
-         }
-
-         $pages .= '</div>';
-      }
    }
 
    $vars['content'] = $content;
-   if(isset($pages)){ $vars['pages'] = $pages; }
    return $vars;
 }
 
