@@ -1042,6 +1042,11 @@ function import_ead_storecontent($CollectionID, $ParentID, $RepositoryID, $Eleme
             $objContent->CollectionID = $CollectionID;
             $objContent->ParentID = $currentPID;
             $objContent->LevelContainerID = $arrEADLevelMap[$Level];
+            // SCARC wants the UnitID to appear as the item identifier if it's present
+            // 8/3/15 -ME
+            if ('' != (string)$objSimpleXMLElement->did->unitid) {
+              $objContent->LevelContainerIdentifier =  (string)$objSimpleXMLElement->did->unitid;
+            }
 
             if (!$objContent->dbStore())
             {
