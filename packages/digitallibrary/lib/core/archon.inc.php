@@ -340,7 +340,7 @@ abstract class DigitalLibrary_Archon
    {
       $arrFiles = array();
 
-      $query = "SELECT ID,DefaultAccessLevel,DigitalContentID,Title,Filename,FileTypeID,Size,DisplayOrder FROM tblDigitalLibrary_Files WHERE DigitalContentID > 0 ORDER BY Filename";
+      $query = "SELECT ID,DefaultAccessLevel,DigitalContentID,Title,Source,Filename,FileTypeID,Size,DisplayOrder FROM tblDigitalLibrary_Files WHERE DigitalContentID > 0 ORDER BY Filename";
       $result = $this->mdb2->query($query);
       if(PEAR::isError($result))
       {
@@ -1020,7 +1020,7 @@ ORDER BY tblDigitalLibrary_DigitalContent.Title";
       }
 
 
-      $query = "SELECT ID,DefaultAccessLevel,DigitalContentID,Title,Filename,FileTypeID,Size,DisplayOrder FROM tblDigitalLibrary_Files WHERE $wherequery ORDER BY Filename";
+      $query = "SELECT ID,DefaultAccessLevel,DigitalContentID,Title,Source,Filename,FileTypeID,Size,DisplayOrder FROM tblDigitalLibrary_Files WHERE $wherequery ORDER BY Filename";
 
       call_user_func_array(array($this->mdb2, 'setLimit'), $limitparams);
       $prep = $this->mdb2->prepare($query, $wheretypes, MDB2_PREPARE_RESULT);

@@ -63,6 +63,7 @@ CREATE TABLE tblDigitalLibrary_Files (
   DefaultAccessLevel int(11) NOT NULL DEFAULT '2',
   DigitalContentID int(11) NOT NULL DEFAULT '0',
   Title varchar(255) DEFAULT NULL,
+  Source varchar(255) DEFAULT NULL,
   Filename varchar(255) NOT NULL DEFAULT '',
   FileTypeID int(11) NOT NULL DEFAULT '0',
   FileContents longblob NOT NULL,

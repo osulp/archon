@@ -84,6 +84,7 @@ function files_ui_main()
    $generalSection = $_ARCHON->AdministrativeInterface->getSection('general');
 
    $generalSection->insertRow('files_title')->insertTextField('Title', 25, 100);
+  $generalSection->insertRow('files_source')->insertTextField('Source', 25, 100);
 //   $fileSection->insertRow('files_filecontents')->insertUploadField('FileContents');
    $generalSection->insertRow('files_mediatype')->insertInformation('FileType', NULL, false);
    $generalSection->insertRow('files_filename')->insertInformation('Filename');

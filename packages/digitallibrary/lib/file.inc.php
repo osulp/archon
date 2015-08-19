@@ -80,7 +80,7 @@ abstract class DigitalLibrary_File
       static $prep = NULL;
       if(!isset($prep))
       {
-         $query = "SELECT ID, DefaultAccessLevel, DigitalContentID, Title, Filename, FileTypeID, Size, DisplayOrder FROM tblDigitalLibrary_Files WHERE ID = ?";
+         $query = "SELECT ID, DefaultAccessLevel, DigitalContentID, Title, Source, Filename, FileTypeID, Size, DisplayOrder FROM tblDigitalLibrary_Files WHERE ID = ?";
          $prep = $_ARCHON->mdb2->prepare($query, 'integer', MDB2_PREPARE_RESULT);
       }
       $result = $prep->execute($this->ID);
@@ -172,10 +172,10 @@ abstract class DigitalLibrary_File
       }
       elseif($this->DigitalContentID > 0)
       {
-         $checkquery = "SELECT ID FROM tblDigitalLibrary_Files WHERE Title = ? AND Filename = ? AND DigitalContentID = ? AND ID != ?";
-         $checktypes = array('text', 'text', 'integer', 'integer');
-         $checkvars = array($this->Title, $this->Filename, $this->DigitalContentID, $this->ID);
-         $checkqueryerror = "A File with the same TitleAndFilenameAndContent already exists in the database";
+         $checkquery = "SELECT ID FROM tblDigitalLibrary_Files WHERE Title = ? AND Source = ? AND Filename = ? AND DigitalContentID = ? AND ID != ?";
+         $checktypes = array('text', 'text', 'text', 'integer', 'integer');
+         $checkvars = array($this->Title, $this->Source, $this->Filename, $this->DigitalContentID, $this->ID);
+         $checkqueryerror = "A File with the same Title, Source, Filename, and Content already exists in the database";
          $problemfields = array('Title', 'Filename');
          $requiredfields = array('Title', 'Filename');
       }
@@ -1125,6 +1125,10 @@ abstract class DigitalLibrary_File
     * @var string
     */
    public $Title = '';
+   /**
+   * @var string
+   */
+   public $Source = '';
    /**
     * @var string
     */
