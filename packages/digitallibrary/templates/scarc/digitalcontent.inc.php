@@ -85,6 +85,7 @@ if(!empty($objDigitalContent->Files))
          }
 
          echo("<span class='digcontentfiletitle'><strong>Description:</strong> " . $objFile->getString('Title'). "<br/>");
+         echo("<span class='digcontentfilesource'><strong>Source:</strong> " . $objFile->getString('Source'). "<br/>");
 
          if($FullAccess)
          {

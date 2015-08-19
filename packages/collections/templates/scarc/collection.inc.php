@@ -30,6 +30,57 @@ $repositoryid = $objCollection->RepositoryID;
 
 $printerFriendly = $_ARCHON->getPhrase('printer_friendly', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)->getPhraseValue(ENCODE_HTML);
 $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)->getPhraseValue(ENCODE_HTML);
+
+$collectionImages = array();
+$digCollLink = '';
+
+if(defined('PACKAGE_DIGITALLIBRARY'))
+{
+  $objCollection->dbLoadDigitalContent();
+  $containsImages = false;
+
+  foreach($objCollection->DigitalContent as $ID => $objDigitalContent)
+  {
+    // Store the link to the Digital Content set page
+    if ('' == $digCollLink) {
+      $digCollLink = '?p=digitallibrary/digitalcontent&amp;id='.$ID;
+    }
+    $objDigitalContent->dbLoadFiles();
+    if(count($objDigitalContent->Files) > 0)
+    {
+      $onlyImages = true;
+      foreach($objDigitalContent->Files as $objFile)
+      {
+        if($objFile->FileType->MediaType->MediaType == 'Image')
+        {
+          $containsImages = true;
+          $img = '<div class="thumbnailimg">
+                    <div class="thumbnailimgwrapper">
+                       <a class="thumbimglink" href="?p=digitallibrary/digitalcontent&amp;id='.$objFile->DigitalContentID.'" title="'.$objDigitalContent->getString('Title', 30).'" rel="#mediumPreview">
+                          <img class="digcontentfile" src="'.$objFile->getFileURL(DIGITALLIBRARY_FILE_PREVIEWLONG).'" alt="'.$objFile->getString('Title').'"/>
+                       </a>
+                    </div>'.
+                '</div>';
+          $collectionImages[] = $img;
+        }
+        else
+        {
+          $onlyImages = false;
+        }
+      }
+    }
+    else
+    {
+      $onlyImages = false;
+    }
+
+    if($onlyImages)
+    {
+      unset($objCollection->DigitalContent[$ID]);
+    }
+  }
+}
+
 ?>
   <div id="scarc-controlcard" class="row" xmlns="http://www.w3.org/1999/html">
   <div id="fa-left-column" class="col-md-3">
@@ -456,27 +507,6 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
         <?php
         }
 
-        if ($objCollection->DigitalContent) {
-          ?>
-          <div class='ccardcontent'><span class='ccardlabel'><a href='#'
-                                                                onclick="toggleDisplay('docsandfiles'); return false;"><img
-                  id='docsandfilesImage'
-                  src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif'
-                  alt='expand icon'/> <?php echo $_ARCHON->getPhrase('online_docs_files', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
-                  ->getPhraseValue(ENCODE_HTML); ?></a></span><br/>
-
-            <div class='ccardshowlist' style="display: none;"
-                 id="docsandfilesResults">
-              <?php
-              if ($objCollection->DigitalContent) {
-                echo("<br/><span class='bold'>Documents and Files:</span><br/>&nbsp;" . $_ARCHON->createStringFromDigitalContentArray($objCollection->DigitalContent, "<br/>\n&nbsp;", LINK_TOTAL));
-              }
-              ?>
-            </div>
-          </div>
-        <?php
-        }
-
         if ($objCollection->Books) {
           ?>
           <div class='ccardcontent'><span class='bold'><a href='#'
@@ -613,16 +643,6 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
   </div>
   <div class="col-md-3">
     <?php
-    if ($containsImages) {
-      ?>
-      <div class='ccardshowlist' id="digitalcontentResults">
-        <?php foreach ($collectionImages as $img) {
-          echo $img;
-        } ?>
-      </div>
-    <?php
-    }
-
     if (!empty($objCollection->Subjects)) {
       $GenreSubjectTypeID = $_ARCHON->getSubjectTypeIDFromString('Genre/Form of Material');
 
@@ -684,6 +704,17 @@ $emailUs = $_ARCHON->getPhrase('email_us', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PU
           }
           ?>
         </div>
+      </div>
+    <?php
+    }
+
+    if ($containsImages) {
+      ?>
+      <div class='ccardshowlist' id="digitalcontentResults">
+        <?php foreach ($collectionImages as $img) {
+          echo $img;
+        } ?>
+        <a href="<?php echo $digCollLink; ?>">Information and Credits</a>
       </div>
     <?php
     }

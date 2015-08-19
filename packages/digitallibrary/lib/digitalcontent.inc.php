@@ -244,7 +244,7 @@ abstract class DigitalLibrary_DigitalContent
       static $prep = NULL;
       if(!isset($prep))
       {
-         $query = "SELECT ID, DefaultAccessLevel, DigitalContentID, Title, Filename, FileTypeID, Size, DisplayOrder FROM tblDigitalLibrary_Files WHERE DigitalContentID = ? ORDER BY DisplayOrder, Title";
+         $query = "SELECT ID, DefaultAccessLevel, DigitalContentID, Title, Source, Filename, FileTypeID, Size, DisplayOrder FROM tblDigitalLibrary_Files WHERE DigitalContentID = ? ORDER BY DisplayOrder, Title";
          $prep = $_ARCHON->mdb2->prepare($query, 'integer', MDB2_PREPARE_RESULT);
       }
       $result = $prep->execute($this->ID);
