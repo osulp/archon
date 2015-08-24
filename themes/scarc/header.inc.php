@@ -189,6 +189,12 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
        src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/osu-tag.gif" width="101" height="119" alt="Oregon State University" title="Oregon State University" /></a><h1 class="scarctitle"><a href="http://scarc.library.oregonstate.edu">Special Collections & Archives<br />Research Center</a></h1></div>
     <div id="header-nav">
       <ul id="nav">
+        <li><a href="?p=collections/collections">Collections</a><ul>
+            <li><a href="?p=collections/classifications">Collections by Type</a></li>
+            <li><a href="?p=subjects/subjects">People, Places, and Topics</a></li>
+            <li><a href="?p=creators/creators">Creators</a></li>
+          </ul>
+        </li>
         <li><a href="http://scarc.library.oregonstate.edu/digital-resources.html">Digital Resources</a><ul>
             <li><a href="http://scarc.library.oregonstate.edu/digitalresources/osuhistory/index.html">University History</a></li>
             <li><a href="http://scarc.library.oregonstate.edu/digitalresources/historyofscience/index.html">History of Science</a></li>
@@ -247,19 +253,4 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
   $CreatorsClass = $arrP[0] == 'creators' ? 'currentBrowseLink' : 'browseLink';
   $DigitalLibraryClass = $arrP[0] == 'digitallibrary' ? 'currentBrowseLink' : 'browseLink';
   ?>
-  <div id="browsebyblock">
-    <span id="browsebyspan">
-       Browse:
-    </span>
-    <span class="<?php echo($TitleClass); ?>">
-       <a href="?p=collections/collections" onclick="js_highlighttoplink(this.parentNode); return true;">Collection by Title</a>
-    </span>&nbsp; | &nbsp;
-    <span class="<?php echo($ClassificationsClass); ?>">
-       <a href="?p=collections/classifications" onclick="js_highlighttoplink(this.parentNode); return true;">Collection by Type</a>
-    </span>&nbsp; | &nbsp;
-    <span class="<?php echo($SubjectsClass); ?>">
-       <a href="?p=subjects/subjects" onclick="js_highlighttoplink(this.parentNode); return true;">People, Places, and Topics</a>
-    </span>
-    <span style="font-size: x-small;font-style: italic; margin-left:5em"> **This is here temporarily until we decide how to incorporate**</span>
-  </div>
 <div id="main">
