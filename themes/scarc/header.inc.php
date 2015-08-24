@@ -189,36 +189,36 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
        src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/osu-tag.gif" width="101" height="119" alt="Oregon State University" title="Oregon State University" /></a><h1 class="scarctitle"><a href="http://scarc.library.oregonstate.edu">Special Collections & Archives<br />Research Center</a></h1></div>
     <div id="header-nav">
       <ul id="nav">
-        <li><a href="">Digital Resources</a><ul>
-            <li><a href="">University History</a></li>
-            <li><a href="">History of Science</a></li>
-            <li><a href="">Linus Pauling Online</a></li>
-            <li><a href="">Oregon Multicultural Archives</a></li>
-            <li><a href="">Natural Resources</a></li>
-            <li><a href="">Online Audio/Video</a></li>
-            <li><a href="">Social Media</a></li>
+        <li><a href="http://scarc.library.oregonstate.edu/digital-resources.html">Digital Resources</a><ul>
+            <li><a href="http://scarc.library.oregonstate.edu/digitalresources/osuhistory/index.html">University History</a></li>
+            <li><a href="http://scarc.library.oregonstate.edu/digitalresources/historyofscience/index.html">History of Science</a></li>
+            <li><a href="http://scarc.library.oregonstate.edu/digitalresources/pauling/index.html">Linus Pauling Online</a></li>
+            <li><a href="http://scarc.library.oregonstate.edu/digitalresources/oma/index.html">Oregon Multicultural Archives</a></li>
+            <li><a href="http://scarc.library.oregonstate.edu/digitalresources/naturalresources/index.html">Natural Resources</a></li>
+            <li><a href="http://scarc.library.oregonstate.edu/events/index.html">Online Audio/Video</a></li>
+            <li><a href="http://scarc.library.oregonstate.edu/digitalresources/socialmedia/index.html">Social Media</a></li>
           </ul>
         </li>
-        <li><a href="?f=about-us">About Us</a><ul>
-            <li><a href="?f=about-us#mission-statement">Mission Statement</a></li>
-            <li><a href="?f=about-us#department-history">Department History</a></li>
-            <li><a href="?f=about-us#staff">Staff</a></li>
-            <li><a href="?f=using-our-collections">Using Our Collections</a></li>
-            <li><a href="?f=facilities">Facilities</a></li>
-            <li><a href="?f=faq">Frequently Asked Questions</a></li>
+        <li><a href="http://scarc.library.oregonstate.edu/about-us.html">About Us</a><ul>
+            <li><a href="http://scarc.library.oregonstate.edu/about-us.html#mission-statement">Mission Statement</a></li>
+            <li><a href="http://scarc.library.oregonstate.edu/about-us.html#department-history">Department History</a></li>
+            <li><a href="http://scarc.library.oregonstate.edu/about-us.html#staff">Staff</a></li>
+            <li><a href="http://scarc.library.oregonstate.edu/using-our-collections.html">Using Our Collections</a></li>
+            <li><a href="http://scarc.library.oregonstate.edu/facilities.html">Facilities</a></li>
+            <li><a href="http://scarc.library.oregonstate.edu/faq.html">Frequently Asked Questions</a></li>
           </ul>
         </li>
-        <li><a href="?f=services">Services</a><ul>
-            <li><a href="?f=faq">Frequently Asked Questions</a></li>
-            <li><a href="?f=donate-materials">Donating Materials</a></li>
-            <li><a href="?f=facilities">Facilities</a></li>
-            <li><a href="?f=instruction-and-outreach">Instruction and Outreach</a></li>
-            <li><a href="?f=records-management">Records Management</a></li>
-            <li><a href="?f=reference">Reference</a></li>
-            <li><a href="?f=duplication">Reproduction &amp; Use</a></li>
+        <li><a href="http://scarc.library.oregonstate.edu/services.html">Services</a><ul>
+            <li><a href="http://scarc.library.oregonstate.edu/faq.html">Frequently Asked Questions</a></li>
+            <li><a href="http://scarc.library.oregonstate.edu/donate-materials.html">Donating Materials</a></li>
+            <li><a href="http://scarc.library.oregonstate.edu/facilities.html">Facilities</a></li>
+            <li><a href="http://scarc.library.oregonstate.edu/instruction-and-outreach.html">Instruction and Outreach</a></li>
+            <li><a href="http://scarc.library.oregonstate.edu/records-management.html">Records Management</a></li>
+            <li><a href="http://scarc.library.oregonstate.edu/reference.html">Reference</a></li>
+            <li><a href="http://scarc.library.oregonstate.edu/duplication.html">Reproduction &amp; Use</a></li>
           </ul>
         </li>
-        <li><a href="?f=ask-an-archivist">Ask An Archivist</a></li>
+        <li><a href="http://scarc.library.oregonstate.edu/ask-an-archivist.html">Ask An Archivist</a></li>
       </ul>
       <div id="search">
     <!--    <form name="gs" method="get" action="http://www.google.com/search"><input name="sitesearch" value="http://scarc.library.oregonstate.edu" type="hidden" /><input name="q" id="search-field" class="search-field" type="text" /><input class="button" value="Search" title="Search" type="submit" /></form>-->
