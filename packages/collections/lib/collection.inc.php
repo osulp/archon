@@ -2211,7 +2211,7 @@ abstract class Collections_Collection
     * @param integer $MakeIntoLink[optional]
     * @return string
     */
-   public function toString($MakeIntoLink = LINK_NONE, $ConcatinateCollectionIdentifier = false, $UseSortTitle = false)
+   public function toString($MakeIntoLink = LINK_NONE, $ConcatinateCollectionIdentifier = false, $UseSortTitle = false, $show_cart = true)
    {
       global $_ARCHON;
 
@@ -2281,6 +2281,7 @@ abstract class Collections_Collection
 
             $arrCart = $_ARCHON->Security->Session->ResearchCart->getCart();
 
+           if ($show_cart) {
             if(!$this->ignoreCart && $arrCart->Collections[$this->ID])
             {
                $String .= "<a id='cid" . $this->ID . "' class='research_delete' onclick='triggerResearchCartEvent(this, {collectionid:{$this->ID},collectioncontentid:0}); return false;' href='#'><img class='cart' src='{$_ARCHON->PublicInterface->ImagePath}/removefromcart.gif' title='$strRemove' alt='$strRemove'/></a>";
@@ -2289,6 +2290,7 @@ abstract class Collections_Collection
             {
                $String .= "<a id='cid" . $this->ID . "' class='research_add' onclick='triggerResearchCartEvent(this, {collectionid:{$this->ID},collectioncontentid:0}); return false;' href='#'><img class='cart' src='{$_ARCHON->PublicInterface->ImagePath}/addtocart.gif' title='$strAddTo' alt='$strAddTo'/></a>";
             }
+           }
          }
       }
 

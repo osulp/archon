@@ -202,11 +202,11 @@ function collections_search()
                                  if($objClassification->ID)
                                  {
                                     $collectionSubstring = $objCollection->getString('CollectionIdentifier') ? ' ' . $objCollection->getString('CollectionIdentifier') : '';
-                                    echo("<dt>" . $objCollection->toString(LINK_TOTAL) . ' ' . $objClassification->toString(LINK_NONE, true, false, true, false) . $collectionSubstring . "</dt>\n");
+                                    echo("<dt>" . $objCollection->toString(LINK_TOTAL,false,false,false) . ' | ' . $objClassification->toString(LINK_NONE, true, false, true, false) . $collectionSubstring . "</dt>\n");
                                  }
                                  else
                                  {
-                                    echo("<dt>" . $objCollection->toString(LINK_TOTAL) . ' ' . $objCollection->getString('CollectionIdentifier') . "</dt>\n");
+                                    echo("<dt>" . $objCollection->toString(LINK_TOTAL,false,false,false) . ' | ' . $objCollection->getString('CollectionIdentifier') . "</dt>\n");
                                  }
                                  $ResultCount++;
 
@@ -272,7 +272,7 @@ function collections_search()
                   <?php
                   foreach($arrCollections as &$objCollection)
                   {
-                     echo("<dt>" . $objCollection->toString(LINK_TOTAL) . "</dt>\n");
+                     echo("<dt>" . $objCollection->toString(LINK_TOTAL,false,false,false) . "</dt>\n");
                      $ResultCount++;
 
                      if(!empty($objCollection->Content))

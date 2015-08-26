@@ -53,7 +53,7 @@ if(!empty($arrCollections))
     foreach($arrCollections as $objCollection)
     {
         $output = "<div class='listitem'>";
-        $output .= $objCollection->toString(LINK_TOTAL, false);
+        $output .= $objCollection->toString(LINK_TOTAL, false, false, false) . ' | ';
         $output .= $objClassification->toString(LINK_NONE, true, false, true, false, " ") . ' ' . $objCollection->CollectionIdentifier;
         $output .= "</div>\n";
 
