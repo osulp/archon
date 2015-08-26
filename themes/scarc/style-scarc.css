@@ -1869,13 +1869,13 @@ td {
 
 dt.faitem {
     margin: 5px 0;
-    font-size: 1.1em;
+    font-size: 1em;
     font-weight: bold;
 }
 
 dt.faitemnormal {
-    margin: 7px 0 3px 0;
-    font-size: 1.1em;
+    margin-top: 10px;
+    font-size: 1em;
     font-weight: normal;
 }
 
@@ -1887,7 +1887,7 @@ dl.faitem dt.faitem {
     margin-top: 10px;
 }
 
-dd.faitemcontent, dd.faitemdesc {
+dd.faitemcontent, dd.faitemdesc, dd.faitemuserfields {
     padding-left: 10px;
 }
 
