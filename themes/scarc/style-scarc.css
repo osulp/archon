@@ -1869,7 +1869,14 @@ td {
 
 dt.faitem {
     margin: 5px 0;
-    font-size: 1.1em;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+dt.faitemnormal {
+    margin-top: 10px;
+    font-size: 1em;
+    font-weight: normal;
 }
 
 dl.faitem {
@@ -1878,6 +1885,10 @@ dl.faitem {
 
 dl.faitem dt.faitem {
     margin-top: 10px;
+}
+
+dd.faitemcontent, dd.faitemdesc, dd.faitemuserfields {
+    padding-left: 10px;
 }
 
 h3 {
@@ -1947,6 +1958,11 @@ dl.CollectionClassEnabledResults dd{
 }
 
 div#coll-container-list>dl>dd>dl.faitem>dt {
-    font-weight: normal;
+    /*font-weight: normal;*/
     padding-top: 8px;
+}
+
+/* Hide the Green Arrow that indicates there is digital content - #58 */
+#scarc-controlcard img.dl {
+    display: none;
 }

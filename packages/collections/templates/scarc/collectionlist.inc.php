@@ -26,7 +26,7 @@
 isset($_ARCHON) or die();
 
 echo("<div class='listitem'>");
-echo($objCollection->toString(LINK_TOTAL, false, false));
+echo($objCollection->toString(LINK_TOTAL, false, false, false) . ' | ');
 $objCollection->Classification = New Classification($objCollection->ClassificationID);
 echo($objCollection->Classification->toString(LINK_NONE, true, false, true, false) . ' ' . $objCollection->CollectionIdentifier);
 echo "</div>\n";

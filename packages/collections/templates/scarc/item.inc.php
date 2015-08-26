@@ -24,41 +24,32 @@
  */
 isset($_ARCHON) or die();
 
+//echo "<pre>";print_r($Content);echo "</pre>";
+
 
 if($enabled)
 {
+  $dtclass = (count($Content['Content']) > 0) ? 'faitem' : 'faitemnormal';
    ?>
 
-<dt class='faitem' id="id<?php echo($Content['ID']); ?>"><a name="id<?php echo($Content['ID']); ?>"></a><?php echo($Content['String']); ?></dt>
+<dt class='<?php echo $dtclass; ?>' id="id<?php echo($Content['ID']); ?>"><a name="id<?php echo($Content['ID']); ?>"></a><?php echo($Content['String']); ?></dt>
 
    <?php
    if($Content['Description'])
    {
-      echo("<dd class='faitemcontent'>" . $Content['Description'] . "</dd>\n");
+      echo("<dd class='faitemdesc'>" . $Content['Description'] . "</dd>\n");
    }
 
    if($Content['UserFields'])
    {
-      $strUserFields = '';
-      $last = count($Content['UserFields']);
-      $count = 1;
-
       natcasesort(&$Content['UserFields']);
-
       foreach($Content['UserFields'] as $ID => $String)
       {
         // Suppress the 'UnitID field display - Issue #27 - 6/22/15 ME
         if ('UnitID' != substr($String, 0, 6)) {
-         $strUserFields .= $String;
-
-         if($count != $last)
-         {
-            $strUserFields .= "</dd>\n<dd class='faitemcontent'>\n";
-         }
-         $count++;
+          echo "<dd class='faitemuserfields'>" . $String . "</dd>\n";
+        }
       }
-      }
-      echo("<dd class='faitemcontent'>" . $strUserFields . "</dd>\n");
    }
 
    if(!empty($Content['Subjects']))
@@ -77,7 +68,7 @@ if($enabled)
 
    if(!empty($Content['Content']))
    {
-      echo("<dd><dl class='faitem'>#CONTENT#</dl></dd>");
+      echo("<dd class='faitemcontent'><dl class='faitem'>#CONTENT#</dl></dd>");
    }
 
 
