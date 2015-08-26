@@ -1870,6 +1870,13 @@ td {
 dt.faitem {
     margin: 5px 0;
     font-size: 1.1em;
+    font-weight: bold;
+}
+
+dt.faitemnormal {
+    margin: 7px 0 3px 0;
+    font-size: 1.1em;
+    font-weight: normal;
 }
 
 dl.faitem {
@@ -1878,6 +1885,10 @@ dl.faitem {
 
 dl.faitem dt.faitem {
     margin-top: 10px;
+}
+
+dd.faitemcontent, dd.faitemdesc {
+    padding-left: 10px;
 }
 
 h3 {
@@ -1947,6 +1958,6 @@ dl.CollectionClassEnabledResults dd{
 }
 
 div#coll-container-list>dl>dd>dl.faitem>dt {
-    font-weight: normal;
+    /*font-weight: normal;*/
     padding-top: 8px;
 }
