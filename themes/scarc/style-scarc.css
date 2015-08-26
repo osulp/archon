@@ -1961,3 +1961,8 @@ div#coll-container-list>dl>dd>dl.faitem>dt {
     /*font-weight: normal;*/
     padding-top: 8px;
 }
+
+/* Hide the Green Arrow that indicates there is digital content - #58 */
+#scarc-controlcard img.dl {
+    display: none;
+}
