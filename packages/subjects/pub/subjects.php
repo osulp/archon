@@ -104,11 +104,11 @@ function subjects_main($SubjectTypeID)
       {
          $href .= "&amp;subjecttypeid=$SubjectTypeID";
       }
-      $content .= "<a href='$href'>-#-</a>" . INDENT;
+      $content .= '<a class="browse-letter" href="'.$href.'">#</a>';
    }
    else
    {
-      $content .= "-#-" . INDENT;
+      $content .= '<span class="browse-letter">#</span>';
    }
 
    for($i = 65; $i < 91; $i++)
@@ -122,16 +122,11 @@ function subjects_main($SubjectTypeID)
          {
             $href .= "&amp;subjecttypeid=$SubjectTypeID";
          }
-         $content .= "<a href='$href'>-$char-</a>" . INDENT;
+         $content .= '<a class="browse-letter" href="'.$href.'">'.$char.'</a>';
       }
       else
       {
-         $content .= "-$char-" . INDENT;
-      }
-
-      if($char == 'M')
-      {
-         $content .= "<br /><br />\n";
+         $content .= '<span class="browse-letter">'.$char.'</span>';
       }
    }
    $content .= "<br /><br /><a href='?p={$_REQUEST['p']}&amp;browse&amp;subjecttypeid={$SubjectTypeID}'>{$strViewAll}</a>";

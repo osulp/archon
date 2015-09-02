@@ -91,19 +91,12 @@ function collections_main($ShowBooks)
             {
                $href .= "&amp;books";
             }
-            $content .= "<a href='$href'>-$char-</a>" . INDENT;
+            $content .= '<a class="browse-letter" href="'.$href.'">'.$char.'</a>';
          }
          else
          {
-            $content .= "-$char-" . INDENT;
+            $content .= '<span class="browse-letter">'. $char;
          }
-
-         if($char == 'M')
-         {
-            $content .= "<br /><br />\n";
-         }
-
-
       }
       $bookurl = ($ShowBooks) ? '&amp;books' : '';
       $content .= "<br /><br /><a href='?p={$_REQUEST['p']}&amp;browse{$bookurl}'>{$strViewAll}</a>";
