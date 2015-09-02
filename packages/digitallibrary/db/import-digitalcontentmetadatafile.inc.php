@@ -32,10 +32,15 @@ if ($_REQUEST['f'] == 'import-' . $UtilityCode) {
 
   if (!empty($arrFiles)) {
 
+    $allClassifications = array();
+    foreach ($_ARCHON->getAllClassifications() as $id => $classification) {
+      $allClassifications[$id] = strtolower($classification->ClassificationIdentifier);
+    }
+
     $allCollections = array();
     // get a list of the collections
     foreach ($_ARCHON->getAllCollections() as $id => $collect) {
-      $cid = str_replace(' ', '', $collect->CollectionIdentifier);
+      $cid = $allClassifications[$collect->ClassificationID].str_replace(' ', '', $collect->CollectionIdentifier);
       $allCollections[strtolower($cid)] = $id;
     }
 
