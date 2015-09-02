@@ -12,8 +12,7 @@ isset($_ARCHON) or die();
 echo("<h1 id='titleheader'>" . strip_tags($_ARCHON->PublicInterface->Title) . "</h1>\n");
 
 $arrClassifications = $_ARCHON->getChildClassifications($objClassification->ID);
-$arrCollections = $_ARCHON->getCollectionsForClassification($objClassification->ID, true);
-
+$arrCollections = $_ARCHON->getCollectionsForClassification($objClassification->ID, true, 'SortTitle');
 
 if ($objClassification->Description)
 {

@@ -1166,15 +1166,17 @@ abstract class Collections_Archon
       return $arrBooks;
    }
 
-   /**
-    * Retrieves an array of Collection objects that are organized
-    * under the Classification specified by $ID
-    *
-    * @param integer $ID
-    * @param boolean $ExcludeDisabledCollections[optional]
-    * @return Collection[]
-    */
-   public function getCollectionsForClassification($ClassificationID, $ExcludeDisabledCollections = false)
+  /**
+   * Retrieves an array of Collection objects that are organized
+   * under the Classification specified by $ID
+   *
+   * @param int $ClassificationID
+   * @param bool $ExcludeDisabledCollections[optional]
+   * @param string $sortColumn[optional]
+   * @param string $sortDir[optional]
+   * @return array|bool Collection[]
+   */
+  public function getCollectionsForClassification($ClassificationID, $ExcludeDisabledCollections = false, $sortColumn = '', $sortDir = 'ASC')
    {
       if(!$ClassificationID)
       {
@@ -1194,12 +1196,15 @@ abstract class Collections_Archon
       {
          $andquery = "AND Enabled = '1'";
       }
+
+      // Adding ability to sort by a column passed in.  Typically will be the SortTitle but can be whatever.
+      $sort_by = (empty($sortColumn)) ? '' : ' ORDER BY ' . $sortColumn . ' ' . $sortDir;
       $andtypes = array();
       $andvars = array();
 
       $arrCollections = array();
 
-      $query = "SELECT * FROM tblCollections_Collections WHERE ClassificationID = ? $andquery";
+      $query = "SELECT * FROM tblCollections_Collections WHERE ClassificationID = ? $andquery" . $sort_by;
       $prep = $this->mdb2->prepare($query, array_merge(array('integer'), $andtypes), MDB2_PREPARE_RESULT);
       $result = $prep->execute(array_merge(array($ClassificationID), $andvars));
       if(PEAR::isError($result))
@@ -1209,27 +1214,12 @@ abstract class Collections_Archon
 
       while($row = $result->fetchRow())
       {
-         $arrCollections[$row['ID']] = New Collection($row);
+        // Removed $row['ID'] from $arrCollections key to permit result sorting #49 - 9/2/15 ME
+        $arrCollections[] = New Collection($row);
       }
       $result->free();
       $prep->free();
 
-      uasort($arrCollections, create_function('$a,$b', 'return strnatcmp($a->CollectionIdentifier, $b->CollectionIdentifier);'));
-
-      /* while($row = $this->db->fetch_array($result))
-        {
-        $arrSorter[$row['CollectionIdentifier']] = New Collection($row);
-        }
-
-        if(!empty($arrSorter))
-        {
-        natksort($arrSorter);
-
-        foreach($arrSorter as &$objCollection)
-        {
-        $arrCollections[$objCollection->ID] = $objCollection;
-        }
-        } */
       return $arrCollections;
    }
 
