@@ -15,6 +15,7 @@ class Book extends ArchonObject {}
 class Classification extends ArchonObject {}
 class Collection extends ArchonObject {}
 class CollectionContent extends ArchonObject {}
+class ContainerList extends ArchonObject {}
 class ExtentUnit extends ArchonObject {}
 class LevelContainer extends ArchonObject {}
 class Location extends ArchonObject {}
@@ -32,6 +33,7 @@ $_ARCHON->registerInclude('Book', 'book.inc.php');
 $_ARCHON->registerInclude('Classification', 'classification.inc.php');
 $_ARCHON->registerInclude('Collection', 'collection.inc.php');
 $_ARCHON->registerInclude('CollectionContent', 'collectioncontent.inc.php');
+$_ARCHON->registerInclude('ContainerList', 'containerlist.inc.php');
 $_ARCHON->registerInclude('ExtentUnit', 'extentunit.inc.php');
 $_ARCHON->registerInclude('LevelContainer', 'levelcontainer.inc.php');
 $_ARCHON->registerInclude('Location', 'location.inc.php');

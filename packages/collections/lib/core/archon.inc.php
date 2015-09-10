@@ -3392,7 +3392,83 @@ abstract class Collections_Archon
       return $arrResults;
    }
 
-   /**
+  /**
+   * Searches the ContainerList table
+   *
+   * @param $SearchQuery
+   * @param int $SubjectID
+   * @param int $CreatorID
+   * @param int $LanguageID
+   * @param $Limit
+   * @param int $Offset
+   * @return mixed
+   */
+  public function searchContainerList($SearchQuery, $SubjectID = 0, $CreatorID = 0, $LanguageID = 0, $Limit = CONFIG_CORE_SEARCH_RESULTS_LIMIT, $Offset = 0)
+  {
+
+    if($SubjectID && is_natural($SubjectID))
+    {
+      $arrIndexSearch['Subject'] = array($SubjectID => NULL);
+    }
+    elseif($CreatorID && is_natural($CreatorID))
+    {
+      $arrIndexSearch['Creator'] = array($CreatorID => NULL);
+    }
+    elseif($LanguageID && is_natural($LanguageID))
+    {
+      $arrIndexSearch['Language'] = array($LanguageID => NULL);
+    }
+    else
+    {
+      return $this->searchTable($SearchQuery, 'tblCollections_ContainerLists', array('Contents'), 'ContainerList', NULL, NULL, array(), array(), NULL, array(), array(), $Limit, $Offset);
+    }
+
+    if(!empty($arrIndexSearch))
+    {
+      foreach($arrIndexSearch as $Type => $arrObjects)
+      {
+        if(!empty($arrObjects))
+        {
+          foreach($arrObjects as $ID => $junk)
+          {
+            $prepQuery->query = "SELECT * FROM tblCollections_Books JOIN {$this->mdb2->quoteIdentifier("tblCollections_Book{$Type}Index")} ON {$this->mdb2->quoteIdentifier("tblCollections_Book{$Type}Index")}.BookID = tblCollections_Books.ID WHERE {$this->mdb2->quoteIdentifier("tblCollections_Book{$Type}Index")}.{$this->mdb2->quoteIdentifier("{$Type}ID")} = ?  ORDER BY tblCollections_Books.Title";
+            $prepQuery->types = array('integer');
+            $prepQuery->vars = array($ID);
+            $arrPrepQueries[] = $prepQuery;
+          }
+        }
+      }
+    }
+
+    foreach($arrPrepQueries as $prepQuery)
+    {
+      // Run query to list collections
+      call_user_func(array($this->mdb2, 'setLimit'), $Limit);
+      $prep = $this->mdb2->prepare($prepQuery->query, $prepQuery->types, MDB2_PREPARE_RESULT);
+      if(PEAR::isError($prep))
+      {
+        echo($prepQuery->query);
+        trigger_error($prep->getMessage(), E_USER_ERROR);
+      }
+      $result = $prep->execute($prepQuery->vars);
+      if(PEAR::isError($result))
+      {
+        trigger_error($result->getMessage(), E_USER_ERROR);
+      }
+
+      while($row = $result->fetchRow())
+      {
+        $arrResults[$row['ID']] = New Book($row);
+      }
+      $result->free();
+      $prep->free();
+    }
+
+    return $arrResults;
+  }
+
+
+  /**
     * Bulk renumbering of numeric level container identifiers
     *
     * Each identifier MUST be numeric, or else this function will not work
