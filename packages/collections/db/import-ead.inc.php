@@ -187,7 +187,7 @@ if ($_REQUEST['f'] == 'import-' . $UtilityCode)
 
 
 
-
+         /** @var Collections_Collection $objCollection */
          $objCollection = New Collection();
 
          // Enabled
@@ -456,6 +456,11 @@ if ($_REQUEST['f'] == 'import-' . $UtilityCode)
                echo("Successfully Stored Collection: {$objCollection->Title}<br/>\n");
             }
          }
+
+        // If there's PDF content in the Other URL field, store it for searching
+        if (!empty($objCollection->OtherURL)) {
+          $objCollection->dbUpdateRelatedContainerList();
+        }
 
 
          // MaterialTypeID, Creators

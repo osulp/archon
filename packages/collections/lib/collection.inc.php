@@ -1710,11 +1710,8 @@ abstract class Collections_Collection
    * Parses the OtherURL field, pulling out PDF containerlist URLS.  Then converts the contents to text and stores in the DB for searching.
    *
    * NOTE: Doesn't follow the other 'related' functions as there isn't a separate join table for ContainerList
-   *
-   * @param $CollectionID
-   * @param $OtherURL
    */
-  public function dbUpdateRelatedContainerList($CollectionID, $OtherURL) {
+  public function dbUpdateRelatedContainerList() {
 
     global $_ARCHON;
     include 'vendor/autoload.php';
@@ -1729,7 +1726,7 @@ abstract class Collections_Collection
     $error_message = '';
 
     // Parse the OtherURL field and capture both the URL and the label.
-    preg_match_all('/\[url=(.*?)\](.*?)\[\/url\]/', $OtherURL, $matches, PREG_SET_ORDER);
+    preg_match_all('/\[url=(.*?)\](.*?)\[\/url\]/', $this->OtherURL, $matches, PREG_SET_ORDER);
 
     foreach ($matches as $match) {
       $url = $match[1];
@@ -1743,7 +1740,7 @@ abstract class Collections_Collection
         $contents = $doc->getText();
 
         $container = new ContainerList();
-        $container->CollectionID =$CollectionID;
+        $container->CollectionID = $this->ID;
         $container->Contents = $contents;
         $container->URL = $url;
         $container->LinkLabel = $label;
