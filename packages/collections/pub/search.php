@@ -388,39 +388,43 @@ function containerlist_search() {
   global $_ARCHON;
   global $ResultCount, $in_CollectionID;
 
-  /** @var string $objInPDFBoxListPhrase */
-  $objInPDFBoxListPhrase = Phrase::getPhrase('search_inpdfboxlist', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-  $strClassPdfCL = $objInPDFBoxListPhrase ? $objInPDFBoxListPhrase->getPhraseValue(ENCODE_HTML) : 'PDF Container List';
+  if (!is_null($_ARCHON->QueryString)) {
 
-  $objPdfCLMatchesPhrase = Phrase::getPhrase('search_matches', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-  $strPdfCLMatches = $objPdfCLMatchesPhrase ? $objPdfCLMatchesPhrase->getPhraseValue(ENCODE_HTML) : 'Matches';
+    /** @var string $objInPDFBoxListPhrase */
+    $objInPDFBoxListPhrase = Phrase::getPhrase('search_inpdfboxlist', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
+    $strClassPdfCL = $objInPDFBoxListPhrase ? $objInPDFBoxListPhrase->getPhraseValue(ENCODE_HTML) : 'PDF Container List';
 
-  if(!$in_CollectionID)
-  {
-    $arrCollections = $_ARCHON->searchContainerList($_ARCHON->QueryString, $in_CollectionID);
+    $objPdfCLMatchesPhrase = Phrase::getPhrase('search_matches', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
+    $strPdfCLMatches = $objPdfCLMatchesPhrase ? $objPdfCLMatchesPhrase->getPhraseValue(ENCODE_HTML) : 'Matches';
 
-    if(!empty($arrCollections))
+    if(!$in_CollectionID)
     {
-      ?>
-      <div class="searchTitleAndResults searchlistitem">
+      $arrCollections = $_ARCHON->searchContainerList($_ARCHON->QueryString, $in_CollectionID);
+
+      if(!empty($arrCollections))
+      {
+        ?>
+        <div class="searchTitleAndResults searchlistitem">
    <span id='PdfCLTitle'>
       <a href="#" onclick="toggleDisplay('PdfCL'); return false;"><img id="PdfCLImage" src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif" alt="expand/collapse" /><?php echo("  ".$strClassPdfCL); ?></a>
    </span>(<span id='PdfCLCount'><?php echo(count($arrCollections)); ?></span> <?php echo($strPdfCLMatches); ?>) <br/>
-        <dl id='PdfCLResults' style='display: none;'>
-          <?php
+          <dl id='PdfCLResults' style='display: none;'>
+            <?php
 
-          foreach($arrCollections as $objPdfCL)
-          {
-            echo '<dt><a href="' . $objPdfCL->URL . '" target="_blank">' . $objPdfCL->toString(LINK_NONE) . '</a></dt>';
-            $ResultCount++;
-          }
-          ?>
-        </dl>
-      </div>
+            foreach($arrCollections as $objPdfCL)
+            {
+              echo '<dt><a href="' . $objPdfCL->URL . '" target="_blank">' . $objPdfCL->toString(LINK_NONE) . '</a></dt>';
+              $ResultCount++;
+            }
+            ?>
+          </dl>
+        </div>
 
-    <?php
+      <?php
+      }
     }
   }
+
 }
 
 $_ARCHON->addPublicSearchFunction('collections_search', 10);
