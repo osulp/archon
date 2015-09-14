@@ -193,7 +193,7 @@ DROP TABLE IF EXISTS tblCollections_ContainerLists;
 CREATE TABLE tblCollections_ContainerLists (
   ID int(11) unsigned NOT NULL AUTO_INCREMENT,
   CollectionID int(11) NOT NULL,
-  Contents text NOT NULL,
+  Contents mediumtext NOT NULL,
   URL text,
   LinkLabel text,
   PRIMARY KEY (ID)
