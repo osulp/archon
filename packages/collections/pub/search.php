@@ -9,8 +9,6 @@
 
 isset($_ARCHON) or die();
 
-
-
 $in_RepositoryID = isset($_REQUEST['repositoryid']) ? $_REQUEST['repositoryid'] : $_ARCHON->Security->Session->getRemoteVariable('RepositoryID');
 $in_RepositoryID = !isset($in_RepositoryID) && CONFIG_CORE_LIMIT_REPOSITORY_SEARCH_RESULTS ? $_ARCHON->Repository->ID : $in_RepositoryID;
 $in_ClassificationID = isset($_REQUEST['classificationid']) ? $_REQUEST['classificationid'] : 0;
@@ -263,6 +261,8 @@ function collections_search()
             $strMatches = $objMatchesPhrase ? $objMatchesPhrase->getPhraseValue(ENCODE_HTML) : 'Matches';
             $objInBoxListPhrase = Phrase::getPhrase('search_inboxlist', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
             $strInBoxList = $objInBoxListPhrase ? $objInBoxListPhrase->getPhraseValue(ENCODE_HTML) : 'Results Found Within Box List';
+           $objInPDFBoxListPhrase = Phrase::getPhrase('search_inpdfboxlist', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
+           $strInPDFBoxList = $objInPDFBoxListPhrase ? $objInPDFBoxListPhrase->getPhraseValue(ENCODE_HTML) : 'Results Found Within PDF Box List';
             ?>
 <div class="searchTitleAndResults searchlistitem">
    <span id='CollectionTitle'>
@@ -382,6 +382,53 @@ function books_search()
    }
 }
 
+function containerlist_search() {
+
+  /** @var Collections_Archon $_ARCHON  */
+  global $_ARCHON;
+  global $ResultCount, $in_CollectionID;
+
+  if (!is_null($_ARCHON->QueryString)) {
+
+    /** @var string $objInPDFBoxListPhrase */
+    $objInPDFBoxListPhrase = Phrase::getPhrase('search_inpdfboxlist', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
+    $strClassPdfCL = $objInPDFBoxListPhrase ? $objInPDFBoxListPhrase->getPhraseValue(ENCODE_HTML) : 'PDF Container List';
+
+    $objPdfCLMatchesPhrase = Phrase::getPhrase('search_matches', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
+    $strPdfCLMatches = $objPdfCLMatchesPhrase ? $objPdfCLMatchesPhrase->getPhraseValue(ENCODE_HTML) : 'Matches';
+
+    if(!$in_CollectionID)
+    {
+      $arrCollections = $_ARCHON->searchContainerList($_ARCHON->QueryString, $in_CollectionID);
+
+      if(!empty($arrCollections))
+      {
+        ?>
+        <div class="searchTitleAndResults searchlistitem">
+   <span id='PdfCLTitle'>
+      <a href="#" onclick="toggleDisplay('PdfCL'); return false;"><img id="PdfCLImage" src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif" alt="expand/collapse" /><?php echo("  ".$strClassPdfCL); ?></a>
+   </span>(<span id='PdfCLCount'><?php echo(count($arrCollections)); ?></span> <?php echo($strPdfCLMatches); ?>) <br/>
+          <dl id='PdfCLResults' style='display: none;'>
+            <?php
+
+            foreach($arrCollections as $objPdfCL)
+            {
+              echo '<dt><a href="' . $objPdfCL->URL . '" target="_blank">' . $objPdfCL->toString(LINK_NONE) . '</a></dt>';
+              $ResultCount++;
+            }
+            ?>
+          </dl>
+        </div>
+
+      <?php
+      }
+    }
+  }
+
+}
+
 $_ARCHON->addPublicSearchFunction('collections_search', 10);
 $_ARCHON->addPublicSearchFunction('books_search', 10);
+$_ARCHON->addPublicSearchFunction('containerlist_search', 10);
+
 ?>

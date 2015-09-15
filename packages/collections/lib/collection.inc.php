@@ -122,7 +122,21 @@ abstract class Collections_Collection
          trigger_error($affected->getMessage(), E_USER_ERROR);
       }
 
-      if(!$_ARCHON->deleteRelationship('tblCollections_CollectionLocationIndex', 'CollectionID', $ID, MANY_TO_MANY))
+     // Delete the related container lists
+     static $containerListPrep = NULL;
+     if(!isset($containerListPrep))
+     {
+       $query = "DELETE FROM tblCollections_ContainerLists WHERE CollectionID = ?";
+       $containerListPrep = $_ARCHON->mdb2->prepare($query, 'integer', MDB2_PREPARE_MANIP);
+     }
+     $affected = $containerListPrep->execute($ID);
+     if(PEAR::isError($affected))
+     {
+       trigger_error($affected->getMessage(), E_USER_ERROR);
+     }
+
+
+     if(!$_ARCHON->deleteRelationship('tblCollections_CollectionLocationIndex', 'CollectionID', $ID, MANY_TO_MANY))
       {
          return false;
       }
@@ -1692,6 +1706,106 @@ abstract class Collections_Collection
       return true;
    }
 
+  /**
+   * Parses the OtherURL field, pulling out PDF containerlist URLS.  Then converts the contents to text and stores in the DB for searching.
+   *
+   * NOTE: Doesn't follow the other 'related' functions as there isn't a separate join table for ContainerList
+   */
+  public function dbUpdateRelatedContainerList() {
+
+    global $_ARCHON;
+    include 'vendor/autoload.php';
+
+    // Delete any existing entries first - this will also delete any related lists if the field is cleared out.
+    $this->dbLoadContainerLists();
+    foreach ($this->ContainerLists as $clist) {
+      $clist->dbDelete();
+    }
+
+    $matches = array();
+    $error_message = '';
+
+    // Parse the OtherURL field and capture both the URL and the label.
+    preg_match_all('/\[url=(.*?)\](.*?)\[\/url\]/', $this->OtherURL, $matches, PREG_SET_ORDER);
+
+    foreach ($matches as $match) {
+      $url = $match[1];
+      $label = $match[2];
+
+      try {
+        $parser = new \Smalot\PdfParser\Parser();
+
+        // Open the URL and parse the PDF.
+        $doc = $parser->parseFile($url);
+        $contents = $doc->getText();
+
+        $container = new ContainerList();
+        $container->CollectionID = $this->ID;
+        $container->Contents = $contents;
+        $container->URL = $url;
+        $container->LinkLabel = $label;
+
+        if (false == $container->dbStore()) {
+          $error_message .= 'Error storing PDF container list: ' . $url;
+        }
+      } catch (Exception $e) {
+        $error_message .= 'Error reading PDF container list: [' . $url . '] : ' . $e->getMessage();
+      }
+    }
+    if (!empty($error_message)) {
+      $_ARCHON->declareError($error_message);
+    }
+  }
+
+  /**
+   * Loads all of the container lists for this collection.
+   *
+   * @return boolean
+   */
+  public function dbLoadContainerLists() {
+
+    global $_ARCHON;
+
+    if(!$this->ID)
+    {
+      $_ARCHON->declareError("Could not load Subjects: Collection ID not defined.");
+      return false;
+    }
+
+    if(!is_natural($this->ID))
+    {
+      $_ARCHON->declareError("Could not load Subjects: Collection ID must be numeric.");
+      return false;
+    }
+
+    $this->ContainerLists = array();
+
+    $query = "SELECT * FROM tblCollections_ContainerLists WHERE CollectionID = ?";
+    $prep = $_ARCHON->mdb2->prepare($query, 'integer', MDB2_PREPARE_RESULT);
+    $result = $prep->execute($this->ID);
+    if(PEAR::isError($result))
+    {
+      trigger_error($result->getMessage(), E_USER_ERROR);
+    }
+
+    if(!$result->numRows())
+    {
+      // No container lists found, return.
+      return true;
+    }
+
+    while($row = $result->fetchRow())
+    {
+      $cl = new ContainerList($row);
+      $this->ContainerLists[$cl->ID] = $cl;
+    }
+    $result->free();
+    $prep->free();
+
+    return true;
+  }
+
+
    /**
     * Unrelates all creators for collection
     *
@@ -2516,6 +2630,13 @@ abstract class Collections_Collection
    /**
     * These variables store other objects which relate to the Collection
     */
+
+  /**
+   * Array of related Container Lists
+   *
+   * @var ContainerList[]
+   */
+  public $ContainerLists = array();
 
    /**
     * Array containing Content for Collection

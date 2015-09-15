@@ -174,6 +174,16 @@ CREATE TABLE tblCollections_CollectionSubjectIndex (
 
 
 
+IF EXISTS(SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'tblCollections_ContainerLists') DROP TABLE tblCollections_ContainerLists ;
+CREATE TABLE tblCollections_ContainerLists (
+  ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+  CollectionID INT NOT NULL,
+  Contents TEXT NOT NULL,
+  URL TEXT NULL,
+  LinkLabel TEXT NULL
+);
+
+
 -- Create table 'tblCollections_Content'
 --
 IF EXISTS(SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'tblCollections_Content') DROP TABLE tblCollections_Content ;
@@ -425,6 +435,8 @@ DECLARE @package_collections INT; SET @package_collections = (SELECT ID FROM tbl
 DECLARE @package_collections INT; SET @package_collections = (SELECT ID FROM tblCore_Packages WHERE APRCode = 'collections'); INSERT INTO tblCore_UserProfileFields (PackageID, UserProfileField, Required, InputType, Size, ListDataSource) VALUES (@package_collections, 'ResearcherTypeID', '0', 'list', '0', 'getAllResearcherTypes');
 
 -- Done!
+
+CREATE FULLTEXT INDEX  ON tblCollections_ContainerLists(Contents);
 
 -- Add Indexes to Collection Content table
 CREATE INDEX CollectionID ON tblCollections_Content(CollectionID);

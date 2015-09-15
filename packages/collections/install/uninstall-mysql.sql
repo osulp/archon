@@ -24,6 +24,7 @@ DROP TABLE IF EXISTS tblCollections_ResearchAppointments ;
 DROP TABLE IF EXISTS tblCollections_ResearchCarts ;
 DROP TABLE IF EXISTS tblCollections_ResearcherTypes ;
 DROP TABLE IF EXISTS tblCollections_UserFields ;
+DROP TABLE IF EXISTS tblCollections_ContainerLists;
 
 -- Done!<br>
 

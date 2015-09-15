@@ -474,9 +474,9 @@ function collections_ui_exec()
             $objCollection->dbUpdateRelatedCreators($_REQUEST['relatedcreatorids'], array($_REQUEST['primarycreatorid']));
          }
 
+        $objCollection->dbUpdateRelatedContainerList($ID, $objCollection->OtherURL);
 
-
-         if($stored && is_array($_REQUEST['locationentries']) && !empty($_REQUEST['locationentries']))
+        if($stored && is_array($_REQUEST['locationentries']) && !empty($_REQUEST['locationentries']))
          {
             foreach($_REQUEST['locationentries'] as $LocationEntryID => $array)
             {

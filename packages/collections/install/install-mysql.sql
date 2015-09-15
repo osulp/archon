@@ -187,6 +187,20 @@ CREATE TABLE tblCollections_CollectionSubjectIndex (
 
 
 
+-- Create table 'tblCollections_ContainerLists'
+--
+DROP TABLE IF EXISTS tblCollections_ContainerLists;
+CREATE TABLE tblCollections_ContainerLists (
+  ID int(11) unsigned NOT NULL AUTO_INCREMENT,
+  CollectionID int(11) NOT NULL,
+  Contents mediumtext NOT NULL,
+  URL text,
+  LinkLabel text,
+  PRIMARY KEY (ID)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+
 -- Create table 'tblCollections_Content'
 --
 DROP TABLE IF EXISTS tblCollections_Content ;
