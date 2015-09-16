@@ -1304,7 +1304,8 @@ abstract class Collections_CollectionContent
                $encoding_substring .= $objTmp->getString('Date');
             }
 
-            $String = ($MakeIntoLink == LINK_EACH && $this->ID) ? "<a href='?p=collections/findingaid&amp;id={$this->CollectionID}&amp;rootcontentid={$this->RootContentID}{$q}#id{$this->ID}'>$encoding_substring</a>" . $String : $encoding_substring . $String;
+//            $String = ($MakeIntoLink == LINK_EACH && $this->ID) ? "<a href='?p=collections/findingaid&amp;id={$this->CollectionID}&amp;rootcontentid={$this->RootContentID}{$q}#id{$this->ID}'>$encoding_substring</a>" . $String : $encoding_substring . $String;
+           $String = ($MakeIntoLink == LINK_EACH && $this->ID) ? "<a href='?p=collections/findingaid&amp;id={$this->CollectionID}{$q}#id{$this->ID}'>$encoding_substring</a>" . $String : $encoding_substring . $String;
             $encoding_substring = '';
 
             if($objTmp->ParentID && ($ConcatinateParentLevelContainerIdentifier || $ConcatinateParentLevelContainer))
