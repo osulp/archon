@@ -21,6 +21,7 @@ function routeSearch(form) {
                 + encodeURIComponent("http://scarc.library.oregonstate.edu")
                 + "&q=" + encodeURIComponent(query);
             window.location = searchUrl;
+            return false;
         }
     }
 }

@@ -95,7 +95,7 @@ function collections_main($ShowBooks)
          }
          else
          {
-            $content .= '<span class="browse-letter">'. $char;
+            $content .= '<span class="browse-letter">'. $char . '</span>';
          }
       }
       $bookurl = ($ShowBooks) ? '&amp;books' : '';
