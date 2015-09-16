@@ -81,14 +81,8 @@ foreach($inputs as $input)
 	$form .= $_ARCHON->PublicInterface->executeTemplate('core', $template, $input);
 }
 
-
 echo("<form action=\"index.php\" accept-charset=\"UTF-8\" method=\"post\">\n");
-
-if(!$_ARCHON->Error)
-{
 	eval($_ARCHON->PublicInterface->Templates['core']['Login']);
-}
-
 print "</form>\n";
 require_once("footer.inc.php");
 ?>
