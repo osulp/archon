@@ -233,6 +233,11 @@ a.nostyle:hover { color: #385E86; text-decoration: none; }
 
 a.nowrap:link, a.nowrap:visited, a.nowrap:hover, a.nowrap:active  { white-space: nowrap; }
 
+.browse-letter {
+    font-size: 1.3em;
+    padding-right: 20px;
+}
+
 p {
 	margin-top: 0px; 
 	padding-top: 0px;
@@ -514,9 +519,8 @@ img#osu-tag {
 
 #header-nav {
 	width: 90%;
-	height: 35px;
-	margin: 0 auto;
-	margin-top: -1px;
+	height: 55px;
+	margin: -1px auto 5px auto;
 	padding-top: 8px;
 	/*background-image: url('images/scarc-header-navigation.jpg');*/
 	/*background-repeat: no-repeat;*/
@@ -530,10 +534,7 @@ img#scarc-title {
 	margin-left: 117px;
 }
 
-
 #nav {
-	width: 42em;
-	height: 3em;
 	float: left;
 }
 
@@ -545,28 +546,26 @@ img#scarc-title {
 
 #nav a {
 	display: block;
-	/*
-	width: 10;
-	*/
 	text-decoration: none;
 	color: #403E3A;
 	font-weight: bold;
 }
 
 #nav li a {
-	margin-right: .7em;
+    margin: 8px 0.7em 0 0;
 	font-weight: bold;
+    font-size: 1.2em;
 }
 
 #nav li {
 	float: left;
 	margin-right: .5em;
-
 	font-family: 'Trebuchet MS', Tahoma, Helvetica, Arial;
 	font-variant: small-caps;
 	font-weight: bold;
 	font-size: 1em;
 	letter-spacing: 0.05em;
+    padding-left: 1em;
 }
 
 #nav a:hover, #nav a:selected {
@@ -574,14 +573,6 @@ img#scarc-title {
 	background-color: white;
 	font-weight: normal;
 }
-
-
-#nav li a:hover {
-		/*
-	background-color: white;
-		*/
-}
-
 
 #nav li ul {
 	position: absolute;
@@ -689,10 +680,7 @@ img#scarc-title {
 
 
 #search {
-	width: 17em; 	
-	/*
-	height: 4em;
-	*/
+    width: 265px;
 	padding: 0;
 	padding-right: .5em;
 	margin-top: 0px;
@@ -703,34 +691,23 @@ img#scarc-title {
 	
 #search input.search-field {
 	background: #FFFFFF /* url(images/searchicon.png) no-repeat scroll 2px 3px */;
-	font-size: .75em;
+	font-size: 0.9em;
 	color: #038;
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: bold;
-	/* border: 3px solid black none; */
-	margin: 0; 
-	padding: 0;
-	height: 1.5em;
+	margin: 0;
+	padding: 0 0 0 3px;
 	width: 15em;
 }
 
 #search input.button {
-	border-style: none;
-	border-width: 0px;
-	border-color: black;
+    border: none;
 	background-color: #385E86;
-	/*
-	background-color: #FF6000;
-	*/
-	/* background: transparent url(images/searchbutton02.gif) no-repeat scroll /*0px 0px*/;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: .9em;
-	font-weight: bold;
+	font-size: 1em;
 	color: #FFFFFF;
 	margin: 0;
-	padding: 0;
-	height: 1.5em;
-	width: 4.75em;
+	padding: 1px 5px;
 }
 
 
@@ -1797,8 +1774,7 @@ td {
 
 #researchblock {
     float: right;
-    font-size: 0.8em;
-    width: 30;
+    font-size: 0.95em;
     margin-right: 5px;
     padding-top: 0;
     color: #FFF;
@@ -1940,6 +1916,23 @@ ul.containers li.active a, ul.containers li.active a:hover {
     }
 }
 
+@media (max-width: 1015px) {
+    div#search {
+        float: left;
+        width: 100%;
+        background-color: #E8E9EB;
+        margin: 0 0 5px 0;
+        padding: 5px;
+    }
+    h1.scarctitle {
+        font-size: 1.5em;
+    }
+    #header-nav, #header-title, #main {
+        width: 100%;
+    }
+
+}
+
 dl#CollectionResults {
     margin-top: 5px;
 }
@@ -1965,4 +1958,14 @@ div#coll-container-list>dl>dd>dl.faitem>dt {
 /* Hide the Green Arrow that indicates there is digital content - #58 */
 #scarc-controlcard img.dl {
     display: none;
+}
+
+/* Set the highlight color for search results within finding aids */
+[class^=highlight] {
+    background-color: #FFFFCC;
+}
+
+/* Allows the list of letters to adjust with screen size and break appropriately */
+div.center {
+    word-wrap: break-word;
 }

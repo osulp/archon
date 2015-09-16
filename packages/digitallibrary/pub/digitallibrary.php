@@ -63,11 +63,11 @@ function digitallibrary_main()
 
       if(!empty($arrDigitalContentCount['#']))
       {
-         $content .= "<a href='?p={$_REQUEST['p']}&amp;char=" . urlencode('#') . "'>-#-</a>" . INDENT;
+         $content .= '<a class="browse-letter" href="?p=' . $_REQUEST['p'] . '&amp;char=' . urlencode('#') . '">#</a>';
       }
       else
       {
-         $content .= "-#-" . INDENT;
+         $content .= '<span class="browse-letter">#</span>';
       }
 
       for($i = 65; $i < 91; $i++)
@@ -76,16 +76,11 @@ function digitallibrary_main()
 
          if(!empty($arrDigitalContentCount[encoding_strtolower($char)]))
          {
-            $content .= "<a href='?p={$_REQUEST['p']}&amp;char=$char'>-$char-</a>" . INDENT;
+            $content .= '<a class="browse-letter" href="?p=' . $_REQUEST['p'] . '&amp;char=' . $char . '">' . $char .' </a>';
          }
          else
          {
-            $content .= "-$char-" . INDENT;
-         }
-
-         if($char == 'M')
-         {
-            $content .= "<br/><br/>\n";
+            $content .= '<span class="browse-letter">' . $char . '</span>';
          }
       }
       $content .= "<br/><br/><a href='?p={$_REQUEST['p']}&amp;browse'>{$strViewAll}</a>";
