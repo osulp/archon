@@ -233,7 +233,7 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
           <input type="hidden" name="p" value="core/search" />
           <input type="text" size="25" class="search-field" title="search" maxlength="150" name="q" id="qfa" value="<?php echo(encode($_ARCHON->QueryString, ENCODE_HTML)); ?>" tabindex="100" />
           <input type="submit" value="Search" tabindex="300" class='button' title="Search" />
-          &nbsp;<input type="radio" name="scope" value="fa" checked="checked"> Finding aids only &nbsp;&nbsp;<input type="radio" name="scope" value="site"> Entire site
+          &nbsp;<input type="radio" name="scope" value="fa" checked="checked"> Collections only &nbsp;&nbsp;<input type="radio" name="scope" value="site"> Entire site
           <?php
           if(defined('PACKAGE_COLLECTIONS') && CONFIG_COLLECTIONS_SEARCH_BOX_LISTS)
           {
