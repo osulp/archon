@@ -75,6 +75,7 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
       <script type="text/javascript" src="<?php echo($_ARCHON->PublicInterface->ThemeJavascriptPath); ?>/jquery.scrollTo-min.js"></script>
       <?php echo($_ARCHON->getJavascriptTags('jquery.jgrowl.min')); ?>
      <script type="text/javascript" src="<?php echo($_ARCHON->PublicInterface->ThemeJavascriptPath); ?>/bootstrap.js"></script>
+     <script type="text/javascript" src="<?php echo($_ARCHON->PublicInterface->ThemeJavascriptPath); ?>/search.js"></script>
       <?php echo($_ARCHON->getJavascriptTags('archon')); ?>
        <script type="text/javascript">
          /* <![CDATA[ */
@@ -190,6 +191,7 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
     <div id="header-nav">
       <ul id="nav">
         <li><a href="?p=collections/collections">Collections</a><ul>
+            <li><a href="?p=collections/collections">Collections by Title</a>
             <li><a href="?p=collections/classifications">Collections by Type</a></li>
             <li><a href="?p=subjects/subjects">People, Places, and Topics</a></li>
             <li><a href="?p=creators/creators">Creators</a></li>
@@ -227,21 +229,19 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
         <li><a href="http://scarc.library.oregonstate.edu/ask-an-archivist.html">Ask An Archivist</a></li>
       </ul>
       <div id="search">
-    <!--    <form name="gs" method="get" action="http://www.google.com/search"><input name="sitesearch" value="http://scarc.library.oregonstate.edu" type="hidden" /><input name="q" id="search-field" class="search-field" type="text" /><input class="button" value="Search" title="Search" type="submit" /></form>-->
-        <form action="index.php" accept-charset="UTF-8" method="get" onsubmit="if(!this.q.value) { alert('Please enter search terms.'); return false; } else { return true; }">
-          <div>
-            <input type="hidden" name="p" value="core/search" />
-            <input type="text" size="25" class="search-field" title="search" maxlength="150" name="q" id="qfa" value="<?php echo(encode($_ARCHON->QueryString, ENCODE_HTML)); ?>" tabindex="100" />
-            <input type="submit" value="Search" tabindex="300" class='button' title="Search" />
-            <?php
-            if(defined('PACKAGE_COLLECTIONS') && CONFIG_COLLECTIONS_SEARCH_BOX_LISTS)
-            {
-              ?>
-              <input type="hidden" name="content" value="1" />
-            <?php
-            }
+        <form action="index.php" accept-charset="UTF-8" method="get" onsubmit="return routeSearch(this)">
+          <input type="hidden" name="p" value="core/search" />
+          <input type="text" size="25" class="search-field" title="search" maxlength="150" name="q" id="qfa" value="<?php echo(encode($_ARCHON->QueryString, ENCODE_HTML)); ?>" tabindex="100" />
+          <input type="submit" value="Search" tabindex="300" class='button' title="Search" />
+          &nbsp;<input type="radio" name="scope" value="fa" checked="checked"> Finding aids only &nbsp;&nbsp;<input type="radio" name="scope" value="site"> Entire site
+          <?php
+          if(defined('PACKAGE_COLLECTIONS') && CONFIG_COLLECTIONS_SEARCH_BOX_LISTS)
+          {
             ?>
-          </div>
+            <input type="hidden" name="content" value="1" />
+          <?php
+          }
+          ?>
         </form>
       </div>
     </div>
