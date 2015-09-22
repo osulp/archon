@@ -40,7 +40,11 @@ if ($_REQUEST['f'] == 'import-' . $UtilityCode) {
     $allCollections = array();
     // get a list of the collections
     foreach ($_ARCHON->getAllCollections() as $id => $collect) {
-      $cid = $allClassifications[$collect->ClassificationID].str_replace(' ', '', $collect->CollectionIdentifier);
+      if (preg_match('/\d{1,4}/', $collect->CollectionIdentifier)) {
+        $cid = $allClassifications[$collect->ClassificationID].str_replace(' ', '', $collect->CollectionIdentifier);
+      } else {
+        $cid = str_replace(' ', '', $collect->CollectionIdentifier);
+      }
       $allCollections[strtolower($cid)] = $id;
     }
 
