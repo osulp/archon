@@ -158,7 +158,7 @@ function collections_search()
             ?>
 <div class="searchTitleAndResults searchlistitem">
    <span id='CollectionTitle'>
-      <a href="#" onclick="toggleDisplay('Collection'); return false;"><img id="CollectionImage" src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif" alt="expand/collapse" /><?php echo("  ".$strClassRecordsAndMans); ?></a>
+      <a href="#" onclick="toggleDisplay('Collection'); return false;"><span id="CollectionImage" class="glyphicon glyphicon-plus-sign"></span><?php echo("  ".$strClassRecordsAndMans); ?></a>
    </span> (<span id='CollectionCount'><?php echo($numCollectionResults); ?></span> <?php echo($strMatches); ?>)<br/>
    <dl id='CollectionResults' style='display: none;'>
                   <?php
@@ -213,7 +213,7 @@ function collections_search()
                                     echo("<dd><div class='InnerContentTitleAndResults'>\n");
                                     echo("<span class='InnerContentResultsToggle'>");
                                     echo("<a href='#' onclick='toggleDisplay(\"CollectionContent{$objCollection->ID}\"); return false;'>");
-                                    echo("<img id='CollectionContent{$objCollection->ID}Image' src='{$_ARCHON->PublicInterface->ImagePath}/plus.gif' alt='expand/collapse' />");
+                                    echo("<span id='CollectionContent{$objCollection->ID}Image' class='glyphicon glyphicon-plus-sign'></span>");
                                     echo(" $strInBoxList</a></span>\n");
                                     echo("<dl id='CollectionContent{$objCollection->ID}Results' class='InnerCollectionContentResults' style='display: none;'>");
                                     foreach($objCollection->Content as &$objContent)
@@ -266,7 +266,7 @@ function collections_search()
             ?>
 <div class="searchTitleAndResults searchlistitem">
    <span id='CollectionTitle'>
-      <a href="#" onclick="toggleDisplay('Collection'); return false;"><img id="CollectionImage" src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif" alt="expand/collapse" /><?php echo(" ". $strPlainRecordsAndMans); ?></a>
+      <a href="#" onclick="toggleDisplay('Collection'); return false;"><span id="CollectionImage" class="glyphicon glyphicon-plus-sign"></span><?php echo(" ". $strPlainRecordsAndMans); ?></a>
    </span> (<span id='CollectionCount'><?php echo(count($arrCollections)); ?></span> <?php echo($strMatches); ?>)<br/>
    <dl id='CollectionResults' style='display: none;'>
                   <?php
@@ -280,7 +280,7 @@ function collections_search()
                         echo("<dd><div class='InnerContentTitleAndResults'>\n");
                         echo("<span class='InnerContentResultsToggle'>");
                         echo("<a href='#' onclick='toggleDisplay(\"CollectionContent{$objCollection->ID}\"); return false;'>");
-                        echo("<img id='CollectionContent{$objCollection->ID}Image' src='{$_ARCHON->PublicInterface->ImagePath}/plus.gif' alt='expand/collapse' />");
+                        echo("<span id='CollectionContent{$objCollection->ID}Image' class='glyphicon glyphicon-plus-sign'></span>");
                         echo(" $strInBoxList</a></span>\n<dl id='CollectionContent{$objCollection->ID}Results' class='InnerCollectionContentResults' style='display: none;'>");
 
                         foreach($objCollection->Content as &$objContent)
@@ -363,7 +363,7 @@ function books_search()
          ?>
 <div class="searchTitleAndResults searchlistitem">
    <span id='BookTitle'>
-      <a href="#" onclick="toggleDisplay('Book'); return false;"><img id="BookImage" src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif" alt="expand/collapse" /><?php echo("  ".$strClassBook); ?></a>
+      <a href="#" onclick="toggleDisplay('Book'); return false;"><span id="BookImage" class="glyphicon glyphicon-plus-sign"></span><?php echo("  ".$strClassBook); ?></a>
    </span>(<span id='BookCount'><?php echo(count($arrBooks)); ?></span> <?php echo($strBookMatches); ?>) <br/>
    <dl id='BookResults' style='display: none;'>
                <?php
@@ -406,7 +406,7 @@ function containerlist_search() {
         ?>
         <div class="searchTitleAndResults searchlistitem">
    <span id='PdfCLTitle'>
-      <a href="#" onclick="toggleDisplay('PdfCL'); return false;"><img id="PdfCLImage" src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif" alt="expand/collapse" /><?php echo("  ".$strClassPdfCL); ?></a>
+      <a href="#" onclick="toggleDisplay('PdfCL'); return false;"><span id="PdfCLImage" class="glyphicon glyphicon-plus-sign"></span><?php echo("  ".$strClassPdfCL); ?></a>
    </span>(<span id='PdfCLCount'><?php echo(count($arrCollections)); ?></span> <?php echo($strPdfCLMatches); ?>) <br/>
           <dl id='PdfCLResults' style='display: none;'>
             <?php

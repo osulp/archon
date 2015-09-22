@@ -57,7 +57,7 @@ if($objAccession->PrimaryCreator->BiogHist)
 {
 ?>
 
-<div class='accessioncontent'><span class='accessionlabel'><a href='#' onclick="toggleDisplay('BiogHist'); return false;"><img id='BiogHistImage' src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif' alt='expand icon' />
+<div class='accessioncontent'><span class='accessionlabel'><a href='#' onclick="toggleDisplay('BiogHist'); return false;"><span id='BiogHistImage' class="glyphicon glyphicon-plus-sign"></span>
 
 
 <?php
@@ -144,7 +144,7 @@ if(!empty($objAccession->Subjects))
     if(!empty($arrSubjects))
     {
     ?>
-	<div class='accessioncontent'><span class='accessionlabel'><a href='#' onclick="toggleDisplay('subjects'); return false;"><img id='subjectsImage' src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif' alt='expand icon' /> Show Subjects</a> <span style='font-size:80%'>(links to similar collections)</span></span><br/>
+	<div class='accessioncontent'><span class='accessionlabel'><a href='#' onclick="toggleDisplay('subjects'); return false;"><span id='subjectsImage' class="glyphicon glyphicon-plus-sign"></span> Show Subjects</a> <span style='font-size:80%'>(links to similar collections)</span></span><br/>
 		<div class='accessionshowlist' style='display: none' id='subjectsResults'><?php echo($_ARCHON->createStringFromSubjectArray($arrSubjects, "<br/>\n", LINK_TOTAL)); ?></div>
 	</div>
 	<?php
@@ -152,7 +152,7 @@ if(!empty($objAccession->Subjects))
   if(!empty($arrGenres))
     {
     ?>
-	<div class='accessioncontent'><span class='accessionlabel'><a href='#' onclick="toggleDisplay('genres'); return false;"><img id='genresImage' src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif' alt='expand icon' /> Show Forms of Material</a> <span style='font-size:80%'>(links to similar genres)</span></span><br/>
+	<div class='accessioncontent'><span class='accessionlabel'><a href='#' onclick="toggleDisplay('genres'); return false;"><span id='genresImage' class="glyphicon glyphicon-plus-sign"></span> Show Forms of Material</a> <span style='font-size:80%'>(links to similar genres)</span></span><br/>
 		<div class='accessionshowlist' style='display: none' id='genresResults'><?php echo($_ARCHON->createStringFromSubjectArray($arrGenres, "<br/>\n", LINK_TOTAL)); ?></div>
 	</div>
 	<?php
@@ -166,7 +166,7 @@ if (!empty($objAccession->AccessionDate) || !empty($objAccession->ProcessingPrio
 {
  	?>
 
-	<div class='accessioncontent'><span class='accessionlabel'><a href='#' onclick="toggleDisplay('otherinformation'); return false;"><img id='otherinformationImage' src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif' alt='expand icon' /> Show Administrative Information</a></span><br/>
+	<div class='accessioncontent'><span class='accessionlabel'><a href='#' onclick="toggleDisplay('otherinformation'); return false;"><span id='otherinformationImage' class="glyphicon glyphicon-plus-sign"></span> Show Administrative Information</a></span><br/>
       <div class='accessionshowlist' style='display:none' id='otherinformationResults'>
 
     <?php
