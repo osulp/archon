@@ -401,7 +401,8 @@ function digitallibrary_ui_main()
 
    $fileSection = $_ARCHON->AdministrativeInterface->insertSection('files', 'multiple');
    $fileSection->setMultipleArguments('File', 'Files', 'dbLoadFiles', array('DigitalContentID' => $_ARCHON->AdministrativeInterface->Object->ID));
-   $fileSection->insertRow('files_title')->insertTextField('Title', 25, 100);
+   $fileSection->insertRow('files_title')->insertTextField('Title', 20, 1024);
+   $fileSection->insertRow('files_source')->insertTextField('Source', 20, 1024);
    $fileSection->insertRow('files_filecontents')->insertUploadField('FileContents');
    $fileSection->insertRow('files_mediatype')->insertInformation('FileType', NULL, false);
    $fileSection->insertRow('files_displayorder')->insertTextField('DisplayOrder', 3, 10);
