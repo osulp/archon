@@ -57,7 +57,7 @@ function accessions_search()
 ?>
 <div class='searchTitleAndResults searchlistitem'>
   <span id='AccessionTitle'>
-    <a href="#" onclick="toggleDisplay('Accession'); return false;"><img id="AccessionImage" src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif" alt="expand/collapse" /><?php echo(" ".$strUnprocessedMaterials); if ($_ARCHON->Security->verifyPermissions(MODULE_COLLECTIONS, READ)){echo (" and Processed Accessions");}?></a>
+    <a href="#" onclick="toggleDisplay('Accession'); return false;"><span id="AccessionImage"  class="glyphicon glyphicon-plus-sign"></span><?php echo(" ".$strUnprocessedMaterials); if ($_ARCHON->Security->verifyPermissions(MODULE_COLLECTIONS, READ)){echo (" and Processed Accessions");}?></a>
   </span> (<span id='AccessionCount'><?php echo(count($arrDisplayAccessions)); ?></span> <?php echo($strMatches); ?>)<br/>
   <dl id='AccessionResults' style='display: none;'>
 <?php

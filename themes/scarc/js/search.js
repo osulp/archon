@@ -12,7 +12,7 @@ function routeSearch(form) {
         return false;
     } else {
         var scope = form['scope'];
-        if (scope[0].checked) {
+        if ('fa' == scope.value) {
             // finding aids only, so process the Archon search
             return true;
         } else {

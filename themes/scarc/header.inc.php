@@ -229,11 +229,19 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
         <li><a href="http://scarc.library.oregonstate.edu/ask-an-archivist.html">Ask An Archivist</a></li>
       </ul>
       <div id="search">
-        <form action="index.php" accept-charset="UTF-8" method="get" onsubmit="return routeSearch(this)">
-          <input type="hidden" name="p" value="core/search" />
-          <input type="text" size="25" class="search-field" title="search" maxlength="150" name="q" id="qfa" value="<?php echo(encode($_ARCHON->QueryString, ENCODE_HTML)); ?>" tabindex="100" />
-          <input type="submit" value="Search" tabindex="300" class='button' title="Search" />
-          &nbsp;<input type="radio" name="scope" value="fa" checked="checked"> Collections only &nbsp;&nbsp;<input type="radio" name="scope" value="site"> Entire site
+        <form class="form-inline" action="index.php" accept-charset="UTF-8" method="get" onsubmit="return routeSearch(this)">
+          <div class="form-group-sm">
+            <input type="hidden" name="p" value="core/search" />
+            <label class="sr-only" for="qfa">Search Term</label>
+            <input type="text" size="25" class="form-control" title="search" maxlength="150" name="q" id="qfa"
+                 placeholder="Search"
+                 value="<?php echo(encode($_ARCHON->QueryString, ENCODE_HTML)); ?>" />
+            <label class="sr-only" for="scope">Search Scope</label>
+            <select class="form-control" id="scope">
+              <option value="fa" selected="selected">Collections Only</option>
+              <option value="site">Entire Site</option>
+            </select>
+            <button type="submit" value="Search" class="btn btn-primary btn-sm" title="Search">Search</button>
           <?php
           if(defined('PACKAGE_COLLECTIONS') && CONFIG_COLLECTIONS_SEARCH_BOX_LISTS)
           {
@@ -242,6 +250,7 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
           <?php
           }
           ?>
+          </div>
         </form>
       </div>
     </div>

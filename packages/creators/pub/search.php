@@ -66,7 +66,7 @@ function creators_search()
 
 <div class='searchTitleAndResults searchlistitem'>
   <span id='CreatorTitle'>
-    <a href="#" onclick="toggleDisplay('Creator'); return false;"><img id="CreatorImage" src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif" alt="expand/collapse" /><?php echo(" ".$strCreatorDescriptions); ?></a>
+    <a href="#" onclick="toggleDisplay('Creator'); return false;"><span id="CreatorImage" class="glyphicon glyphicon-plus-sign"></span><?php echo(" ".$strCreatorDescriptions); ?></a>
   </span> (<span id='CreatorCount'><?php echo(count($arrCreators)); ?></span> <?php echo($strMatches); ?>)<br/>
   <dl id='CreatorResults' style='display: none;'>
 <?php

@@ -79,7 +79,7 @@ function digitallibrary_search()
 ?>
          <div class='searchTitleAndResults searchlistitem'>
             <span id='DigitalContentTitle'>
-               <a href="#" onclick="toggleDisplay('DigitalContent'); return false;"><img id="DigitalContentImage" src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif" alt="expand/collapse" /><?php echo(" " . $strDigitalImages); ?></a>
+               <a href="#" onclick="toggleDisplay('DigitalContent'); return false;"><span id="DigitalContentImage" class="glyphicon glyphicon-plus-sign"></span><?php echo(" " . $strDigitalImages); ?></a>
             </span> (<span id='DigitalContentCount'><?php echo(count($arrDigitalContent)); ?></span> <?php echo($strMatches); ?>)<br/>
             <dl id='DigitalContentResults' style='display: none;'>
 <?php

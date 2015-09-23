@@ -50,7 +50,7 @@ function subjects_search()
 ?>
 <div class='searchTitleAndResults searchlistitem'>
   <span id='SubjectTitle'>
-    <a href="#" onclick="toggleDisplay('Subject'); return false;"><img id="SubjectImage" src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif" alt="expand/collapse" /><?php echo(" ".$strSubjectHeadings); ?></a>
+    <a href="#" onclick="toggleDisplay('Subject'); return false;"><span id='SubjectImage' class="glyphicon glyphicon-plus-sign"></span><?php echo(" ".$strSubjectHeadings); ?></a>
   </span> (<span id='SubjectCount'><?php echo(count($arrSubjects)); ?></span> <?php echo($strMatches); ?>)<br/>
 <dl id='SubjectResults' style='display: none;'>
 <?php

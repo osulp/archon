@@ -86,19 +86,12 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
   <div id="fa-left-column" class="col-md-3">
     <div id="ccardprintcontact" class="smround" data-spy="affix" data-offset-top="230">
       <p><a
-          href="?p=collections/findingaid&amp;id=<?php echo $objCollection->ID; ?>&amp;templateset=print&amp;disabletheme=1"><img
-            src="<?php echo $_ARCHON->PublicInterface->ImagePath; ?>/printer.png"
-            alt="<?php echo $printerFriendly; ?>"/></a> <a
-          href="?p=collections/findingaid&amp;id=<?php echo $objCollection->ID; ?>&amp;templateset=print&amp;disabletheme=1"><?php echo $printerFriendly; ?></a>
+          href="?p=collections/findingaid&amp;id=<?php echo $objCollection->ID; ?>&amp;templateset=print&amp;disabletheme=1"><span
+          class="glyphicon glyphicon-print"></span> <?php echo $printerFriendly; ?></a>
       </p>
-
       <p><a
-          href="?p=collections/research&amp;f=email&amp;repositoryid=$repositoryid&amp;referer="<?php echo urlencode($_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]); ?>
-        "><img
-          src="<?php echo $_ARCHON->PublicInterface->ImagePath; ?>/email.png"
-          alt="<?php echo $emailUs; ?>"/> </a><a
-          href="?p=collections/research&amp;f=email&amp;repositoryid=$repositoryid&amp;referer="<?php echo urlencode($_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]); ?>
-        "><?php echo $emailUs; ?></a></p>
+          href="?p=collections/research&amp;f=email&amp;repositoryid=$repositoryid&amp;referer="<?php echo urlencode($_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]); ?>"><span
+          class="glyphicon glyphicon-envelope"></span> <?php echo $emailUs; ?></a></p>
 
       <p><?php
         if (defined('PACKAGE_COLLECTIONS')) {
@@ -106,11 +99,29 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
           $EntryCount = $_ARCHON->Security->Session->ResearchCart->getCartCount();
           $class = $_ARCHON->Repository->ResearchFunctionality & RESEARCH_COLLECTIONS ? '' : 'hidewhenempty';
           $hidden = ($_ARCHON->Repository->ResearchFunctionality & RESEARCH_COLLECTIONS || $EntryCount) ? '' : "style='display:none'";
-          echo("<span id='viewcartlink' class='$class' $hidden><a href='?p=collections/research&amp;f=cart&amp;referer=" . urlencode($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) . "'>" . $_ARCHON->getPhrase('view_cart', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+          echo("<span id='viewcartlink' class='$class' $hidden><a href='?p=collections/research&amp;f=cart&amp;referer=" . urlencode($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) . "'><span class=\"glyphicon glyphicon-shopping-cart\"></span> " . $_ARCHON->getPhrase('view_cart', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
               ->getPhraseValue(ENCODE_HTML) . "</a></span>");
         } ?>
       </p>
+
+<?php
+      /**
+      * Other Finding Aid
+      */
+      if (!empty($objCollection->OtherURL)) {
+      $onclick = ($_ARCHON->config->GACode && $_ARCHON->config->GACollectionsURL) ? "onclick='javascript: pageTracker._trackPageview(\"{$_ARCHON->config->GACollectionsURL}\");'" : "";
+      ?>
+      <div class="ccardcontent" id="other_guides">
+        <span class="ccardlabel">
+          <a href="#" onclick="toggleDisplay('OtherGuides'); return false;"><span id="OtherGuidesImage" class="glyphicon glyphicon-plus-sign"></span> Other Reference Guides (PDF)</a>
+        </span>
+        <div class="ccardshowlist" style="display:none" id="OtherGuidesResults">
+          <?php echo($objCollection->getString('OtherURL')); ?>
+        </div>
+      </div>
       <?php
+      }
+
       if (!empty($objCollection->Content)) {
         render_container_list($_ARCHON, $objCollection);
       }
@@ -142,10 +153,9 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
   if (!empty($objCollection->Creators)) {
     ?>
     <div class='ccardcontent'><span class='ccardlabel'><a href='#'
-                                                          onclick="toggleDisplay('CollectionCreators'); return false;"><img
+                                                          onclick="toggleDisplay('CollectionCreators'); return false;"><span
             id='CollectionCreatorsImage'
-            src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif'
-            alt='expand icon'/>
+            class="glyphicon glyphicon-plus-sign"></span>
           <?php echo $_ARCHON->getPhrase('creators', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
             ->getPhraseValue(ENCODE_HTML); ?>
         </a></span>
@@ -196,10 +206,9 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
   if ($objCollection->AltExtentStatement) {
     ?>
     <div class='ccardcontent'><span class='ccardlabel'><a href='#'
-                                                          onclick="toggleDisplay('CollectionAltExtent'); return false;"><img
+                                                          onclick="toggleDisplay('CollectionAltExtent'); return false;"><span
             id='CollectionAltExtentImage'
-            src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif'
-            alt='expand icon'/>
+            class="glyphicon glyphicon-plus-sign"></span>
           <?php echo $_ARCHON->getPhrase('coll_alt_extents', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
             ->getPhraseValue(ENCODE_HTML); ?>
         </a></span>
@@ -218,10 +227,10 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
   if ($objCollection->Scope || !empty($objCollection->Content) || ($objCollection->DigitalContent || $containsImages) || !empty($objCollection->OtherURL)) {
     ?>
     <div class='ccardcontent'><span class='ccardlabel'><a href='#'
-                                                          onclick="toggleDisplay('scopeAndContents'); return false;"><img
+                                                          onclick="toggleDisplay('scopeAndContents'); return false;"><span
             id='scopeAndContentsImage'
-            src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif'
-            alt='expand icon'/> <?php echo $_ARCHON->getPhrase('scope_and_contents', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+            class="glyphicon glyphicon-plus-sign"></span>
+          <?php echo $_ARCHON->getPhrase('scope_and_contents', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
             ->getPhraseValue(ENCODE_HTML); ?></a></span><br/>
 
       <div class='ccardshowlist' style='display: none'
@@ -245,10 +254,9 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
   if ($objCollection->BiogHist) {
     ?>
     <div class='ccardcontent'><span class='ccardlabel'><a href='#'
-                                                          onclick="toggleDisplay('CollectionBiogHist'); return false;"><img
+                                                          onclick="toggleDisplay('CollectionBiogHist'); return false;"><span
             id='CollectionBiogHistImage'
-            src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif'
-            alt='expand icon'/>
+            class="glyphicon glyphicon-plus-sign"></span>
           <?php echo $_ARCHON->getPhrase('bio_historical_notes', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
             ->getPhraseValue(ENCODE_HTML); ?>
         </a></span>
@@ -262,20 +270,6 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
         }
         ?>
       </div>
-    </div>
-  <?php
-  }
-
-  /**
-   * Other Finding Aid
-   */
-  if (!empty($objCollection->OtherURL)) {
-    $onclick = ($_ARCHON->config->GACode && $_ARCHON->config->GACollectionsURL) ? "onclick='javascript: pageTracker._trackPageview(\"{$_ARCHON->config->GACollectionsURL}\");'" : "";
-    ?>
-    <div class='ccardcontent'><span
-        class='ccardlabel'><?php echo $_ARCHON->getPhrase('other_find_aid', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
-          ->getPhraseValue(ENCODE_HTML); ?></span> <a
-        href='<?php echo($objCollection->getString('OtherURL')); ?>' <?php echo($onclick); ?>><?php echo($objCollection->getString('OtherURL')); ?></a>
     </div>
   <?php
   }
@@ -298,10 +292,9 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
   if ($objCollection->Arrangement) {
     ?>
     <div class='ccardcontent'><span class='ccardlabel'><a href='#'
-                                                          onclick="toggleDisplay('CollectionArrangement'); return false;"><img
+                                                          onclick="toggleDisplay('CollectionArrangement'); return false;"><span
             id='CollectionArrangementImage'
-            src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif'
-            alt='expand icon'/>
+            class="glyphicon glyphicon-plus-sign"></span>
           <?php echo $_ARCHON->getPhrase('arrangement', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
             ->getPhraseValue(ENCODE_HTML); ?>
         </a></span>
@@ -396,10 +389,10 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
     || !empty($objCollection->DigitalContent) || !empty($objCollection->MaterialType) || !empty($objCollection->Books)) {
     ?>
     <div class='ccardcontent'><span class='ccardlabel'><a href='#'
-                                                          onclick="toggleDisplay('otherinformation'); return false;"><img
+                                                          onclick="toggleDisplay('otherinformation'); return false;"><span
             id='otherinformationImage'
-            src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif'
-            alt='expand icon'/> <?php echo $_ARCHON->getPhrase('other_information', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+            class="glyphicon glyphicon-plus-sign"></span>
+          <?php echo $_ARCHON->getPhrase('other_information', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
             ->getPhraseValue(ENCODE_HTML); ?></a></span><br/>
 
       <div class='ccardshowlist' style='display:none'
@@ -510,10 +503,10 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
         if ($objCollection->Books) {
           ?>
           <div class='ccardcontent'><span class='bold'><a href='#'
-                                                          onclick="toggleDisplay('LinkedBooks'); return false;"><img
+                                                          onclick="toggleDisplay('LinkedBooks'); return false;"><span
                   id='LinkedBooksImage'
-                  src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif'
-                  alt='expand icon'/> <?php echo $_ARCHON->getPhrase('books', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+                  class="glyphicon glyphicon-plus-sign"></span>
+                <?php echo $_ARCHON->getPhrase('books', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
                   ->getPhraseValue(ENCODE_HTML); ?> </a></span><br/>
 
             <div class='ccardshowlist' style='display: none'
@@ -526,10 +519,10 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
         if (!empty($arrDisplayAccessions)) {
           ?>
           <div class='ccardcontent'><span class='ccardlabel'><a href='#'
-                                                                onclick="toggleDisplay('accessions'); return false;"><img
+                                                                onclick="toggleDisplay('accessions'); return false;"><span
                   id='accessionsImage'
-                  src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif'
-                  alt='expand icon'/> <?php echo $_ARCHON->getPhrase('unprocessed_materials', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+                  class="glyphicon glyphicon-plus-sign"></span>
+                 <?php echo $_ARCHON->getPhrase('unprocessed_materials', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
                   ->getPhraseValue(ENCODE_HTML); ?><?php
                 if ($_ARCHON->Security->verifyPermissions(MODULE_COLLECTIONS, READ)) {
                   echo $_ARCHON->getPhrase('processed_accessions', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
@@ -658,10 +651,10 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
       if (!empty($arrSubjects)) {
         ?>
         <div class='ccardcontent'><span class='ccardlabel'><a href='#'
-                                                              onclick="toggleDisplay('subjects'); return false;"><img
+                                                              onclick="toggleDisplay('subjects'); return false;"><span
                 id='subjectsImage'
-                src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif'
-                alt='expand icon'/> <?php echo $_ARCHON->getPhrase('subjects', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+                class="glyphicon glyphicon-plus-sign"></span>
+              <?php echo $_ARCHON->getPhrase('subjects', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
                 ->getPhraseValue(ENCODE_HTML); ?></a></span><br/>
 
           <div class='ccardshowlist' style='display: none'
@@ -672,10 +665,10 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
       if (!empty($arrGenres)) {
         ?>
         <div class='ccardcontent'><span class='ccardlabel'><a href='#'
-                                                              onclick="toggleDisplay('genres'); return false;"><img
+                                                              onclick="toggleDisplay('genres'); return false;"><span
                 id='genresImage'
-                src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif'
-                alt='expand icon'/> <?php echo $_ARCHON->getPhrase('forms_of_material', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+                class="glyphicon glyphicon-plus-sign"></span>
+              <?php echo $_ARCHON->getPhrase('forms_of_material', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
                 ->getPhraseValue(ENCODE_HTML); ?></a></span><br/>
 
           <div class='ccardshowlist' style='display: none'
@@ -688,10 +681,10 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
     if ($objCollection->RelatedMaterials || $objCollection->RelatedMaterialsURL) {
       ?>
       <div class='ccardcontent'><span class='ccardlabel'><a href='#'
-                                                            onclick="toggleDisplay('relatedMats'); return false;"><img
+                                                            onclick="toggleDisplay('relatedMats'); return false;"><span
               id='relatedMatsImage'
-              src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif'
-              alt='expand icon'/> <?php echo $_ARCHON->getPhrase('related_materials', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+              class="glyphicon glyphicon-plus-sign"></span>
+            <?php echo $_ARCHON->getPhrase('related_materials', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
               ->getPhraseValue(ENCODE_HTML); ?></a></span><br/>
 
         <div class='ccardshowlist' style='display: none' id='relatedMatsResults'>

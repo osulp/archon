@@ -18,7 +18,7 @@ function incrementCount(id)
    if(obj.innerHTML == '0')
    {
       var objTitle = document.getElementById(id + 'Title');
-      objTitle.innerHTML = "<a href='#' onclick=\"toggleDisplay('" + id + "'); return false;\"><img id='" + id + "Image' src='" + imagePath + "/plus.gif' alt='expand/collapse' /> " + objTitle.innerHTML + "</a>";
+      objTitle.innerHTML = "<a href='#' onclick=\"toggleDisplay('" + id + "'); return false;\"><span id='" + id + "Image' class='glyphicon glyphicon-plus-sign'></span> " + objTitle.innerHTML + "</a>";
    }
 
    obj.innerHTML = parseInt(obj.innerHTML) + 1;
@@ -43,7 +43,7 @@ function toggleDisplay(id)
    {
       if(objImg)
       {
-         objImg.src = $(objResults).is(':visible') ? imagePath + '/plus.gif' : imagePath + '/minus.gif';
+         objImg.className = $(objResults).is(':visible') ? 'glyphicon glyphicon-plus-sign' : 'glyphicon glyphicon-minus-sign';
       }
 
       $(objResults).slideToggle('fast');
@@ -54,7 +54,7 @@ function toggleDisplay(id)
 
       if(objImg)
       {
-         objImg.src = (objResults.style.display == '') ? imagePath + '/minus.gif' : imagePath + '/plus.gif';
+         objImg.className = (objResults.style.display == '') ? 'glyphicon glyphicon-minus-sign' : 'glyphicon glyphicon-plus-sign';
       }
    }
 

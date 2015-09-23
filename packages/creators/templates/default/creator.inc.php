@@ -38,7 +38,7 @@ if ($objCreator->NameFullerForm)
 if(!empty($objCreator->CreatorRelationships))
 {
    ?>
-<div class='CreatorEntry'><span class='bold'><a href='#' onclick="toggleDisplay('relatedcreators'); return false;"><img id='relatedcreatorsImage' src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif' alt='expand icon' /> Show Related Creators</a> <!--<span style='font-size:80%'>(links to similar collections)</span> --></span><br />
+<div class='CreatorEntry'><span class='bold'><a href='#' onclick="toggleDisplay('relatedcreators'); return false;"><span id='relatedcreatorsImage' class="glyphicon glyphicon-plus-sign"></span> Show Related Creators</a> <!--<span style='font-size:80%'>(links to similar collections)</span> --></span><br />
    <div class='ccardshowlist' style='display: none' id='relatedcreatorsResults'><?php echo($_ARCHON->createStringFromCreatorArray($objCreator->CreatorRelationships, "<br/>\n", LINK_TOTAL)); ?></div>
 </div>
    <?php
@@ -86,7 +86,7 @@ if ($objCreator->Collections || $objCreator->Books || $objCreator->DigitalConten
 if ($objCreator->Collections)
 {
    ?>
-<div class='CreatorEntry'><span class='bold'><a href='#' onclick="toggleDisplay('LinkedCollections'); return false;"><img id='LinkedCollectionsImage' src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif' alt='expand icon' /> Records or Manuscript Collections Created by <?php echo($objCreator->Name)?></a></span><br/>
+<div class='CreatorEntry'><span class='bold'><a href='#' onclick="toggleDisplay('LinkedCollections'); return false;"><span id='LinkedCollectionsImage' class="glyphicon glyphicon-plus-sign"></span> Records or Manuscript Collections Created by <?php echo($objCreator->Name)?></a></span><br/>
    <div class='CreatorEntryShowList' style='display:none' id='LinkedCollectionsResults'><br/>
          <?php
          foreach ($objCreator->Collections as $objCollection)
@@ -101,7 +101,7 @@ if ($objCreator->Collections)
 if ($objCreator->Accessions)
 {
    ?>
-<div class='CreatorEntry'><span class='bold'><a href='#' onclick="toggleDisplay('LinkedAccessions'); return false;"><img id='LinkedAccessionsImage' src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif' alt='expand icon' /> Unprocessed Holdings Created by <?php echo($objCreator->Name)?></a></span><br/>
+<div class='CreatorEntry'><span class='bold'><a href='#' onclick="toggleDisplay('LinkedAccessions'); return false;"><span id='LinkedAccessionsImage'  class="glyphicon glyphicon-plus-sign"></span> Unprocessed Holdings Created by <?php echo($objCreator->Name)?></a></span><br/>
    <div class='CreatorEntryShowList' style='display:none' id='LinkedAccessionsResults'><br/>
          <?php
          foreach ($objCreator->Accessions as $objAccession)
@@ -119,7 +119,7 @@ if ($objCreator->Accessions)
 if ($objCreator->Books)
 {
    ?>
-<div class='CreatorEntry'><span class='bold'><a href='#' onclick="toggleDisplay('LinkedBooks'); return false;"><img id='LinkedBooksImage' src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif' alt='expand icon' /> Books Authored by <?php echo($objCreator->Name)?></a></span><br/>
+<div class='CreatorEntry'><span class='bold'><a href='#' onclick="toggleDisplay('LinkedBooks'); return false;"><span id='LinkedBooksImage'  class="glyphicon glyphicon-plus-sign"></span> Books Authored by <?php echo($objCreator->Name)?></a></span><br/>
    <div class='CreatorEntryShowList' style='display:none' id='LinkedBooksResults'><br/>
          <?php
          foreach ($objCreator->Books as $objBook)
@@ -135,7 +135,7 @@ if ($objCreator->Books)
 if ($objCreator->DigitalContent)
 {
    ?>
-<div class='CreatorEntry'><span class='bold'><a href='#' onclick="toggleDisplay('LinkedDigitalContent'); return false;"><img id='LinkedDigitalContentImage' src='<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/plus.gif' alt='expand icon' /> Digital Content Created by <?php echo($objCreator->Name)?></a></span><br/>
+<div class='CreatorEntry'><span class='bold'><a href='#' onclick="toggleDisplay('LinkedDigitalContent'); return false;"><span id='LinkedDigitalContentImage' class="glyphicon glyphicon-plus-sign"></span> Digital Content Created by <?php echo($objCreator->Name)?></a></span><br/>
    <div class='CreatorEntryShowList' style='display:none' id='LinkedDigitalContentResults'><br/>
          <?php
          if($containsImages)

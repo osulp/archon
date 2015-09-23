@@ -519,15 +519,9 @@ img#osu-tag {
 
 #header-nav {
 	width: 90%;
-	height: 55px;
+	height: 45px;
 	margin: -1px auto 5px auto;
-	padding-top: 8px;
-	/*background-image: url('images/scarc-header-navigation.jpg');*/
-	/*background-repeat: no-repeat;*/
-	background-position: top left;
-	/*background-color: #385E86;*/
     background-color: #E8E9EB;
-
 }
 
 img#scarc-title {
@@ -677,40 +671,11 @@ img#scarc-title {
 	overflow: hidden;
 }
 
-
-
 #search {
-    width: 265px;
-	padding: 0;
-	padding-right: .5em;
-	margin-top: 0px;
+	margin: 8px 5px 0 0;
 	text-align: left;
 	float: right;
 }
-	
-	
-#search input.search-field {
-	background: #FFFFFF /* url(images/searchicon.png) no-repeat scroll 2px 3px */;
-	font-size: 0.9em;
-	color: #038;
-	font-family: Arial, Helvetica, sans-serif;
-	font-weight: bold;
-	margin: 0;
-	padding: 0 0 0 3px;
-	width: 15em;
-}
-
-#search input.button {
-    border: none;
-	background-color: #385E86;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 1em;
-	color: #FFFFFF;
-	margin: 0;
-	padding: 1px 5px;
-}
-
-
 
 #scarc_image {
 	width: 90%;
@@ -719,11 +684,6 @@ img#scarc-title {
 	margin: 0 auto;
 	padding: 0 auto;
 }
-
-
-
-
-
 
 
 /** VERTICAL MENU CSS **/
@@ -1890,10 +1850,12 @@ div.ccardserieslist {
 
 .ccardlabel a:link, .ccardlabel a:visited {
     color: #000000;
+    text-decoration: none;
 }
 
 .ccardlabel a:hover {
     color: #c34500;
+    text-decoration: underline;
 }
 
 ul.containers li.active a, ul.containers li.active a:hover {
@@ -1916,7 +1878,7 @@ ul.containers li.active a, ul.containers li.active a:hover {
     }
 }
 
-@media (max-width: 1015px) {
+@media (max-width: 1145px) {
     div#search {
         float: left;
         width: 100%;
@@ -1968,4 +1930,31 @@ div#coll-container-list>dl>dd>dl.faitem>dt {
 /* Allows the list of letters to adjust with screen size and break appropriately */
 div.center {
     word-wrap: break-word;
+}
+
+div#fa-left-column {
+    font-size: 1.2em;
+}
+
+div#nav-container-list {
+    font-size: 0.9em;
+}
+
+div.searchTitleAndResults a, div.searchTitleAndResults a:link, div.searchTitleAndResults a:visited  {
+    color: #000000;
+    text-decoration: none;
+}
+
+div.searchTitleAndResults a:hover {
+    color: #c34500;
+    text-decoration: underline;
+}
+
+input#qfa {
+    margin-right: -10px;
+    padding-right: 10px;
+}
+
+#other_guides {
+    font-size: 0.8em;
 }
