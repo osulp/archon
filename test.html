@@ -1,0 +1,137 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    <link rel="stylesheet"  href="themes/scarc/css/bootstrap.min.css" >
+    <link rel="stylesheet" type="text/css" href="themes/scarc/style-scarc.css" />
+    <link rel="stylesheet" type="text/css" href="themes/scarc/js/cluetip/jquery.cluetip.css" />
+    <link rel="stylesheet" type="text/css" href="themes/scarc/js/jgrowl/jquery.jgrowl.css" />
+    <link rel="icon" type="image/ico" href="themes/scarc/images/archon.ico"/>
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="themes/scarc/ie.css" />
+    <link rel="stylesheet" type="text/css" href="themes/themes/scarc/js/cluetip/jquery.cluetip.ie.css" />
+    <![endif]-->
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script type='text/javascript' src='packages/core/js/jquery-expander.js'></script>      <script type="text/javascript" src="themes/scarc/js/jquery.hoverIntent.js"></script>
+    <script type="text/javascript" src="themes/scarc/js/cluetip/jquery.cluetip.js"></script>
+    <script type="text/javascript" src="themes/scarc/js/jquery.scrollTo-min.js"></script>
+    <script type='text/javascript' src='packages/core/js/jquery.jgrowl.min.js'></script>     <script type="text/javascript" src="themes/scarc/js/bootstrap.js"></script>
+    <script type="text/javascript" src="themes/scarc/js/search.js"></script>
+    <script type='text/javascript' src='packages/core/js/archon.js'></script><script type='text/javascript' src='packages/digitallibrary/js/archon.js'></script>       <script type="text/javascript">
+    /* <![CDATA[ */
+    imagePath = 'themes/scarc/images';
+    $(document).ready(function() {
+        $('div.listitem:nth-child(even)').addClass('evenlistitem');
+        $('div.listitem:last-child').addClass('lastlistitem');
+        $('#locationtable tr:nth-child(odd)').addClass('oddtablerow');
+        $('.expandable').expander({
+            slicePoint:       600,              // make expandable if over this x chars
+            widow:            100,              // do not make expandable unless total length > slicePoint + widow
+            expandText:         '[read more]',  //text to use for expand link
+            expandEffect:     'fadeIn',         // or slideDown
+            expandSpeed:      700,              // in milliseconds
+            collapseTimer:    0,                // milliseconds before auto collapse; default is 0 (don't re-collape)
+            userCollapseText: '[collapse]'      // text for collaspe link
+        });
+        resize_left_column();
+        $(window).resize(function () {
+            resize_left_column();
+        });
+    });
+
+    function resize_left_column() {
+        $('#ccardprintcontact').width($('#fa-left-column').width());
+    }
+
+    function js_highlighttoplink(selectedSpan)
+    {
+        $('.currentBrowseLink').toggleClass('browseLink').toggleClass('currentBrowseLink');
+        $(selectedSpan).toggleClass('currentBrowseLink');
+        $(selectedSpan).effect('highlight', {}, 300);
+    }
+
+    $(document).ready(function() {externalLinks();});
+    $(window).unload(function() {});
+    /* ]]> */
+</script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body data-spy="scroll" data-target="#nav-container-list">
+<div class="container-fluid">
+    <div id="header-blacktop" class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-6" id="header-blacktop-text">
+            <a href="http://library.oregonstate.edu" class="header-blacktop">OSU Libraries</a>
+        </div>
+        <div class="col-md-4" id="researchblock">
+            <a href='?p=core/login'>Log In</a> | <a href='?p=collections/research&amp;f=email&amp;referer=archon.local%2F'>Contact Us</a> <span id='viewcartlink' class='' >| <a href='?p=collections/research&amp;f=cart&amp;referer=archon.local%2F'>View Cart (<span id='cartcount'>0</span>)</a></span>        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+
+
+
+
+    <div class="row" id="header-title"><a href="http://oregonstate.edu" class="nostyle"><img id="osu-tag"
+                                                                                             src="themes/scarc/images/osu-tag.gif" width="101" height="119" alt="Oregon State University"
+                                                                                             title="Oregon State University" /></a><h1 class="scarctitle"><a href="http://scarc.library.oregonstate.edu">Special Collections & Archives<br />Research Center</a></h1></div>
+
+
+
+
+    <div id="main" class="row">
+        <h1 id='titleheader'></h1>
+
+        <div id='themeindex' class='bground'>
+            <dl>
+                <dt class='index'>Default Behaviors</dt>
+                <dd class='index'>
+                    <ul>
+                        <li>The search engine looks for records containing every term you submit.</li>
+                    </ul>
+                </dd>
+                <dt class='index'>Search By Phrase</dt>
+                <dd class='index'>
+                    <ul>
+                        <li>Use double quotes around your search query.  (e.g "Festival of Contemporary Arts")</li>
+                    </ul>
+                </dd>
+                <dt class='index'>Narrow Your Search Results</dt>
+                <dd class='index'>
+                    <ul>
+                        <li>Use a minus sign before a term you want to omit from your results.  (e.g. 'bass -fish' finds bass guitars but not bass fishing.)</li>
+                        <li>Browse by collection title, subject, name, or classification.</li>
+                    </ul>
+                </dd>
+            </dl>
+        </div></div>
+    <div id="footer" class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
+            <p class="footer">
+                &copy; 2015, <a class="footer" href="http://scarc.library.oregonstate.edu">Special Collections &amp; Archives Research Center</a><br /><a class="footer" href="http://library.oregonstate.edu">Oregon State University Libraries</a><br /><a class="footer" href="mailto:scarc@oregonstate.edu">scarc@oregonstate.edu</a>    (541) 737-2075 <br />
+                Normal Operating Hours: 10:00-6:00, Mon, Wed-Fri; 10:00-8:00 Tues <br />
+                <br />
+                121 The Valley Library<br />
+                Oregon State University<br />
+                Corvallis, OR 97331-3411 <br /></p>
+        </div>
+        <div class="col-md-2">
+            <p class="footer"><a class="footer" href="http://scarc.library.oregonstate.edu/accolades.html">Accolades</a><br /><a class="footer" href="http://scarc.library.oregonstate.edu/copyright.html">Copyright</a><br /><a class="footer" href="http://scarc.library.oregonstate.edu/facilities.html">Facilities</a><br /><a class="footer" href="http://scarc.library.oregonstate.edu/faq.html">FAQ</a><br /><a class="footer" href="http://scarc.library.oregonstate.edu/legacy-award.html">Pauling Legacy Award</a><br /><a class="footer" href="http://scarc.library.oregonstate.edu/residentscholar.html">Resident Scholar Program</a><br /><a class="footer" href="http://scarc.library.oregonstate.edu/internship.html">Student Internship Program</a><br /><a class="footer" href="http://scarc.library.oregonstate.edu/using-our-collections.html">Using Our Collections</a><br /><a class="footer" href="http://scarc.library.oregonstate.edu/visiting-guide.html">Visiting Guide</a><br /></p>
+        </div>
+        <div class="col-md-2">
+            <p class="footer"><a class="footer" href="http://www.facebook.com/OSU.SpecColl.Arch">Facebook</a><br /><a class="footer" href="http://www.flickr.com/photos/osuarchives">Flickr</a><br /><a class="footer" href="http://www.flickr.com/photos/osucommons/">Flickr Commons</a> (<a class="footer" href="flickrcommons.html">About</a>)<br /><a class="footer" href="https://pinterest.com/SCARCpinned/">Pinterest</a><br /><a class="footer" href="https://twitter.com/OSU_scarc">Twitter</a><br /></p>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</body>
+</html>

@@ -104,6 +104,24 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
         } ?>
       </p>
       <?php
+      $objCollection->dbLoadContainerLists(true);
+      if (!empty($objCollection->ContainerLists)) {
+        ?>
+        <div class="ccardcontent" id="other_guides">
+          <span class="ccardlabel">
+            <a href="#" onclick="toggleDisplay('OtherGuides'); return false;"><span id="OtherGuidesImage" class="glyphicon glyphicon-plus-sign"></span> Other Reference Guides (PDF)</a>
+          </span>
+          <div class="ccardshowlist" style="display:none" id="OtherGuidesResults">
+            <?php
+            foreach ($objCollection->ContainerLists as $cl) {
+              echo '<a href="' . $cl->URL . '" target="_blank">' . $cl->LinkLabel . '</a><br>';
+            }
+            ?>
+          </div>
+        </div>
+      <?php
+      }
+
       if (!empty($objCollection->Content)) {
         render_container_list($_ARCHON, $objCollection);
       }

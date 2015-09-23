@@ -1758,11 +1758,12 @@ abstract class Collections_Collection
   }
 
   /**
-   * Loads all of the container lists for this collection.
+   * Loads the container lists for this collection.
    *
-   * @return boolean
+   * @param bool $linksOnly returns only the URL and link text if true
+   * @return bool
    */
-  public function dbLoadContainerLists() {
+  public function dbLoadContainerLists($linksOnly = false) {
 
     global $_ARCHON;
 
@@ -1780,7 +1781,9 @@ abstract class Collections_Collection
 
     $this->ContainerLists = array();
 
-    $query = "SELECT * FROM tblCollections_ContainerLists WHERE CollectionID = ?";
+    $query = ($linksOnly)
+      ? "SELECT ID,URL,LinkLabel FROM tblCollections_ContainerLists WHERE CollectionID = ?"
+      : "SELECT * FROM tblCollections_ContainerLists WHERE CollectionID = ?";
     $prep = $_ARCHON->mdb2->prepare($query, 'integer', MDB2_PREPARE_RESULT);
     $result = $prep->execute($this->ID);
     if(PEAR::isError($result))
