@@ -103,22 +103,22 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
               ->getPhraseValue(ENCODE_HTML) . "</a></span>");
         } ?>
       </p>
-      <?php
-      $objCollection->dbLoadContainerLists(true);
-      if (!empty($objCollection->ContainerLists)) {
-        ?>
-        <div class="ccardcontent" id="other_guides">
-          <span class="ccardlabel">
-            <a href="#" onclick="toggleDisplay('OtherGuides'); return false;"><span id="OtherGuidesImage" class="glyphicon glyphicon-plus-sign"></span> Other Reference Guides (PDF)</a>
-          </span>
-          <div class="ccardshowlist" style="display:none" id="OtherGuidesResults">
-            <?php
-            foreach ($objCollection->ContainerLists as $cl) {
-              echo '<a href="' . $cl->URL . '" target="_blank">' . $cl->LinkLabel . '</a><br>';
-            }
-            ?>
-          </div>
+
+<?php
+      /**
+      * Other Finding Aid
+      */
+      if (!empty($objCollection->OtherURL)) {
+      $onclick = ($_ARCHON->config->GACode && $_ARCHON->config->GACollectionsURL) ? "onclick='javascript: pageTracker._trackPageview(\"{$_ARCHON->config->GACollectionsURL}\");'" : "";
+      ?>
+      <div class="ccardcontent" id="other_guides">
+        <span class="ccardlabel">
+          <a href="#" onclick="toggleDisplay('OtherGuides'); return false;"><span id="OtherGuidesImage" class="glyphicon glyphicon-plus-sign"></span> Other Reference Guides (PDF)</a>
+        </span>
+        <div class="ccardshowlist" style="display:none" id="OtherGuidesResults">
+          <?php echo($objCollection->getString('OtherURL')); ?>
         </div>
+      </div>
       <?php
       }
 
@@ -270,20 +270,6 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
         }
         ?>
       </div>
-    </div>
-  <?php
-  }
-
-  /**
-   * Other Finding Aid
-   */
-  if (!empty($objCollection->OtherURL)) {
-    $onclick = ($_ARCHON->config->GACode && $_ARCHON->config->GACollectionsURL) ? "onclick='javascript: pageTracker._trackPageview(\"{$_ARCHON->config->GACollectionsURL}\");'" : "";
-    ?>
-    <div class='ccardcontent'><span
-        class='ccardlabel'><?php echo $_ARCHON->getPhrase('other_find_aid', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
-          ->getPhraseValue(ENCODE_HTML); ?></span> <a
-        href='<?php echo($objCollection->getString('OtherURL')); ?>' <?php echo($onclick); ?>><?php echo($objCollection->getString('OtherURL')); ?></a>
     </div>
   <?php
   }
