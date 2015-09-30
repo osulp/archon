@@ -33,9 +33,9 @@ if (isset($_REQUEST['f']) && in_array($_REQUEST['f'], $pages)) {
       which include manuscripts, photographs, record groups, moving images, oral
       histories and more. For more information about any
       of our collections, please <a
-        href="http://scarc.library.oregonstate.edu/faq.html">contact us</a>.
+        href="http://scarc.library.oregonstate.edu/ask-an-archivist.html">contact us</a>.
       If you are new to archival research, please <a
-        href="http://scarc.library.oregonstate.edu/ask-an-archivist.html">review
+        href="http://scarc.library.oregonstate.edu/faq.html">review
         our FAQ.</a></p>
     <br>
     <h2>Search Tips</h2>
