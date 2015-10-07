@@ -88,8 +88,8 @@ if($_ARCHON->db->ServerType == 'MySQL' || $_ARCHON->db->ServerType == 'MySQLi')
    }
 
    // This might fail.
-   $query = "SET max_allowed_packet=1073741824";
-   $affected = $_ARCHON->mdb2->exec($query);
+//   $query = "SET max_allowed_packet=1073741824";
+//   $affected = $_ARCHON->mdb2->exec($query);
 }
 
 if($_ARCHON->mdb2)
