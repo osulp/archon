@@ -1958,3 +1958,12 @@ input#qfa {
 #other_guides {
     font-size: 0.8em;
 }
+
+img.home-image {
+    width: 100%;
+}
+
+figcaption {
+    margin-top: 5px;
+    font-size: 0.95em;
+}

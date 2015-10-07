@@ -262,4 +262,4 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
   $CreatorsClass = $arrP[0] == 'creators' ? 'currentBrowseLink' : 'browseLink';
   $DigitalLibraryClass = $arrP[0] == 'digitallibrary' ? 'currentBrowseLink' : 'browseLink';
   ?>
-<div id="main">
+<div id="main" class="container">

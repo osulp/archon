@@ -82,7 +82,7 @@ function creators_main()
 
 		if(!empty($arrCreatorCount[encoding_strtolower($char)]))
 		{
-		   $content .= '<a class="browse-letter" href="?p='. $_REQUEST['p'] .'&amp;char=$char"'. $char .'">'. $char .'</a>';
+		   $content .= '<a class="browse-letter" href="?p='. $_REQUEST['p'] .'&amp;char='. $char .'">'. $char .'</a>';
 		}
 		else
 		{

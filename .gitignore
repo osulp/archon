@@ -1,5 +1,5 @@
 .idea
-.DS_Store
 .htaccess
 incoming/
 config.inc.php
+robots.txt
