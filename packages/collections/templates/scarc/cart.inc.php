@@ -42,8 +42,8 @@ if(!$_ARCHON->Security->isAuthenticated())
 ?>
    <span class='bold'><a href="?p=core/register">Register an account to set up a research appointment</a></span>
    <br/><br/>
-   <span style="font-size:90%;">Registering an account and submitting research requests through this system helps us to have your materials ready for you before you arrive for your appointment.</span><br/><br/>
-   <span style="font-size:80%;">(If you already have an account, please <a href="/?p=core/login">login</a>.)</span>
+   <p>Registering an account and submitting research requests through this system helps us to have your materials ready for you before you arrive for your appointment.</p>
+   <p>(If you already have an account, please <a href="?p=core/login">login</a>.)</p>
 
 <?php
 }
