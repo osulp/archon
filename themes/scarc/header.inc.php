@@ -142,10 +142,7 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
             {
               echo(" | <a href='?p=admin' rel='external'>Admin</a>&nbsp;");
             }
-            else
-            {
-              echo (" | <a href='?p=core/account'>My Account</a>");
-            }
+
 
             $logoutURI = preg_replace('/(&|\\?)f=([\\w])*/', '', $_SERVER['REQUEST_URI']);
             $Logout = (encoding_strpos($logoutURI, '?') !== false) ? '&amp;f=logout' : '?f=logout';
@@ -169,7 +166,7 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
             echo(" | <a href='?p={$emailpage}&amp;f=email&amp;referer=" . urlencode($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) . "'>Contact Us</a> ");
             if($_ARCHON->Security->isAuthenticated())
             {
-              echo(" | <a href='?p=core/account&amp;f=account'>My Account</a>");
+              echo(" | <a href='?p=core/account&amp;f=account'>My Account</a> ");
             }
             if(defined('PACKAGE_COLLECTIONS'))
             {
