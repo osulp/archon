@@ -328,7 +328,10 @@
 				<phrase name='import_collection_csv' regularexpression=''>
 					The Collection CSV import script takes collection information from a csv (comma-separated values) file and imports it into Archon. Please see the Archon documentation for details.
 				</phrase>
-				<phrase name='import_collectioncontent_csv' regularexpression=''>
+                <phrase name='import_collectionlocations_csv' regularexpression=''>
+                    The Collection Location CSV import script takes collection location data from a csv (comma-separated values) file and imports it into Archon.
+                </phrase>
+                <phrase name='import_collectioncontent_csv' regularexpression=''>
 					The Collection Content CSV import script takes content information from a csv (comma-separated values) file and imports it into Archon. Please see the Archon documentation for details.
 				</phrase>
 				<phrase name='import_ead' regularexpression=''>
@@ -433,6 +436,9 @@
 				<phrase name='import_collection_csv' regularexpression=''>
 					Collection CSV
 				</phrase>
+                <phrase name='import_collectionlocations_csv' regularexpression=''>
+                    Collection Locations CSV
+                </phrase>
 				<phrase name='import_collectioncontent_csv' regularexpression=''>
 					Collection Content CSV
 				</phrase>
