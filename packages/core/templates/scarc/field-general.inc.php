@@ -18,10 +18,10 @@
 
 isset($_ARCHON) or die();
 ?>
-<div class="userformpair">
-	<div class="userformlabel"><?php echo($strInputLabel); ?></div>
-	<div class="userforminput">
-		<?php echo($strInputElement); echo($strRequired); ?>
+<div class="form-group">
+	<?php echo($strRequired); echo($strInputLabel); ?>
+	<div class="col-sm-8">
+		<?php echo($strInputElement);  ?>
 	</div>
 </div>
 
