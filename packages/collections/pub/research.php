@@ -159,8 +159,6 @@ function research_email()
 {
    global $_ARCHON;
 
-
-
    $objEmailTitlePhrase = Phrase::getPhrase('research_email_title', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
    $strEmailTitle = $objEmailTitlePhrase ? $objEmailTitlePhrase->getPhraseValue(ENCODE_HTML) : 'Send Email';
    $objExtPhrase = Phrase::getPhrase('research_email_ext', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
@@ -193,17 +191,13 @@ function research_email()
       $_ARCHON->declareError("Could not display Email: Email template not defined for template set {$_ARCHON->PublicInterface->TemplateSet}.");
    }
 
-
    include("header.inc.php");
-
-
 
    if($_ARCHON->Security->userHasAdministrativeAccess())
    {
       include("footer.inc.php");
       return;
    }
-
 
    $strName = $_ARCHON->Security->Session->User ? $_ARCHON->Security->Session->User->toString() : '';
    $strName = $_REQUEST['fromname'] ? encode($_REQUEST['fromname'], ENCODE_HTML) : $strName;
@@ -221,13 +215,12 @@ function research_email()
    $strPhone = $_REQUEST['fromphone'] ? encode($_REQUEST['fromphone'], ENCODE_HTML) : $strPhone;
    //$strPhone = encode($strPhone, ENCODE_HTML);
    ?>
-   <form action="index.php" accept-charset="UTF-8" method="post">
+   <form class="form-horizontal col-sm-7" action="index.php" accept-charset="UTF-8" method="post">
       <div>
          <input type="hidden" name="f" value="sendemails" />
          <input type="hidden" name="p" value="collections/research" />
          <input type="hidden" name="referer" value="<?php echo($in_referer); ?>" />
          <input type="hidden" name="query_string" value="<?php echo($_SERVER['QUERY_STRING']); ?>" />
-
       </div>
 
       <?php
@@ -397,11 +390,7 @@ function research_exec()
 {
    global $_ARCHON;
 
-
    $callback = ($_REQUEST['callback']) ? $_REQUEST['callback'] : '';
-
-
-
 
    if($_REQUEST['f'] == 'add')
    {
@@ -425,8 +414,6 @@ function research_exec()
             echo(");");
          }
       }
-
-
       return;
    }
    elseif($_REQUEST['f'] == 'delete')
@@ -558,17 +545,14 @@ function research_exec()
       }
       else
       {
-         //$_REQUEST['f'] = 'email';
-         $location = "index.php?" . $_REQUEST['query_string'];
-
-         $params = array_intersect_key($_REQUEST, array_flip(array('fromaddress', 'message', 'fromname', 'subject', 'fromphone')));
+        $params = array_intersect_key($_REQUEST, array_flip(array('fromaddress', 'message', 'fromname', 'subject', 'fromphone')));
+        $location = "index.php?" . $_REQUEST['query_string'].'&'.http_build_query($params);
       }
    }
    else
    {
       $location = "index.php?p={$_REQUEST['p']}&f=cart";
    }
-
 
    if($_ARCHON->Error)
    {

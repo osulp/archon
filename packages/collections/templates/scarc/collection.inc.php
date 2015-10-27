@@ -90,7 +90,7 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
           class="glyphicon glyphicon-print"></span> <?php echo $printerFriendly; ?></a>
       </p>
       <p><a
-          href="?p=collections/research&amp;f=email&amp;repositoryid=$repositoryid&amp;referer="<?php echo urlencode($_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]); ?>"><span
+          href="?p=collections/research&amp;f=email&amp;repositoryid=<?php echo $repositoryid; ?>&amp;referer="<?php echo urlencode($_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]); ?>"><span
           class="glyphicon glyphicon-envelope"></span> <?php echo $emailUs; ?></a></p>
 
       <p><?php
