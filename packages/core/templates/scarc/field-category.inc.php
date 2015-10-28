@@ -18,7 +18,4 @@
 
 isset($_ARCHON) or die();
 ?>
-	<div class="userformpair">
-	<div class="userformlabel"><b><?php echo($strSectionHeading); ?></b></div>
-	<div class="userforminput">&nbsp;</div>
-	</div>
+<legend><?php echo($strSectionHeading); ?></legend>

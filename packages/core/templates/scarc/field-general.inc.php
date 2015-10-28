@@ -19,7 +19,7 @@
 isset($_ARCHON) or die();
 ?>
 <div class="form-group">
-	<?php echo($strRequired); echo($strInputLabel); ?>
+	<?php echo($strInputLabel);  ?>
 	<div class="col-sm-8">
 		<?php echo($strInputElement);  ?>
 	</div>
