@@ -116,8 +116,6 @@ function research_cart()
 {
    global $_ARCHON;
 
-
-
    $objResearchTitlePhrase = Phrase::getPhrase('research_carttitle', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
    $strResearchTitle = $objResearchTitlePhrase ? $objResearchTitlePhrase->getPhraseValue(ENCODE_HTML) : 'My Research Cart';
 
@@ -139,7 +137,7 @@ function research_cart()
       return;
    }
    ?>
-   <form action="index.php" accept-charset="UTF-8" method="post">
+   <form class="form-horizontal col-sm-8" action="index.php" accept-charset="UTF-8" method="post">
       <div>
          <input type="hidden" name="f" value="verify" />
          <input type="hidden" name="p" value="collections/research" />
@@ -238,8 +236,6 @@ function research_verify()
 {
    global $_ARCHON;
 
-
-
    $objVerifyTitlePhrase = Phrase::getPhrase('research_verify_title', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
    $strVerifyTitle = $objVerifyTitlePhrase ? $objVerifyTitlePhrase->getPhraseValue(ENCODE_HTML) : 'Verify Research Appointment';
    $objVerifyNavPhrase = Phrase::getPhrase('research_verify_nav', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
@@ -280,7 +276,7 @@ function research_verify()
 
    if($_ARCHON->Error)
    {
-      $_ARCHON->PublicInterface->Header->Message = $_ARCHON->clearError();
+      $_ARCHON->sendMessage($_ARCHON->clearError());
       $_REQUEST['f'] = 'cart';
       research_cart();
    }
@@ -302,20 +298,21 @@ function research_verify()
 
    if($_ARCHON->Error)
    {
+     $_ARCHON->sendMessage($_ARCHON->clearError());
       research_cart();
       return;
    }
 
-   include("header.inc.php");
-   ?>
-   <form action="index.php" accept-charset="UTF-8" method="GET">
-      <input type="hidden" name=f value="makeappointment" />
-      <input type="hidden" name="p" value="collections/research" />
-      <input type="hidden" id="RepositoryIDField" name="RepositoryID" value="<?php echo($RepositoryID); ?>" />
-   <?php eval($_ARCHON->PublicInterface->Templates['collections']['Verify']); ?>
-   </form>
-   <?php
-   include("footer.inc.php");
+  include("header.inc.php");
+  ?>
+  <form class="form-horizontal" action="index.php" accept-charset="UTF-8" method="GET">
+    <input type="hidden" name=f value="makeappointment"/>
+    <input type="hidden" name="p" value="collections/research"/>
+    <input type="hidden" id="RepositoryIDField" name="RepositoryID" value="<?php echo($RepositoryID); ?>"/>
+    <?php eval($_ARCHON->PublicInterface->Templates['collections']['Verify']); ?>
+  </form>
+  <?php
+  include("footer.inc.php");
 }
 
 function research_displaycart()
