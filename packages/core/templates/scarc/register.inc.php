@@ -17,6 +17,7 @@
 isset($_ARCHON) or die();
 ?>
 <h1 id="titleheader"><?php echo($strPageTitle); ?></h1>
+<p>Fields marked with an asterisk (<span style="color:red">*</span>) are required.</p>
 <?php echo($form); ?>
 <?php echo($strSubmitButton); ?>
 <br />

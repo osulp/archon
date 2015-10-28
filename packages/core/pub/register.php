@@ -96,7 +96,7 @@ $strSubmitButton = "<div class=\"form-group\"><div class=\"col-sm-offset-4 col-s
     type=\"submit\" class=\"btn btn-primary\" value=\"$strSubmit\" /></div></div>";
 
 $inputs[] = array(
-	'strInputLabel' => "<label class=\"col-sm-4 control-label\" for=\"CountryIDField\">$strCountry:</label>",
+	'strInputLabel' => "<label class=\"col-sm-4 control-label\" for=\"CountryIDField\">$strRequiredMarker $strCountry:</label>",
 	'strInputElement' => $strCountrySelect,
 	'strRequired' => '',
 	'template' => 'FieldGeneral',
@@ -280,7 +280,7 @@ EOT;
 	}
 
   require_once("header.inc.php");
-	echo("<form action=\"index.php\" class=\"form-horizontal col-sm-5\" accept-charset=\"UTF-8\" method=\"post\">\n");
+	echo("<form action=\"index.php\" class=\"form-horizontal col-sm-6\" accept-charset=\"UTF-8\" method=\"post\">\n");
 
 	$form = "<input type=\"hidden\" name=\"p\" value=\"$_REQUEST[p]\" />\n";
 
@@ -327,21 +327,31 @@ function register_exec()
 
     	$arrUserProfileFields = $_ARCHON->getAllUserProfileFields();
     	$arrPatterns = $_ARCHON->getAllPatterns();
-    	
-        if(!empty($arrUserProfileFields))
+
+      if (empty($_REQUEST['firstname'])) {
+        $_ARCHON->declareError('Required field First Name is missing.');
+      }
+      if (empty($_REQUEST['lastname'])) {
+        $_ARCHON->declareError('Required field Last Name is missing.');
+      }
+      if (empty($_REQUEST['password'])) {
+        $_ARCHON->declareError('Required field Password is missing.');
+      }
+
+      if(!empty($arrUserProfileFields))
         {
         	foreach($arrUserProfileFields as $objUserProfileField)
         	{
         		if(!$_REQUEST['userprofilefields'][$objUserProfileField->ID]['value'] && ($objUserProfileField->Required || (isset($objUserProfileField->Countries[$_REQUEST['countryid']]) && $objUserProfileField->Countries[$_REQUEST['countryid']]->Required)))
         		{
-        			$_ARCHON->declareError("Could not store User: Required field $objUserProfileField->UserProfileField is empty.");
+        			$_ARCHON->declareError("Required field $objUserProfileField->UserProfileField is empty.");
         		}
         		
         		if($_REQUEST['userprofilefields'][$objUserProfileField->ID]['value'] && $objUserProfileField->PatternID)
         		{
         			if(!$arrPatterns[$objUserProfileField->PatternID]->match($_REQUEST['userprofilefields'][$objUserProfileField->ID]['value']))
         			{
-        				$_ARCHON->declareError("Could not store User: '{$_REQUEST['userprofilefields'][$objUserProfileField->ID]['value']}' is not a valid $objUserProfileField->UserProfileField.");
+        				$_ARCHON->declareError("'{$_REQUEST['userprofilefields'][$objUserProfileField->ID]['value']}' is not a valid $objUserProfileField->UserProfileField.");
         			}
         		}
                 
@@ -349,7 +359,7 @@ function register_exec()
                 {
                     if(($timeValue = strtotime($_REQUEST['userprofilefields'][$objUserProfileField->ID]['value'])) === false)
                     {
-                        $_ARCHON->declareError("Could not store User: strtotime() unable to parse value '{$_REQUEST['userprofilefields'][$objUserProfileField->ID]['value']}'.");
+                        $_ARCHON->declareError("strtotime() unable to parse value '{$_REQUEST['userprofilefields'][$objUserProfileField->ID]['value']}'.");
                     }
                     else
                     {
@@ -358,10 +368,9 @@ function register_exec()
                 }
         	}
         }
-        
         if($_REQUEST['password'] != $_REQUEST['confirmpassword'])
         {
-            $_ARCHON->declareError("Could not store User: Passwords do not match.");
+            $_ARCHON->declareError("Passwords do not match.");
         }
         elseif(!$_ARCHON->Error && $objUser->dbStore())
         {
@@ -425,6 +434,7 @@ function register_exec()
     }
     else
     {
+      $_ARCHON->sendMessage($msg);
         $_ARCHON->PublicInterface->Header->Message = $msg;
         register_initialize();
     }

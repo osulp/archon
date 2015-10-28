@@ -1972,3 +1972,7 @@ figcaption {
     margin-top: 0.5em;
 
 }
+
+legend {
+    font-size: 1.3em;
+}
