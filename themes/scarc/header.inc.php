@@ -136,7 +136,7 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
           <?php
           if($_ARCHON->Security->isAuthenticated())
           {
-            echo("<span class='bold'>Welcome, " . $_ARCHON->Security->Session->User->toString() . "</span>");
+            echo("<span class='bold'>Welcome, " . $_ARCHON->Security->Session->User->DisplayName . "</span>");
 
             if($_ARCHON->Security->userHasAdministrativeAccess())
             {

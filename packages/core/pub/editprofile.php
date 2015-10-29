@@ -27,107 +27,104 @@ function editprofile_initialize()
 	}
 }
 
-
 function editprofile_form()
 {
-    global $_ARCHON;
+  global $_ARCHON;
 
-    
+  $objMyAccountPhrase = Phrase::getPhrase('myaccount_title', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+  $strMyAccountTitle = $objMyAccountPhrase ? $objMyAccountPhrase->getPhraseValue(ENCODE_HTML) : 'My Account';
+  $objEditProfileTitlePhrase = Phrase::getPhrase('editprofile_title', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+  $strEditProfileTitle = $objEditProfileTitlePhrase ? $objEditProfileTitlePhrase->getPhraseValue(ENCODE_HTML) : 'Edit My Profile';
 
-    $objMyAccountPhrase = Phrase::getPhrase('myaccount_title', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strMyAccountTitle = $objMyAccountPhrase ? $objMyAccountPhrase->getPhraseValue(ENCODE_HTML) : 'My Account';
-    $objEditProfileTitlePhrase = Phrase::getPhrase('editprofile_title', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strEditProfileTitle = $objEditProfileTitlePhrase ? $objEditProfileTitlePhrase->getPhraseValue(ENCODE_HTML) : 'Edit My Profile';
+  $_ARCHON->PublicInterface->Title = $strEditProfileTitle;
+  $_ARCHON->PublicInterface->addNavigation($strMyAccountTitle, "?p=core/account");
+  $_ARCHON->PublicInterface->addNavigation($_ARCHON->PublicInterface->Title, "?p={$_REQUEST['p']}");
 
-    $_ARCHON->PublicInterface->Title = $strEditProfileTitle;
-    $_ARCHON->PublicInterface->addNavigation($strMyAccountTitle, "?p=core/account");
-    $_ARCHON->PublicInterface->addNavigation($_ARCHON->PublicInterface->Title, "?p={$_REQUEST['p']}");
+  require_once("header.inc.php");
 
-    require_once("header.inc.php");
-    
-    $arrLanguages = $_ARCHON->getAllLanguages();
-    $arrCountries = $_ARCHON->getAllCountries();
-    
-    $UserCountryID = $_REQUEST['countryid'] ? $_REQUEST['countryid'] : $_ARCHON->Security->Session->User->CountryID;
-    
-    $objSelectOnePhrase = Phrase::getPhrase('selectone', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strSelectOne = $objSelectOnePhrase ? $objSelectOnePhrase->getPhraseValue(ENCODE_HTML) : '(Select One)';
-    $objRequiredPhrase = Phrase::getPhrase('requirednotice', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strRequired = $objRequiredPhrase ? $objRequiredPhrase->getPhraseValue(ENCODE_NONE) : 'Fields marked with an asterisk (<span style="color:red">*</span>) are required.';
-    $objYesPhrase = Phrase::getPhrase('yes', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strYes = $objYesPhrase ? $objYesPhrase->getPhraseValue(ENCODE_NONE) : 'Yes';
-    $objNoPhrase = Phrase::getPhrase('no', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strNo = $objNoPhrase ? $objNoPhrase->getPhraseValue(ENCODE_NONE) : 'No';
-    $objSubmitPhrase = Phrase::getPhrase('submit', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strSubmit = $objSubmitPhrase ? $objSubmitPhrase->getPhraseValue(ENCODE_HTML) : 'Submit';
-    
-    $objEmailPhrase = Phrase::getPhrase('editprofile_email', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strEmail = $objEmailPhrase ? $objEmailPhrase->getPhraseValue(ENCODE_HTML) : 'E-mail';
-    $objFirstNamePhrase = Phrase::getPhrase('editprofile_firstname', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strFirstName = $objFirstNamePhrase ? $objFirstNamePhrase->getPhraseValue(ENCODE_HTML) : 'First Name';
-    $objLastNamePhrase = Phrase::getPhrase('editprofile_lastname', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strLastName = $objLastNamePhrase ? $objLastNamePhrase->getPhraseValue(ENCODE_HTML) : 'Last Name';
-    $objDisplayNamePhrase = Phrase::getPhrase('editprofile_displayname', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strDisplayName = $objDisplayNamePhrase ? $objDisplayNamePhrase->getPhraseValue(ENCODE_HTML) : 'Display Name';
-    $objLanguagePhrase = Phrase::getPhrase('editprofile_language', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strLanguage = $objLanguagePhrase ? $objLanguagePhrase->getPhraseValue(ENCODE_HTML) : 'Language';
-    $objCountryPhrase = Phrase::getPhrase('editprofile_country', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strCountry = $objCountryPhrase ? $objCountryPhrase->getPhraseValue(ENCODE_HTML) : 'Country';
-    $objPasswordPhrase = Phrase::getPhrase('editprofile_password', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strPassword = $objPasswordPhrase ? $objPasswordPhrase->getPhraseValue(ENCODE_HTML) : 'Password';
-    $objConfirmPasswordPhrase = Phrase::getPhrase('editprofile_confirmpassword', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strConfirmPassword = $objConfirmPasswordPhrase ? $objConfirmPasswordPhrase->getPhraseValue(ENCODE_HTML) : 'Confirm Password';
-    $objPrivacyNotePhrase = Phrase::getPhrase('editprofile_privacynote', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strPrivacyNote = $objPrivacyNotePhrase ? $objPrivacyNotePhrase->getPhraseValue(ENCODE_HTML) : 'Privacy Note';
+  $arrLanguages = $_ARCHON->getAllLanguages();
+  $arrCountries = $_ARCHON->getAllCountries();
+
+  $UserCountryID = $_REQUEST['countryid'] ? $_REQUEST['countryid'] : $_ARCHON->Security->Session->User->CountryID;
+
+  $objSelectOnePhrase = Phrase::getPhrase('selectone', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+  $strSelectOne = $objSelectOnePhrase ? $objSelectOnePhrase->getPhraseValue(ENCODE_HTML) : '(Select One)';
+  $objRequiredPhrase = Phrase::getPhrase('requirednotice', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+  $strRequired = $objRequiredPhrase ? $objRequiredPhrase->getPhraseValue(ENCODE_NONE) : 'Fields marked with an asterisk (<span style="color:red">*</span>) are required.';
+  $objYesPhrase = Phrase::getPhrase('yes', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+  $strYes = $objYesPhrase ? $objYesPhrase->getPhraseValue(ENCODE_NONE) : 'Yes';
+  $objNoPhrase = Phrase::getPhrase('no', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+  $strNo = $objNoPhrase ? $objNoPhrase->getPhraseValue(ENCODE_NONE) : 'No';
+  $objSubmitPhrase = Phrase::getPhrase('submit', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+  $strSubmit = $objSubmitPhrase ? $objSubmitPhrase->getPhraseValue(ENCODE_HTML) : 'Submit';
+
+  $objEmailPhrase = Phrase::getPhrase('editprofile_email', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+  $strEmail = $objEmailPhrase ? $objEmailPhrase->getPhraseValue(ENCODE_HTML) : 'E-mail';
+  $objFirstNamePhrase = Phrase::getPhrase('editprofile_firstname', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+  $strFirstName = $objFirstNamePhrase ? $objFirstNamePhrase->getPhraseValue(ENCODE_HTML) : 'First Name';
+  $objLastNamePhrase = Phrase::getPhrase('editprofile_lastname', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+  $strLastName = $objLastNamePhrase ? $objLastNamePhrase->getPhraseValue(ENCODE_HTML) : 'Last Name';
+  $objDisplayNamePhrase = Phrase::getPhrase('editprofile_displayname', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+  $strDisplayName = $objDisplayNamePhrase ? $objDisplayNamePhrase->getPhraseValue(ENCODE_HTML) : 'Display Name';
+  $objLanguagePhrase = Phrase::getPhrase('editprofile_language', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+  $strLanguage = $objLanguagePhrase ? $objLanguagePhrase->getPhraseValue(ENCODE_HTML) : 'Language';
+  $objCountryPhrase = Phrase::getPhrase('editprofile_country', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+  $strCountry = $objCountryPhrase ? $objCountryPhrase->getPhraseValue(ENCODE_HTML) : 'Country';
+  $objPasswordPhrase = Phrase::getPhrase('editprofile_password', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+  $strPassword = $objPasswordPhrase ? $objPasswordPhrase->getPhraseValue(ENCODE_HTML) : 'Password';
+  $objConfirmPasswordPhrase = Phrase::getPhrase('editprofile_confirmpassword', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+  $strConfirmPassword = $objConfirmPasswordPhrase ? $objConfirmPasswordPhrase->getPhraseValue(ENCODE_HTML) : 'Confirm Password';
+  $objPrivacyNotePhrase = Phrase::getPhrase('editprofile_privacynote', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+  $strPrivacyNote = $objPrivacyNotePhrase ? $objPrivacyNotePhrase->getPhraseValue(ENCODE_HTML) : 'Privacy Note';
 
 	$strPageTitle = strip_tags($_ARCHON->PublicInterface->Title);
 
 	$strUserID = $_ARCHON->Security->Session->User->ID;
 
-	$strRequiredMarker = "<span style=\"color:red\">*</span>";
-	$strSubmitButton = "<input type=\"submit\" value=\"$strSubmit\" class=\"button\" />";
+  $strRequiredMarker = "<span style=\"color:red\">*</span>";
+  $strSubmitButton = "<div class=\"form-group\"><div class=\"col-sm-offset-4 col-sm-8\"><input
+    type=\"submit\" class=\"btn btn-primary\" value=\"$strSubmit\" /></div></div>";
 
 	$inputs = array();
 
 	$strEmailValue = $_ARCHON->Security->Session->User->Email;
 	$inputs[] = array(
-		'strInputLabel' => "<label for=\"EmailField\">$strEmail:</label>",
-		'strInputElement' => "<input type=\"text\" id=\"EmailField\" name=\"Email\" value=\"$strEmailValue\" maxlength=\"50\" />",
-		'strRequired' => $strRequiredMarker,
+		'strInputLabel' => "<label class=\"control-label col-sm-4\" for=\"EmailField\">$strRequiredMarker $strEmail:</label>",
+		'strInputElement' => "<input class=\"form-control\" type=\"text\" id=\"EmailField\" name=\"Email\" value=\"$strEmailValue\" maxlength=\"50\" />",
+		'strRequired' => '',
 		'template' => 'FieldGeneral',
 	);
 
-
 	$strFirstNameValue = $_ARCHON->Security->Session->User->FirstName;
 	$inputs[] = array(
-		'strInputLabel' => "<label for=\"FirstNameField\">$strFirstName:</label>",
-		'strInputElement' => "<input type=\"text\" id=\"FirstNameField\" name=\"FirstName\" value=\"$strFirstNameValue\" maxlength=\"50\" />",
-		'strRequired' => $strRequiredMarker,
+		'strInputLabel' => "<label class=\"control-label col-sm-4\" for=\"FirstNameField\">$strRequiredMarker $strFirstName:</label>",
+		'strInputElement' => "<input class=\"form-control\" type=\"text\" id=\"FirstNameField\" name=\"FirstName\" value=\"$strFirstNameValue\" maxlength=\"50\" />",
+		'strRequired' => '',
 		'template' => 'FieldGeneral',
 	);
 
 
 	$strLastNameValue = $_ARCHON->Security->Session->User->LastName;
 	$inputs[] = array(
-		'strInputLabel' => "<label for=\"LastNameField\">$strLastName:</label>",
-		'strInputElement' => "<input type=\"text\" id=\"LastNameField\" name=\"LastName\" value=\"$strLastNameValue\" maxlength=\"50\" />",
-		'strRequired' => $strRequiredMarker,
+		'strInputLabel' => "<label class=\"control-label col-sm-4\" for=\"LastNameField\">$strRequiredMarker $strLastName:</label>",
+		'strInputElement' => "<input class=\"form-control\" type=\"text\" id=\"LastNameField\" name=\"LastName\" value=\"$strLastNameValue\" maxlength=\"50\" />",
+		'strRequired' => '',
 		'template' => 'FieldGeneral',
 	);
 
 
 	$strDisplayNameValue = $_ARCHON->Security->Session->User->DisplayName;
 	$inputs[] = array(
-		'strInputLabel' => "<label for=\"DisplayNameField\">$strDisplayName:</label>",
-		'strInputElement' => "<input type=\"text\" id=\"DisplayNameField\" name=\"DisplayName\" value=\"$strDisplayNameValue\" maxlength=\"100\" />",
-		'strRequired' => $strRequiredMarker,
+		'strInputLabel' => "<label class=\"control-label col-sm-4\" for=\"DisplayNameField\">$strRequiredMarker $strDisplayName:</label>",
+		'strInputElement' => "<input class=\"form-control\" type=\"text\" id=\"DisplayNameField\" name=\"DisplayName\" value=\"$strDisplayNameValue\" maxlength=\"100\" />",
+		'strRequired' => '',
 		'template' => 'FieldGeneral',
 	);
 
 
 	$inputs[] = array(
-		'strInputLabel' => "<label for=\"PasswordField\">$strPassword:</label>",
-		'strInputElement' => "<input type=\"password\" id=\"PasswordField\" name=\"Password\" />",
+		'strInputLabel' => "<label class=\"control-label col-sm-4\" for=\"PasswordField\">$strPassword:</label>",
+		'strInputElement' => "<input class=\"form-control\" type=\"password\" id=\"PasswordField\" name=\"Password\" />",
 		'strRequired' => '',
 		'template' => 'FieldGeneral',
 	);
@@ -135,15 +132,15 @@ function editprofile_form()
 
 
 	$inputs[] = array(
-		'strInputLabel' => "<label for=\"ConfirmPasswordField\">$strConfirmPassword:</label>",
-		'strInputElement' => "<input type=\"password\" id=\"ConfirmPasswordField\" name=\"ConfirmPassword\" />",
+		'strInputLabel' => "<label class=\"control-label col-sm-4\" for=\"ConfirmPasswordField\">$strConfirmPassword:</label>",
+		'strInputElement' => "<input class=\"form-control\" type=\"password\" id=\"ConfirmPasswordField\" name=\"ConfirmPassword\" />",
 		'strRequired' => '',
 		'template' => 'FieldGeneral',
 	);
 
 
 	$strLangSelect = <<<EOT
-<select id="LanguangeIDField" name="LanguangeID">
+<select class="form-control" id="LanguangeIDField" name="LanguangeID">
 		<option value="0">$strSelectOne</option>
 EOT;
 
@@ -159,7 +156,7 @@ EOT;
 	$strLangSelect .= '</select>';
 
 	$inputs[] = array(
-		'strInputLabel' => "<label for=\"LanguangeIDField\">$strLanguage:</label>",
+		'strInputLabel' => "<label class=\"control-label col-sm-4\" for=\"LanguangeIDField\">$strLanguage:</label>",
 		'strInputElement' => $strLangSelect,
 		'strRequired' => '',
 		'template' => 'FieldGeneral',
@@ -167,7 +164,7 @@ EOT;
 
 
 	$strCountrySelect = <<<EOT
-<select id="CountryIDField" name="CountryID">
+<select class="form-control" id="CountryIDField" name="CountryID">
 		<option value="0">$strSelectOne</option>
 EOT;
 
@@ -183,9 +180,9 @@ EOT;
 	$strCountrySelect .= '</select>';
 
 	$inputs[] = array(
-		'strInputLabel' => "<label for=\"CountryIDField\">$strCountry:</label>",
+		'strInputLabel' => "<label class=\"control-label col-sm-4\" for=\"CountryIDField\">$strRequiredMarker $strCountry:</label>",
 		'strInputElement' => $strCountrySelect,
-		'strRequired' => $strRequiredMarker,
+		'strRequired' => '',
 		'template' => 'FieldGeneral',
 	);
 
@@ -270,7 +267,7 @@ if($id == 'StateProvinceIDField'){
 }
 
 				$strInput = <<<EOT
-      <select id="$id" name="UserProfileFields[$fieldName][Value]">
+      <select class="form-control" id="$id" name="UserProfileFields[$fieldName][Value]">
         <option value="0">$strSelectOne</option>
 EOT;
 
@@ -289,9 +286,9 @@ EOT;
 			$strInput .= "      </select>";
 
 				$inputs[] = array(
-					'strInputLabel' => "<label for=\"$id\">$strUserProfileField:</label>",
+					'strInputLabel' => "<label class=\"control-label col-sm-4\" for=\"$id\">$required $strUserProfileField:</label>",
 					'strInputElement' => $strInput,
-					'strRequired' => $required,
+					'strRequired' => '',
 					'template' => 'FieldGeneral',
 				);
 	        }
@@ -304,9 +301,9 @@ EOT;
 				$size = $objUserProfileField->Size;
 
 				$inputs[] = array(
-					'strInputLabel' => "<label for=\"$id\">$strUserProfileField:</label>",
+					'strInputLabel' => "<label class=\"control-label col-sm-4\" for=\"$id\">$required $strUserProfileField:</label>",
 					'strInputElement' => "<textarea id=\"$id\" name=\"UserProfileFields[$fieldName][Value]\" rows=\"$size\" cols=\"50\">$value</textarea>",
-					'strRequired' => $required,
+					'strRequired' => '',
 					'template' => 'FieldTextArea',
 				);
 	        }
@@ -325,21 +322,16 @@ EOT;
 				$maxLength = $objUserProfileField->MaxLength;
 
 				$inputs[] = array(
-					'strInputLabel' => "<label for=\"$id\">$strUserProfileField:</label>",
-					'strInputElement' => "<input type=\"text\" id=\"$id\" name=\"UserProfileFields[$fieldName][Value]\" value=\"$value\" size=\"$size\" maxlength=\"$maxLength\" />",
-					'strRequired' => $required,
+					'strInputLabel' => "<label class=\"control-label col-sm-4\" for=\"$id\">$required $strUserProfileField:</label>",
+					'strInputElement' => "<input class=\"form-control\" type=\"text\" id=\"$id\" name=\"UserProfileFields[$fieldName][Value]\" value=\"$value\" size=\"$size\" maxlength=\"$maxLength\" />",
+					'strRequired' => '',
 					'template' => 'FieldGeneral',
 				);
    		    }
     	}
     }
 
-	$strSubmitButton = "<input type=\"submit\" value=\"$strSubmit\" class=\"button\" />";
-
-
-	echo("<form action=\"index.php\" accept-charset=\"UTF-8\" method=\"post\">\n");
-
-
+	echo("<form class=\"form-horizontal col-sm-6\" action=\"index.php\" accept-charset=\"UTF-8\" method=\"post\">\n");
 	$form = "<input type=\"hidden\" name=\"p\" value=\"$_REQUEST[p]\" />\n";
 	$form .= "<input type=\"hidden\" name=\"f\" value=\"store\" />\n";
 	$form .= "<input type=\"hidden\" name=\"id\" value=\"$strUserID\" />\n";
@@ -363,11 +355,8 @@ EOT;
 	}
 
 	echo("</form>\n");
-    require_once("footer.inc.php");
+  require_once("footer.inc.php");
 }
-
-
-
 
 function editprofile_exec()
 {

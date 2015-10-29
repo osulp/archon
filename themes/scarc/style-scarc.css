@@ -1739,7 +1739,7 @@ td {
     padding-top: 0;
     color: #FFF;
     text-align: right;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 #researchblock a {
@@ -1891,6 +1891,12 @@ ul.containers li.active a, ul.containers li.active a:hover {
     }
     #header-nav, #header-title, #main {
         width: 100%;
+    }
+    #header-blacktop-text {
+        margin-left: 115px;
+    }
+    #header-blacktop-container {
+        width: 98%;
     }
 
 }
