@@ -43,34 +43,33 @@ $strRememberMe = $objRememberMePhrase ? $objRememberMePhrase->getPhraseValue(ENC
 
 $strPageTitle = strip_tags($strLoginTitle);
 
-$strSubmitButton = "<input type=\"submit\" value=\"$strLogin\" class=\"button\" />";
+$strSubmitButton = "<div class=\"form-group\"><div class=\"col-sm-offset-4 col-sm-8\"><input
+    type=\"submit\" class=\"btn btn-primary\" value=\"$strLogin\" /></div></div>";
 
 $vars = array();
 
 // Why is the value for this button not internationalized?
-$registerButton = "<input type=\"button\" value=\"Register an Account\" onclick=\"location.href='?p=core/register&amp;go=$go';\" />\n";
-
-
+$registerButton = "<input type=\"button\" class=\"btn btn-primary\" value=\"Register an Account\" onclick=\"location.href='?p=core/register&amp;go=$go';\" />\n";
 
 $inputs[] = array(
-	'strInputLabel' => "<label for=\"ArchonLoginFieldA\">$strLogin:</label>",
-	'strInputElement' => "<input type=\"text\" id=\"ArchonLoginFieldA\" name=\"ArchonLogin\" value=\"$_REQUEST[login]\" maxlength=\"50\" />",
+	'strInputLabel' => "<label class=\"col-sm-4 control-label\" for=\"ArchonLoginFieldA\">$strLogin:</label>",
+	'strInputElement' => "<input type=\"text\" class=\"form-control\" id=\"ArchonLoginFieldA\" name=\"ArchonLogin\" value=\"$_REQUEST[login]\" maxlength=\"50\" />",
 	'strRequired' => '',
 	'template' => 'FieldGeneral',
 );
 
 $inputs[] = array(
-	'strInputLabel' => "<label for=\"ArchonPasswordFieldA\">$strPassword:</label>",
-	'strInputElement' => "<input type=\"password\" id=\"ArchonPasswordFieldA\" name=\"ArchonPassword\" />",
+	'strInputLabel' => "<label class=\"col-sm-4 control-label\" for=\"ArchonPasswordFieldA\">$strPassword:</label>",
+	'strInputElement' => "<input type=\"password\" class=\"form-control\" id=\"ArchonPasswordFieldA\" name=\"ArchonPassword\" />",
 	'strRequired' => '',
 	'template' => 'FieldGeneral',
 );
 
 $inputs[] = array(
-	'strInputLabel' => "<label for=\"RememberMeFieldA\">$strRememberMe:</label>",
+	'strInputLabel' => "$strRememberMe",
 	'strInputElement' => "<input type=\"checkbox\" name=\"RememberMe\" id=\"RememberMeFieldA\" value=\"1\" />",
 	'strRequired' => '',
-	'template' => 'FieldGeneral',
+	'template' => 'FieldCheckbox',
 );
 
 $form = "<input type=\"hidden\" name=\"p\" value=\"$_REQUEST[p]\" />\n";
@@ -81,8 +80,7 @@ foreach($inputs as $input)
 	$form .= $_ARCHON->PublicInterface->executeTemplate('core', $template, $input);
 }
 
-echo("<form action=\"index.php\" accept-charset=\"UTF-8\" method=\"post\">\n");
+echo("<form action=\"index.php\" class=\"form-horizontal col-sm-5\" accept-charset=\"UTF-8\" method=\"post\">\n");
 	eval($_ARCHON->PublicInterface->Templates['core']['Login']);
 print "</form>\n";
 require_once("footer.inc.php");
-?>

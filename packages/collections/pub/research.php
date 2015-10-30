@@ -116,8 +116,6 @@ function research_cart()
 {
    global $_ARCHON;
 
-
-
    $objResearchTitlePhrase = Phrase::getPhrase('research_carttitle', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
    $strResearchTitle = $objResearchTitlePhrase ? $objResearchTitlePhrase->getPhraseValue(ENCODE_HTML) : 'My Research Cart';
 
@@ -139,7 +137,7 @@ function research_cart()
       return;
    }
    ?>
-   <form action="index.php" accept-charset="UTF-8" method="post">
+   <form class="form-horizontal col-sm-8" action="index.php" accept-charset="UTF-8" method="post">
       <div>
          <input type="hidden" name="f" value="verify" />
          <input type="hidden" name="p" value="collections/research" />
@@ -158,8 +156,6 @@ function research_cart()
 function research_email()
 {
    global $_ARCHON;
-
-
 
    $objEmailTitlePhrase = Phrase::getPhrase('research_email_title', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
    $strEmailTitle = $objEmailTitlePhrase ? $objEmailTitlePhrase->getPhraseValue(ENCODE_HTML) : 'Send Email';
@@ -193,17 +189,13 @@ function research_email()
       $_ARCHON->declareError("Could not display Email: Email template not defined for template set {$_ARCHON->PublicInterface->TemplateSet}.");
    }
 
-
    include("header.inc.php");
-
-
 
    if($_ARCHON->Security->userHasAdministrativeAccess())
    {
       include("footer.inc.php");
       return;
    }
-
 
    $strName = $_ARCHON->Security->Session->User ? $_ARCHON->Security->Session->User->toString() : '';
    $strName = $_REQUEST['fromname'] ? encode($_REQUEST['fromname'], ENCODE_HTML) : $strName;
@@ -221,13 +213,12 @@ function research_email()
    $strPhone = $_REQUEST['fromphone'] ? encode($_REQUEST['fromphone'], ENCODE_HTML) : $strPhone;
    //$strPhone = encode($strPhone, ENCODE_HTML);
    ?>
-   <form action="index.php" accept-charset="UTF-8" method="post">
+   <form class="form-horizontal col-sm-7" action="index.php" accept-charset="UTF-8" method="post">
       <div>
          <input type="hidden" name="f" value="sendemails" />
          <input type="hidden" name="p" value="collections/research" />
          <input type="hidden" name="referer" value="<?php echo($in_referer); ?>" />
          <input type="hidden" name="query_string" value="<?php echo($_SERVER['QUERY_STRING']); ?>" />
-
       </div>
 
       <?php
@@ -244,8 +235,6 @@ function research_email()
 function research_verify()
 {
    global $_ARCHON;
-
-
 
    $objVerifyTitlePhrase = Phrase::getPhrase('research_verify_title', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
    $strVerifyTitle = $objVerifyTitlePhrase ? $objVerifyTitlePhrase->getPhraseValue(ENCODE_HTML) : 'Verify Research Appointment';
@@ -287,7 +276,7 @@ function research_verify()
 
    if($_ARCHON->Error)
    {
-      $_ARCHON->PublicInterface->Header->Message = $_ARCHON->clearError();
+      $_ARCHON->sendMessage($_ARCHON->clearError());
       $_REQUEST['f'] = 'cart';
       research_cart();
    }
@@ -309,20 +298,21 @@ function research_verify()
 
    if($_ARCHON->Error)
    {
+     $_ARCHON->sendMessage($_ARCHON->clearError());
       research_cart();
       return;
    }
 
-   include("header.inc.php");
-   ?>
-   <form action="index.php" accept-charset="UTF-8" method="GET">
-      <input type="hidden" name=f value="makeappointment" />
-      <input type="hidden" name="p" value="collections/research" />
-      <input type="hidden" id="RepositoryIDField" name="RepositoryID" value="<?php echo($RepositoryID); ?>" />
-   <?php eval($_ARCHON->PublicInterface->Templates['collections']['Verify']); ?>
-   </form>
-   <?php
-   include("footer.inc.php");
+  include("header.inc.php");
+  ?>
+  <form class="form-horizontal" action="index.php" accept-charset="UTF-8" method="GET">
+    <input type="hidden" name=f value="makeappointment"/>
+    <input type="hidden" name="p" value="collections/research"/>
+    <input type="hidden" id="RepositoryIDField" name="RepositoryID" value="<?php echo($RepositoryID); ?>"/>
+    <?php eval($_ARCHON->PublicInterface->Templates['collections']['Verify']); ?>
+  </form>
+  <?php
+  include("footer.inc.php");
 }
 
 function research_displaycart()
@@ -397,11 +387,7 @@ function research_exec()
 {
    global $_ARCHON;
 
-
    $callback = ($_REQUEST['callback']) ? $_REQUEST['callback'] : '';
-
-
-
 
    if($_REQUEST['f'] == 'add')
    {
@@ -425,8 +411,6 @@ function research_exec()
             echo(");");
          }
       }
-
-
       return;
    }
    elseif($_REQUEST['f'] == 'delete')
@@ -558,17 +542,14 @@ function research_exec()
       }
       else
       {
-         //$_REQUEST['f'] = 'email';
-         $location = "index.php?" . $_REQUEST['query_string'];
-
-         $params = array_intersect_key($_REQUEST, array_flip(array('fromaddress', 'message', 'fromname', 'subject', 'fromphone')));
+        $params = array_intersect_key($_REQUEST, array_flip(array('fromaddress', 'message', 'fromname', 'subject', 'fromphone')));
+        $location = "index.php?" . $_REQUEST['query_string'].'&'.http_build_query($params);
       }
    }
    else
    {
       $location = "index.php?p={$_REQUEST['p']}&f=cart";
    }
-
 
    if($_ARCHON->Error)
    {

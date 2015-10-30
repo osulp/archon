@@ -17,12 +17,8 @@
 isset($_ARCHON) or die();
 ?>
 <h1 id="titleheader"><?php echo($strPageTitle); ?></h1>
-
-<div class='userformbox bground'>
+<p>Fields marked with an asterisk (<span style="color:red">*</span>) are required.</p>
 <?php echo($form); ?>
-  <div id="userformsubmit">
-    <?php echo($strSubmitButton); ?>
-  </div>
+<?php echo($strSubmitButton); ?>
 <br />
 <p class="center"><a href="?p=core/privacy"><?php echo($strPrivacyNote); ?></a></p>
-</div>

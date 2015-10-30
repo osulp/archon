@@ -23,16 +23,7 @@ isset($_ARCHON) or die();
 OR
 <br />
 <br />
-
-<div class='researchformbox bground'>
-
 <?php echo($form); ?>
-
-  <div id="userformsubmit">
-    <?php echo($strSubmitButton); ?>
-  </div>
-
+<?php echo($strSubmitButton); ?>
 <br />
 <p class="center"><a href="?p=core/privacy"><?php echo($strPrivacyNote); ?></a></p>
-</div>
-

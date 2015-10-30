@@ -27,16 +27,9 @@ function register_initialize()
 	}
 }
 
-
-
-
-
 function register_form()
 {
     global $_ARCHON;
-
-
-
 
     $objRegisterTitlePhrase = Phrase::getPhrase('register_registertitle', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
     $strRegisterTitle = $objRegisterTitlePhrase ? $objRegisterTitlePhrase->getPhraseValue(ENCODE_HTML) : 'Register an Account';
@@ -79,7 +72,7 @@ function register_form()
 	$strPageTitle = strip_tags($_ARCHON->PublicInterface->Title);
 
 	$strCountrySelect = <<<EOT
-<select id="CountryIDField" name="CountryID">
+<select class="form-control" id="CountryIDField" name="CountryID">
 		<option value="0">$strSelectOne</option>
 EOT;
 
@@ -97,50 +90,50 @@ EOT;
 
 	$inputs = array();
 
-$strRequiredMarker = "<span style=\"color:red\">*</span>";
-$strSubmitButton = "<input type=\"submit\" value=\"$strSubmit\" class=\"button\" />";
+  $strRequiredMarker = "<span style=\"color:red\">*</span>";
 
-
+$strSubmitButton = "<div class=\"form-group\"><div class=\"col-sm-offset-4 col-sm-8\"><input
+    type=\"submit\" class=\"btn btn-primary\" value=\"$strSubmit\" /></div></div>";
 
 $inputs[] = array(
-	'strInputLabel' => "<label for=\"CountryIDField\">$strCountry:</label>",
+	'strInputLabel' => "<label class=\"col-sm-4 control-label\" for=\"CountryIDField\">$strRequiredMarker $strCountry:</label>",
 	'strInputElement' => $strCountrySelect,
 	'strRequired' => '',
 	'template' => 'FieldGeneral',
 );
 
 $inputs[] = array(
-	'strInputLabel' => "<label for=\"EmailField\">$strEmail:</label>",
-	'strInputElement' => "<input type=\"text\" id=\"EmailField\" name=\"Email\" value=\"$_REQUEST[email]\" maxlength=\"50\" />",
-	'strRequired' => $strRequiredMarker,
+	'strInputLabel' => "<label class=\"col-sm-4 control-label\" for=\"EmailField\">$strRequiredMarker $strEmail:</label>",
+	'strInputElement' => "<input type=\"text\" class=\"form-control\" id=\"EmailField\" name=\"Email\" value=\"$_REQUEST[email]\" maxlength=\"50\" />",
+	'strRequired' => '',
 	'template' => 'FieldGeneral',
 );
 
 $inputs[] = array(
-	'strInputLabel' => "<label for=\"FirstNameField\">$strFirstName:</label>",
-	'strInputElement' => "<input type=\"text\" id=\"FirstNameField\" name=\"FirstName\" value=\"$_REQUEST[firstname]\" maxlength=\"50\" />",
-	'strRequired' => $strRequiredMarker,
+	'strInputLabel' => "<label class=\"col-sm-4 control-label\" for=\"FirstNameField\">$strRequiredMarker $strFirstName:</label>",
+	'strInputElement' => "<input type=\"text\" class=\"form-control\" id=\"FirstNameField\" name=\"FirstName\" value=\"$_REQUEST[firstname]\" maxlength=\"50\" />",
+	'strRequired' => '',
 	'template' => 'FieldGeneral',
 );
 
 $inputs[] = array(
-	'strInputLabel' => "<label for=\"LastNameField\">$strLastName:</label>",
-	'strInputElement' => "<input type=\"text\" id=\"LastNameField\" name=\"LastName\" value=\"$_REQUEST[lastname]\" maxlength=\"50\" />",
-	'strRequired' => $strRequiredMarker,
+	'strInputLabel' => "<label class=\"col-sm-4 control-label\" for=\"LastNameField\">$strRequiredMarker $strLastName:</label>",
+	'strInputElement' => "<input type=\"text\" class=\"form-control\" id=\"LastNameField\" name=\"LastName\" value=\"$_REQUEST[lastname]\" maxlength=\"50\" />",
+	'strRequired' => '',
 	'template' => 'FieldGeneral',
 );
 
 $inputs[] = array(
-	'strInputLabel' => "<label for=\"PasswordField\">$strPassword:</label>",
-	'strInputElement' => "<input type=\"password\" id=\"PasswordField\" name=\"Password\" />",
-	'strRequired' => $strRequiredMarker,
+	'strInputLabel' => "<label class=\"col-sm-4 control-label\" for=\"PasswordField\">$strRequiredMarker $strPassword:</label>",
+	'strInputElement' => "<input type=\"password\" class=\"form-control\" id=\"PasswordField\" name=\"Password\" />",
+	'strRequired' => '',
 	'template' => 'FieldGeneral',
 );
 
 $inputs[] = array(
-	'strInputLabel' => "<label for=\"ConfirmPasswordField\">$strConfirmPassword:</label>",
-	'strInputElement' => "<input type=\"password\" id=\"ConfirmPasswordField\" name=\"ConfirmPassword\" />",
-	'strRequired' => $strRequiredMarker,
+	'strInputLabel' => "<label class=\"col-sm-4 control-label\" for=\"ConfirmPasswordField\">$strRequiredMarker $strConfirmPassword:</label>",
+	'strInputElement' => "<input type=\"password\" class=\"form-control\" id=\"ConfirmPasswordField\" name=\"ConfirmPassword\" />",
+	'strRequired' => '',
 	'template' => 'FieldGeneral',
 );
   
@@ -170,11 +163,6 @@ $inputs[] = array(
             $required = $objUserProfileField->Required || (isset($objUserProfileField->Countries[$_REQUEST['countryid']]) && $objUserProfileField->Countries[$_REQUEST['countryid']]->Required) ? '<span style="color:red">*</span>' : '';
             $value = isset($_REQUEST['userprofilefields'][$objUserProfileField->ID]['value']) ? $_REQUEST['userprofilefields'][$objUserProfileField->ID]['value'] : $objUserProfileField->DefaultValue;
 
-
-
-
-
-
             if($objUserProfileField->InputType == 'radio')
             {
 				if($value)
@@ -195,9 +183,13 @@ $inputs[] = array(
 
 				$radioButtons = <<<EOT
 				<fieldset>
-					<legend>$strUserProfileField $required</legend>
-					<label for="$idYes"><input type="radio" id="$idYes" name="$inputName" value="1"$checkedYes />$strYes</label>
-					<label for="$idNo"><input type="radio" id="$idNo" name="$inputName" value="0"$checkedNo  />$strNo</label>
+					<legend>$required $strUserProfileField</legend>
+					<div class="radio">
+					  <label for="$idYes"><input type="radio" id="$idYes" name="$inputName" value="1"$checkedYes />$strYes</label>
+					</div>
+					<div class="radio">
+					  <label for="$idNo"><input type="radio" id="$idNo" name="$inputName" value="0"$checkedNo  />$strNo</label>
+					</div>
 				</fieldset>
 EOT;
 
@@ -207,12 +199,6 @@ EOT;
 				);
 
             }
-
-
-
-
-
-
             elseif($objUserProfileField->InputType == 'select')
             {
                 $arrSelectChoices = call_user_func(array($_ARCHON, $objUserProfileField->ListDataSource));
@@ -220,7 +206,7 @@ EOT;
 				$fieldName = $objUserProfileField->ID;
 
 				$strInput = <<<EOT
-      <select id="$id" name="UserProfileFields[$fieldName][Value]">
+      <select id="$id" class="form-control" name="UserProfileFields[$fieldName][Value]">
         <option value="0">$strSelectOne</option>
 EOT;
 
@@ -239,18 +225,12 @@ EOT;
 			$strInput .= "      </select>";
 
 				$inputs[] = array(
-					'strInputLabel' => "<label for=\"$id\">$strUserProfileField:</label>",
+					'strInputLabel' => "<label class=\"col-sm-4 control-label\" for=\"$id\">$required $strUserProfileField:</label>",
 					'strInputElement' => $strInput,
-					'strRequired' => $required,
+					'strRequired' => '',
 					'template' => 'FieldGeneral',
 				);
             }
-
-
-
-
-
-
             elseif($objUserProfileField->InputType == 'textarea')
             {
 				$id = $objUserProfileField->UserProfileField.'Field';
@@ -258,19 +238,13 @@ EOT;
 				$size = $objUserProfileField->Size;
 
 				$inputs[] = array(
-					'strInputLabel' => "<label for=\"$id\">$strUserProfileField:</label>",
-					'strInputElement' => "<textarea id=\"$id\" name=\"UserProfileFields[$fieldName][Value]\" rows=\"$size\" cols=\"50\">$value</textarea>",
-					'strRequired' => $required,
+					'strInputLabel' => "<label class=\"col-sm-4 control-label\" for=\"$id\">$required $strUserProfileField:</label>",
+					'strInputElement' => "<textarea id=\"$id\" class=\"form-control\" name=\"UserProfileFields[$fieldName][Value]\" rows=\"$size\" cols=\"50\">$value</textarea>",
+					'strRequired' => '',
 					'template' => 'FieldTextArea',
 				);
-            }
-
-
-
-
-
-
-            elseif($objUserProfileField->InputType == 'textfield' || $objUserProfileField->InputType == 'timestamp')
+        }
+        elseif($objUserProfileField->InputType == 'textfield' || $objUserProfileField->InputType == 'timestamp')
     		{
                 if($value && is_natural($value) && $objUserProfileField->InputType == 'timestamp')
                 {
@@ -283,9 +257,9 @@ EOT;
 				$maxLength = $objUserProfileField->MaxLength;
 
 				$inputs[] = array(
-					'strInputLabel' => "<label for=\"$id\">$strUserProfileField:</label>",
-					'strInputElement' => "<input type=\"text\" id=\"$id\" name=\"UserProfileFields[$fieldName][Value]\" value=\"$value\" size=\"$size\" maxlength=\"$maxLength\" />",
-					'strRequired' => $required,
+					'strInputLabel' => "<label class=\"col-sm-4 control-label\" for=\"$id\">$required $strUserProfileField:</label>",
+					'strInputElement' => "<input type=\"text\" class=\"form-control\" id=\"$id\" name=\"UserProfileFields[$fieldName][Value]\" value=\"$value\" size=\"$size\" maxlength=\"$maxLength\" />",
+					'strRequired' => '',
 					'template' => 'FieldGeneral',
 				);
     		}
@@ -305,8 +279,8 @@ EOT;
 		array_shift($inputs);
 	}
 
-    require_once("header.inc.php");
-	echo("<form action=\"index.php\" accept-charset=\"UTF-8\" method=\"post\">\n");
+  require_once("header.inc.php");
+	echo("<form action=\"index.php\" class=\"form-horizontal col-sm-6\" accept-charset=\"UTF-8\" method=\"post\">\n");
 
 	$form = "<input type=\"hidden\" name=\"p\" value=\"$_REQUEST[p]\" />\n";
 
@@ -335,7 +309,7 @@ EOT;
 	}
 
 	echo("</form>");
-    require_once("footer.inc.php");
+  require_once("footer.inc.php");
 }
 
 function register_exec()
@@ -353,21 +327,31 @@ function register_exec()
 
     	$arrUserProfileFields = $_ARCHON->getAllUserProfileFields();
     	$arrPatterns = $_ARCHON->getAllPatterns();
-    	
-        if(!empty($arrUserProfileFields))
+
+      if (empty($_REQUEST['firstname'])) {
+        $_ARCHON->declareError('Required field First Name is missing.');
+      }
+      if (empty($_REQUEST['lastname'])) {
+        $_ARCHON->declareError('Required field Last Name is missing.');
+      }
+      if (empty($_REQUEST['password'])) {
+        $_ARCHON->declareError('Required field Password is missing.');
+      }
+
+      if(!empty($arrUserProfileFields))
         {
         	foreach($arrUserProfileFields as $objUserProfileField)
         	{
         		if(!$_REQUEST['userprofilefields'][$objUserProfileField->ID]['value'] && ($objUserProfileField->Required || (isset($objUserProfileField->Countries[$_REQUEST['countryid']]) && $objUserProfileField->Countries[$_REQUEST['countryid']]->Required)))
         		{
-        			$_ARCHON->declareError("Could not store User: Required field $objUserProfileField->UserProfileField is empty.");
+        			$_ARCHON->declareError("Required field $objUserProfileField->UserProfileField is empty.");
         		}
         		
         		if($_REQUEST['userprofilefields'][$objUserProfileField->ID]['value'] && $objUserProfileField->PatternID)
         		{
         			if(!$arrPatterns[$objUserProfileField->PatternID]->match($_REQUEST['userprofilefields'][$objUserProfileField->ID]['value']))
         			{
-        				$_ARCHON->declareError("Could not store User: '{$_REQUEST['userprofilefields'][$objUserProfileField->ID]['value']}' is not a valid $objUserProfileField->UserProfileField.");
+        				$_ARCHON->declareError("'{$_REQUEST['userprofilefields'][$objUserProfileField->ID]['value']}' is not a valid $objUserProfileField->UserProfileField.");
         			}
         		}
                 
@@ -375,7 +359,7 @@ function register_exec()
                 {
                     if(($timeValue = strtotime($_REQUEST['userprofilefields'][$objUserProfileField->ID]['value'])) === false)
                     {
-                        $_ARCHON->declareError("Could not store User: strtotime() unable to parse value '{$_REQUEST['userprofilefields'][$objUserProfileField->ID]['value']}'.");
+                        $_ARCHON->declareError("strtotime() unable to parse value '{$_REQUEST['userprofilefields'][$objUserProfileField->ID]['value']}'.");
                     }
                     else
                     {
@@ -384,10 +368,9 @@ function register_exec()
                 }
         	}
         }
-        
         if($_REQUEST['password'] != $_REQUEST['confirmpassword'])
         {
-            $_ARCHON->declareError("Could not store User: Passwords do not match.");
+            $_ARCHON->declareError("Passwords do not match.");
         }
         elseif(!$_ARCHON->Error && $objUser->dbStore())
         {
@@ -451,6 +434,7 @@ function register_exec()
     }
     else
     {
+      $_ARCHON->sendMessage($msg);
         $_ARCHON->PublicInterface->Header->Message = $msg;
         register_initialize();
     }

@@ -20,38 +20,46 @@ isset($_ARCHON) or die();
 echo("<h1 id='titleheader'>" . strip_tags($_ARCHON->PublicInterface->Title) . "</h1>\n");
 research_displaycart();
 ?>
-<div class='userformbox bground'>
 <input type="hidden" name="ArrivalTime" value="<?php echo($ArrivalTimestamp); ?>" />
 <input type="hidden" name="DepartureTime" value="<?php echo($DepartureTimestamp); ?>" />
 <input type="hidden" name="AppointmentPurposeID" value="<?php echo($objAppointmentPurpose->ID); ?>" />
 <input type="hidden" name="Topic" value="<?php echo(encode($_REQUEST['topic'], ENCODE_HTML)); ?>" />
 <textarea name="ResearcherComments" style="display: none;"><?php echo(encode($_REQUEST['researchercomments'], ENCODE_HTML)); ?></textarea>
-  <p class="center">
-    <span class="bold">Verify Your Appointment</span><br/>
-    (To make changes, click Back in your browser.)
-  </p>
-  <div class="userformpair">
-    <div class="userformlabel">Date/Time of Arrival:</div>
-    <div class="userforminput"><?php echo(date(CONFIG_CORE_DATE_FORMAT, $ArrivalTimestamp)); ?></div>
+  <p class="center"><span class="bold">Verify Your Appointment</span><br/>(To make changes, click Back in your browser.)</p>
+  <div class="form-group">
+    <label class="control-label col-sm-4">Date/Time of Arrival:</label>
+    <div class="col-sm-8">
+      <p class="form-control-static"><?php echo(date(CONFIG_CORE_DATE_FORMAT, $ArrivalTimestamp)); ?></p>
+    </div>
   </div>
-  <div class="userformpair">
-    <div class="userformlabel">Estimated Date/Time of Departure:</div>
-    <div class="userforminput"><?php if($DepartureTimestamp) { echo(date(CONFIG_CORE_DATE_FORMAT, $DepartureTimestamp)); } else { echo("Unspecified"); } ?></div>
+  <div class="form-group">
+    <label class="control-label col-sm-4">Estimated Date/Time of Departure:</label>
+    <div class="col-sm-8">
+      <p class="form-control-static"><?php if($DepartureTimestamp) { echo(date(CONFIG_CORE_DATE_FORMAT, $DepartureTimestamp)); } else { echo("Unspecified"); } ?></p>
+    </div>
   </div>
-  <div class="userformpair">
-    <div class="userformlabel">Purpose:</div>
-    <div class="userforminput"><?php if($objAppointmentPurpose->ID) { echo($objAppointmentPurpose->toString()); } ?></div>
+  <div class="form-group">
+    <label class="control-label col-sm-4">Purpose:</label>
+    <div class="col-sm-8">
+      <p class="form-control-static"><?php if($objAppointmentPurpose->ID) { echo($objAppointmentPurpose->toString()); } ?></p>
+    </div>
   </div>
-  <div class="userformpair">
-    <div class="userformlabel">Topic of Research:</div>
-    <div class="userforminput"><?php echo(encode($_REQUEST['topic'], ENCODE_HTML)); ?></div>
+  <div class="form-group">
+    <label class="control-label col-sm-4">Topic of Research:</label>
+    <div class="col-sm-8">
+      <p class="form-control-static"><?php echo(encode($_REQUEST['topic'], ENCODE_HTML)); ?></p>
+    </div>
   </div>
-  <div class="userformpair">
-    <div class="userformlabel">Additional Comments for the Archivist:</div>
-    <div class="userforminput"><?php echo(nl2br(encode($_REQUEST['researchercomments'], ENCODE_HTML))); ?></div>
+  <div class="form-group">
+    <label class="control-label col-sm-4">Additional Comments for the Archivist:</label>
+    <div class="col-sm-8">
+      <p class="form-control-static"><?php echo(nl2br(encode($_REQUEST['researchercomments'], ENCODE_HTML))); ?></p>
+    </div>
   </div>
-  <div id="userformsubmit">
-    <input type="submit" value="Finalize Appointment Request" class="button">
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-8">
+      <input type="submit" class="btn btn-primary" value="Finalize Appointment Request" />
+    </div>
   </div>
 </div>
 <script type="text/javascript">

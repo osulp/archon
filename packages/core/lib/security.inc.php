@@ -33,7 +33,7 @@ class Security extends AObject
       {
          if(!$this->verifyCredentials($_REQUEST['archonlogin'], $_REQUEST['archonpassword'], $_REQUEST['rememberme']))
          {
-            $_ARCHON->declareError("Authentication Failed");
+            $_ARCHON->declareError("Authentication Failed.\nPlease check your login and password and try again.");
          }
       }
 
