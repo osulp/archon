@@ -144,6 +144,9 @@ function digitallibrary_search()
       }
    }
 }
-
-$_ARCHON->addPublicSearchFunction('digitallibrary_search', 20);
+/**
+ * Don't include Digital Library contents in search results.
+ * https://github.com/osulp/archon/issues/87
+ */
+//$_ARCHON->addPublicSearchFunction('digitallibrary_search', 20);
       ?>

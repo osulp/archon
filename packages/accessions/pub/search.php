@@ -76,4 +76,4 @@ function accessions_search()
     }
 }
 
-$_ARCHON->addPublicSearchFunction('accessions_search', 30);
+$_ARCHON->addPublicSearchFunction('accessions_search', 60);
