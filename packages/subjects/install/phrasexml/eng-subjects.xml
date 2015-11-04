@@ -82,7 +82,10 @@
 				<phrase name='subjects_typedshowbeginningwith' regularexpression=''>
 					Show "$1" Subjects Beginning with
 				</phrase>
-			</phrasetype>
+                <phrase name='subjects_chooseletter' regularexpression=''>
+                    Choose a letter above to start browsing.
+                </phrase>
+            </phrasetype>
 		</module>
 		<module script='subjects'>
 			<phrasetype name='Description'>

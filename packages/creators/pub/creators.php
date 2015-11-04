@@ -162,7 +162,7 @@ function generate_creator_atoz_list($arrCreatorCount, $strViewAll) {
   $creator_list = '';
   $selected = (isset($_REQUEST['char'])) ? $_REQUEST['char'] : '';
   if (empty($arrCreatorCount['#']) || '#' == $selected) {
-    $creator_list .= '<span class="browse-letter">#</span>';
+    $creator_list .= '<span class="browse-letter selected-char">#</span>';
   }
   else {
     $creator_list .= '<a class="browse-letter" href="?p=' . $_REQUEST['p'] . '&amp;char=' . urlencode('#') . '">#</a>';
@@ -171,7 +171,7 @@ function generate_creator_atoz_list($arrCreatorCount, $strViewAll) {
   for ($i = 65; $i < 91; $i++) {
     $char = chr($i);
     if ($char == $selected) {
-      $creator_list .= '<span class="browse-letter">' . $char . '</span>';
+      $creator_list .= '<span class="browse-letter selected-char">' . $char . '</span>';
     }
     else {
       if (!empty($arrCreatorCount[encoding_strtolower($char)])) {

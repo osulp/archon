@@ -199,7 +199,7 @@ function generate_collection_atoz_list($arrCollectionCount, $ShowBooks, $strView
   {
     $char = chr($i);
     if ($char == $selected) {
-      $collection_list .= '<span class="browse-letter">'. $char . '</span>';
+      $collection_list .= '<span class="browse-letter selected-char">'. $char . '</span>';
     } else {
       if(!empty($arrCollectionCount[encoding_strtolower($char)]))
       {

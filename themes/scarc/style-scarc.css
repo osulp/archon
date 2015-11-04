@@ -238,6 +238,11 @@ a.nowrap:link, a.nowrap:visited, a.nowrap:hover, a.nowrap:active  { white-space:
     padding-right: 20px;
 }
 
+.selected-char {
+    font-weight: bold;
+    color: #999999;
+}
+
 p {
 	margin-top: 0px; 
 	padding-top: 0px;
