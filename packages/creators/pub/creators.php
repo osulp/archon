@@ -12,17 +12,13 @@ if(!$_ARCHON->PublicInterface->Templates['creators']['Creator'])
    $_ARCHON->declareError("Could not display Creator: Creator template not defined for template set {$_ARCHON->PublicInterface->TemplateSet}.");
 }
 
-
 $in_Char = isset($_REQUEST['char']) ? $_REQUEST['char'] : NULL;
-
 $in_Browse = isset($_REQUEST['browse']) ? true : false;
-
 
 $objCreatorsTitlePhrase = Phrase::getPhrase('creators_title', PACKAGE_CREATORS, 0, PHRASETYPE_PUBLIC);
 $strCreatorsTitle = $objCreatorsTitlePhrase ? $objCreatorsTitlePhrase->getPhraseValue(ENCODE_HTML) : 'Browse by Creator';
 $_ARCHON->PublicInterface->Title = $strCreatorsTitle;
 $_ARCHON->PublicInterface->addNavigation($_ARCHON->PublicInterface->Title, "?p={$_REQUEST['p']}");
-
 
 if($in_Char)
 {
@@ -31,79 +27,26 @@ if($in_Char)
 elseif($in_Browse)
 {
    $in_Page = $_REQUEST['page'] ? $_REQUEST['page'] : 1;
-
    $vars = creators_listAllCreators($in_Page);
 }
 else
 {
-   $vars = creators_main();
+  $vars['strPageTitle'] = strip_tags($_ARCHON->PublicInterface->Title);
+  $vars['strBackgroundID'] = '';
+  $objChooseLetterPhrase = Phrase::getPhrase('creators_chooseletter', PACKAGE_CREATORS, 0, PHRASETYPE_PUBLIC);
+  $vars['strSubTitle'] = $objChooseLetterPhrase ? $objChooseLetterPhrase->getPhraseValue(ENCODE_HTML) : 'Choose a letter above to start browsing.';
 }
+$strViewAll = $objViewAllPhrase ? $objViewAllPhrase->getPhraseValue(ENCODE_HTML) : 'View All';
+$arrCreatorCount = $_ARCHON->countCreators(true);
+$vars['aToZList'] = generate_creator_atoz_list($arrCreatorCount, $strViewAll);
 
 require_once("header.inc.php");
-
 echo($_ARCHON->PublicInterface->executeTemplate('creators', 'CreatorNav', $vars));
-
 require_once("footer.inc.php");
-
-
-function creators_main()
-{
-   global $_ARCHON;
-
-   
-
-   $objShowBeginningWithPhrase = Phrase::getPhrase('creators_showbeginningwith', PACKAGE_CREATORS, 0, PHRASETYPE_PUBLIC);
-   $strShowBeginningWith = $objShowBeginningWithPhrase ? $objShowBeginningWithPhrase->getPhraseValue(ENCODE_HTML) : 'Show Creators Beginning with';
-
-   $objViewAllPhrase = Phrase::getPhrase('viewall', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-   $strViewAll = $objViewAllPhrase ? $objViewAllPhrase->getPhraseValue(ENCODE_HTML) : 'View All';
-
-   $arrCreatorCount = $_ARCHON->countCreators(true);
-
-	$vars['strPageTitle'] = strip_tags($_ARCHON->PublicInterface->Title);
-	$vars['strSubTitle'] = $strShowBeginningWith.":";
-	$vars['strSubTitleClasses'] = 'bold center';
-	$vars['strBackgroundID'] = '';
-
-	$content = "<div class=\"center\">\n";
-
-	 if(!empty($arrCreatorCount['#']))
-	 {
-		$content .= '<a class="browse-letter" href="?p='. $_REQUEST['p'] . '&amp;char=' . urlencode('#'). '">#</a>';
-	 }
-	 else
-	 {
-		$content .= '<span class="browse-letter">#</span>';
-	 }
-
-	 for($i = 65; $i < 91; $i++)
-	 {
-		$char = chr($i);
-
-		if(!empty($arrCreatorCount[encoding_strtolower($char)]))
-		{
-		   $content .= '<a class="browse-letter" href="?p='. $_REQUEST['p'] .'&amp;char='. $char .'">'. $char .'</a>';
-		}
-		else
-		{
-		   $content .= '<span class="browse-letter">' . $char . '</span>';
-		}
-	 }
-
-	$content .= "<br /><br /><a href='?p={$_REQUEST['p']}&amp;browse'>{$strViewAll}</a>";
-	$content .= "</div>\n";
-
-	$vars['content'] = $content;
-
-	return $vars;
-}
-
 
 function creators_listCreatorsForChar($Char)
 {
    global $_ARCHON;
-
-   
 
    $objNavBeginningWithPhrase = Phrase::getPhrase('creators_navbeginningwith', PACKAGE_CREATORS, 0, PHRASETYPE_PUBLIC);
    $strNavBeginningWith = $objNavBeginningWithPhrase ? $objNavBeginningWithPhrase->getPhraseValue(ENCODE_HTML) : 'Beginning with "$1"';
@@ -212,4 +155,40 @@ function creators_listAllCreators($Page)
 
 	$vars['content'] = $content;
 	return $vars;
+}
+
+function generate_creator_atoz_list($arrCreatorCount, $strViewAll) {
+
+  $creator_list = '';
+  $selected = (isset($_REQUEST['char'])) ? $_REQUEST['char'] : '';
+  if (empty($arrCreatorCount['#']) || '#' == $selected) {
+    $creator_list .= '<span class="browse-letter">#</span>';
+  }
+  else {
+    $creator_list .= '<a class="browse-letter" href="?p=' . $_REQUEST['p'] . '&amp;char=' . urlencode('#') . '">#</a>';
+  }
+
+  for ($i = 65; $i < 91; $i++) {
+    $char = chr($i);
+    if ($char == $selected) {
+      $creator_list .= '<span class="browse-letter">' . $char . '</span>';
+    }
+    else {
+      if (!empty($arrCreatorCount[encoding_strtolower($char)])) {
+        $creator_list .= '<a class="browse-letter" href="?p=' . $_REQUEST['p'] . '&amp;char=' . $char . '">' . $char . '</a>';
+      }
+      else {
+        $creator_list .= '<span class="browse-letter">' . $char . '</span>';
+      }
+    }
+  }
+
+  if (!empty($creator_list)) {
+    $creator_list = '<hr /><div class="center"><h3>Show Creators Beginning With:</h3>' . $creator_list;
+    if ($strViewAll) {
+      $creator_list .= "<br /><a href='?p={$_REQUEST['p']}&amp;browse'>{$strViewAll}</a>";
+    }
+    $creator_list .= "</div><hr />";
+  }
+  return $creator_list;
 }

@@ -1982,3 +1982,11 @@ figcaption {
 legend {
     font-size: 1.3em;
 }
+
+.listitemhead {
+    font-size: 1.1em;
+}
+
+.bold {
+    font-weight: bold;
+}

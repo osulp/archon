@@ -1,6 +1,6 @@
 <?php
 /**
- * Digital content navigation template
+ * Creator navigation template
  *
  *
  * The Archon API is also available through the variable:
@@ -23,4 +23,3 @@ isset($_ARCHON) or die();
 <div class="bground beginningwith"<?php echo($strBackgroundID); ?>>
   <?php echo($content); ?>
 </div>
-<?php if(isset($pages)){ echo($pages); } ?>

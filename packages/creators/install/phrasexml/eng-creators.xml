@@ -78,6 +78,9 @@
 				<phrase name='creators_showbeginningwith' regularexpression=''>
 					Show Creators Beginning with
 				</phrase>
+                <phrase name='creators_chooseletter' regularexpression=''>
+                    Choose a letter above to start browsing.
+                </phrase>
 				<phrase name='creators_title' regularexpression=''>
 					Browse by Creator
 				</phrase>
