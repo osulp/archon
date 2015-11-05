@@ -156,16 +156,16 @@ function triggerResearchCartEvent(anchor, params)
          if(parameters['f'] == 'add')
          {
             img.attr('src', src.replace('addto', 'removefrom'));
-            img.attr('title', 'Remove from your cart.');
-            img.attr('alt', 'Remove from your cart.');
+            img.attr('title', 'Remove from your shelf.');
+            img.attr('alt', 'Remove from your shelf.');
             $(anchor).removeClass('research_add');
             $(anchor).addClass('research_delete');
             $('#viewcartlink:hidden').show();
 
          }else{
             img.attr('src', src.replace('removefrom', 'addto'));
-            img.attr('title', 'Add to your cart.');
-            img.attr('alt', 'Add to your cart.');
+            img.attr('title', 'Add to your shelf.');
+            img.attr('alt', 'Add to your shelf.');
             $(anchor).removeClass('research_delete');
             $(anchor).addClass('research_add');
             if(data.response.cartcount == 0 && $('#viewcartlink').hasClass('hidewhenempty')){
