@@ -20,7 +20,7 @@ echo("<h1 id='titleheader'>" . strip_tags($_ARCHON->PublicInterface->Title) . "<
 $_ARCHON->Security->Session->ResearchCart->getCart();
 if(!$_ARCHON->Security->Session->ResearchCart->getCartCount())
 {
-   echo("<div id='researchcart' class='mdround center'><strong>Your research materials cart is currently empty.</strong>");
+   echo("<div id='researchcart' class='mdround center'><strong>".$_ARCHON->getPhrase('research_cartempty', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)->getPhraseValue(ENCODE_HTML)."</strong>");
    if($_ARCHON->Security->isAuthenticated())
    {
       echo("<strong>You may wish to add something to it before setting up an appointment.</strong><br/>");
@@ -30,7 +30,7 @@ if(!$_ARCHON->Security->Session->ResearchCart->getCartCount())
 }
 else
 {
-   echo("<div class='listitemhead bold'>Your cart holds:</div>");
+   echo("<div class='listitemhead bold'>".$_ARCHON->getPhrase('research_cartholds', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)->getPhraseValue(ENCODE_HTML)."</div>");
 }
 
 research_displaycart();

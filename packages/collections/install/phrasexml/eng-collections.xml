@@ -218,8 +218,8 @@
 				<phrase name='error_deactivate' regularexpression='Could not deactivate ([\w]+)'>
 					Could not deactivate $1
 				</phrase>
-				<phrase name='error_emptycart' regularexpression='Cart can not be empty\.'>
-					Cart can not be empty.
+				<phrase name='error_emptycart' regularexpression='Shelf can not be empty\.'>
+					Shelf can not be empty.
 				</phrase>
 				<phrase name='error_noempty' regularexpression='Could not empty ([\w]+)'>
 					Could not empty $1
@@ -266,11 +266,11 @@
 				<phrase name='error_send' regularexpression='Could not send ([\w]+)( [\w]+)?'>
 					Could not send $1$2
 				</phrase>
-				<phrase name='itemaddedtocart' regularexpression='Item added to research cart\.'>
-					Item added to research cart.
+				<phrase name='itemaddedtocart' regularexpression='Item added to research shelf\.'>
+					Item added to research shelf.
 				</phrase>
-				<phrase name='itemdeletedfromcart' regularexpression='Item deleted from research cart\.'>
-					Item deleted from research cart.
+				<phrase name='itemdeletedfromcart' regularexpression='Item deleted from research shelf\.'>
+					Item deleted from research shelf.
 				</phrase>
 				<phrase name='profileupdated' regularexpression='Profile updated successfully\.'>
 					Profile updated successfully.
@@ -717,11 +717,17 @@
                 <phrase name='repository' regularexpression=''>
                     Repository:
                 </phrase>
+                <phrase name='research_cartempty' regularexpression=''>
+                    Your research shelf is currently empty.
+                </phrase>
+                <phrase name='research_cartholds' regularexpression=''>
+                    Your shelf holds:
+                </phrase>
                 <phrase name='research_carttitle' regularexpression=''>
-                    My Research Cart
+                    My Research Shelf
                 </phrase>
                 <phrase name='research_email_cartappend' regularexpression=''>
-                    Your 'cart' currently holds the following materials.  This list will be appended to your email message.
+                    Your 'shelf' currently holds the following materials.  This list will be appended to your email message.
                 </phrase>
                 <phrase name='research_email_ext' regularexpression=''>
                     Ext
@@ -751,7 +757,7 @@
                     Send Email
                 </phrase>
                 <phrase name='research_verify_nav' regularexpression=''>
-                    My Research Request Cart
+                    My Research Shelf
                 </phrase>
                 <phrase name='research_verify_title' regularexpression=''>
                     Verify Research Appointment
@@ -871,16 +877,16 @@
                     Technical Notes:
                 </phrase>
                 <phrase name='tostring_addto' regularexpression=''>
-                    Add to your cart.
+                    Add to your shelf.
                 </phrase>
                 <phrase name='tostring_remove' regularexpression=''>
-                    Remove from your cart.
+                    Remove from your shelf.
                 </phrase>
                 <phrase name='unprocessed_materials' regularexpression=''>
                     Unprocessed Materials
                 </phrase>
                 <phrase name='view_cart' regularexpression=''>
-                    View Cart
+                    View Shelf
                 </phrase>
 			</phrasetype>
 		</module>
