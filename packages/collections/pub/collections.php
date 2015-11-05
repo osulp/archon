@@ -11,11 +11,11 @@ $in_Char = isset($_REQUEST['char']) ? $_REQUEST['char'] : NULL;
 $in_Book = isset($_REQUEST['books']) ? true : false;
 $in_Browse = isset($_REQUEST['browse']) ? true : false;
 
+$objCollectionsTitlePhrase = Phrase::getPhrase('collections_title', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
+$strCollectionsTitle = $objCollectionsTitlePhrase ? $objCollectionsTitlePhrase->getPhraseValue(ENCODE_HTML) : 'Browse By Collection Title';
+
 if(!$in_Book)
 {
-   $objCollectionsTitlePhrase = Phrase::getPhrase('collections_title', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-   $strCollectionsTitle = $objCollectionsTitlePhrase ? $objCollectionsTitlePhrase->getPhraseValue(ENCODE_HTML) : 'Browse By Collection Title';
-
    $_ARCHON->PublicInterface->Title = $strCollectionsTitle;
    $_ARCHON->PublicInterface->addNavigation($_ARCHON->PublicInterface->Title, "?p={$_REQUEST['p']}");
 }
@@ -23,7 +23,6 @@ else
 {
    $objBooksTitlePhrase = Phrase::getPhrase('collections_booktitle', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
    $strBooksTitle = $objBooksTitlePhrase ? $objBooksTitlePhrase->getPhraseValue(ENCODE_HTML) : 'Browse By Book Title';
-
 
    $_ARCHON->PublicInterface->Title = $strBooksTitle;
    $_ARCHON->PublicInterface->addNavigation($_ARCHON->PublicInterface->Title, "?p={$_REQUEST['p']}&amp;books");
@@ -36,102 +35,23 @@ if($in_Char)
 elseif($in_Browse)
 {
    $in_Page = $_REQUEST['page'] ? $_REQUEST['page'] : 1;
-
    $vars = collections_listAllCollections($in_Page, $in_Book);
-
 }
 else
 {
-  $vars = collections_main($in_Book);
+  $vars['strPageTitle'] = $strCollectionsTitle;
+  $objChooseLetterPhrase = Phrase::getPhrase('collections_chooseletter', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
+  $vars['strSubTitle'] = $objChooseLetterPhrase ? $objChooseLetterPhrase->getPhraseValue(ENCODE_HTML) : 'Choose a letter above to start browsing.';
 }
+
+$arrCollectionCount = $_ARCHON->countCollections(true, false, $_SESSION['Archon_RepositoryID']);
+$objViewAllPhrase = Phrase::getPhrase('viewall', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+$strViewAll = $objViewAllPhrase ? $objViewAllPhrase->getPhraseValue(ENCODE_HTML) : 'View All';
+$vars['aToZList'] = generate_collection_atoz_list($arrCollectionCount, $in_Book, $strViewAll);
 
 require_once("header.inc.php");
 echo($_ARCHON->PublicInterface->executeTemplate('collections', 'CollectionsNav', $vars));
 require_once("footer.inc.php");
-
-
-function collections_main($ShowBooks)
-{
-   global $_ARCHON;
-
-   $objViewAllPhrase = Phrase::getPhrase('viewall', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-   $strViewAll = $objViewAllPhrase ? $objViewAllPhrase->getPhraseValue(ENCODE_HTML) : 'View All';
-
-
-	$vars['strPageTitle'] = strip_tags($_ARCHON->PublicInterface->Title);
-	$vars['strSubTitleClasses'] = 'bold center';
-	$vars['strBackgroundID'] = '';
-	$content = '<div class="center">';
-
-   if($ShowBooks)
-   {
-      $objBrowseBooksBeginningPhrase = Phrase::getPhrase('collections_browsebooksbeginning', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-      $strBrowseBooksBeginning = $objBrowseBooksBeginningPhrase ? $objBrowseBooksBeginningPhrase->getPhraseValue(ENCODE_HTML) : 'Browse Books Beginning With';
-
-      $arrCollectionCount = $_ARCHON->countBooks(true);
-      $vars['strSubTitle'] = $strBrowseBooksBeginning.":";
-   }
-   else
-   {
-      $objBrowseHoldingsBeginningPhrase = Phrase::getPhrase('collections_browseholdingsbeginning', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-      $strBrowseHoldingsBeginning = $objBrowseHoldingsBeginningPhrase ? $objBrowseHoldingsBeginningPhrase->getPhraseValue(ENCODE_HTML) : 'Browse Holdings Beginning With';
-
-      $arrCollectionCount = $_ARCHON->countCollections(true, false, $_SESSION['Archon_RepositoryID']);
-      $vars['strSubTitle'] = $strBrowseHoldingsBeginning.":";
-   }
-
-      for($i = 65; $i < 91; $i++)
-      {
-         $char = chr($i);
-
-         if(!empty($arrCollectionCount[encoding_strtolower($char)]))
-         {
-            $href = "?p={$_REQUEST['p']}&amp;char=$char";
-            if($ShowBooks)
-            {
-               $href .= "&amp;books";
-            }
-            $content .= '<a class="browse-letter" href="'.$href.'">'.$char.'</a>';
-         }
-         else
-         {
-            $content .= '<span class="browse-letter">'. $char . '</span>';
-         }
-      }
-      $bookurl = ($ShowBooks) ? '&amp;books' : '';
-      $content .= "<br /><br /><a href='?p={$_REQUEST['p']}&amp;browse{$bookurl}'>{$strViewAll}</a>";
-
-   if($ShowBooks)
-   {
-      $objBrowseAllCollectionsPhrase = Phrase::getPhrase('collections_browseallcollections', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-      $strBrowseAllCollections = $objBrowseAllCollectionsPhrase ? $objBrowseAllCollectionsPhrase->getPhraseValue(ENCODE_HTML) : 'Browse All Collections';
-
-      $content .= "<a href='?p={$_REQUEST['p']}'>{$strBrowseAllCollections}</a>";
-   }
-   else
-   {
-      if($_ARCHON->countBooks())
-      {
-         $objBrowseBooksCollectionPhrase = Phrase::getPhrase('collections_browsebookscollection', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-         $strBrowseBooksCollection = $objBrowseBooksCollectionPhrase ? $objBrowseBooksCollectionPhrase->getPhraseValue(ENCODE_HTML) : 'Browse Books Collection';
-         $content .= "<a href='?p={$_REQUEST['p']}&amp;books'>{$strBrowseBooksCollection}</a>";
-      }
-   }
-
-   if(CONFIG_COLLECTIONS_ENABLE_PUBLIC_EAD_LIST)
-   {
-      $objViewEADListPhrase = Phrase::getPhrase('collections_vieweadlist', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-      $strViewEADList = $objViewEADListPhrase ? $objViewEADListPhrase->getPhraseValue(ENCODE_HTML) : 'List links to EAD files';
-
-      $content .=  "<br /><br /><a rel='external' href='?p=collections/eadlist'>{$strViewEADList}</a>";
-   }
-
-	$content .= '</div>';
-
-   $vars['content'] = $content;
-	return $vars;
-}
-
 
 function collections_listAllCollections($Page, $ShowBooks)
 {
@@ -218,7 +138,7 @@ function collections_listCollectionsForChar($Char, $ShowBooks)
    $vars['strBackgroundID'] = ' id="listitemwrapper"';
    $content = '';
 
-   if(!$_ARCHON->Error)
+  if(!$_ARCHON->Error)
    {
       if(!$ShowBooks)
       {
@@ -263,4 +183,46 @@ function collections_listCollectionsForChar($Char, $ShowBooks)
    return $vars;
 }
 
-?>
+/**
+ * Generates the HTML for the A to Z list of collections.
+ *
+ * @param $arrCollectionCount
+ * @param $ShowBooks
+ * @param $strViewAll
+ * @return string
+ */
+function generate_collection_atoz_list($arrCollectionCount, $ShowBooks, $strViewAll) {
+
+  $collection_list = '';
+  $selected = (isset($_REQUEST['char'])) ? $_REQUEST['char'] : '';
+  for($i = 65; $i < 91; $i++)
+  {
+    $char = chr($i);
+    if ($char == $selected) {
+      $collection_list .= '<span class="browse-letter selected-char">'. $char . '</span>';
+    } else {
+      if(!empty($arrCollectionCount[encoding_strtolower($char)]))
+      {
+        $href = "?p={$_REQUEST['p']}&amp;char=$char";
+        if($ShowBooks)
+        {
+          $href .= "&amp;books";
+        }
+        $collection_list .= '<a class="browse-letter" href="'.$href.'">'.$char.'</a>';
+      }
+      else
+      {
+        $collection_list .= '<span class="browse-letter">'. $char . '</span>';
+      }
+    }
+  }
+  $bookurl = ($ShowBooks) ? '&amp;books' : '';
+  if (!empty($collection_list)) {
+    $collection_list = '<hr /><div class="center"><h3>Show Collections Beginning With:</h3>' . $collection_list;
+    if ($strViewAll) {
+      $collection_list .= "<br /><a href='?p={$_REQUEST['p']}&amp;browse{$bookurl}'>{$strViewAll}</a>";
+    }
+    $collection_list .= '</div><hr />';
+  }
+  return $collection_list;
+}

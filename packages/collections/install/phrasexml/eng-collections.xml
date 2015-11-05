@@ -621,6 +621,9 @@
                 <phrase name='collections_browsebooksbeginning' regularexpression=''>
                     Browse Books Beginning With
                 </phrase>
+                <phrase name='collections_chooseletter' regularexpression=''>
+                    Choose a letter above to start browsing.
+                </phrase>
                 <phrase name='collections_browseholdingsbeginning' regularexpression=''>
                     Browse Holdings Beginning With
                 </phrase>

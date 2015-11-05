@@ -84,4 +84,4 @@ function creators_search()
     }
 }
 
-$_ARCHON->addPublicSearchFunction('creators_search', 40);
+$_ARCHON->addPublicSearchFunction('creators_search', 50);

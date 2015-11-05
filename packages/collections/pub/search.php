@@ -428,7 +428,7 @@ function containerlist_search() {
 }
 
 $_ARCHON->addPublicSearchFunction('collections_search', 10);
-$_ARCHON->addPublicSearchFunction('books_search', 10);
-$_ARCHON->addPublicSearchFunction('containerlist_search', 10);
+$_ARCHON->addPublicSearchFunction('books_search', 30);
+$_ARCHON->addPublicSearchFunction('containerlist_search', 20);
 
 ?>

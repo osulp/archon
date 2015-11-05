@@ -68,5 +68,5 @@ function subjects_search()
     }
 }
 
-$_ARCHON->addPublicSearchFunction('subjects_search', 50);
+$_ARCHON->addPublicSearchFunction('subjects_search', 40);
 ?>

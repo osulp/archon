@@ -8,14 +8,10 @@
 
 isset($_ARCHON) or die();
 
-
-
 $in_ID = isset($_REQUEST['id']) ? $_REQUEST['id'] : NULL;
 $in_Char = isset($_REQUEST['char']) ? $_REQUEST['char'] : NULL;
 $in_SubjectTypeID = isset($_REQUEST['subjecttypeid']) ? $_REQUEST['subjecttypeid'] : 0;
 $in_Browse = isset($_REQUEST['browse']) ? true : false;
-
-
 
 $objSubjectsTitlePhrase = Phrase::getPhrase('subjects_title', PACKAGE_SUBJECTS, 0, PHRASETYPE_PUBLIC);
 $strSubjectsTitle = $objSubjectsTitlePhrase ? $objSubjectsTitlePhrase->getPhraseValue(ENCODE_HTML) : 'Browse by Subject';
@@ -41,20 +37,23 @@ elseif($in_Char)
 elseif($in_Browse)
 {
    $in_Page = $_REQUEST['page'] ? $_REQUEST['page'] : 1;
-
    $vars = subjects_listAllSubjects($in_Page, $in_SubjectTypeID);
 }
 else
 {
-   $vars = subjects_main($in_SubjectTypeID);
+  $vars['strPageTitle'] = strip_tags($_ARCHON->PublicInterface->Title);
+  $objChooseLetterPhrase = Phrase::getPhrase('subjects_chooseletter', PACKAGE_SUBJECTS, 0, PHRASETYPE_PUBLIC);
+  $vars['strSubTitle'] = $objChooseLetterPhrase ? $objChooseLetterPhrase->getPhraseValue(ENCODE_HTML) : 'Choose a letter above to start browsing.';
 }
 
+$objViewAllPhrase = Phrase::getPhrase('viewall', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+$strViewAll = $objViewAllPhrase ? $objViewAllPhrase->getPhraseValue(ENCODE_HTML) : 'View All';
+$arrSubjectCount = $_ARCHON->countSubjects(true, $SubjectTypeID);
+$vars['aToZList'] = generate_subject_atoz_list($arrSubjectCount, $in_SubjectTypeID, $strViewAll);
+
 require_once("header.inc.php");
-
 echo($_ARCHON->PublicInterface->executeTemplate('subjects', 'SubjectNav', $vars));
-
 require_once("footer.inc.php");
-
 
 function subjects_main($SubjectTypeID)
 {
@@ -153,8 +152,6 @@ function subjects_main($SubjectTypeID)
          }
       }
    }
-
-
 
    $vars['content'] = $content;
    $vars['subTopics'] = $subTopics;
@@ -373,8 +370,45 @@ function subjects_listAllSubjects($Page, $SubjectTypeID)
    return $vars;
 }
 
+function generate_subject_atoz_list($arrSubjectCount, $SubjectTypeID, $strViewAll) {
 
+  $subject_list = '';
+  $selected = (isset($_REQUEST['char'])) ? $_REQUEST['char'] : '';
+  if (empty($arrSubjectCount['#']) || '#' == $selected) {
+    $subject_list .= '<span class="browse-letter selected-char">#</span>';
+  }
+  else {
+    $href = "?p={$_REQUEST['p']}&amp;char=" . urlencode('#');
+    if ($SubjectTypeID) {
+      $href .= "&amp;subjecttypeid=$SubjectTypeID";
+    }
+    $subject_list .= '<a class="browse-letter" href="' . $href . '">#</a>';
+  }
 
-
-
-?>
+  for ($i = 65; $i < 91; $i++) {
+    $char = chr($i);
+    if ($char == $selected) {
+      $subject_list .= '<span class="browse-letter selected-char">' . $char . '</span>';
+    }
+    else {
+      if (!empty($arrSubjectCount[encoding_strtolower($char)])) {
+        $href = "?p={$_REQUEST['p']}&amp;char=$char";
+        if ($SubjectTypeID) {
+          $href .= "&amp;subjecttypeid=$SubjectTypeID";
+        }
+        $subject_list .= '<a class="browse-letter" href="' . $href . '">' . $char . '</a>';
+      }
+      else {
+        $subject_list .= '<span class="browse-letter">' . $char . '</span>';
+      }
+    }
+  }
+  if (!empty($subject_list)) {
+    $subject_list = '<hr /><div class="center"><h3>Show People, Places, and Topics Beginning With:</h3>' . $subject_list;
+    if ($strViewAll) {
+      $subject_list .= "<br /><a href='?p={$_REQUEST['p']}&amp;browse&amp;subjecttypeid={$SubjectTypeID}'>{$strViewAll}</a>";
+    }
+    $subject_list .= "</div><hr />";
+  }
+  return $subject_list;
+}
