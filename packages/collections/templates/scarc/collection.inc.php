@@ -89,10 +89,13 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
           href="?p=collections/findingaid&amp;id=<?php echo $objCollection->ID; ?>&amp;templateset=print&amp;disabletheme=1"><span
           class="glyphicon glyphicon-print"></span> <?php echo $printerFriendly; ?></a>
       </p>
+      <?php
+      if(!$_ARCHON->Security->userHasAdministrativeAccess())
+      {
+      ?>
       <p><a
           href="?p=collections/research&amp;f=email&amp;repositoryid=<?php echo $repositoryid; ?>&amp;referer="<?php echo urlencode($_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]); ?>"><span
           class="glyphicon glyphicon-envelope"></span> <?php echo $emailUs; ?></a></p>
-
       <p><?php
         if (defined('PACKAGE_COLLECTIONS')) {
           $_ARCHON->Security->Session->ResearchCart->getCart();
@@ -101,7 +104,9 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
           $hidden = ($_ARCHON->Repository->ResearchFunctionality & RESEARCH_COLLECTIONS || $EntryCount) ? '' : "style='display:none'";
           echo("<span id='viewcartlink' class='$class' $hidden><a href='?p=collections/research&amp;f=cart&amp;referer=" . urlencode($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) . "'><span class=\"glyphicon glyphicon-shopping-cart\"></span> " . $_ARCHON->getPhrase('view_cart', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
               ->getPhraseValue(ENCODE_HTML) . "</a></span>");
-        } ?>
+        }
+      }
+        ?>
       </p>
 
 <?php
