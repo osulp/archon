@@ -4,9 +4,6 @@ isset($_ARCHON) or die();
 echo("<h1 id='titleheader'>" . strip_tags($_ARCHON->PublicInterface->Title) . "</h1>\n");
 
 ?>
-
-<h2 style='color:red'>Generic privacy note--must be tailored for use at your institution!!!</h2>
-
 <h2 style='text-align:left'>Cookies</h2>
 
 <p>Your privacy is important to us.  We have developed this note to inform you of ways in which we collect, store, and use information you provide to us.</p>
