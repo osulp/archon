@@ -187,7 +187,7 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
        src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/osu-tag.gif" width="101" height="119" alt="Oregon State University" title="Oregon State University" /></a><h1 class="scarctitle"><a href="http://scarc.library.oregonstate.edu">Special Collections & Archives<br />Research Center</a></h1></div>
     <div id="header-nav">
       <ul id="nav">
-        <li><a href="?p=collections/collections">Collections</a><ul>
+        <li><a href="index.php">Collections</a><ul>
             <li><a href="?p=collections/collections">Collections by Title</a>
             <li><a href="?p=collections/classifications">Collections by Type</a></li>
             <li><a href="?p=subjects/subjects">People, Places, and Topics</a></li>
