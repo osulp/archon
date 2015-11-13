@@ -66,8 +66,8 @@ function register_form()
     $strSubmit = $objSubmitPhrase ? $objSubmitPhrase->getPhraseValue(ENCODE_HTML) : 'Submit';
     $objThankYouPhrase = Phrase::getPhrase('register_thankyou', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
     $strThankYou = $objThankYouPhrase ? $objThankYouPhrase->getPhraseValue(ENCODE_HTML) : 'Thank you for registering.';
-    $objPrivacyNotePhrase = Phrase::getPhrase('register_privacynote', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strPrivacyNote = $objPrivacyNotePhrase ? $objPrivacyNotePhrase->getPhraseValue(ENCODE_HTML) : 'Privacy Note';
+    $objPrivacyNotePhrase = Phrase::getPhrase('privacy_title', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+    $strPrivacyNote = $objPrivacyNotePhrase ? $objPrivacyNotePhrase->getPhraseValue(ENCODE_HTML) : 'Privacy Policy';
 
 	$strPageTitle = strip_tags($_ARCHON->PublicInterface->Title);
 
