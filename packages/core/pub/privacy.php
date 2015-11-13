@@ -4,7 +4,7 @@ isset($_ARCHON) or die();
 
 
 $objPrivacyTitlePhrase = Phrase::getPhrase('privacy_title', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-$strPrivacyTitle = $objPrivacyTitlePhrase ? $objPrivacyTitlePhrase->getPhraseValue(ENCODE_HTML) : 'Privacy Note';
+$strPrivacyTitle = $objPrivacyTitlePhrase ? $objPrivacyTitlePhrase->getPhraseValue(ENCODE_HTML) : 'Privacy Policy';
 
 $_ARCHON->PublicInterface->Title = $strPrivacyTitle;
 

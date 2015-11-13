@@ -74,8 +74,8 @@ function editprofile_form()
   $strPassword = $objPasswordPhrase ? $objPasswordPhrase->getPhraseValue(ENCODE_HTML) : 'Password';
   $objConfirmPasswordPhrase = Phrase::getPhrase('editprofile_confirmpassword', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
   $strConfirmPassword = $objConfirmPasswordPhrase ? $objConfirmPasswordPhrase->getPhraseValue(ENCODE_HTML) : 'Confirm Password';
-  $objPrivacyNotePhrase = Phrase::getPhrase('editprofile_privacynote', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-  $strPrivacyNote = $objPrivacyNotePhrase ? $objPrivacyNotePhrase->getPhraseValue(ENCODE_HTML) : 'Privacy Note';
+  $objPrivacyNotePhrase = Phrase::getPhrase('privacy_title', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+  $strPrivacyNote = $objPrivacyNotePhrase ? $objPrivacyNotePhrase->getPhraseValue(ENCODE_HTML) : 'Privacy Policy';
 
 	$strPageTitle = strip_tags($_ARCHON->PublicInterface->Title);
 

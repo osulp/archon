@@ -799,7 +799,7 @@
                     Ext
                 </phrase>
                 <phrase name='researcher_privacynote' regularexpression=''>
-                    Privacy Note
+                    Privacy Policy
                 </phrase>
                 <phrase name='researcher_registertitle' regularexpression=''>
                     Register a Researcher Account
