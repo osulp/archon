@@ -134,6 +134,7 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
         <div id="header-blacktop-text"><a href="http://library.oregonstate.edu" class="header-blacktop">OSU Libraries</a></div>
         <div id="researchblock">
           <?php
+          $go = urlencode($_SERVER['QUERY_STRING']);
           if($_ARCHON->Security->isAuthenticated())
           {
             echo("<span class='bold'>Welcome, " . $_ARCHON->Security->Session->User->DisplayName . "</span>");
@@ -151,11 +152,11 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
           }
           elseif($_ARCHON->config->ForceHTTPS)
           {
-            echo("<a href='?p=core/login'>Log In</a>");
+            echo("<a href='?p=core/login&amp;go={$go}'>Log In</a>");
           }
           else
           {
-            echo("<a href='?p=core/login'>Log In</a>");
+            echo("<a href='?p=core/login&amp;go={$go}'>Log In</a>");
 //            echo("<a href='#' onclick='$(window).scrollTo(\"#archoninfo\"); if($(\"#userlogin\").is(\":visible\")) $(\"#loginlink\").html(\"Log In\"); else $(\"#loginlink\").html(\"Hide\"); $(\"#userlogin\").slideToggle(\"normal\"); $(\"#ArchonLoginField\").focus(); return false;'>Log In</a>");
           }
 
