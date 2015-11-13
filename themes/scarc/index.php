@@ -37,7 +37,28 @@ if (isset($_REQUEST['f']) && in_array($_REQUEST['f'], $pages)) {
       If you are new to archival research, please <a
         href="http://scarc.library.oregonstate.edu/faq.html">review
         our FAQ.</a></p>
-    <br>
+    <p><?php
+      /**
+       * This is a repeat of the generate_collection_atoz_list function in packages/collections/pub/collections.php
+       * Since that file outputs page content when "required" we couldn't just require the file and call the method.
+       */
+      $arrCollectionCount = $_ARCHON->countCollections(TRUE, FALSE, $_SESSION['Archon_RepositoryID']);
+      $collection_list = '';
+      for ($i = 65; $i < 91; $i++) {
+        $char = chr($i);
+        if (!empty($arrCollectionCount[encoding_strtolower($char)])) {
+          $href = "?p=collections/collections&amp;char=$char";
+          $collection_list .= '<a class="browse-letter" href="' . $href . '">' . $char . '</a>';
+        }
+        else {
+          $collection_list .= '<span class="browse-letter">' . $char . '</span>';
+        }
+      }
+      if (!empty($collection_list)) {
+        echo '<hr /><div class="center"><h3>Browse ' . $arrCollectionCount['*'] . ' Collections</h3>'
+          . $collection_list . "<br /><a href='?p=collections/collections&browse'>View All</a></div><hr />";
+      }
+      ?></p>
     <h2>Search Tips</h2>
     <dl>
       <dt class='index'>Default Behaviors</dt>
