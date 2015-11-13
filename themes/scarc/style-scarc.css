@@ -1995,3 +1995,11 @@ legend {
 .bold {
     font-weight: bold;
 }
+
+#classificationlist {
+    font-size: 1.1em;
+}
+
+.classificationlist-id {
+    font-size: 0.9em;
+}
