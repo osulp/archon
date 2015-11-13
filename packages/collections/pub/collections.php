@@ -80,7 +80,11 @@ function collections_listAllCollections($Page, $ShowBooks)
    $objViewAllPhrase = Phrase::getPhrase('viewall', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
    $strViewAll = $objViewAllPhrase ? $objViewAllPhrase->getPhraseValue(ENCODE_HTML) : 'View All';
 
-   if(!$_ARCHON->PublicInterface->Templates[$_ARCHON->Package->APRCode][$template])
+  $objResultsCountPhrase = Phrase::getPhrase('collections_resultscount', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
+  $strResultsCount = $objResultsCountPhrase ? $objResultsCountPhrase->getPhraseValue(ENCODE_HTML) : ' ($1 found)';
+  $strResultsCountHeader = str_replace('$1', count($arrCollections), $strResultsCount);
+
+  if(!$_ARCHON->PublicInterface->Templates[$_ARCHON->Package->APRCode][$template])
    {
       $_ARCHON->declareError("Could not list Collections: CollectionList template not defined for template set {$_ARCHON->PublicInterface->TemplateSet}.");
    }
@@ -95,7 +99,7 @@ function collections_listAllCollections($Page, $ShowBooks)
       if(!empty($arrCollections))
       {
 
-         $vars['strSubTitle'] = $strViewAll;
+         $vars['strSubTitle'] = $strViewAll . $strResultsCountHeader;
 
          foreach($arrCollections as ${$objectName})
          {
@@ -154,7 +158,11 @@ function collections_listCollectionsForChar($Char, $ShowBooks)
       if(!empty($arrCollections))
       {
 
-         if(!$ShowBooks)
+        $objResultsCountPhrase = Phrase::getPhrase('collections_resultscount', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
+        $strResultsCount = $objResultsCountPhrase ? $objResultsCountPhrase->getPhraseValue(ENCODE_HTML) : ' ($1 found)';
+        $strResultsCountHeader = str_replace('$1', count($arrCollections), $strResultsCount);
+
+        if(!$ShowBooks)
          {
             $objHoldingsBeginningWithPhrase = Phrase::getPhrase('collections_holdingsbeginningwithlist', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
             $strHoldingsBeginningWith = $objHoldingsBeginningWithPhrase ? $objHoldingsBeginningWithPhrase->getPhraseValue(ENCODE_HTML) : 'Holdings Beginning With "$1"';
@@ -167,7 +175,7 @@ function collections_listCollectionsForChar($Char, $ShowBooks)
             $strBeginningWithHeader = str_replace('$1', encoding_strtoupper($Char), $strBooksBeginningWith);
          }
 
-         $vars['strSubTitle'] = $strBeginningWithHeader;
+         $vars['strSubTitle'] = $strBeginningWithHeader . $strResultsCountHeader;
 
          foreach($arrCollections as ${$objectName})
          {
