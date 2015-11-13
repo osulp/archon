@@ -33,9 +33,9 @@ if(!empty($arrClassifications))
 	echo("<div id='classificationlist' class='bground'><div class='listitemcover'></div>");
     foreach($arrClassifications as $objChildClassification)
     {
-        echo("<div class='listitem'>");
-        echo($objChildClassification->toString(LINK_NONE, true, false, true, false, ' ') . ' ');
-        echo($objChildClassification->toString(LINK_TOTAL, false, true) . "</div>\n");
+      echo("<div class='listitem'>");
+      echo($objChildClassification->toString(LINK_TOTAL, false, true)
+        . ' <span class="classificationlist-id">['. $objChildClassification->toString(LINK_NONE, true, false, true, false, ' ') . "]</span></div>\n");
     }
     echo('</div>');
 }
