@@ -117,7 +117,7 @@ function research_cart()
    global $_ARCHON;
 
    $objResearchTitlePhrase = Phrase::getPhrase('research_carttitle', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-   $strResearchTitle = $objResearchTitlePhrase ? $objResearchTitlePhrase->getPhraseValue(ENCODE_HTML) : 'My Research Cart';
+   $strResearchTitle = $objResearchTitlePhrase ? $objResearchTitlePhrase->getPhraseValue(ENCODE_HTML) : 'My Research Shelf';
 
    $_ARCHON->PublicInterface->Title = $strResearchTitle;
    $_ARCHON->PublicInterface->addNavigation($_ARCHON->PublicInterface->Title);
@@ -176,7 +176,7 @@ function research_email()
    $objSendEmailPhrase = Phrase::getPhrase('research_email_sendemail', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
    $strSendEmail = $objSendEmailPhrase ? $objSendEmailPhrase->getPhraseValue(ENCODE_HTML) : 'Send Email';
    $objCartAppendPhrase = Phrase::getPhrase('research_email_cartappend', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-   $strCartAppend = $objCartAppendPhrase ? $objCartAppendPhrase->getPhraseValue(ENCODE_HTML) : "Your 'cart' currently holds the following materials.  This list will be appended to your email message.";
+   $strCartAppend = $objCartAppendPhrase ? $objCartAppendPhrase->getPhraseValue(ENCODE_HTML) : "Your 'shelf' currently holds the following materials.  This list will be appended to your email message.";
 
    $_ARCHON->PublicInterface->Title = $strEmailTitle;
    $_ARCHON->PublicInterface->addNavigation($_ARCHON->PublicInterface->Title);
@@ -227,7 +227,7 @@ function research_email()
          eval($_ARCHON->PublicInterface->Templates['collections']['Email']);
       }
       ?>
-   </form>    
+   </form>
    <?php
    include('footer.inc.php');
 }
@@ -239,7 +239,7 @@ function research_verify()
    $objVerifyTitlePhrase = Phrase::getPhrase('research_verify_title', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
    $strVerifyTitle = $objVerifyTitlePhrase ? $objVerifyTitlePhrase->getPhraseValue(ENCODE_HTML) : 'Verify Research Appointment';
    $objVerifyNavPhrase = Phrase::getPhrase('research_verify_nav', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-   $strVerifyNav = $objVerifyNavPhrase ? $objVerifyNavPhrase->getPhraseValue(ENCODE_HTML) : 'My Research Request Cart';
+   $strVerifyNav = $objVerifyNavPhrase ? $objVerifyNavPhrase->getPhraseValue(ENCODE_HTML) : 'My Research Shelf';
 
    $ArrivalTimestamp = strtotime($_REQUEST['arrivaldatestring']);
    $DepartureTimestamp = strtotime($_REQUEST['departuredatestring']);
@@ -333,6 +333,8 @@ function research_displaycart()
    $_ARCHON->PublicInterface->DisableTheme = true;
 //   $arrCartOutput[$objCollection->RepositoryID]
 
+  $strRemove = $_ARCHON->getPhrase('tostring_remove', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)->getPhraseValue(ENCODE_HTML);
+
    foreach($arrCart->Collections as $CollectionID => $arrObjs)
    {
       foreach($arrObjs->Content as $ContentID => $obj)
@@ -356,13 +358,13 @@ function research_displaycart()
 
             $arrCartOutput[$objCollection->RepositoryID] .= "<dl>\n";
             $arrCartOutput[$objCollection->RepositoryID] .= "<dt>" . $objCollection->toString(LINK_TOTAL)
-                    . "<a class='removefromcart' href='#' onclick='removeFromCart({collectionid:" . $objCollection->ID . ",collectioncontentid:0}); return false;'><img class='cart' src='{$_ARCHON->PublicInterface->ImagePath}/removefromcart.gif' title='Remove from cart' alt='$strRemove'/></a></dt>\n";
+                    . "<a class='removefromcart' href='#' onclick='removeFromCart({collectionid:" . $objCollection->ID . ",collectioncontentid:0}); return false;'><img class='cart' src='{$_ARCHON->PublicInterface->ImagePath}/removefromcart.gif' title='$strRemove' alt='$strRemove'/></a></dt>\n";
          }
 
          if($objContent)
          {
             $arrCartOutput[$objCollection->RepositoryID] .= "<dd>" . $objContent->toString(LINK_EACH, true, true, true, true, $_ARCHON->PublicInterface->Delimiter)
-                    . "<a class='removefromcart' href='#' onclick='removeFromCart({collectionid:" . $objCollection->ID . ",collectioncontentid:" . $objContent->ID . " }); return false;'><img class='cart' src='{$_ARCHON->PublicInterface->ImagePath}/removefromcart.gif' title='Remove from cart' alt='$strRemove'/></a></dt>\n";
+                    . "<a class='removefromcart' href='#' onclick='removeFromCart({collectionid:" . $objCollection->ID . ",collectioncontentid:" . $objContent->ID . " }); return false;'><img class='cart' src='{$_ARCHON->PublicInterface->ImagePath}/removefromcart.gif' title='$strRemove' alt='$strRemove'/></a></dt>\n";
          }
 
          $arrPreviousCollectionIDs[$objCollection->RepositoryID] = $CollectionID;
@@ -401,7 +403,7 @@ function research_exec()
          ?>
          {"response":
          {
-         "message":"Item added to research cart",
+         "message":"<?php echo $_ARCHON->getPhrase('itemaddedtocart', PACKAGE_COLLECTIONS, 0, PHRASETYPE_MESSAGE)->getPhraseValue(ENCODE_HTML); ?>",
          "cartcount":<?php echo($_ARCHON->Security->Session->ResearchCart->getCartCount()); ?>
          }
          }
@@ -426,7 +428,7 @@ function research_exec()
          ?>
          {"response":
          {
-         "message":"Item removed from research cart",
+         "message":"<?php echo $_ARCHON->getPhrase('itemdeletedfromcart', PACKAGE_COLLECTIONS, 0, PHRASETYPE_MESSAGE)->getPhraseValue(ENCODE_HTML); ?>",
          "cartcount":<?php echo($_ARCHON->Security->Session->ResearchCart->getCartCount()); ?>
          }
          }

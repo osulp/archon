@@ -374,9 +374,9 @@ abstract class Collections_Collection
       elseif(!$_ARCHON->Security->userHasAdministrativeAccess()) // && $this->enabled())
       {
          $objRemovePhrase = Phrase::getPhrase('tostring_remove', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-         $strRemove = $objRemovePhrase ? $objRemovePhrase->getPhraseValue(ENCODE_HTML) : 'Remove from your cart.';
+         $strRemove = $objRemovePhrase ? $objRemovePhrase->getPhraseValue(ENCODE_HTML) : 'Remove from your shelf.';
          $objAddToPhrase = Phrase::getPhrase('tostring_addto', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-         $strAddTo = $objAddToPhrase ? $objAddToPhrase->getPhraseValue(ENCODE_HTML) : 'Add to your cart.';
+         $strAddTo = $objAddToPhrase ? $objAddToPhrase->getPhraseValue(ENCODE_HTML) : 'Add to your shelf.';
 
          $url = urlencode($_SERVER['REQUEST_URI']);
 
@@ -2389,9 +2389,9 @@ abstract class Collections_Collection
          elseif(!$_ARCHON->Security->userHasAdministrativeAccess() && ($this->Repository->ResearchFunctionality & RESEARCH_COLLECTIONS))
          {
             $objRemovePhrase = Phrase::getPhrase('tostring_remove', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-            $strRemove = $objRemovePhrase ? $objRemovePhrase->getPhraseValue(ENCODE_HTML) : 'Remove from your cart.';
+            $strRemove = $objRemovePhrase ? $objRemovePhrase->getPhraseValue(ENCODE_HTML) : 'Remove from your shelf.';
             $objAddToPhrase = Phrase::getPhrase('tostring_addto', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-            $strAddTo = $objAddToPhrase ? $objAddToPhrase->getPhraseValue(ENCODE_HTML) : 'Add to your cart.';
+            $strAddTo = $objAddToPhrase ? $objAddToPhrase->getPhraseValue(ENCODE_HTML) : 'Add to your shelf.';
 
             $arrCart = $_ARCHON->Security->Session->ResearchCart->getCart();
 
