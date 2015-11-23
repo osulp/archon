@@ -91,7 +91,8 @@ if (isset($_REQUEST['f']) && in_array($_REQUEST['f'], $pages)) {
   <div class="col-md-6">
     <figure>
       <a href="http://oregondigital.org/catalog/oregondigital:df70c053z" target="_blank"><img
-          class="home-image" src="themes/<?php echo $_ARCHON->PublicInterface->Theme; ?>/images/oregondigital-df70c053z.jpg"></a>
+          class="home-image" src="themes/<?php echo $_ARCHON->PublicInterface->Theme; ?>/images/oregondigital-df70c053z.jpg"
+          alt="Ida Kidder (foreground) seated in the Oregon State College library, ca. 1910s"></a>
       <figcaption>Ida Kidder (foreground) seated in the Oregon State College
         library, ca. 1910s. Kidder was OSC’s first professional librarian and
         served the college from 1908 to her death in 1920. After a new library

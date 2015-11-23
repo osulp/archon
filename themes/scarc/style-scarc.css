@@ -44,6 +44,10 @@ h1.scarc_logo {
 	margin-bottom: 0;
 }
 
+h1.scarctitle {
+    width: 45%;
+}
+
 h1.announcement {
 	margin: 0 0 1em .5em;
 	padding: 0 auto;

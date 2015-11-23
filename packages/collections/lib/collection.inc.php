@@ -374,9 +374,9 @@ abstract class Collections_Collection
       elseif(!$_ARCHON->Security->userHasAdministrativeAccess()) // && $this->enabled())
       {
          $objRemovePhrase = Phrase::getPhrase('tostring_remove', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-         $strRemove = $objRemovePhrase ? $objRemovePhrase->getPhraseValue(ENCODE_HTML) : 'Remove from your shelf.';
+         $strRemove = $objRemovePhrase ? $objRemovePhrase->getPhraseValue(ENCODE_HTML) : 'Remove from Shelf';
          $objAddToPhrase = Phrase::getPhrase('tostring_addto', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-         $strAddTo = $objAddToPhrase ? $objAddToPhrase->getPhraseValue(ENCODE_HTML) : 'Add to your shelf.';
+         $strAddTo = $objAddToPhrase ? $objAddToPhrase->getPhraseValue(ENCODE_HTML) : 'Add to Shelf';
 
          $url = urlencode($_SERVER['REQUEST_URI']);
 
@@ -446,11 +446,11 @@ abstract class Collections_Collection
 
             if($link_type == 'public' && ($this->Repository->ResearchFunctionality & RESEARCH_COLLECTIONS))
             {
-               $link_string = "<a id='ccid$id' class='research_add' onclick='triggerResearchCartEvent(this, {collectionid:{$cid},collectioncontentid:{$id}}); return false;' href='#'><img class='cart' src='{$imagepath}/addtocart.gif' title='$strAddTo' alt='$strAddTo'/></a>";
+               $link_string = " <a id='ccid$id' class='research_add btn btn-default btn-xs' onclick='triggerResearchCartEvent(this, {collectionid:{$cid},collectioncontentid:{$id}}); return false;' href='#'>$strAddTo</a>";
             }
             elseif($link_type == 'admin')
             {
-               $link_string = "<a href='?p=admin/collections/collectioncontent&amp;collectionid={$cid}&amp;parentid={$row['ParentID']}&amp;id={$row['ID']}' rel='external'><img class='edit' src='{$imagepath}/edit.gif' title='$strEditThis' alt='$strEditThis' /></a>";
+               $link_string = " <a href='?p=admin/collections/collectioncontent&amp;collectionid={$cid}&amp;parentid={$row['ParentID']}&amp;id={$row['ID']}' rel='external'><img class='edit' src='{$imagepath}/edit.gif' title='$strEditThis' alt='$strEditThis' /></a>";
             }
             else
             {
@@ -2389,20 +2389,20 @@ abstract class Collections_Collection
          elseif(!$_ARCHON->Security->userHasAdministrativeAccess() && ($this->Repository->ResearchFunctionality & RESEARCH_COLLECTIONS))
          {
             $objRemovePhrase = Phrase::getPhrase('tostring_remove', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-            $strRemove = $objRemovePhrase ? $objRemovePhrase->getPhraseValue(ENCODE_HTML) : 'Remove from your shelf.';
+            $strRemove = $objRemovePhrase ? $objRemovePhrase->getPhraseValue(ENCODE_HTML) : 'Remove from Shelf';
             $objAddToPhrase = Phrase::getPhrase('tostring_addto', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-            $strAddTo = $objAddToPhrase ? $objAddToPhrase->getPhraseValue(ENCODE_HTML) : 'Add to your shelf.';
+            $strAddTo = $objAddToPhrase ? $objAddToPhrase->getPhraseValue(ENCODE_HTML) : 'Add to Shelf';
 
             $arrCart = $_ARCHON->Security->Session->ResearchCart->getCart();
 
            if ($show_cart) {
             if(!$this->ignoreCart && $arrCart->Collections[$this->ID])
             {
-               $String .= "<a id='cid" . $this->ID . "' class='research_delete' onclick='triggerResearchCartEvent(this, {collectionid:{$this->ID},collectioncontentid:0}); return false;' href='#'><img class='cart' src='{$_ARCHON->PublicInterface->ImagePath}/removefromcart.gif' title='$strRemove' alt='$strRemove'/></a>";
+               $String .= "<br><a id='cid" . $this->ID . "' class='research_delete btn btn-default btn-xs' onclick='triggerResearchCartEvent(this, {collectionid:{$this->ID},collectioncontentid:0}); return false;' href='#'>$strRemove</a>";
             }
             else
             {
-               $String .= "<a id='cid" . $this->ID . "' class='research_add' onclick='triggerResearchCartEvent(this, {collectionid:{$this->ID},collectioncontentid:0}); return false;' href='#'><img class='cart' src='{$_ARCHON->PublicInterface->ImagePath}/addtocart.gif' title='$strAddTo' alt='$strAddTo'/></a>";
+               $String .= "<br><a id='cid" . $this->ID . "' class='research_add btn btn-default btn-xs' onclick='triggerResearchCartEvent(this, {collectionid:{$this->ID},collectioncontentid:0}); return false;' href='#'>$strAddTo</a>";
             }
            }
          }

@@ -150,24 +150,18 @@ function triggerResearchCartEvent(anchor, params)
 
          $('#cartcount').text(data.response.cartcount);
 
-         var img = $(anchor).children('img.cart');
-         var src = img.attr('src');
          $.jGrowl(data.response.message);
          if(parameters['f'] == 'add')
          {
-            img.attr('src', src.replace('addto', 'removefrom'));
-            img.attr('title', 'Remove from your shelf.');
-            img.attr('alt', 'Remove from your shelf.');
             $(anchor).removeClass('research_add');
             $(anchor).addClass('research_delete');
+            $(anchor).text('Remove from Shelf');
             $('#viewcartlink:hidden').show();
 
          }else{
-            img.attr('src', src.replace('removefrom', 'addto'));
-            img.attr('title', 'Add to your shelf.');
-            img.attr('alt', 'Add to your shelf.');
             $(anchor).removeClass('research_delete');
             $(anchor).addClass('research_add');
+            $(anchor).text('Add to Shelf');
             if(data.response.cartcount == 0 && $('#viewcartlink').hasClass('hidewhenempty')){
                $('#viewcartlink').hide();
             }
