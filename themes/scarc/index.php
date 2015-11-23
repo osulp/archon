@@ -17,7 +17,7 @@ if (isset($_REQUEST['f']) && in_array($_REQUEST['f'], $pages)) {
 ?>
 <div class="row">
   <div class="col-md-6">
-    <h2>Welcome</h2>
+    <h1>Welcome</h1>
     <p>Welcome to the OSU Libraries Special Collections & Archives Research
       Center’s collections portal, home to detailed description of
       the more than 1,200 archival collections held by SCARC. Use the
@@ -37,7 +37,7 @@ if (isset($_REQUEST['f']) && in_array($_REQUEST['f'], $pages)) {
       If you are new to archival research, please <a
         href="http://scarc.library.oregonstate.edu/faq.html">review
         our FAQ.</a></p>
-    <p><?php
+    <?php
       /**
        * This is a repeat of the generate_collection_atoz_list function in packages/collections/pub/collections.php
        * Since that file outputs page content when "required" we couldn't just require the file and call the method.
@@ -55,10 +55,10 @@ if (isset($_REQUEST['f']) && in_array($_REQUEST['f'], $pages)) {
         }
       }
       if (!empty($collection_list)) {
-        echo '<hr /><div class="center"><h3>Browse ' . $arrCollectionCount['*'] . ' Collections</h3>'
+        echo '<hr /><div class="center"><h2>Browse ' . $arrCollectionCount['*'] . ' Collections</h2>'
           . $collection_list . "<br /><a href='?p=collections/collections&browse'>View All</a></div><hr />";
       }
-      ?></p>
+      ?>
     <h2>Search Tips</h2>
     <dl>
       <dt class='index'>Default Behaviors</dt>

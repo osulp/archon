@@ -226,7 +226,7 @@ function generate_collection_atoz_list($arrCollectionCount, $ShowBooks, $strView
   }
   $bookurl = ($ShowBooks) ? '&amp;books' : '';
   if (!empty($collection_list)) {
-    $collection_list = '<hr /><div class="center"><h3>Show Collections Beginning With:</h3>' . $collection_list;
+    $collection_list = '<hr /><div class="center"><h2>Show Collections Beginning With:</h2>' . $collection_list;
     if ($strViewAll) {
       $collection_list .= "<br /><a href='?p={$_REQUEST['p']}&amp;browse{$bookurl}'>{$strViewAll}</a>";
     }
