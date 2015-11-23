@@ -189,7 +189,7 @@ if (empty($_ARCHON->PublicInterface->Title)) {
     </div>
     <div id="header-title"><a href="http://oregonstate.edu" class="nostyle"><img id="osu-tag"
        src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/osu-tag.gif" width="101" height="119" alt="Oregon State University" title="Oregon State University" /></a><h1
-        class="scarctitle"><a href="http://scarc.library.oregonstate.edu"><?php echo $RepositoryName; ?></a></h1></div>
+        class="scarctitle"><a href="http://scarc.library.oregonstate.edu">Special Collections and Archives Research Center</a></h1></div>
     <div id="header-nav">
       <ul id="nav">
         <li><a href="index.php">Collections</a><ul>
