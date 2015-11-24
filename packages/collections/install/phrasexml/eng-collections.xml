@@ -799,7 +799,7 @@
                     Ext
                 </phrase>
                 <phrase name='researcher_privacynote' regularexpression=''>
-                    Privacy Note
+                    Privacy Policy
                 </phrase>
                 <phrase name='researcher_registertitle' regularexpression=''>
                     Register a Researcher Account
@@ -877,10 +877,10 @@
                     Technical Notes:
                 </phrase>
                 <phrase name='tostring_addto' regularexpression=''>
-                    Add to your shelf.
+                    Add to Shelf
                 </phrase>
                 <phrase name='tostring_remove' regularexpression=''>
-                    Remove from your shelf.
+                    Remove from Shelf
                 </phrase>
                 <phrase name='unprocessed_materials' regularexpression=''>
                     Unprocessed Materials

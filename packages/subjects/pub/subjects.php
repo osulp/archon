@@ -404,7 +404,7 @@ function generate_subject_atoz_list($arrSubjectCount, $SubjectTypeID, $strViewAl
     }
   }
   if (!empty($subject_list)) {
-    $subject_list = '<hr /><div class="center"><h3>Show People, Places, and Topics Beginning With:</h3>' . $subject_list;
+    $subject_list = '<hr /><div class="center"><h2>Show People, Places, and Topics Beginning With:</h2>' . $subject_list;
     if ($strViewAll) {
       $subject_list .= "<br /><a href='?p={$_REQUEST['p']}&amp;browse&amp;subjecttypeid={$SubjectTypeID}'>{$strViewAll}</a>";
     }

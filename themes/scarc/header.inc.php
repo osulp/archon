@@ -49,6 +49,9 @@ else
 }
 
 $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
+if (empty($_ARCHON->PublicInterface->Title)) {
+  $_ARCHON->PublicInterface->Title = $RepositoryName;
+}
 
 //header('Content-type: text/html; charset=UTF-8');
 ?>
@@ -134,6 +137,7 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
         <div id="header-blacktop-text"><a href="http://library.oregonstate.edu" class="header-blacktop">OSU Libraries</a></div>
         <div id="researchblock">
           <?php
+          $go = urlencode($_SERVER['QUERY_STRING']);
           if($_ARCHON->Security->isAuthenticated())
           {
             echo("<span class='bold'>Welcome, " . $_ARCHON->Security->Session->User->DisplayName . "</span>");
@@ -151,11 +155,11 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
           }
           elseif($_ARCHON->config->ForceHTTPS)
           {
-            echo("<a href='?p=core/login'>Log In</a>");
+            echo("<a href='?p=core/login&amp;go={$go}'>Log In</a>");
           }
           else
           {
-            echo("<a href='?p=core/login'>Log In</a>");
+            echo("<a href='?p=core/login&amp;go={$go}'>Log In</a>");
 //            echo("<a href='#' onclick='$(window).scrollTo(\"#archoninfo\"); if($(\"#userlogin\").is(\":visible\")) $(\"#loginlink\").html(\"Log In\"); else $(\"#loginlink\").html(\"Hide\"); $(\"#userlogin\").slideToggle(\"normal\"); $(\"#ArchonLoginField\").focus(); return false;'>Log In</a>");
           }
 
@@ -184,10 +188,11 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
 
     </div>
     <div id="header-title"><a href="http://oregonstate.edu" class="nostyle"><img id="osu-tag"
-       src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/osu-tag.gif" width="101" height="119" alt="Oregon State University" title="Oregon State University" /></a><h1 class="scarctitle"><a href="http://scarc.library.oregonstate.edu">Special Collections & Archives<br />Research Center</a></h1></div>
+       src="<?php echo($_ARCHON->PublicInterface->ImagePath); ?>/osu-tag.gif" width="101" height="119" alt="Oregon State University" /></a><div
+        class="scarctitle"><a href="http://scarc.library.oregonstate.edu">Special Collections and Archives Research Center</a></div></div>
     <div id="header-nav">
       <ul id="nav">
-        <li><a href="?p=collections/collections">Collections</a><ul>
+        <li><a href="index.php">Collections</a><ul>
             <li><a href="?p=collections/collections">Collections by Title</a>
             <li><a href="?p=collections/classifications">Collections by Type</a></li>
             <li><a href="?p=subjects/subjects">People, Places, and Topics</a></li>
@@ -238,7 +243,7 @@ $_ARCHON->PublicInterface->addNavigation('Archon', 'index.php', true);
               <option value="fa" selected="selected">Collections Only</option>
               <option value="site">Entire Site</option>
             </select>
-            <button type="submit" value="Search" class="btn btn-primary btn-sm" title="Search">Search</button>
+            <button type="submit" value="Search" class="btn btn-primary btn-sm">Search</button>
           <?php
           if(defined('PACKAGE_COLLECTIONS') && CONFIG_COLLECTIONS_SEARCH_BOX_LISTS)
           {

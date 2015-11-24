@@ -17,7 +17,7 @@ if (isset($_REQUEST['f']) && in_array($_REQUEST['f'], $pages)) {
 ?>
 <div class="row">
   <div class="col-md-6">
-    <h2>Welcome</h2>
+    <h1>Welcome</h1>
     <p>Welcome to the OSU Libraries Special Collections & Archives Research
       Center’s collections portal, home to detailed description of
       the more than 1,200 archival collections held by SCARC. Use the
@@ -37,7 +37,28 @@ if (isset($_REQUEST['f']) && in_array($_REQUEST['f'], $pages)) {
       If you are new to archival research, please <a
         href="http://scarc.library.oregonstate.edu/faq.html">review
         our FAQ.</a></p>
-    <br>
+    <?php
+      /**
+       * This is a repeat of the generate_collection_atoz_list function in packages/collections/pub/collections.php
+       * Since that file outputs page content when "required" we couldn't just require the file and call the method.
+       */
+      $arrCollectionCount = $_ARCHON->countCollections(TRUE, FALSE, $_SESSION['Archon_RepositoryID']);
+      $collection_list = '';
+      for ($i = 65; $i < 91; $i++) {
+        $char = chr($i);
+        if (!empty($arrCollectionCount[encoding_strtolower($char)])) {
+          $href = "?p=collections/collections&amp;char=$char";
+          $collection_list .= '<a class="browse-letter" href="' . $href . '">' . $char . '</a>';
+        }
+        else {
+          $collection_list .= '<span class="browse-letter">' . $char . '</span>';
+        }
+      }
+      if (!empty($collection_list)) {
+        echo '<hr /><div class="center"><h2>Browse ' . $arrCollectionCount['*'] . ' Collections</h2>'
+          . $collection_list . "<br /><a href='?p=collections/collections&browse'>View All</a></div><hr />";
+      }
+      ?>
     <h2>Search Tips</h2>
     <dl>
       <dt class='index'>Default Behaviors</dt>
@@ -70,7 +91,8 @@ if (isset($_REQUEST['f']) && in_array($_REQUEST['f'], $pages)) {
   <div class="col-md-6">
     <figure>
       <a href="http://oregondigital.org/catalog/oregondigital:df70c053z" target="_blank"><img
-          class="home-image" src="themes/<?php echo $_ARCHON->PublicInterface->Theme; ?>/images/oregondigital-df70c053z.jpg"></a>
+          class="home-image" src="themes/<?php echo $_ARCHON->PublicInterface->Theme; ?>/images/oregondigital-df70c053z.jpg"
+          alt="Ida Kidder (foreground) seated in the Oregon State College library, ca. 1910s"></a>
       <figcaption>Ida Kidder (foreground) seated in the Oregon State College
         library, ca. 1910s. Kidder was OSC’s first professional librarian and
         served the college from 1908 to her death in 1920. After a new library

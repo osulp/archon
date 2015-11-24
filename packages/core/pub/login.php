@@ -18,7 +18,7 @@ $go = str_replace('f=logout', '', $go);
 
 if($_ARCHON->Security->isAuthenticated())
 {
-    header("Location: ?p=$go");
+    header("Location: ?$go");
 }
 
 $PublicPhrasePhraseInputTypeID = $_ARCHON->getPhraseTypeIDFromString('Public Phrase');
@@ -73,6 +73,7 @@ $inputs[] = array(
 );
 
 $form = "<input type=\"hidden\" name=\"p\" value=\"$_REQUEST[p]\" />\n";
+$form .= "<input type=\"hidden\" name=\"go\" value=\"{$_REQUEST['go']}\" />\n";
 
 foreach($inputs as $input)
 {

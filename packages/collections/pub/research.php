@@ -358,13 +358,13 @@ function research_displaycart()
 
             $arrCartOutput[$objCollection->RepositoryID] .= "<dl>\n";
             $arrCartOutput[$objCollection->RepositoryID] .= "<dt>" . $objCollection->toString(LINK_TOTAL)
-                    . "<a class='removefromcart' href='#' onclick='removeFromCart({collectionid:" . $objCollection->ID . ",collectioncontentid:0}); return false;'><img class='cart' src='{$_ARCHON->PublicInterface->ImagePath}/removefromcart.gif' title='$strRemove' alt='$strRemove'/></a></dt>\n";
+                    . " <a class='removefromcart btn btn-default btn-xs' href='#' onclick='removeFromCart({collectionid:" . $objCollection->ID . ",collectioncontentid:0}); return false;'>$strRemove</a></dt>\n";
          }
 
          if($objContent)
          {
             $arrCartOutput[$objCollection->RepositoryID] .= "<dd>" . $objContent->toString(LINK_EACH, true, true, true, true, $_ARCHON->PublicInterface->Delimiter)
-                    . "<a class='removefromcart' href='#' onclick='removeFromCart({collectionid:" . $objCollection->ID . ",collectioncontentid:" . $objContent->ID . " }); return false;'><img class='cart' src='{$_ARCHON->PublicInterface->ImagePath}/removefromcart.gif' title='$strRemove' alt='$strRemove'/></a></dt>\n";
+                    . " <a class='removefromcart btn btn-default btn-xs' href='#' onclick='removeFromCart({collectionid:" . $objCollection->ID . ",collectioncontentid:" . $objContent->ID . " }); return false;'>$strRemove</a></dt>\n";
          }
 
          $arrPreviousCollectionIDs[$objCollection->RepositoryID] = $CollectionID;

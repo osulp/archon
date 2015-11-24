@@ -184,7 +184,7 @@ function generate_creator_atoz_list($arrCreatorCount, $strViewAll) {
   }
 
   if (!empty($creator_list)) {
-    $creator_list = '<hr /><div class="center"><h3>Show Creators Beginning With:</h3>' . $creator_list;
+    $creator_list = '<hr /><div class="center"><h2>Show Creators Beginning With:</h2>' . $creator_list;
     if ($strViewAll) {
       $creator_list .= "<br /><a href='?p={$_REQUEST['p']}&amp;browse'>{$strViewAll}</a>";
     }
