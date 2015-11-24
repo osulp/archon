@@ -132,6 +132,7 @@ if (empty($_ARCHON->PublicInterface->Title)) {
      <?php  echo $_ARCHON->PublicInterface->outputGoogleAnalyticsCode(); ?>
    </head>
   <body data-spy="scroll" data-target="#nav-container-list">
+    <div id="skiptocontent"><a href="#main">skip to main content</a></div>
     <div id="header-blacktop">
       <div id="header-blacktop-container">
         <div id="header-blacktop-text"><a href="http://library.oregonstate.edu" class="header-blacktop">OSU Libraries</a></div>

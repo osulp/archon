@@ -526,7 +526,7 @@ img#osu-tag {
 	width: 90%;
 	height: 45px;
 	margin: -1px auto 5px auto;
-    background-color: #E8E9EB;
+    background-color: #F3F3F3;
 }
 
 img#scarc-title {
@@ -1998,6 +1998,39 @@ legend {
     font-weight: bold;
 }
 
+#classificationlist {
+    font-size: 1.1em;
+}
+
+.classificationlist-id {
+    font-size: 0.9em;
+}
+
+/* Added skip navigation for 508 accessibility */
+#skiptocontent a {
+    font-size: 1.5em;
+    padding:12px;
+    position: absolute;
+    top:-70px;
+    left:0px;
+    color:white;
+    border-right:1px solid white;
+    border-bottom:1px solid white;
+    background:transparent;
+    -webkit-transition: top 1s ease-out, background .5s linear;
+    transition: top 1s ease-out, background 1s linear;
+    z-index: 100;
+}
+
+#skiptocontent a:focus {
+    position:absolute;
+    left:0px;
+    top:0px;
+    background:#BF1722;
+    outline:0;
+    -webkit-transition: top .1s ease-in, background .5s linear;
+    transition: top .1s ease-in, background .5s linear;
+}
 #classificationlist {
     font-size: 1.1em;
 }
