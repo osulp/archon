@@ -378,7 +378,7 @@ function research_displaycart()
    {
       $objRepository = New Repository($RepositoryID);
       $objRepository->dbLoad();
-      echo("<div class='repogrp' id=repo" . $RepositoryID . "><span class='cartrepository'>" . $objRepository->toString() . "</span>");
+      echo("<div class='repogrp' id=repo" . $RepositoryID . ">");
       echo($output);
       echo("</dl></div>\n");
    }

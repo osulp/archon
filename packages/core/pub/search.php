@@ -58,14 +58,6 @@ if($in_LanguageID)
 
     echo(str_replace('$1', $objLanguage->toString(LINK_NONE, true), $strResultsForLanguage) . "<br/><br/>\n");
 }
-elseif($_ARCHON->QueryString)
-{
-    $objSearchedForPhrase = Phrase::getPhrase('search_searchedfor', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strSearchedFor = $objSearchedForPhrase ? $objSearchedForPhrase->getPhraseValue(ENCODE_HTML) : 'You searched for "$1".';
-
-    echo("<div class='listitemhead bold'>". str_replace('$1', encode($_ARCHON->QueryString, ENCODE_HTML), $strSearchedFor) . "</div><br/>\n");
-    
-}
 
 $arrPackages = $_ARCHON->Packages;
 

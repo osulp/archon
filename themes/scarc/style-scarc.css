@@ -2006,7 +2006,29 @@ legend {
     font-size: 0.9em;
 }
 
-/* Added skip navigation for 508 accessibility */
+.research_add, .research_delete {
+    margin-left: 6px;
+    margin-bottom: 7px;
+}
+
+#cart-button .research_add, #cart-button .research_delete {
+    margin: 0;
+}
+
+#researchcart {
+    margin-top: 8px;
+}
+
+div.repogrp dt {
+    margin: 4px 0;
+}
+
+div.repogrp dd {
+    margin: 4px 0 4px 5px;
+}
+
+/* 508 accessibility */
+/* Added skip navigation  */
 #skiptocontent a {
     font-size: 1.5em;
     padding:12px;
@@ -2014,27 +2036,25 @@ legend {
     top:-70px;
     left:0px;
     color:white;
-    border-right:1px solid white;
-    border-bottom:1px solid white;
+    border-right:2px solid white;
+    border-bottom:2px solid white;
     background:transparent;
     -webkit-transition: top 1s ease-out, background .5s linear;
     transition: top 1s ease-out, background 1s linear;
     z-index: 100;
 }
-
+/* transitions the skip link in when it's given focus by tab */
 #skiptocontent a:focus {
     position:absolute;
     left:0px;
     top:0px;
-    background:#BF1722;
+    background:#D85A1A;
     outline:0;
     -webkit-transition: top .1s ease-in, background .5s linear;
     transition: top .1s ease-in, background .5s linear;
 }
-#classificationlist {
-    font-size: 1.1em;
-}
 
-.classificationlist-id {
-    font-size: 0.9em;
+#acrobatDownload {
+    padding: 5px;
+    font-size: .9em;
 }

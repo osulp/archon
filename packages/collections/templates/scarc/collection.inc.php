@@ -121,6 +121,10 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
           <a href="#" onclick="toggleDisplay('OtherGuides'); return false;"><span id="OtherGuidesImage" class="glyphicon glyphicon-plus-sign"></span> Other Reference Guides (PDF)</a>
         </span>
         <div class="ccardshowlist" style="display:none" id="OtherGuidesResults">
+          <div id="acrobatDownload">
+            <p><em>To view reference guides in PDF format, download the following free software:<br /><a
+                  href="http://get.adobe.com/reader/" title="External Link">Get Acrobat Reader</a></em></p>
+          </div>
           <?php echo($objCollection->getString('OtherURL')); ?>
         </div>
       </div>
@@ -135,7 +139,7 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
   </div>
   <div class="col-md-6">
   <h1 id='titleheader'><?php echo $_ARCHON->PublicInterface->Title; ?></h1>
-
+  <div id="cart-button"><?php echo $objCollection->getCartLink(); ?></div>
   <div id="ccardpublic" class='mdround'>  <!-- begin div ccardcontents -->
   <?php
 

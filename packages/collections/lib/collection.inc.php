@@ -2325,7 +2325,7 @@ abstract class Collections_Collection
     * @param integer $MakeIntoLink[optional]
     * @return string
     */
-   public function toString($MakeIntoLink = LINK_NONE, $ConcatinateCollectionIdentifier = false, $UseSortTitle = false, $show_cart = true)
+   public function toString($MakeIntoLink = LINK_NONE, $ConcatinateCollectionIdentifier = false, $UseSortTitle = false)
    {
       global $_ARCHON;
 
@@ -2375,41 +2375,64 @@ abstract class Collections_Collection
          $String .= '</a>';
       }
 
-      if(!$_ARCHON->PublicInterface->DisableTheme && !$_ARCHON->AdministrativeInterface && $this->ID)
-      {
-
-
-         if($_ARCHON->Security->verifyPermissions(MODULE_COLLECTIONS, UPDATE))
-         {
-            $objEditThisPhrase = Phrase::getPhrase('tostring_editthis', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-            $strEditThis = $objEditThisPhrase ? $objEditThisPhrase->getPhraseValue(ENCODE_HTML) : 'Edit This';
-
-            $String .= "<a href='?p=admin/collections/collections&amp;id={$this->ID}' rel='external'><img class='edit' src='{$_ARCHON->PublicInterface->ImagePath}/edit.gif' title='$strEditThis' alt='$strEditThis' /></a>";
-         }
-         elseif(!$_ARCHON->Security->userHasAdministrativeAccess() && ($this->Repository->ResearchFunctionality & RESEARCH_COLLECTIONS))
-         {
-            $objRemovePhrase = Phrase::getPhrase('tostring_remove', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-            $strRemove = $objRemovePhrase ? $objRemovePhrase->getPhraseValue(ENCODE_HTML) : 'Remove from Shelf';
-            $objAddToPhrase = Phrase::getPhrase('tostring_addto', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
-            $strAddTo = $objAddToPhrase ? $objAddToPhrase->getPhraseValue(ENCODE_HTML) : 'Add to Shelf';
-
-            $arrCart = $_ARCHON->Security->Session->ResearchCart->getCart();
-
-           if ($show_cart) {
-            if(!$this->ignoreCart && $arrCart->Collections[$this->ID])
-            {
-               $String .= "<br><a id='cid" . $this->ID . "' class='research_delete btn btn-default btn-xs' onclick='triggerResearchCartEvent(this, {collectionid:{$this->ID},collectioncontentid:0}); return false;' href='#'>$strRemove</a>";
-            }
-            else
-            {
-               $String .= "<br><a id='cid" . $this->ID . "' class='research_add btn btn-default btn-xs' onclick='triggerResearchCartEvent(this, {collectionid:{$this->ID},collectioncontentid:0}); return false;' href='#'>$strAddTo</a>";
-            }
-           }
-         }
-      }
-
       return $String;
    }
+
+  /**
+   * Split this functionality out of the toString method above so that we could
+   * have more control over where and how the cart button is displayed.
+   *
+   * @return string
+   */
+  public function getCartLink()
+  {
+    global $_ARCHON;
+
+    $String = '';
+
+    if(!$this->Title || !$this->RepositoryID)
+    {
+      $this->dbLoad();
+    }
+
+    if($this->RepositoryID && !$this->Repository)
+    {
+      $this->Repository = New Repository($this->RepositoryID);
+      $this->Repository->dbLoad();
+      $_ARCHON->cacheObject($this->Repository);
+    }
+
+    if(!$_ARCHON->PublicInterface->DisableTheme && !$_ARCHON->AdministrativeInterface && $this->ID)
+    {
+      if($_ARCHON->Security->verifyPermissions(MODULE_COLLECTIONS, UPDATE))
+      {
+        $objEditThisPhrase = Phrase::getPhrase('tostring_editthis', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
+        $strEditThis = $objEditThisPhrase ? $objEditThisPhrase->getPhraseValue(ENCODE_HTML) : 'Edit This';
+
+        $String .= "<a href='?p=admin/collections/collections&amp;id={$this->ID}' rel='external'><img class='edit' src='{$_ARCHON->PublicInterface->ImagePath}/edit.gif' title='$strEditThis' alt='$strEditThis' /></a>";
+      }
+      elseif(!$_ARCHON->Security->userHasAdministrativeAccess() && ($this->Repository->ResearchFunctionality & RESEARCH_COLLECTIONS))
+      {
+        $objRemovePhrase = Phrase::getPhrase('tostring_remove', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
+        $strRemove = $objRemovePhrase ? $objRemovePhrase->getPhraseValue(ENCODE_HTML) : 'Remove from Shelf';
+        $objAddToPhrase = Phrase::getPhrase('tostring_addto', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
+        $strAddTo = $objAddToPhrase ? $objAddToPhrase->getPhraseValue(ENCODE_HTML) : 'Add to Shelf';
+
+        $arrCart = $_ARCHON->Security->Session->ResearchCart->getCart();
+
+        if(!$this->ignoreCart && $arrCart->Collections[$this->ID])
+        {
+          $String .= "<a id='cid" . $this->ID . "' class='research_delete btn btn-default btn-xs' onclick='triggerResearchCartEvent(this, {collectionid:{$this->ID},collectioncontentid:0}); return false;' href='#'>$strRemove</a>";
+        }
+        else
+        {
+          $String .= "<a id='cid" . $this->ID . "' class='research_add btn btn-default btn-xs' onclick='triggerResearchCartEvent(this, {collectionid:{$this->ID},collectioncontentid:0}); return false;' href='#'>$strAddTo</a>";
+        }
+      }
+    }
+
+    return $String;
+  }
 
    public function getNormalDate()
    {

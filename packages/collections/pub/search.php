@@ -408,12 +408,16 @@ function containerlist_search() {
    <span id='PdfCLTitle'>
       <a href="#" onclick="toggleDisplay('PdfCL'); return false;"><span id="PdfCLImage" class="glyphicon glyphicon-plus-sign"></span><?php echo("  ".$strClassPdfCL); ?></a>
    </span>(<span id='PdfCLCount'><?php echo(count($arrCollections)); ?></span> <?php echo($strPdfCLMatches); ?>) <br/>
+          <div id="acrobatDownload">
+            <p><em>To view reference guides in PDF format, download the following free software: <a
+                  href="http://get.adobe.com/reader/" title="External Link">Get Acrobat Reader</a></em></p>
+          </div>
           <dl id='PdfCLResults' style='display: none;'>
             <?php
-
             foreach($arrCollections as $objPdfCL)
             {
-              echo '<dt><a href="' . $objPdfCL->URL . '" target="_blank">' . $objPdfCL->toString(LINK_NONE) . '</a></dt>';
+              $collection = new Collection($objPdfCL->CollectionID);
+              echo '<dt><a href="' . $objPdfCL->URL . '" target="_blank">' . $objPdfCL->toString(LINK_NONE) . '</a> '.$collection->getCartLink() .' </dt>';
               $ResultCount++;
             }
             ?>
