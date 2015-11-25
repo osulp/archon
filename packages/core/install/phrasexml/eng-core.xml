@@ -780,7 +780,7 @@
 					Your search did not return any results.  Please revise your query and try again.
 				</phrase>
 				<phrase name='search_pluralhit' regularexpression=''>
-					$1 results found.
+					$1 results returned.
 				</phrase>
 				<phrase name='search_resultsforlanguage' regularexpression=''>
 					Search Results for Language: $1
@@ -789,7 +789,7 @@
 					You searched for "$1".
 				</phrase>
 				<phrase name='search_singularhit' regularexpression=''>
-					$1 result found.
+					$1 result returned.
 				</phrase>
 				<phrase name='search_title' regularexpression=''>
 					Search Results

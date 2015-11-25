@@ -81,9 +81,9 @@ echo ("</div>");
 if($ResultCount)
 {
     $objSingularHitPhrase = Phrase::getPhrase('search_singularhit', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strSingularHit = $objSingularHitPhrase ? $objSingularHitPhrase->getPhraseValue(ENCODE_HTML) : "$1 result.  Click the links to show each category's results.";
+    $strSingularHit = $objSingularHitPhrase ? $objSingularHitPhrase->getPhraseValue(ENCODE_HTML) : "$1 result returned.";
     $objPluralHitPhrase = Phrase::getPhrase('search_pluralhit', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strPluralHit = $objPluralHitPhrase ? $objPluralHitPhrase->getPhraseValue(ENCODE_HTML) : "$1 results.  Click the links to show each category's results.";
+    $strPluralHit = $objPluralHitPhrase ? $objPluralHitPhrase->getPhraseValue(ENCODE_HTML) : "$1 results returned.";
 
     $strHit = $ResultCount != 1 ? $strPluralHit : $strSingularHit;
 
