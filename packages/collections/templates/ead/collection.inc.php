@@ -38,9 +38,6 @@ if ($objCollection->Enabled) {
    $audience = "internal";
 }
 
-//echo "<pre>";print_r($objCollection);echo "</pre>";
-
-
 $normalDate = $objCollection->getNormalDate();
 ?>
 
@@ -255,7 +252,7 @@ if ($objCollection->CollectionIdentifier) {
                 }
                 $source = $objCreator->CreatorSource->getString('SourceAbbreviation');
             ?>
-                    <<?php echo($type); ?>name  role="creator"<?php echo($encodinganalog); ?>><?php echo($string); ?></<?php echo($type); ?>name>
+                    <<?php echo($type); ?>name role="creator"<?php echo($encodinganalog); ?>><?php echo($string); ?></<?php echo($type); ?>name>
                   </origination>
             <?php
               }
