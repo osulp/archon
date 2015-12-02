@@ -386,8 +386,9 @@ abstract class Collections_Collection
       {
          $link_type = '';
       }
+     $arrCart = $_ARCHON->Security->Session->ResearchCart->getCart();
 
-      while($row = $result->fetchRow())
+     while($row = $result->fetchRow())
       {
          $this->Content[$row['ID']] = array();
          $this->Content[$row['ID']]['ID'] = $row['ID'];
@@ -446,7 +447,14 @@ abstract class Collections_Collection
 
             if($link_type == 'public' && ($this->Repository->ResearchFunctionality & RESEARCH_COLLECTIONS))
             {
-               $link_string = " <a id='ccid$id' class='research_add btn btn-default btn-xs' onclick='triggerResearchCartEvent(this, {collectionid:{$cid},collectioncontentid:{$id}}); return false;' href='#'>$strAddTo</a>";
+              if ($arrCart->Collections[$this->ID]->Content[$id])
+              {
+                $link_string = " <a id='ccid$id' class='research_delete btn btn-default btn-xs' onclick='triggerResearchCartEvent(this, {collectionid:{$cid},collectioncontentid:{$id}}); return false;' href='#'>$strRemove</a>";
+              }
+              else
+              {
+                $link_string = " <a id='ccid$id' class='research_add btn btn-default btn-xs' onclick='triggerResearchCartEvent(this, {collectionid:{$cid},collectioncontentid:{$id}}); return false;' href='#'>$strAddTo</a>";
+              }
             }
             elseif($link_type == 'admin')
             {
