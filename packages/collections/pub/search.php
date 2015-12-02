@@ -397,6 +397,9 @@ function containerlist_search() {
     $objPdfCLMatchesPhrase = Phrase::getPhrase('search_matches', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
     $strPdfCLMatches = $objPdfCLMatchesPhrase ? $objPdfCLMatchesPhrase->getPhraseValue(ENCODE_HTML) : 'Matches';
 
+    $objLearnMorePhrase = Phrase::getPhrase('search_learnmore', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
+    $strLearnMore = $objLearnMorePhrase ? $objLearnMorePhrase->getPhraseValue(ENCODE_HTML) : 'Learn more about this collection';
+
     if(!$in_CollectionID)
     {
       $arrCollections = $_ARCHON->searchContainerList($_ARCHON->QueryString, $in_CollectionID);
@@ -409,11 +412,17 @@ function containerlist_search() {
       <a href="#" onclick="toggleDisplay('PdfCL'); return false;"><span id="PdfCLImage" class="glyphicon glyphicon-plus-sign"></span><?php echo("  ".$strClassPdfCL); ?></a>
    </span>(<span id='PdfCLCount'><?php echo(count($arrCollections)); ?></span> <?php echo($strPdfCLMatches); ?>) <br/>
           <dl id='PdfCLResults' style='display: none;'>
+            <dt>
+            <div id="acrobatDownload">
+              <p><em>To view reference guides in PDF format, download the following free software: <a
+                    href="http://get.adobe.com/reader/" title="External Link">Get Acrobat Reader</a></em></p>
+            </div>
+            </dt>
             <?php
-
             foreach($arrCollections as $objPdfCL)
             {
-              echo '<dt><a href="' . $objPdfCL->URL . '" target="_blank">' . $objPdfCL->toString(LINK_NONE) . '</a></dt>';
+              $collection = new Collection($objPdfCL->CollectionID);
+              echo '<dt><a href="' . $objPdfCL->URL . '" target="_blank">' . $objPdfCL->toString(LINK_NONE) . '</a> <span class="divider">|</span> <a class="more-info-link" href="?p=collections/findingaid&amp;id='. $collection->ID . '">' . $strLearnMore .'</a></dt>';
               $ResultCount++;
             }
             ?>

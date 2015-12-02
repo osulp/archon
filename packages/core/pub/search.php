@@ -58,14 +58,6 @@ if($in_LanguageID)
 
     echo(str_replace('$1', $objLanguage->toString(LINK_NONE, true), $strResultsForLanguage) . "<br/><br/>\n");
 }
-elseif($_ARCHON->QueryString)
-{
-    $objSearchedForPhrase = Phrase::getPhrase('search_searchedfor', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strSearchedFor = $objSearchedForPhrase ? $objSearchedForPhrase->getPhraseValue(ENCODE_HTML) : 'You searched for "$1".';
-
-    echo("<div class='listitemhead bold'>". str_replace('$1', encode($_ARCHON->QueryString, ENCODE_HTML), $strSearchedFor) . "</div><br/>\n");
-    
-}
 
 $arrPackages = $_ARCHON->Packages;
 
@@ -89,9 +81,9 @@ echo ("</div>");
 if($ResultCount)
 {
     $objSingularHitPhrase = Phrase::getPhrase('search_singularhit', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strSingularHit = $objSingularHitPhrase ? $objSingularHitPhrase->getPhraseValue(ENCODE_HTML) : "$1 Hit!  Click the links to show each category's results.";
+    $strSingularHit = $objSingularHitPhrase ? $objSingularHitPhrase->getPhraseValue(ENCODE_HTML) : "$1 result returned.";
     $objPluralHitPhrase = Phrase::getPhrase('search_pluralhit', PACKAGE_CORE, 0, PHRASETYPE_PUBLIC);
-    $strPluralHit = $objPluralHitPhrase ? $objPluralHitPhrase->getPhraseValue(ENCODE_HTML) : "$1 Hits!  Click the links to show each category's results.";
+    $strPluralHit = $objPluralHitPhrase ? $objPluralHitPhrase->getPhraseValue(ENCODE_HTML) : "$1 results returned.";
 
     $strHit = $ResultCount != 1 ? $strPluralHit : $strSingularHit;
 

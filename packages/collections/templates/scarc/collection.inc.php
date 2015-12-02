@@ -102,7 +102,7 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
           $EntryCount = $_ARCHON->Security->Session->ResearchCart->getCartCount();
           $class = $_ARCHON->Repository->ResearchFunctionality & RESEARCH_COLLECTIONS ? '' : 'hidewhenempty';
           $hidden = ($_ARCHON->Repository->ResearchFunctionality & RESEARCH_COLLECTIONS || $EntryCount) ? '' : "style='display:none'";
-          echo("<span id='viewcartlink' class='$class' $hidden><a href='?p=collections/research&amp;f=cart&amp;referer=" . urlencode($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) . "'><span class=\"glyphicon glyphicon-book\"></span> " . $_ARCHON->getPhrase('view_cart', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+          echo("<span class='$class' $hidden><a href='?p=collections/research&amp;f=cart&amp;referer=" . urlencode($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) . "'><span class=\"glyphicon glyphicon-book\"></span> " . $_ARCHON->getPhrase('view_cart', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
               ->getPhraseValue(ENCODE_HTML) . "</a></span>");
         }
       }
@@ -121,6 +121,10 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
           <a href="#" onclick="toggleDisplay('OtherGuides'); return false;"><span id="OtherGuidesImage" class="glyphicon glyphicon-plus-sign"></span> Other Reference Guides (PDF)</a>
         </span>
         <div class="ccardshowlist" style="display:none" id="OtherGuidesResults">
+          <div id="acrobatDownload">
+            <p><em>To view reference guides in PDF format, download the following free software:<br /><a
+                  href="http://get.adobe.com/reader/" title="External Link">Get Acrobat Reader</a></em></p>
+          </div>
           <?php echo($objCollection->getString('OtherURL')); ?>
         </div>
       </div>
@@ -135,7 +139,7 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
   </div>
   <div class="col-md-6">
   <h1 id='titleheader'><?php echo $_ARCHON->PublicInterface->Title; ?></h1>
-
+  <div id="cart-button"><?php echo $objCollection->getCartLink(); ?></div>
   <div id="ccardpublic" class='mdround'>  <!-- begin div ccardcontents -->
   <?php
 
