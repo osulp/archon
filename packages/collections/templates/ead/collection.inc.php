@@ -38,6 +38,9 @@ if ($objCollection->Enabled) {
    $audience = "internal";
 }
 
+//echo "<pre>";print_r($objCollection);echo "</pre>";
+
+
 $normalDate = $objCollection->getNormalDate();
 ?>
 
@@ -226,6 +229,39 @@ if ($objCollection->CollectionIdentifier) {
                <did>
                   <head>Overview of the Collection</head>
             <?php
+              if (!empty($objCollection->PrimaryCreator)) {
+                $objCreator = $objCollection->PrimaryCreator;
+            ?>
+                  <origination>
+            <?php
+                if ($objCreator->CreatorType->CreatorType == 'Corporate Name') {
+                  $type = 'corp';
+                  $encodinganalog = ' encodinganalog="110"';
+                  $string = bbcode_ead_encode($objCreator->getString('Name', 0, false, false));
+                  $normal = $string;
+                } else {
+                  $encodinganalog = ' encodinganalog="100"';
+                  $string = bbcode_ead_encode($objCreator->getString('Name', 0, false, false));
+
+                  if ($objCreator->CreatorType->CreatorType == 'Personal Name') {
+                    $type = 'pers';
+                  } else {
+                    $type = 'fam';
+                  }
+                  $normal = $string;
+                  if ($objCreator->Dates) {
+                    $string .= ", " . bbcode_ead_encode($objCreator->getString('Dates', 0, false, false));
+                  }
+                }
+                $source = $objCreator->CreatorSource->getString('SourceAbbreviation');
+            ?>
+                    <<?php echo($type); ?>name  role="creator"<?php echo($encodinganalog); ?>><?php echo($string); ?></<?php echo($type); ?>name>
+                  </origination>
+            <?php
+              }
+            ?>
+
+            <?php
                if ($objCollection->Title) {
             ?>
                <unittitle label="Collection Title" encodinganalog="245"><?php echo(bbcode_ead_encode($objCollection->getString('Title', 0, false, false))); ?>
@@ -248,44 +284,6 @@ if ($objCollection->CollectionIdentifier) {
                   </unittitle>
                   <unitid encodinganalog="035" label="Identification" repositorycode="US-<?php echo($objCollection->Repository->Code); ?>" countrycode="<?php echo($objCollection->Repository->Country->ISOAlpha2) ?>"><?php echo($collectionidentifier); ?></unitid>
 <?php
-               if (!empty($objCollection->Creators)) {
-?>
-                     <origination label="Creator" encodinganalog="245$c">
-<?php
-                  foreach ($objCollection->Creators as $objCreator) {
-                     if ($objCreator->CreatorType->CreatorType == 'Corporate Name') {
-                        $type = 'corp';
-                        $encodinganalog = ' encodinganalog="110"';
-                        $string = bbcode_ead_encode($objCreator->getString('Name', 0, false, false));
-                        $normal = $string;
-                     } else {
-                        $encodinganalog = ' encodinganalog="100"';
-                        $string = bbcode_ead_encode($objCreator->getString('Name', 0, false, false));
-
-                        if ($objCreator->CreatorType->CreatorType == 'Personal Name') {
-                           $type = 'pers';
-                        } else {
-                           $type = 'fam';
-                        }
-
-                        $normal = $string;
-
-                        if ($objCreator->Dates) {
-                           $string .= ", " . bbcode_ead_encode($objCreator->getString('Dates', 0, false, false));
-                        }
-                     }
-
-
-                     $source = $objCreator->CreatorSource->getString('SourceAbbreviation');
-?>
-                     <<?php echo($type); ?>name<?php echo($encodinganalog); ?> normal="<?php echo($normal); ?>" source="<?php echo($source); ?>" role="Collector"><?php echo($string); ?></<?php echo($type); ?>name>
-            <?php
-                  }
-            ?>
-               </origination>
-            <?php
-               }
-
 
                if ($objCollection->Extent && $objCollection->ExtentUnit->ExtentUnit) {
             ?>
@@ -521,7 +519,48 @@ if ($objCollection->CollectionIdentifier) {
 
                      <p>This Collection is indexed under the following controlled access subject terms.</p>
       <?php
-                  $arrSubjectTypes = $_ARCHON->getAllSubjectTypes();
+
+                 if (!empty($objCollection->Creators)) {
+      ?>
+                   <controlaccess>
+      <?php
+                     foreach ($objCollection->Creators as $objCreator) {
+
+                       if (empty($objCollection->PrimaryCreator) || ($objCollection->PrimaryCreator->ID != $objCreator->ID)) {
+                         if ($objCreator->CreatorType->CreatorType == 'Corporate Name') {
+                           $type = 'corp';
+                           $encodinganalog = ' encodinganalog="110"';
+                           $string = bbcode_ead_encode($objCreator->getString('Name', 0, false, false));
+                           $normal = $string;
+                         } else {
+                           $encodinganalog = ' encodinganalog="100"';
+                           $string = bbcode_ead_encode($objCreator->getString('Name', 0, false, false));
+
+                           if ($objCreator->CreatorType->CreatorType == 'Personal Name') {
+                             $type = 'pers';
+                           } else {
+                             $type = 'fam';
+                           }
+
+                           $normal = $string;
+
+                           if ($objCreator->Dates) {
+                             $string .= ", " . bbcode_ead_encode($objCreator->getString('Dates', 0, false, false));
+                           }
+                         }
+
+                         $source = $objCreator->CreatorSource->getString('SourceAbbreviation');
+                         ?>
+                         <<?php echo($type); ?>name role="creator"<?php echo($encodinganalog); ?>><?php echo($string); ?></<?php echo($type); ?>name>
+                       <?php
+                       }
+                     }
+      ?>
+                   </controlaccess>
+      <?php
+                 }
+
+                 $arrSubjectTypes = $_ARCHON->getAllSubjectTypes();
                   $arrSubjectSources = $_ARCHON->getAllSubjectSources();
 
                   foreach ($arrSubjectTypes as $objSubjectType)
