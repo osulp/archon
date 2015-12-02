@@ -124,9 +124,6 @@ if(!$_ARCHON->Error)
    }
    else
    {
-
-      $objCollection->ignoreCart = true;
-
       $objCollection->dbLoadRootContent();
       $arrRootContent = $objCollection->Content;
 
