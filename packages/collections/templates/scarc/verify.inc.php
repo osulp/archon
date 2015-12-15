@@ -22,7 +22,6 @@ research_displaycart();
 ?>
 <input type="hidden" name="ArrivalTime" value="<?php echo($ArrivalTimestamp); ?>" />
 <input type="hidden" name="DepartureTime" value="<?php echo($DepartureTimestamp); ?>" />
-<input type="hidden" name="AppointmentPurposeID" value="<?php echo($objAppointmentPurpose->ID); ?>" />
 <input type="hidden" name="Topic" value="<?php echo(encode($_REQUEST['topic'], ENCODE_HTML)); ?>" />
 <textarea name="ResearcherComments" style="display: none;"><?php echo(encode($_REQUEST['researchercomments'], ENCODE_HTML)); ?></textarea>
   <p class="center"><span class="bold">Verify Your Appointment</span><br/>(To make changes, click Back in your browser.)</p>
@@ -36,12 +35,6 @@ research_displaycart();
     <label class="control-label col-sm-4">Estimated Date/Time of Departure:</label>
     <div class="col-sm-8">
       <p class="form-control-static"><?php if($DepartureTimestamp) { echo(date(CONFIG_CORE_DATE_FORMAT, $DepartureTimestamp)); } else { echo("Unspecified"); } ?></p>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label col-sm-4">Purpose:</label>
-    <div class="col-sm-8">
-      <p class="form-control-static"><?php if($objAppointmentPurpose->ID) { echo($objAppointmentPurpose->toString()); } ?></p>
     </div>
   </div>
   <div class="form-group">
