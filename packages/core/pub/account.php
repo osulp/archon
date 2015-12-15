@@ -30,17 +30,5 @@ require_once("header.inc.php");
 </ul>
 <?php
 
-$arrPackages = $_ARCHON->Packages;
-
-foreach($arrPackages as $ID => $objPackage)
-{
-    if(is_natural($ID) && file_exists("packages/$objPackage->APRCode/pub/core/account.inc.php"))
-    {
-    	echo("<b>" . $objPackage->toString() . ":</b>\n<ul>\n");
-        require_once("packages/$objPackage->APRCode/pub/core/account.inc.php");
-        echo("</ul>\n");
-    }
-}
-
 require_once("footer.inc.php");
 ?>

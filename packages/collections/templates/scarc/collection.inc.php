@@ -144,6 +144,18 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
   <?php
 
   /**
+   * Predominant Dates
+   */
+  if ($objCollection->PredominantDates) {
+    ?>
+    <div class='ccardcontent'><span
+        class='ccardlabel'><?php echo $_ARCHON->getPhrase('predominant_dates', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+          ->getPhraseValue(ENCODE_HTML); ?></span> <?php echo($objCollection->getString('PredominantDates')); ?>
+    </div>
+    <?php
+  }
+
+  /**
    * Abstract
    */
   if ($objCollection->Abstract) {
@@ -185,18 +197,6 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
     <div class='ccardcontent'><span
         class='ccardlabel'><?php echo $_ARCHON->getPhrase('collection_id', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
           ->getPhraseValue(ENCODE_HTML); ?></span> <?php echo($objCollection->Classification->toString(LINK_NONE, TRUE, FALSE, TRUE, FALSE)); ?> <?php echo($objCollection->getString('CollectionIdentifier')); ?>
-    </div>
-  <?php
-  }
-
-  /**
-   * ARK ID
-   */
-  if ($objCollection->ArkID) {
-    ?>
-    <div class='ccardcontent'><span
-        class='ccardlabel'><?php echo $_ARCHON->getPhrase('ark_id', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
-          ->getPhraseValue(ENCODE_HTML); ?></span> <?php echo($objCollection->ArkID); ?>
     </div>
   <?php
   }

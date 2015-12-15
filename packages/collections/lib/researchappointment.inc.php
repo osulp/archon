@@ -560,7 +560,7 @@ abstract class Collections_ResearchAppointment
 
                if(CONFIG_COLLECTIONS_SEARCH_BY_CLASSIFICATION && $objCollection->ClassificationID && $objCollection->ClassificationID != $PrevClassificationID)
                {
-                  $Summary .= "{$objCollection->Classification->toString(LINK_NONE, true, false, true, false)}/$objCollection->CollectionIdentifier ";
+                  $Summary .= "\n{$objCollection->Classification->toString(LINK_NONE, true, false, true, false)} $objCollection->CollectionIdentifier ";
                   $Summary .= $objCollection->Classification->toString(LINK_NONE, false, true, false, true, '/') . " -- ";
                }
                else
@@ -594,7 +594,7 @@ $Summary\n\n";
          $ResearcherMessage .= "Please note that no specific materials were requested for this appointment. If you wish to have anything in particular available when you arrive, please contact us before the appointment.\n\n";
       }
 
-      $ResearcherMessage .= "Take Care,\n";
+      $ResearcherMessage .= "Regards,\n";
       $ResearcherMessage .= $Repository->Administrator ? $Repository->Administrator . "\n" : '';
       $ResearcherMessage .= $Repository->Name ? $Repository->Name . "\n" : '';
       $ResearcherMessage .= $Repository->Address ? $Repository->Address . "\n" : '';

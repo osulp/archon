@@ -598,7 +598,7 @@
                     Browse by Record Group
                 </phrase>
                 <phrase name='coll_alt_extents' regularexpression=''>
-                    More Extent Information:
+                    More Extent Information
                 </phrase>
                 <phrase name='collection_id' regularexpression=''>
                     ID:

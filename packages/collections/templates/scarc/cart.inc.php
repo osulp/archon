@@ -49,8 +49,6 @@ if(!$_ARCHON->Security->isAuthenticated())
 }
 else
 {
-   $arrAppointmentPurposes = $_ARCHON->getAllResearchAppointmentPurposes();
-
    $arrRepositories = $_ARCHON->Security->Session->ResearchCart->getCartRepositories();
 
    if($_REQUEST['arrivaltimestamp'])
@@ -107,22 +105,6 @@ else
          <div class="col-sm-8">
            <input class="form-control" type="text" size="40" id="DepartureDateStringField" name="DepartureDateString" value="<?php echo(encode($_REQUEST['departuredatestring'], ENCODE_HTML)); ?>" aria-describedby="departHelp" />
            <span id="departHelp" class='help-block'>(eg. 4/30/<?php echo(date('Y')); ?> 1:30 PM)</span>
-         </div>
-      </div>
-      <div class="form-group">
-         <label class="control-label col-sm-4" for="PurposeField">Purpose:</label>
-         <div class="col-sm-8">
-            <select class="form-control" id="PurposeField" name="AppointmentPurposeID">
-               <option value="0">(Select One)</option>
-              <?php
-              if (!empty($arrAppointmentPurposes)) {
-                foreach ($arrAppointmentPurposes as $objAppointmentPurpose) {
-                  $selected = $objAppointmentPurpose->ID == $_REQUEST['appointmentpurposeid'] ? 'selected' : '';
-                  echo("        <option value=\"$objAppointmentPurpose->ID\" $selected>" . $objAppointmentPurpose->toString() . "</option>");
-                }
-              }
-              ?>
-            </select>
          </div>
       </div>
       <div class="form-group">
