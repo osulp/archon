@@ -573,7 +573,7 @@ abstract class Collections_ResearchAppointment
 
                if($objContent)
                {
-                  $Summary .= $objContent->toString(LINK_NONE, true, true, true, true, "\n");
+                  $Summary .= $objContent->toString(LINK_NONE, true, true, true, true, ', ');
                }
 
                $Summary .= "\n";
