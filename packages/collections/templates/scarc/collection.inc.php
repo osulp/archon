@@ -144,6 +144,18 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
   <?php
 
   /**
+   * Predominant Dates
+   */
+  if ($objCollection->PredominantDates) {
+    ?>
+    <div class='ccardcontent'><span
+        class='ccardlabel'><?php echo $_ARCHON->getPhrase('predominant_dates', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+          ->getPhraseValue(ENCODE_HTML); ?></span> <?php echo($objCollection->getString('PredominantDates')); ?>
+    </div>
+    <?php
+  }
+
+  /**
    * Abstract
    */
   if ($objCollection->Abstract) {
