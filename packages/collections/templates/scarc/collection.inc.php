@@ -202,18 +202,6 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
   }
 
   /**
-   * ARK ID
-   */
-  if ($objCollection->ArkID) {
-    ?>
-    <div class='ccardcontent'><span
-        class='ccardlabel'><?php echo $_ARCHON->getPhrase('ark_id', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
-          ->getPhraseValue(ENCODE_HTML); ?></span> <?php echo($objCollection->ArkID); ?>
-    </div>
-  <?php
-  }
-
-  /**
    * Extents
    */
   if ($objCollection->Extent) {
