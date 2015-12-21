@@ -65,7 +65,11 @@ else
 ?>
    <div class='userformbox mdround'>
      <legend>Make An Appointment</legend>
-     <p>Fields marked with an asterisk (<span style="color:red">*</span>) are required.</p>
+     <p class="info-message"><strong>Please note:</strong> We require at least 24 hours notice to page
+       materials in advance of your appointment. Materials will be removed from your
+       shelf in this system after making an appointment. You will receive an
+       appointment confirmation email listing the contents of your shelf.</p>
+     <p><em>Fields marked with an asterisk (<span style="color:red">*</span>) are required.</em></p>
      <div class="form-group">
          <label class="col-sm-4 control-label" for="RepositoryIDField">Repository:</label>
          <div class="col-sm-8">
