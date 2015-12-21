@@ -583,7 +583,7 @@ abstract class Collections_ResearchAppointment
 
       $ResearcherMessage = "{$this->Researcher->FirstName} {$this->Researcher->LastName},
 
-Thank you for making an appointment for research.  We have received your request, and look forward to your arrival.  A copy of your research request has been sent to the archives staff.  If there are any problems with your appointment, you will be contacted by e-mail by a representative of the archives.  Also, if you need to reach the archives to discuss your appointment further, feel free to $ContactInfo.
+Thank you for making an appointment for research.  We have received your request, and look forward to your arrival.  A copy of your research request has been sent to our staff.  If there are any problems with your appointment, you will be contacted by e-mail.  Also, if you need to reach us to discuss your appointment further, feel free to $ContactInfo.
 
 A copy of your research request follows:
 
