@@ -2053,6 +2053,16 @@ dl#PdfCLResults dt {
     margin: 4px 0 4px 15px;
 }
 
+#PdfCLDesc {
+	font-size: 1.1em;
+	margin-top: 8px;
+}
+
+dt#PdfCLDesc {
+	padding: 5px;
+	background-color: #F5F2ED;
+}
+
 /* 508 accessibility */
 /* Added skip navigation  */
 #skiptocontent a {
@@ -2081,5 +2091,5 @@ dl#PdfCLResults dt {
 }
 
 #acrobatDownload {
-     font-size: .9em;
+     font-size: .85em;
  }
