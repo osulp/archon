@@ -129,11 +129,11 @@ header('Content-type: text/html; charset=UTF-8');
          <?php
          if($objCollection->PredominantDates)
          {
-         ?><p><span class="bold">Predominant Dates:</span><?php echo($objCollection->PredominantDates); ?></p><?php } ?>
+         ?><p><span class="bold">Predominant Dates:</span> <?php echo($objCollection->PredominantDates); ?></p><?php } ?>
             <?php
             if($objCollection->Classification)
             {
-            ?><p><span class='bold'>ID:</span> <?php echo($objCollection->Classification->toString(LINK_NONE, true, false, true, false)); ?>/<?php echo($objCollection->getString('CollectionIdentifier')); ?></p><?php } ?>
+            ?><p><span class='bold'>ID:</span> <?php echo($objCollection->Classification->toString(LINK_NONE, true, false, true, false)); ?> <?php echo($objCollection->getString('CollectionIdentifier')); ?></p><?php } ?>
          <?php
             if(!empty($objCollection->PrimaryCreator))
             {
@@ -191,12 +191,13 @@ header('Content-type: text/html; charset=UTF-8');
             if ($objCollection->BiogHist) { ?>
               <h2 style='text-align:left'><a name="bioghist"></a><?php echo ("Biographical / Historical Notes"); ?></h2>
               <div style="margin-left:40px">
-                <?php echo($objCollection->getString('BiogHist')); ?>
+                <?php echo($objCollection->getString('BiogHist'));
+                if ($objCollection->BiogHistAuthor) {
+                  echo("<br><br><span class='bold'>Author:</span> " . $objCollection->getString('BiogHistAuthor'));
+                }
+               ?>
               </div>
       <?php
-              if ($objCollection->BiogHistAuthor) {
-                echo(" <span class='bold'>Author:</span> " . $objCollection->getString('BiogHistAuthor'));
-              }
             }
 
             if($objCollection->PrimaryCreator->BiogHist)
