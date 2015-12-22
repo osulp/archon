@@ -160,7 +160,7 @@ header('Content-type: text/html; charset=UTF-8');
             if($objCollection->AcquisitionDate)
             {
          ?> <p><span class='bold'>Date Acquired:</span> <?php
-               echo($objCollection->getString('AcquisitionDateMonth') . '/' . $objCollection->getString('AcquisitionDateDay') . '/' . $objCollection->getString('AcquisitionDateYear'));             
+               echo($objCollection->getString('AcquisitionDateMonth') . '/' . $objCollection->getString('AcquisitionDateDay') . '/' . $objCollection->getString('AcquisitionDateYear'));
          ?></p><?php } ?>
 
          <?php
@@ -186,10 +186,22 @@ header('Content-type: text/html; charset=UTF-8');
             if($objCollection->Scope)
             {
       ?><h2 style='text-align:left'><a name="scopecontent"></a>Scope and Contents of the Materials</h2><div style="margin-left:40px"><?php echo($objCollection->getString('Scope')); ?></div><?php } ?>
+
       <?php
+            if ($objCollection->BiogHist) { ?>
+              <h2 style='text-align:left'><a name="bioghist"></a><?php echo ("Biographical / Historical Notes"); ?></h2>
+              <div style="margin-left:40px">
+                <?php echo($objCollection->getString('BiogHist')); ?>
+              </div>
+      <?php
+              if ($objCollection->BiogHistAuthor) {
+                echo(" <span class='bold'>Author:</span> " . $objCollection->getString('BiogHistAuthor'));
+              }
+            }
+
             if($objCollection->PrimaryCreator->BiogHist)
             {
-      ?><h2 style='text-align:left'><a name="bioghist"></a><?php
+      ?><h2 style='text-align:left'><a name="bioghist-primary"></a><?php
                if(trim($objCollection->PrimaryCreator->CreatorType) == "Corporate Name")
                {
                   echo ("Historical Note");
@@ -446,7 +458,7 @@ header('Content-type: text/html; charset=UTF-8');
             {
                echo($strFindingAidLinks . "<br/>\n");
             }
-            
+
             $contentCount = $objCollection->countContent();
             if($contentCount > 0)
             {
