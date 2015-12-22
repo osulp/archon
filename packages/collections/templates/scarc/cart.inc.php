@@ -42,7 +42,9 @@ if(!$_ARCHON->Security->isAuthenticated())
 ?>
    <span class='bold'><a href="?p=core/register">Register an account to set up a research appointment</a></span>
    <br/><br/>
-   <p>Registering an account and submitting research requests through this system helps us to have your materials ready for you before you arrive for your appointment.</p>
+   <p>Registering an account and submitting research requests through this system
+     helps us to have your materials ready for you before you arrive for your appointment.
+     We require at least 24 hours notice before your arrival, and we will page up to five boxes in advance.</p>
    <p>(If you already have an account, please <a href="?p=core/login">login</a>.)</p>
 
 <?php
@@ -63,7 +65,11 @@ else
 ?>
    <div class='userformbox mdround'>
      <legend>Make An Appointment</legend>
-     <p>Fields marked with an asterisk (<span style="color:red">*</span>) are required.</p>
+     <p class="info-message"><strong>Please note:</strong> We require at least 24 hours notice to page
+       materials in advance of your appointment. Materials will be removed from your
+       shelf in this system after making an appointment. You will receive an
+       appointment confirmation email listing the contents of your shelf.</p>
+     <p><em>Fields marked with an asterisk (<span style="color:red">*</span>) are required.</em></p>
      <div class="form-group">
          <label class="col-sm-4 control-label" for="RepositoryIDField">Repository:</label>
          <div class="col-sm-8">

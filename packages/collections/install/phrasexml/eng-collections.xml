@@ -861,6 +861,9 @@
                 <phrase name='search_searchingforlocation' regularexpression=''>
                     Searching for $1
                 </phrase>
+				<phrase name='search_pdfcldesc' regularexpression=''>
+					PDF Container Lists are provided for collections which are not fully arranged and described. These collections are open for use unless otherwise noted.
+				</phrase>
                 <phrase name='staff_info' regularexpression=''>
                     Staff Information
                 </phrase>

@@ -400,6 +400,10 @@ function containerlist_search() {
     $objLearnMorePhrase = Phrase::getPhrase('search_learnmore', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
     $strLearnMore = $objLearnMorePhrase ? $objLearnMorePhrase->getPhraseValue(ENCODE_HTML) : 'Learn more about this collection';
 
+    $objPdfCLDescPhrase = Phrase::getPhrase('search_pdfcldesc', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC);
+    $strPdfCLDesc = $objPdfCLDescPhrase ? $objPdfCLDescPhrase->getPhraseValue(ENCODE_HTML)
+      : 'PDF Container Lists are provided for collections which are not fully arranged and described. These collections are open for use unless otherwise noted.';
+
     if(!$in_CollectionID)
     {
       $arrCollections = $_ARCHON->searchContainerList($_ARCHON->QueryString, $in_CollectionID);
@@ -412,11 +416,11 @@ function containerlist_search() {
       <a href="#" onclick="toggleDisplay('PdfCL'); return false;"><span id="PdfCLImage" class="glyphicon glyphicon-plus-sign"></span><?php echo("  ".$strClassPdfCL); ?></a>
    </span>(<span id='PdfCLCount'><?php echo(count($arrCollections)); ?></span> <?php echo($strPdfCLMatches); ?>) <br/>
           <dl id='PdfCLResults' style='display: none;'>
-            <dt>
-            <div id="acrobatDownload">
-              <p><em>To view reference guides in PDF format, download the following free software: <a
+            <dt id="PdfCLDesc">
+              <p><?php echo $strPdfCLDesc; ?></p>
+              <p id="acrobatDownload">
+                <em>To view reference guides in PDF format, download the following free software: <a
                     href="http://get.adobe.com/reader/" title="External Link">Get Acrobat Reader</a></em></p>
-            </div>
             </dt>
             <?php
             foreach($arrCollections as $objPdfCL)
