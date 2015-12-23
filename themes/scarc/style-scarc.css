@@ -505,10 +505,16 @@ a.header-blacktop:hover {
 
 #header-title {
 	width: 90%;
-	height: 98px;
+	height: 100px;
 	margin: 0 auto;
 	padding: 0;
-    background: #FFF url('images/scarc-header-title.jpg') no-repeat right;
+    /*background: #FFF url('images/scarc-header-title.jpg') no-repeat right;*/
+	background-color: #ffffff;
+	background: -moz-linear-gradient(left,  rgba(255,255,255,1) 50%, rgba(255,255,255,0) 85%), url('images/bicycleguy-900x100.jpg') no-repeat right top; /* FF3.6-15 */
+	background: -webkit-linear-gradient(left,  rgba(255,255,255,1) 50%,rgba(255,255,255,0) 85%), url('images/bicycleguy-900x100.jpg') no-repeat right top; /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right,  rgba(255,255,255,1) 50%,rgba(255,255,255,0) 85%), url('images/bicycleguy-900x100.jpg') no-repeat right top; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 ), url('images/bicycleguy-140.jpg') no-repeat right top; /* IE6-9 */
+
 }
 
 
