@@ -24,18 +24,8 @@
  */
 isset($_ARCHON) or die();
 
-$objCollection->dbLoadDigitalContent();
-foreach($objCollection->DigitalContent as $ID => $objDigitalContent)
-{
-   if(!$objDigitalContent->Browsable && !$_ARCHON->Security->verifyPermissions(MODULE_DIGITALLIBRARY, READ))
-   {
-      unset($objCollection->DigitalContent[$ID]);
-   }
-}
-
 header('Content-type: text/html; charset=UTF-8');
 ?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
    <head><title><?php echo(strip_tags($_ARCHON->PublicInterface->Title)); ?></title>
@@ -107,8 +97,6 @@ header('Content-type: text/html; charset=UTF-8');
       </div>
 
       <?php
-      $repositoryid = $objCollection->RepositoryID;
-
       echo("<h1 id='titleheader'>" . strip_tags($_ARCHON->PublicInterface->Title) . "</h1>\n");
       ?>
 
@@ -129,15 +117,15 @@ header('Content-type: text/html; charset=UTF-8');
          <?php
          if($objCollection->PredominantDates)
          {
-         ?><p><span class="bold">Predominant Dates:</span><?php echo($objCollection->PredominantDates); ?></p><?php } ?>
+         ?><p><span class="bold">Predominant Dates:</span> <?php echo($objCollection->PredominantDates); ?></p><?php } ?>
             <?php
             if($objCollection->Classification)
             {
-            ?><p><span class='bold'>ID:</span> <?php echo($objCollection->Classification->toString(LINK_NONE, true, false, true, false)); ?>/<?php echo($objCollection->getString('CollectionIdentifier')); ?></p><?php } ?>
+            ?><p><span class='bold'>ID:</span> <?php echo($objCollection->Classification->toString(LINK_NONE, true, false, true, false)); ?> <?php echo($objCollection->getString('CollectionIdentifier')); ?></p><?php } ?>
          <?php
             if(!empty($objCollection->PrimaryCreator))
             {
-         ?><p><span class='bold'>Creator:</span> <?php echo($objCollection->PrimaryCreator->toString()); ?></p><?php } ?>
+         ?><p><span class='bold'>Primary Creator:</span> <?php echo($objCollection->PrimaryCreator->toString()); ?></p><?php } ?>
 
          <?php
             if($objCollection->Extent)
@@ -160,22 +148,13 @@ header('Content-type: text/html; charset=UTF-8');
             if($objCollection->AcquisitionDate)
             {
          ?> <p><span class='bold'>Date Acquired:</span> <?php
-               echo($objCollection->getString('AcquisitionDateMonth') . '/' . $objCollection->getString('AcquisitionDateDay') . '/' . $objCollection->getString('AcquisitionDateYear'));             
+               echo($objCollection->getString('AcquisitionDateMonth') . '/' . $objCollection->getString('AcquisitionDateDay') . '/' . $objCollection->getString('AcquisitionDateYear'));
          ?></p><?php } ?>
 
          <?php
-            if(!empty($arrGenres))
-            {
-         ?>
-               <p><span class='bold'>Formats/Genres:</span> <?php echo($_ARCHON->createStringFromSubjectArray($arrGenres, ', ', LINK_NONE)); ?>
-               </p>
-         <?php
-            }
-         ?>
-         <?php
             if(!empty($objCollection->Languages))
             {
-         ?><p><span class='bold'>Languages:</span> <?php echo($_ARCHON->createStringFromLanguageArray($objCollection->Languages, ', ', LINK_NONE)); ?></p> <?php } ?>
+         ?><p><span class='bold'>Languages of Materials:</span> <?php echo($_ARCHON->createStringFromLanguageArray($objCollection->Languages, ', ', LINK_NONE)); ?></p> <?php } ?>
 
          </div>
       <?php
@@ -185,11 +164,24 @@ header('Content-type: text/html; charset=UTF-8');
       <?php
             if($objCollection->Scope)
             {
-      ?><h2 style='text-align:left'><a name="scopecontent"></a>Scope and Contents of the Materials</h2><div style="margin-left:40px"><?php echo($objCollection->getString('Scope')); ?></div><?php } ?>
+      ?><h2 style='text-align:left'><a name="scopecontent"></a>Scope and Content Notes</h2><div style="margin-left:40px"><?php echo($objCollection->getString('Scope')); ?></div><?php } ?>
+
       <?php
+            if ($objCollection->BiogHist) { ?>
+              <h2 style='text-align:left'><a name="bioghist"></a><?php echo ("Biographical / Historical Notes"); ?></h2>
+              <div style="margin-left:40px">
+                <?php echo($objCollection->getString('BiogHist'));
+                if ($objCollection->BiogHistAuthor) {
+                  echo("<br><br><span class='bold'>Author:</span> " . $objCollection->getString('BiogHistAuthor'));
+                }
+               ?>
+              </div>
+      <?php
+            }
+
             if($objCollection->PrimaryCreator->BiogHist)
             {
-      ?><h2 style='text-align:left'><a name="bioghist"></a><?php
+      ?><h2 style='text-align:left'><a name="bioghist-primary"></a><?php
                if(trim($objCollection->PrimaryCreator->CreatorType) == "Corporate Name")
                {
                   echo ("Historical Note");
@@ -212,11 +204,6 @@ header('Content-type: text/html; charset=UTF-8');
             }
       ?>
       <?php
-            if(!empty($arrSubjects))
-            {
-      ?><h2 style='text-align:left'><a name="subjects"></a>Subject/Index Terms</h2><div style="margin-left:40px"><p><?php echo($_ARCHON->createStringFromSubjectArray($arrSubjects, "<br/>", LINK_NONE)); ?></p></div><?php } ?>
-
-      <?php
             if(!empty($objCollection->AccessRestrictions) || !empty($objCollection->UseRestrictions) || !empty($objCollection->PhysicalAccessNote) || !empty($objCollection->TechnicalAccessNote) || !empty($objCollection->AcquisitionSource) || !empty($objCollection->AcquisitionMethod) || !empty($objCollection->AppraisalInformation) || !empty($objCollection->OrigCopiesNote) || !empty($objCollection->OrigCopiesURL) || !empty($objCollection->RelatedMaterials) || !empty($objCollection->RelatedMaterialsURL) || !empty($objCollection->RelatedPublications) || !empty($objCollection->PreferredCitation) || !empty($objCollection->ProcessingInfo) || !empty($objCollection->RevisionHistory))
 //admin info exists
             {
@@ -235,7 +222,7 @@ header('Content-type: text/html; charset=UTF-8');
                if($objCollection->AltExtentStatement)
                {
          ?>
-                  <p><span class='bold'><a name='AltExtentStatement'></a>Alternate Extent Statement:</span>
+                  <p><span class='bold'><a name='AltExtentStatement'></a>More Extent Information:</span>
             <?php echo($objCollection->getString('AltExtentStatement')); ?>
                </p>
          <?php
@@ -244,7 +231,7 @@ header('Content-type: text/html; charset=UTF-8');
                if($objCollection->AccessRestrictions)
                {
          ?>
-                  <p><span class='bold'>Access Restrictions:</span>
+                  <p><span class='bold'>Statement on Access:</span>
             <?php echo($objCollection->getString('AccessRestrictions')); ?>
                </p>
          <?php
@@ -285,7 +272,7 @@ header('Content-type: text/html; charset=UTF-8');
                if($objCollection->AcquisitionMethod)
                {
          ?>
-                  <p><span class='bold'>Acquisition Method: </span>
+                  <p><span class='bold'>Acquisition Note: </span>
             <?php echo($objCollection->getString('AcquisitionMethod')); ?>
                </p>
          <?php
@@ -398,72 +385,58 @@ header('Content-type: text/html; charset=UTF-8');
       ?>
 
       <?php
-            if(!empty($objCollection->Content))
-            {
-      ?> <hr style="width: 70%" class='center' /> <h2 style='text-align:left'><a name="boxfolder"></a>Box and Folder Listing</h2> <?php } ?>
-      <?php
-            if(!$_ARCHON->PublicInterface->DisableTheme)
-            {
-               $_ARCHON->PublicInterface->DisableTheme = true;
-
-               $arrLinks = array();
-               foreach($arrRootContent as $ID => $objContent)
-               {
-                  if($ID != $in_RootContentID && $objContent->enabled())
-                  {
-                     $strLink = "[<a href='?p=collections/findingaid&amp;id=$objCollection->ID&amp;q=$_ARCHON->QueryStringURL&amp;rootcontentid=$ID#id$ID'>" . $objContent->toString() . "</a>]";
-                  }
-                  else
-                  {
-                     $strLink = '[' . $objContent->toString() . ']';
-                  }
-
-                  $arrLinks[] = $strLink;
-               }
-
-               $strDivision = reset($arrRootContent)->LevelContainer ? reset($arrRootContent)->LevelContainer->getString('LevelContainer') : '';
-               $strFindingAidLinks = "<br/><span class='bold'>Browse by $strDivision:</span><br/><br/>\n";
-               $strFindingAidLinks .= implode(",<br/>\n", $arrLinks);
-
-               if($in_RootContentID)
-               {
-                  $strFindingAidLinks .= ",<br/>\n" . "[<a href='?p=collections/findingaid&amp;id=$objCollection->ID&amp;q=$_ARCHON->QueryStringURL'>" . All . "</a>]<br/>\n";
-               }
-               else
-               {
-                  $strFindingAidLinks .= ",<br/>\n[All]<br/>\n";
-               }
-
-
-               $_ARCHON->PublicInterface->DisableTheme = false;
-            }
-            else
-            {
-               $strFindingAidLinks = '';
-            }
-
-            if($strFindingAidLinks)
-            {
-               echo($strFindingAidLinks . "<br/>\n");
-            }
-            
-            $contentCount = $objCollection->countContent();
-            if($contentCount > 0)
-            {
-               echo("<dl>#CONTENT#</dl>");
-            }
-
-            if($contentCount > 20)
-            {
-               echo($strFindingAidLinks . "\n");
-            }
+      if(!empty($objCollection->Creators))
+      {
+        ?>
+        <h2 style='text-align:left'><a name="creators"></a>Creators</h2>
+        <div style="margin-left:40px">
+          <p><?php echo($_ARCHON->createStringFromCreatorArray($objCollection->Creators, '<br>', LINK_NONE, TRUE)); ?></p>
+        </div>
+        <?php
+      }
       ?>
+
+      <?php
+
+      if (!empty($objCollection->Subjects)) {
+        $GenreSubjectTypeID = $_ARCHON->getSubjectTypeIDFromString('Genre/Form of Material');
+        foreach ($objCollection->Subjects as $objSubject) {
+          if ($objSubject->SubjectTypeID == $GenreSubjectTypeID) {
+            $arrGenres[$objSubject->ID] = $objSubject;
+          }
+          else {
+            $arrSubjects[$objSubject->ID] = $objSubject;
+          }
+        }
+
+        if (!empty($arrSubjects)) {
+          ?>
+          <h2 style='text-align:left'><a name="subjects"></a>People, Places, and Topics</h2>
+          <div style="margin-left:40px">
+            <p><?php echo($_ARCHON->createStringFromSubjectArray($arrSubjects, "<br/>", LINK_NONE)); ?></p>
+          </div>
+          <?php
+        }
+
+        if (!empty($arrGenres)) {
+          ?>
+          <h2 style='text-align:left'><a name="genres"></a>Forms of Material</h2>
+          <div style="margin-left:40px">
+              <p><?php echo($_ARCHON->createStringFromSubjectArray($arrGenres, '<br/>', LINK_NONE)); ?></p>
+          </div>
+          <?php
+        }
+      }
+      if(!empty($objCollection->Content)) {
+        ?>
+        <hr style="width: 70%" class='center' /><h2 style='text-align:left'><a name="boxfolder"></a>Box and Folder Listing</h2>
+        <?php
+        $contentCount = $objCollection->countContent();
+        if($contentCount > 0)
+        {
+          echo("<dl>#CONTENT#</dl>");
+        }
+      }
+   ?>
    </body>
 </html>
-
-
-
-
-
-
-

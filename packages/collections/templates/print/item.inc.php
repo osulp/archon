@@ -39,23 +39,14 @@ if($enabled)
 
    if($Content['UserFields'])
    {
-      $strUserFields = '';
-      $last = count($Content['UserFields']);
-      $count = 1;
-
       natcasesort(&$Content['UserFields']);
-
       foreach($Content['UserFields'] as $ID => $String)
       {
-         $strUserFields .= $String;
-
-         if($count != $last)
-         {
-            $strUserFields .= "</dd>\n<dd class='faitemcontent'>\n";
+         // Suppress the 'UnitID field display - Issue #27 - 6/22/15 ME
+         if ('UnitID' != substr($String, 0, 6)) {
+            echo "<dd class='faitemuserfields'>" . $String . "</dd><br/>\n";
          }
-         $count++;
       }
-      echo("<dd class='faitemcontent'>" . $strUserFields . "</dd>\n");
    }
 
    if(!empty($Content['Subjects']))
@@ -79,6 +70,3 @@ if($enabled)
 
 
 }
-
-
-?>

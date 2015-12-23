@@ -445,7 +445,7 @@ abstract class Collections_Collection
 
             $id = $row['ID'];
 
-            if($link_type == 'public' && ($this->Repository->ResearchFunctionality & RESEARCH_COLLECTIONS))
+            if($link_type == 'public' && !$_ARCHON->PublicInterface->DisableTheme && ($this->Repository->ResearchFunctionality & RESEARCH_COLLECTIONS))
             {
               if ($arrCart->Collections[$this->ID]->Content[$id])
               {
