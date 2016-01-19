@@ -21,9 +21,3 @@ else
 {
    $dialogSection->insertRow('repositoryid')->insertSelect('repositoryid', $objUser->Repositories)->required();
 }
-
-$dialogSection->insertRow('classificationid')->insertHierarchicalSelect('classificationid', 'traverseClassification', 'getChildClassifications', 'Classification');
-
-
-
-?>

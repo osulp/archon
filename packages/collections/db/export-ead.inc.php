@@ -16,11 +16,9 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
 
    $repositoryID = $_REQUEST['repositoryid'] ? $_REQUEST['repositoryid'] : 0;
 
-   $classificationID = $_REQUEST['classificationid'] ? $_REQUEST['classificationid'] : 0;
-
-   if($repositoryID == 0 && $classificationID == 0)
+   if($repositoryID == 0)
    {
-      die("RepositoryID and ClassificationID not defined.");
+      die("RepositoryID not defined.");
    }
 
 
@@ -97,9 +95,9 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
    @set_time_limit(60);
 
 
-   $arrCollections = $_ARCHON->searchCollections('', SEARCH_COLLECTIONS, 0, 0, 0, $repositoryID, $classificationID, 0, NULL, NULL, NULL, 0);
+   $arrCollections = $_ARCHON->searchCollections('', SEARCH_COLLECTIONS, 0, 0, 0, $repositoryID, 0, 0, NULL, NULL, NULL, 0);
 
-   $foldername = "archon_{$repositoryID}_{$classificationID}_ead";
+   $foldername = "archon_{$repositoryID}_ead";
    $dirname = realpath(sys_get_temp_dir())."/".$foldername;
 
    if(file_exists($dirname))

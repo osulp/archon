@@ -386,7 +386,8 @@ abstract class Collections_Collection
       {
          $link_type = '';
       }
-     $arrCart = $_ARCHON->Security->Session->ResearchCart->getCart();
+
+      $arrCart = (!$ForEAD) ? $_ARCHON->Security->Session->ResearchCart->getCart() : array();
 
      while($row = $result->fetchRow())
       {
