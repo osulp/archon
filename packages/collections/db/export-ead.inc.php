@@ -5,6 +5,8 @@ isset($_ARCHON) or die();
 
 $UtilityCode = 'ead';
 
+$temp_dir = realpath('./temp/');
+
 $_ARCHON->addDatabaseExportUtility(PACKAGE_COLLECTIONS, $UtilityCode, '3.21');
 
 if($_REQUEST['f'] == 'export-' . $UtilityCode)
@@ -98,7 +100,8 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
    $arrCollections = $_ARCHON->searchCollections('', SEARCH_COLLECTIONS, 0, 0, 0, $repositoryID, 0, 0, NULL, NULL, NULL, 0);
 
    $foldername = "archon_{$repositoryID}_ead";
-   $dirname = realpath(sys_get_temp_dir())."/".$foldername;
+//   $dirname = realpath(sys_get_temp_dir())."/".$foldername;
+   $dirname = $temp_dir."/".$foldername;
 
    if(file_exists($dirname))
    {
@@ -116,16 +119,12 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
 
    mkdir($dirname, 0755);
 
-
    header("Content-Type: archive/zip");
    header("Content-Disposition: attachment; filename={$foldername}.zip");
-
 
    $_ARCHON->PublicInterface = new PublicInterface();
    $_ARCHON->PublicInterface->initialize(CONFIG_CORE_DEFAULT_THEME, "EAD");
    $_ARCHON->PublicInterface->DisableTheme = true;
-
-
 
    foreach($arrCollections as $objCollection)
    {
@@ -134,14 +133,11 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
 
       $handle = fopen($dirname."/".$_REQUEST['output'].".xml", "w");
 
-
       ob_start();
 
       $objCollection->dbLoadRootContent();
       $arrRootContent = $objCollection->Content;
-
       $objCollection->dbLoadAll(LOADCONTENT_NONE);
-
 
       if(!$_ARCHON->PublicInterface->Templates['collections']['Collection'])
       {
@@ -155,7 +151,6 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
          // Process the collection template.
          eval($_ARCHON->PublicInterface->Templates['collections']['Collection']);
 
-
          $output = ob_get_clean();
 
          // Break the collection template where %Items% occurs
@@ -166,7 +161,6 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
          echo($outputnow);
          flush();
 
-
          if(!$objCollection->enabled())
          {
             $readPermissions = false;
@@ -174,7 +168,6 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
          else
          {
             $readPermissions = false;
-
 
             if($_ARCHON->Security->verifyPermissions(MODULE_COLLECTIONCONTENT, READ)
                     || ($_ARCHON->Security->userHasAdministrativeAccess() && !CONFIG_CORE_LIMIT_REPOSITORY_READ_PERMISSIONS)
@@ -225,39 +218,47 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
       $file = ob_get_clean();
       fwrite($handle, $file);
       fclose($handle);
+      break;
    }
 
+   $zip = new ZipArchive();
+   $zip_file = $temp_dir . "/EADExport.zip";
 
+   if ($zip->open($zip_file, ZipArchive::CREATE)!==TRUE) {
+      $_ARCHON->declareError("Cannot create ZIP file: $zip_file");
+   } else {
+      $export_dir = $temp_dir . '/' . $foldername;
 
-   chdir(realpath(sys_get_temp_dir()));
-
-   $tmp_zip = tempnam ("tmp", "tempname") . ".zip";
-
-   exec("zip -r $tmp_zip $foldername");
-
-
-   $filesize = filesize($tmp_zip);
-   // header("Content-Length: $filesize");
-
-   // deliver the zip file
-   $fp = fopen("$tmp_zip","r");
-   echo fpassthru($fp);
-
-   // clean up the tmp zip file
-   exec("rm $tmp_zip");
-
-   $d = dir($foldername);
-   while($entry = $d->read())
-   {
-      if ($entry!= "." && $entry!= "..")
+      $d = dir($export_dir);
+      while($entry = $d->read())
       {
-         unlink($foldername."/".$entry);
+         if ($entry!= "." && $entry!= "..")
+         {
+            $add_file = $export_dir . '/' . $entry;
+            $zip->addFile($add_file, $foldername . '/' . $entry);
+         }
       }
-   }
-   $d->close();
-   rmdir($foldername);
+      $d->close();
 
+      $zip->close();
+
+      // deliver the zip file
+      $fp = fopen($zip_file,"r");
+      echo fpassthru($fp);
+
+      // Clean up the tmp zip file and the export directory.
+      unlink($zip_file);
+
+      $d = dir($export_dir);
+      while($entry = $d->read())
+      {
+         if ($entry!= "." && $entry!= "..")
+         {
+            unlink($export_dir . '/' . $entry);
+         }
+      }
+      $d->close();
+      rmdir($export_dir);
+   }
 
 }
-
-?>
