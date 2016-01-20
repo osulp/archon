@@ -218,7 +218,6 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
       $file = ob_get_clean();
       fwrite($handle, $file);
       fclose($handle);
-      break;
    }
 
    $zip = new ZipArchive();
