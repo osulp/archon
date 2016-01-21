@@ -5,7 +5,7 @@ isset($_ARCHON) or die();
 
 $UtilityCode = 'ead';
 
-$temp_dir = realpath('./temp/');
+$temp_dir = realpath(sys_get_temp_dir());
 
 $_ARCHON->addDatabaseExportUtility(PACKAGE_COLLECTIONS, $UtilityCode, '3.21');
 
@@ -100,7 +100,6 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
    $arrCollections = $_ARCHON->searchCollections('', SEARCH_COLLECTIONS, 0, 0, 0, $repositoryID, 0, 0, NULL, NULL, NULL, 0);
 
    $foldername = "archon_{$repositoryID}_ead";
-//   $dirname = realpath(sys_get_temp_dir())."/".$foldername;
    $dirname = $temp_dir."/".$foldername;
 
    if(file_exists($dirname))
