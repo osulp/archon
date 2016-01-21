@@ -94,7 +94,7 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
    }
 
 
-   @set_time_limit(60);
+   @set_time_limit(0);
 
 
    $arrCollections = $_ARCHON->searchCollections('', SEARCH_COLLECTIONS, 0, 0, 0, $repositoryID, 0, 0, NULL, NULL, NULL, 0);
@@ -117,9 +117,6 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
    }
 
    mkdir($dirname, 0755);
-
-   header("Content-Type: archive/zip");
-   header("Content-Disposition: attachment; filename={$foldername}.zip");
 
    $_ARCHON->PublicInterface = new PublicInterface();
    $_ARCHON->PublicInterface->initialize(CONFIG_CORE_DEFAULT_THEME, "EAD");
@@ -239,6 +236,9 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
       $d->close();
 
       $zip->close();
+
+      header("Content-Type: archive/zip");
+      header("Content-Disposition: attachment; filename={$foldername}.zip");
 
       // deliver the zip file
       $fp = fopen($zip_file,"r");
