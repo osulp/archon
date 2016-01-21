@@ -122,6 +122,9 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
    $_ARCHON->PublicInterface->initialize(CONFIG_CORE_DEFAULT_THEME, "EAD");
    $_ARCHON->PublicInterface->DisableTheme = true;
 
+   header("Content-Type: archive/zip");
+   header("Content-Disposition: attachment; filename={$foldername}.zip");
+
    foreach($arrCollections as $objCollection)
    {
       $_REQUEST['id'] = $objCollection->ID;
@@ -236,9 +239,6 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode)
       $d->close();
 
       $zip->close();
-
-      header("Content-Type: archive/zip");
-      header("Content-Disposition: attachment; filename={$foldername}.zip");
 
       // deliver the zip file
       $fp = fopen($zip_file,"r");
