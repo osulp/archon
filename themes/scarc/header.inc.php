@@ -194,7 +194,7 @@ if (empty($_ARCHON->PublicInterface->Title)) {
     <div id="header-nav">
       <ul id="nav">
         <li><a href="index.php">Collections</a><ul>
-            <li><a href="?p=collections/collections">Collections by Title</a>
+            <li><a href="?p=collections/collections">Collections by Title</a></li>
             <li><a href="?p=collections/classifications">Collections by Type</a></li>
             <li><a href="?p=subjects/subjects">People, Places, and Topics</a></li>
             <li><a href="?p=creators/creators">Creators</a></li>
