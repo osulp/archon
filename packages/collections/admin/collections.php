@@ -99,6 +99,7 @@ function collections_ui_main()
    $generalSection->insertRow('classificationid')->insertHierarchicalSelect('ClassificationID', 'traverseClassification', 'getChildClassifications', 'Classification');
 
    $generalSection->insertRow('arkid')->insertTextField('ArkID', 25, 25);
+   $generalSection->insertRow('localcolluri')->insertTextField('LocalCollURI', 50, 255);
    $generalSection->insertRow('collectionidentifier')->insertTextField('CollectionIdentifier', 10, 50);
    $generalSection->insertRow('sorttitle')->insertTextField('SortTitle', 50, 150)->required();
 

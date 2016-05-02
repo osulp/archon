@@ -573,6 +573,9 @@
                 <phrase name='ark_id' regularexpression=''>
                     ARK ID:
                 </phrase>
+				<phrase name='local_collection_uri' regularexpression=''>
+					Local Collection URI:
+				</phrase>
                 <phrase name='arrangement' regularexpression=''>
                     Arrangement
                 </phrase>
@@ -925,6 +928,9 @@
                 <phrase name='arkid' regularexpression=''>
                     The ARK identifier for this collection.
                 </phrase>
+				<phrase name='localcolluri' regularexpression=''>
+					The Local Collection URI.
+				</phrase>
                 <phrase name='books' regularexpression=''>
 					Open this section to link books records to the collection.
 				</phrase>
@@ -1199,6 +1205,9 @@
                 <phrase name='arkid' regularexpression=''>
                     ARK ID:
                 </phrase>
+				<phrase name='localcolluri' regularexpression=''>
+					Local Collection URI:
+				</phrase>
                 <phrase name='books' regularexpression=''>
 					Book(s)
 				</phrase>

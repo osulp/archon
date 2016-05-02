@@ -60,6 +60,11 @@ echo("<h1 id='titleheader'>" . $_ARCHON->PublicInterface->Title . "</h1>\n");
         <div class='ccardcontent'><span class='ccardlabel'>ARK ID:</span> <?php echo($objCollection->ArkID); ?></div>
         <?php
       }
+        if ($objCollection->LocalCollURI) {
+          ?>
+          <div class='ccardcontent'><span class='ccardlabel'>Local Collection URI:</span> <?php echo($objCollection->LocalCollURI); ?></div>
+          <?php
+        }
 }
 
 if($objCollection->AltExtentStatement)
