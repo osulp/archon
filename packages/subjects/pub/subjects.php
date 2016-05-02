@@ -30,7 +30,7 @@ if($in_ID)
 {
    $vars = subjects_listChildSubjects($in_ID);
 }
-elseif($in_Char)
+elseif($in_Char || '' == $in_Char)
 {
    $vars = subjects_listSubjectsForChar($in_Char, $in_SubjectTypeID);
 }
@@ -221,12 +221,15 @@ function subjects_listSubjectsForChar($Char, $SubjectTypeID)
 
    $objTypedBeginningWithPhrase = Phrase::getPhrase('subjects_typedbeginningwith', PACKAGE_SUBJECTS, 0, PHRASETYPE_PUBLIC);
    $strTypedBeginningWith = $objTypedBeginningWithPhrase ? $objTypedBeginningWithPhrase->getPhraseValue(ENCODE_HTML) : 'Of Type "$1" Beginning with "$2"';
-   $objSubjectsBeginningWithPhrase = Phrase::getPhrase('subjects_subjectsbeginningwith', PACKAGE_SUBJECTS, 0, PHRASETYPE_PUBLIC);
-   $strSubjectsBeginningWith = $objSubjectsBeginningWithPhrase ? $objSubjectsBeginningWithPhrase->getPhraseValue(ENCODE_HTML) : 'Beginning with "$1"';
 
+   if (empty($Char)) {
+      $strSubjectsBeginningWith = '';
+   } else {
+      $objSubjectsBeginningWithPhrase = Phrase::getPhrase('subjects_subjectsbeginningwith', PACKAGE_SUBJECTS, 0, PHRASETYPE_PUBLIC);
+      $strSubjectsBeginningWith = $objSubjectsBeginningWithPhrase ? $objSubjectsBeginningWithPhrase->getPhraseValue(ENCODE_HTML) : 'Beginning with "$1"';
+   }
 
    $arrSubjectTypes = $_ARCHON->getAllSubjectTypes();
-
 
    if($SubjectTypeID)
    {
@@ -264,9 +267,15 @@ function subjects_listSubjectsForChar($Char, $SubjectTypeID)
       }
       else
       {
-         $objSubjectsBeginningWithHeaderPhrase = Phrase::getPhrase('subjects_subjectsbeginningwithheader', PACKAGE_SUBJECTS, 0, PHRASETYPE_PUBLIC);
-         $strSubjectsBeginningWithHeader = $objSubjectsBeginningWithHeaderPhrase ? $objSubjectsBeginningWithHeaderPhrase->getPhraseValue(ENCODE_HTML) : 'Subjects Beginning with "$1"';
-         $strSubjectsBeginningWithHeader = str_replace('$1', encoding_strtoupper($Char), $strSubjectsBeginningWithHeader);
+         if (empty($Char)) {
+            $objSubjectsBeginningWithHeaderPhrase = Phrase::getPhrase('subjects_subjects', PACKAGE_SUBJECTS, 0, PHRASETYPE_PUBLIC);
+            $strSubjectsBeginningWithHeader = $objSubjectsBeginningWithHeaderPhrase ? $objSubjectsBeginningWithHeaderPhrase->getPhraseValue(ENCODE_HTML) : 'People, Places, and Topics';
+            $strSubjectsBeginningWithHeader = 'All '. $strSubjectsBeginningWithHeader;
+         } else {
+            $objSubjectsBeginningWithHeaderPhrase = Phrase::getPhrase('subjects_subjectsbeginningwithheader', PACKAGE_SUBJECTS, 0, PHRASETYPE_PUBLIC);
+            $strSubjectsBeginningWithHeader = $objSubjectsBeginningWithHeaderPhrase ? $objSubjectsBeginningWithHeaderPhrase->getPhraseValue(ENCODE_HTML) : 'Subjects Beginning with "$1"';
+            $strSubjectsBeginningWithHeader = str_replace('$1', encoding_strtoupper($Char), $strSubjectsBeginningWithHeader);
+         }
 
          $vars['strSubTitle'] = $strSubjectsBeginningWithHeader;
       }
@@ -291,7 +300,7 @@ function subjects_listAllSubjects($Page, $SubjectTypeID)
 {
    global $_ARCHON;
 
-   $arrSubjects = $_ARCHON->searchSubjects($_REQUEST['q'], NULL, $SubjectTypeID, CONFIG_CORE_PAGINATION_LIMIT + 1, ($Page-1)*CONFIG_CORE_PAGINATION_LIMIT);
+   $arrSubjects = $_ARCHON->searchSubjects($_REQUEST['q'], NULL, $SubjectTypeID, false, CONFIG_CORE_PAGINATION_LIMIT + 1, ($Page-1)*CONFIG_CORE_PAGINATION_LIMIT);
 
    if(count($arrSubjects) > CONFIG_CORE_PAGINATION_LIMIT)
    {
