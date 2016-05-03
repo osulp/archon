@@ -27,8 +27,9 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode) {
   $filename = 'collection_locations-' . encoding_strtolower(date('Y-m-d-His'));
 
   $arrCollections = $_ARCHON->searchCollections('', SEARCH_COLLECTIONS, 0, 0, 0, $repositoryID, 0, 0, NULL, NULL, NULL, 0);
+  $arrClassifications = $_ARCHON->getAllClassifications();
 
-  $csv = '"Title","Location","Content","Range Value","Section","Shelf","Extent"' . "\n";
+  $csv = '"ID","Title","Location","Content","Range Value","Section","Shelf","Extent"' . "\n";
   $sep = ',';
   $quote = '"';
   /** @var $collection Collections_Collection */
@@ -38,7 +39,8 @@ if($_REQUEST['f'] == 'export-' . $UtilityCode) {
 
     /** @var $location Collections_LocationEntry */
     foreach ($collection->LocationEntries as $location) {
-      $csv .=  $quote . $collection->Title. $quote . $sep
+      $csv .= $quote . $arrClassifications[$collection->ClassificationID]->ClassificationIdentifier . ' ' . $collection->CollectionIdentifier . $quote . $sep
+        . $quote . $collection->Title. $quote . $sep
         . $quote . $location->Location->Location . $quote . $sep
         . $quote . $location->Content . $quote . $sep
         . $location->RangeValue . $sep
