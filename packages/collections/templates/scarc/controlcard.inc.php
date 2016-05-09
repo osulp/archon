@@ -132,6 +132,18 @@ if ($objCollection->ArkID) {
 }
 
 /**
+ * Oregon Digital collection ID
+ */
+if ($objCollection->LocalCollURI) {
+  ?>
+  <div class='ccardcontent'><span
+      class='ccardlabel'><?php echo $_ARCHON->getPhrase('local_collection_uri', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+        ->getPhraseValue(ENCODE_HTML); ?></span> <?php echo($objCollection->LocalCollURI); ?>
+  </div>
+  <?php
+}
+
+/**
  * Extents
  */
 if ($objCollection->Extent) {

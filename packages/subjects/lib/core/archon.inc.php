@@ -483,7 +483,8 @@ abstract class Subjects_Archon
 
    /**
     * Retrieves an array of Subject objects that begin with
-    * the character specified by $Char
+    * the character specified by $Char.  An empty string passed in for $Char 
+    * will return all Subjects.
     *
     * @param string $Char
     * @param integer $SubjectTypeID
@@ -491,12 +492,6 @@ abstract class Subjects_Archon
     */
    public function getSubjectsForChar($Char, $SubjectTypeID = 0)
    {
-      if(!$Char)
-      {
-         $this->declareError("Could not get Subjects: Character not defined.");
-         return false;
-      }
-
       $arrSubjects = array();
 
       if($SubjectTypeID && is_natural($SubjectTypeID))

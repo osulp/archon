@@ -2505,7 +2505,10 @@ abstract class Collections_Collection
   /** @var string */
   public $ArkID = '';
 
-  /** @var string */
+   /** @var string */
+   public $LocalCollURI = '';
+
+   /** @var string */
    public $Title = '';
 
    /** @var string */
