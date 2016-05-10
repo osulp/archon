@@ -1891,6 +1891,7 @@ abstract class Collections_Archon
 
       $arrPrepQueries = array();
       $arrCollections = array();
+      $arrClassifications = array();
 
       if(!($SearchFlags & SEARCH_COLLECTIONS))
       {
@@ -2053,6 +2054,25 @@ abstract class Collections_Archon
             $textquery = "1=1";
          }
 
+         $arrClassifications = $this->getAllClassifications();
+
+         // Check the query for the collection identifier (Classification ID + " " + Collection ID)
+         // This is a special case predicated on the user searching for the
+         // identifier with a space between: e.g. "FV 101" or "MSS Adamson"
+         $idquery = '';
+         $idtypes = array();
+         $idvars = array();
+         if (2 == count($arrWords)) {
+            foreach ($arrClassifications as $c) {
+               if (strtoupper($arrWords[0]) == $c->ClassificationIdentifier) {
+                  $idquery .= " OR (tblCollections_Collections.ClassificationID = ? AND UPPER(tblCollections_Collections.CollectionIdentifier) LIKE ?)";
+                  array_push($idtypes, 'text', 'text');
+                  array_push($idvars, $c->ID, strtoupper($arrWords[1]).'%');
+                  break;
+               }
+            }
+         }
+
          // First we will try to parse the query for a Classification
          // string of the format #/#, where /# can be appended indefinitely
          // We'll try something easier than before.
@@ -2073,11 +2093,11 @@ abstract class Collections_Archon
             $subvars[] = $SearchQuery;
          }
 
-         if($textquery || $subquery || $repositoryquery || $enabledquery)
+         if($textquery || $subquery || $repositoryquery || $enabledquery || $idquery)
          {
-            $wherequery = "WHERE ($textquery $subquery) $repositoryquery $classificationquery $enabledquery";
-            $wheretypes = array_merge($texttypes, $subtypes, $repositorytypes, $classificationtypes, $enabledtypes);
-            $wherevars = array_merge($textvars, $subvars, $repositoryvars, $classificationvars, $enabledvars);
+            $wherequery = "WHERE ($textquery $subquery) $repositoryquery $classificationquery $enabledquery $idquery";
+            $wheretypes = array_merge($texttypes, $subtypes, $repositorytypes, $classificationtypes, $enabledtypes, $idtypes);
+            $wherevars = array_merge($textvars, $subvars, $repositoryvars, $classificationvars, $enabledvars, $idvars);
          }
          else
          {
