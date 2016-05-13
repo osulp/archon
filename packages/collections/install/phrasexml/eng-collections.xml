@@ -576,6 +576,9 @@
 				<phrase name='local_collection_uri' regularexpression=''>
 					Local Collection URI:
 				</phrase>
+				<phrase name='cataloguri' regularexpression=''>
+					Catalog URI:
+				</phrase>
                 <phrase name='arrangement' regularexpression=''>
                     Arrangement
                 </phrase>
