@@ -118,6 +118,7 @@ CREATE TABLE tblCollections_Collections (
   ClassificationID INT NOT NULL DEFAULT '0',
   ArkID VARCHAR(25) NULL DEFAULT NULL,
   LocalCollURI VARCHAR(255) NULL DEFAULT NULL,
+  CatalogURI VARCHAR(255) NULL DEFAULT NULL,
   CollectionIdentifier varchar(50) NULL DEFAULT NULL,
   Title varchar(150) NOT NULL,
   SortTitle varchar(150) NOT NULL,

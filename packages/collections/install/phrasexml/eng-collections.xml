@@ -931,6 +931,9 @@
 				<phrase name='localcolluri' regularexpression=''>
 					The Local Collection URI.
 				</phrase>
+				<phrase name='cataloguri' regularexpression=''>
+					The URI for this collection's record in the library catalog.
+				</phrase>
                 <phrase name='books' regularexpression=''>
 					Open this section to link books records to the collection.
 				</phrase>
@@ -1207,6 +1210,9 @@
                 </phrase>
 				<phrase name='localcolluri' regularexpression=''>
 					Local Collection URI:
+				</phrase>
+				<phrase name='cataloguri' regularexpression=''>
+					Catalog URI:
 				</phrase>
                 <phrase name='books' regularexpression=''>
 					Book(s)

@@ -636,8 +636,22 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
           href='?p=collections/findingaid&amp;id=<?php echo($objCollection->ID); ?>&amp;templateset=draftcontrolcard&amp;disabletheme=1'>Review
           copy/draft</a>
       </div>
-    </div>
-
+      <?php
+      /**
+      * Catalog URI
+      */
+      if ($objCollection->CatalogURI) {
+      ?>
+      <div class="ccardcontents"><br/>
+        <div class='ccardcontent'><a href="<?php echo($objCollection->CatalogURI); ?>" target="_blank"><?php
+            echo $_ARCHON->getPhrase('cataloguri', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+              ->getPhraseValue(ENCODE_HTML); ?></a>
+        </div>
+      </div>
+      <?php
+      }
+      ?>
+      </div>
   <?php
   }
 
