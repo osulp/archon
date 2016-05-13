@@ -2507,6 +2507,9 @@ abstract class Collections_Collection
 
    /** @var string */
    public $LocalCollURI = '';
+   
+   /** @var string */
+   public $CatalogURI = '';
 
    /** @var string */
    public $Title = '';
