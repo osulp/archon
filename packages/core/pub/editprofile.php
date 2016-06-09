@@ -42,6 +42,16 @@ function editprofile_form()
 
   require_once("header.inc.php");
 
+	if($_ARCHON->PublicInterface->Header->Message && $_ARCHON->PublicInterface->Header->Message != $_ARCHON->Error)
+	{
+		$parts = explode(';',  $_ARCHON->PublicInterface->Header->Message);
+		echo "<div class='alert alert-danger'>";
+		foreach ($parts as $part) {
+			echo $part . "<br>";
+		}
+		echo "</div>\n";
+	}
+
   $arrLanguages = $_ARCHON->getAllLanguages();
   $arrCountries = $_ARCHON->getAllCountries();
 
