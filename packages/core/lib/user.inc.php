@@ -585,7 +585,7 @@ abstract class Core_User
       global $_ARCHON;
 
       // Check permissions
-      if(!($_ARCHON->Security->verifyPermissions(MODULE_ADMINUSERS, UPDATE) || ($_ARCHON->Security->verifyPermissions(MODULE_MYPREFERENCES, UPDATE) && ($_ARCHON->Security->Session->getUserID() == $this->ID))))
+      if(!($_ARCHON->Security->verifyPermissions(MODULE_ADMINUSERS, UPDATE) || ($_ARCHON->Security->Session->getUserID() == $this->ID)))
       {
          $_ARCHON->declareError("Could not set Language: Permission Denied.");
          return false;
@@ -642,7 +642,7 @@ abstract class Core_User
       global $_ARCHON;
 
       // Check permissions
-      if(!($_ARCHON->Security->verifyPermissions(MODULE_ADMINUSERS, UPDATE) || ($_ARCHON->Security->verifyPermissions(MODULE_MYPREFERENCES, UPDATE) && ($_ARCHON->Security->Session->getUserID() == $this->ID))))
+      if(!($_ARCHON->Security->verifyPermissions(MODULE_ADMINUSERS, UPDATE) || ($_ARCHON->Security->Session->getUserID() == $this->ID)))
       {
          $_ARCHON->declareError("Could not set Password: Permission Denied.");
          return false;
