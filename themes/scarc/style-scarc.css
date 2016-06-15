@@ -1769,6 +1769,11 @@ td {
     padding: 5px;
 }
 
+#ccardprintcontact {
+	max-height: 95%;
+	overflow-y: auto;
+}
+
 .cart {
     margin-left: 8px;
 }
@@ -1934,6 +1939,7 @@ div.center {
 
 div#fa-left-column {
     font-size: 1.2em;
+	padding-right: 0;
 }
 
 div#nav-container-list {
