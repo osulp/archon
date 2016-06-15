@@ -84,7 +84,7 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
 ?>
   <div id="scarc-controlcard" class="row" xmlns="http://www.w3.org/1999/html">
   <div id="fa-left-column" class="col-md-3">
-    <div id="ccardprintcontact" class="smround" data-spy="affix" data-offset-top="230">
+    <div id="ccardprintcontact" class="smround" data-spy="affix">
       <p><a
           href="?p=collections/findingaid&amp;id=<?php echo $objCollection->ID; ?>&amp;templateset=print&amp;disabletheme=1"><span
           class="glyphicon glyphicon-print"></span> <?php echo $printerFriendly; ?></a>

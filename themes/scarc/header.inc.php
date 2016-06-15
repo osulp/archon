@@ -96,7 +96,15 @@ if (empty($_ARCHON->PublicInterface->Title)) {
                collapseTimer:    0,                // milliseconds before auto collapse; default is 0 (don't re-collape)
                userCollapseText: '[collapse]'      // text for collaspe link
             });
-            resize_left_column();
+           $('#ccardprintcontact')
+             .affix({
+               offset: { top: 230, bottom: 220 }
+             })
+             .on('affixed.bs.affix', function () {
+               $(this).removeAttr('style');
+               resize_left_column();
+             });
+           resize_left_column();
             $(window).resize(function () {
               resize_left_column();
             });
