@@ -627,6 +627,8 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
 
       <div class="ccardcontents"><br/><span class='ccardlabel'>Show this record as:</span><br/><br/>
         <a
+          href='?p=collections/awead&amp;id=<?php echo($objCollection->ID); ?>&amp;templateset=awead&amp;disabletheme=1&amp;output=<?php echo(formatFileName($objCollection->getString('SortTitle', 0, false, false))); ?>'>Archives West EAD</a><br/>
+        <a
           href='?p=collections/ead&amp;id=<?php echo($objCollection->ID); ?>&amp;templateset=ead&amp;disabletheme=1&amp;output=<?php echo(formatFileName($objCollection->getString('SortTitle', 0, false, false))); ?>'>EAD</a><br/>
         <a href='?p=collections/marc&amp;id=<?php echo($objCollection->ID); ?>'>MARC</a><br/>
         <a

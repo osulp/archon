@@ -2471,8 +2471,8 @@ abstract class Collections_Collection
       }
 
       $date = $this->PublicationDateYear;
-      $date = ($this->PublicationDateMonth) ? $date . "-" . $this->PublicationDateMonth : $date;
-      $date = ($this->PublicationDateDay) ? $date . "-" . $this->PublicationDateDay : $date;
+      $date = ($this->PublicationDateMonth && '00' != $this->PublicationDateMonth ) ? $date . "-" . $this->PublicationDateMonth : $date;
+      $date = ($this->PublicationDateDay && '00' != $this->PublicationDateDay) ? $date . "-" . $this->PublicationDateDay : $date;
 
       return $date;
    }
