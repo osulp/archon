@@ -522,7 +522,7 @@ abstract class Collections_Collection
 
             if(CONFIG_CORE_ESCAPE_XML)
             {
-               $description = encode($description, ENCODE_BBCODE);
+               $description = bbcode_ead_encode($description, ENCODE_BBCODE);
             }
             $this->Content[$row['ID']]['Description'] = $description;
             $this->Content[$row['ID']]['Title'] = $title;

@@ -63,7 +63,6 @@ $udf['physfacet'] = 'physdesc';
 $udf['bioghist'] = 'c';
 $udf['arrangement'] = 'c';
 
-
 if(!empty($Content['UserFields']))
 {   
    // Indicate where user fields are to be included in EAD and if they are expressed with head and paragraph tags or as label attributes
@@ -335,7 +334,7 @@ else
                if(trim($paragraph))
                {
                   ?>
-      <p><?php echo(trim(strip_tags($paragraph))); ?></p>
+      <p><?php echo(trim($paragraph)); ?></p>
                   <?php
                }
             }
