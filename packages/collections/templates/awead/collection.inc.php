@@ -342,8 +342,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                }
 ?>
             </repository>
-
-
             <?php
                if ($objCollection->Abstract) {
             ?>
@@ -380,8 +378,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                ?>
 
       </did>
-
-
       <!--COLLECTION LEVEL METADATA: -->
 <?php
 // NOTE: THE FOLLOWING LINE ONLY NEEDS TO BE INSERTED ONCE (FOR THE PRIMARY CREATOR)
@@ -404,7 +400,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                if ($bioghist_a && $bioghist_b) {
                   $use_subfields = true;
 ?>
-         <bioghist>
                <?php
                }
 
@@ -417,9 +412,9 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                      $head = "Biographical Information";
                   }
 
-                  $enc = ($use_subfields) ? '545$a' : '545';
+                  $enc = ($use_subfields) ? '545$a' : '5451_';
                ?>
-               <bioghist altrender="<?php echo($head); ?>" encodinganalog="<?php echo($enc); ?>"><head><?php echo($head); ?>:</head>
+        <bioghist encodinganalog="<?php echo($enc); ?>"><head><?php echo($head); ?>:</head>
 <?php
                   $arrBiogHistParagraphs = explode(NEWLINE, bbcode_ead_encode($objCollection->PrimaryCreator->getString('BiogHist', 0, false, false)));
 
@@ -433,15 +428,15 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                      }
                   }
          ?>
-                  </bioghist>
+        </bioghist>
          <?php
                }
 
                if ($bioghist_b) {
                   $head = "Administrative History";
-                  $enc = ($use_subfields) ? '545$b' : '545';
+                  $enc = ($use_subfields) ? '545$b' : '5450_';
          ?>
-               <bioghist altrender="<?php echo($head); ?>" encodinganalog="<?php echo($enc); ?>"><head><?php echo($head); ?>:</head>
+        <bioghist encodinganalog="<?php echo($enc); ?>"><head><?php echo($head); ?>:</head>
             <?php
                   $arrBiogHistParagraphs = explode(NEWLINE, bbcode_ead_encode($objCollection->getString('BiogHist', 0, false, false)));
 
@@ -449,26 +444,17 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                      foreach ($arrBiogHistParagraphs as $paragraph) {
                         if (trim($paragraph)) {
             ?>
-                           <p><?php echo(trim($paragraph)); ?></p>
+            <p><?php echo(trim($paragraph)); ?></p>
             <?php
                         }
                      }
                   }
             ?>
-               </bioghist>
+        </bioghist>
             <?php
                }
-
-               if ($bioghist_a && $bioghist_b) {
-            ?>
-               </bioghist>
-<?php
-               }
 ?>
-
-
             <!-- CONTROLLED ACCESS / SUBJECT TERMS -->
-
       <?php
                if (!empty($objCollection->Subjects)) {
                   foreach ($objCollection->Subjects as $objSubject) {
@@ -482,15 +468,12 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
 
                if (!empty($arrEADSubjects)) {
       ?>
-                  <controlaccess>
-                     <head>Access Terms</head>
-
-                     <p>This Collection is indexed under the following controlled access subject terms.</p>
+        <controlaccess>
       <?php
 
                  if (!empty($objCollection->Creators)) {
       ?>
-                   <controlaccess>
+         <controlaccess>
       <?php
                      foreach ($objCollection->Creators as $objCreator) {
 
@@ -519,12 +502,12 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
 
                          $source = $objCreator->CreatorSource->getString('SourceAbbreviation');
                          ?>
-                         <<?php echo($type); ?>name role="creator"<?php echo($encodinganalog); ?>><?php echo($string); ?></<?php echo($type); ?>name>
+          <<?php echo($type); ?>name role="creator"<?php echo($encodinganalog); ?>><?php echo($string); ?></<?php echo($type); ?>name>
                        <?php
                        }
                      }
       ?>
-                   </controlaccess>
+        </controlaccess>
       <?php
                  }
 
@@ -535,8 +518,7 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                      if (!empty($arrEADSubjects[$objSubjectType->ID])) {
                         $subjects = $arrEADSubjects[$objSubjectType->ID];
       ?>
-                           <controlaccess>
-                              <head><?php echo(bbcode_ead_encode($objSubjectType->getString('SubjectType', 0, false, false))); ?>:</head>
+        <controlaccess>
          <?php
                         @asort($subjects);
                         @reset($subjects);
@@ -551,26 +533,22 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                               $role = '';
                            }
          ?>
-                              <<?php echo(bbcode_ead_encode($objSubjectType->getString('EADType', 0, false, false)) . $encodinganalog); ?> source="<?php echo($source); ?>"<?php echo($role) ?>><?php echo($subject); ?></<?php echo(bbcode_ead_encode($objSubjectType->getString('EADType', 0, false, false))); ?>>
+          <<?php echo(bbcode_ead_encode($objSubjectType->getString('EADType', 0, false, false)) . $encodinganalog); ?> source="<?php echo($source); ?>"<?php echo($role) ?>><?php echo($subject); ?></<?php echo(bbcode_ead_encode($objSubjectType->getString('EADType', 0, false, false))); ?>>
          <?php
                         }
          ?>
-                        </controlaccess>
+        </controlaccess>
 <?php
                      }
 ?>
-            </controlaccess>
+      </controlaccess>
             <?php
                }
             ?>
-
-
-         <!-- END CONTROLLED ACCESS TERMS -->
-
+      <!-- END CONTROLLED ACCESS TERMS -->
             <?php
                if (defined('PACKAGE_DIGITALLIBRARY')) {
             ?>
-
             <!-- DIGITAL ARCHIVAL OBJECTS -->
             <?php
                   if (!empty($objCollection->DigitalContent)) {
@@ -627,8 +605,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
 
                if ($admin_info) {
 ?>
-
-                  <descgrp>
                      <head>Administrative Information</head>
       <?php
                   if ($objCollection->AcquisitionMethod) {
@@ -824,7 +800,7 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                   if ($objCollection->RelatedMaterials) {
                      $arrRelMaterialsParagraphs = explode(NEWLINE, bbcode_ead_encode($objCollection->getString('RelatedMaterials', 0, false, false)));
          ?>
-                     <relatedmaterial encodinganalog="544 1">
+                     <relatedmaterial encodinganalog="5441_">
                         <head>Related Materials:</head>
             <?php
                      if (!empty($arrRelMaterialsParagraphs)) {
@@ -884,10 +860,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                   </phystech>
             <?php
                   }
-            ?>
-            </descgrp>
-
-            <?php
                }
 
                if ($objCollection->Arrangement) {
@@ -912,7 +884,7 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
 
                if ($objCollection->Scope) {
 ?>
-            <scopecontent>
+            <scopecontent encodinganalog="5202_">
                <head>Scope and Contents</head>
          <?php
                   $arrScopeParagraphs = explode(NEWLINE, bbcode_ead_encode($objCollection->getString('Scope', 0, false, false)));
