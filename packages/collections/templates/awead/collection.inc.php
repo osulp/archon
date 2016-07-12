@@ -740,10 +740,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                      if (!empty($arrRelMaterialsParagraphs)) {
                         foreach ($arrRelMaterialsParagraphs as $paragraph) {
                            if (trim($paragraph)) {
-
-                             $paragraph = str_replace('show="embed"','show="new" role="text/html"', $paragraph);
-                             $paragraph = str_replace('linktype="simple"','', $paragraph);
-                             $paragraph = str_replace('audience="external"', '', $paragraph);
             ?>
                               <p><?php echo(trim($paragraph)); ?></p>
             <?php
