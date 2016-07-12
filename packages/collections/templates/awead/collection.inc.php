@@ -39,12 +39,6 @@ if ($objCollection->Enabled) {
 }
 
 $normalDate = $objCollection->getNormalDate();
-?>
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE ead PUBLIC "+//ISBN 1-931666-00-8//DTD ead.dtd (Encoded Archival Description (EAD) Version 2002)//EN" "ead.dtd">
-<ead>
-   <eadheader langencoding="iso639-2b" countryencoding="iso3166-1" dateencoding="iso8601" repositoryencoding="iso15511" scriptencoding="iso15924" relatedencoding="dc">
-<?php
 // Get repository code
 
 if ($objCollection->RepositoryID) {
@@ -63,6 +57,10 @@ if ($objCollection->ArkID) {
 
 $collectionidentifier = $objCollection->CollectionIdentifier;
 ?>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE ead PUBLIC "+//ISBN 1-931666-00-8//DTD ead.dtd (Encoded Archival Description (EAD) Version 2002)//EN" "ead.dtd">
+<ead>
+  <eadheader langencoding="iso639-2b" countryencoding="iso3166-1" dateencoding="iso8601" repositoryencoding="iso15511" scriptencoding="iso15924" relatedencoding="dc">
       <eadid countrycode="us" encodinganalog="identifier" mainagencycode="orcs" <?php echo $ark_identifier.' ' .$ark_url; ?>>ORE<?php echo(strtolower($collectionidentifier)); ?>.xml</eadid>
       <filedesc>
       <?php
@@ -89,7 +87,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
             </titlestmt>
 <?php
       }
-// publicationstmt
 ?>
          <publicationstmt>
            <publisher encodinganalog="publisher">Oregon State University Libraries, Special Collections and Archives Research Center</publisher>
@@ -546,56 +543,7 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                }
             ?>
       <!-- END CONTROLLED ACCESS TERMS -->
-            <?php
-               if (defined('PACKAGE_DIGITALLIBRARY')) {
-            ?>
-            <!-- DIGITAL ARCHIVAL OBJECTS -->
-            <?php
-                  if (!empty($objCollection->DigitalContent)) {
-                     $arrDigitalContent = array();
-                     foreach ($objCollection->DigitalContent as $objDigitalContent) {
-                        if ($objDigitalContent->ContentURL  && $objDigitalContent->HyperlinkURL && !$objDigitalContent->CollectionContentID) {
-                           $arrDigitalContent[] = $objDigitalContent;
-                        }
-                     }
-
-                     if (!empty($arrDigitalContent)) {
-                        if (count($arrDigitalContent) == 1) {
-                           $dc = reset($arrDigitalContent);
-            ?>
-                        <dao xlink:type="simple" xlink:href="<?php echo($dc->ContentURL); ?>" xlink:actuate="onRequest" xlink:show="new">
-                        <daodesc>
-                           <head>Title:</head>
-                           <p><?php echo(bbcode_ead_encode($dc->getString('Title', 0, false, false))); ?></p>
-                        </daodesc>
-                     </dao>
-            <?php
-                        } else {
-            ?>
-                     <daogrp>
-            <?php
-                           foreach ($arrDigitalContent as $dc) {
-            ?>
-                           <daoloc xlink:type="simple" xlink:href="<?php echo($dc->ContentURL); ?>" xlink:actuate="onRequest" xlink:show="new">
-                              <daodesc>
-                                 <head>Title:</head>
-                                 <p><?php echo(bbcode_ead_encode($dc->getString('Title', 0, false, false))); ?></p>
-                              </daodesc>
-                           </daoloc>
-         <?php
-                           }
-         ?>
-                        </daogrp>
-         <?php
-                        }
-                     }
-                  }
-         ?>
-                  <!-- END DIGITAL ARCHIVAL OBJECTS -->
-      <?php
-               }
-      ?>
-               <!-- ADMINISTRATIVE INFORMATION -->
+      <!-- ADMINISTRATIVE INFORMATION -->
 <?php
                $c = $objCollection;
                $admin_info = $c->AcquisitionMethod || $c->CustodialHistory || $c->AccrualInfo || $c->ProcessingInfo || $c->SeparatedMaterials || $c->AppraisalInfo ||
@@ -883,13 +831,10 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
             <?php
                }
             ?>
-
          <!-- END ADMINISTRATIVE INFORMATION -->
-
          <!-- END COLLECTION LEVEL METADATA -->
-
             <?php
-               if (!empty($objCollection->Content)) {   //call templates/ead/item.inc.php to insert collection content into <dsc>
+               if (!empty($objCollection->Content)) {   //call templates/awead/item.inc.php to insert collection content into <dsc>
             ?>
             <!-- BEGIN SUBORDINATE COMPONENTS -->
             <dsc type="combined">

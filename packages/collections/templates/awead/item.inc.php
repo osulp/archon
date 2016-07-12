@@ -120,36 +120,6 @@ if(!empty($Content['UserFields']))
    }
 }
 
-if(isset($Content['DigitalContent']) && !empty($Content['DigitalContent']))
-{
-   $digContent = $Content['DigitalContent'];
-   if(count($digContent) == 1)
-   {
-      $dc = reset($digContent);
-      $dc_links = "\t\t<dao xlink:type=\"simple\" xlink:href=\"".$dc['ContentURL']."\" xlink:actuate=\"onRequest\" xlink:show=\"new\">\n";
-      $dc_links .= "\t\t\t<daodesc>\n";
-      $dc_links .= "\t\t\t<head>Title:</head>\n";
-      $dc_links .= "\t\t\t\t<p>".$dc['Title']."</p>\n";
-      $dc_links .= "\t\t\t</daodesc>\n";
-      $dc_links .= "\t\t</dao>\n";
-   }
-   else
-   {
-      $dc_links = "\t\t<daogrp>\n";
-      foreach($digContent as $arrDC)
-      {
-         $dc_links .= "\t\t\t<daoloc xlink:type=\"simple\" xlink:href=\"".$arrDC['ContentURL']."\" xlink:actuate=\"onRequest\" xlink:show=\"new\">\n";
-         $dc_links .= "\t\t\t\t<daodesc>\n";
-         $dc_links .= "\t\t\t\t<head>Title:</head>";
-         $dc_links .= "\t\t\t\t\t<p>".$arrDC['Title']."</p>\n";
-         $dc_links .= "\t\t\t\t</daodesc>\n";
-         $dc_links .= "\t\t\t</daoloc>\n";
-      }
-      $dc_links .= "\t\t</daogrp>\n";
-
-   }
-}
-
 if(!empty($Content['Creators']))
 {
    $creators = "\t\t<origination label=\"Creator\" encodinganalog=\"245\$c\">\n";
@@ -210,8 +180,6 @@ if(isset($Content['Subjects']) && !empty($Content['Subjects']))
    if(!empty($arrEADSubjects))
    {
       $subjects_str = "\t\t<controlaccess>\n";
-      $subjects_str .= "\t\t\t<head>Access Terms</head>\n";
-
       $subjects_str .= "\t\t\t<p>This content is indexed under the following controlled access subject terms.</p>\n";
       $arrSubjectTypes = $_ARCHON->getAllSubjectTypes();
       $arrSubjectSources = $_ARCHON->getAllSubjectSources();
@@ -223,7 +191,6 @@ if(isset($Content['Subjects']) && !empty($Content['Subjects']))
             $subjects = $arrEADSubjects[$objSubjectType->ID];
 
             $subjects_str .= "\t\t\t<controlaccess>\n";
-            $subjects_str .= "\t\t\t\t<head>".bbcode_ead_encode($objSubjectType->getString('SubjectType', 0, false, false))."</head>\n";
 
             @asort($subjects);
             @reset($subjects);
@@ -254,7 +221,7 @@ if(isset($Content['Subjects']) && !empty($Content['Subjects']))
 
 if($Content['PhysicalContainer'])
 {
-   $EADContainers[] = "\t<container type=\"{$Content['LevelContainer']}\">" . $Content['LevelContainerIdentifier'] . "</container>\n";
+   $EADContainers[] = "\t<container type=\"". strtolower($Content['LevelContainer']) . "\">" . $Content['LevelContainerIdentifier'] . "</container>\n";
 }
 
 if(!$Content['IntellectualLevel'])
@@ -265,12 +232,17 @@ if(!$Content['IntellectualLevel'])
 }
 else
 {
+
+//   print_r($Content);
+
    ?>
 <c#EADCLevel# level="<?php echo($Content['EADLevel']); ?>">
    <did>
-      <unitid label="ArchonID" audience="internal">id<?php echo($Content['ID']); ?></unitid>
+      <?php if ('series' == $Content['EADLevel']) {
+         ?>
+         <unitid>Series <?php echo $Content['LevelContainerIdentifier']; ?></unitid>
          <?php
-
+      }
 
          if(!empty($EADContainers))
          {
@@ -296,8 +268,9 @@ else
 
          if($Content['Date'])
          {
+            $normal = ('series' == $Content['EADLevel']) ? ' normal="' . str_replace('-','/',$Content['Date']).'"' : '';
             ?>
-      <unitdate><?php echo($Content['Date']); ?></unitdate>
+      <unitdate<?php echo $normal; ?>><?php echo($Content['Date']); ?></unitdate>
             <?php
          }
 
@@ -355,7 +328,6 @@ else
       {
          ?>
    <scopecontent>
-      <head>Scope and Contents</head>
             <?php
             $arrScopeParagraphs = explode(NEWLINE, bbcode_ead_encode($Content['Description']));
             foreach($arrScopeParagraphs as $paragraph)
