@@ -604,13 +604,9 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
 
 
                if ($admin_info) {
-?>
-                     <head>Administrative Information</head>
-      <?php
                   if ($objCollection->AcquisitionMethod) {
       ?>
                         <acqinfo encodinganalog="541">
-                           <head>Acquisition Information:</head>
                            <p><?php echo(bbcode_ead_encode($objCollection->getString('AcquisitionMethod', 0, false, false))); ?></p>
                         </acqinfo>
 <?php
@@ -620,7 +616,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                      $arrCustodialHistoryParagraphs = explode(NEWLINE, bbcode_ead_encode($objCollection->getString('CustodialHistory', 0, false, false)));
 ?>
                      <custodhist encodinganalog="561">
-                        <head>Custodial History:</head>
          <?php
                      if (!empty($arrCustodialHistoryParagraphs)) {
                         foreach ($arrCustodialHistoryParagraphs as $paragraph) {
@@ -640,7 +635,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                      $arrAccrualInfoParagraphs = explode(NEWLINE, bbcode_ead_encode($objCollection->getString('AccrualInfo', 0, false, false)));
             ?>
                   <accruals encodinganalog="584">
-                     <head>Accruals:</head>
             <?php
                      if (!empty($arrAccrualInfoParagraphs)) {
                         foreach ($arrAccrualInfoParagraphs as $paragraph) {
@@ -660,7 +654,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                      $arrProcessingInfoParagraphs = explode(NEWLINE, bbcode_ead_encode($objCollection->getString('ProcessingInfo', 0, false, false)));
          ?>
                         <processinfo encodinganalog="583">
-                           <head>Processing Information:</head>
 <?php
                      if (!empty($arrProcessingInfoParagraphs)) {
                         foreach ($arrProcessingInfoParagraphs as $paragraph) {
@@ -681,7 +674,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                      $arrSepMaterialsParagraphs = explode(NEWLINE, bbcode_ead_encode($objCollection->getString('SeparatedMaterials', 0, false, false)));
       ?>
                         <separatedmaterial encodinganalog="544 0">
-                           <head>Separated Materials:</head>
       <?php
                      if (!empty($arrSepMaterialsParagraphs)) {
                         foreach ($arrSepMaterialsParagraphs as $paragraph) {
@@ -702,7 +694,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                      $arrAppraisalInfoParagraphs = explode(NEWLINE, bbcode_ead_encode($objCollection->getString('AppraisalInfo', 0, false, false)));
       ?>
                      <appraisal encodinganalog="583">
-                        <head>Appraisal Information:</head>
 <?php
                      if (!empty($arrAppraisalInfoParagraphs)) {
                         foreach ($arrAppraisalInfoParagraphs as $paragraph) {
@@ -722,7 +713,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                      $arrUseRestrictParagraphs = explode(NEWLINE, bbcode_ead_encode($objCollection->getString('UseRestrictions', 0, false, false)));
       ?>
                         <userestrict encodinganalog="540">
-                           <head>Conditions Governing Use:</head>
       <?php
                      if (!empty($arrUseRestrictParagraphs)) {
                         foreach ($arrUseRestrictParagraphs as $paragraph) {
@@ -743,7 +733,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                      $arrAccessRestrictParagraphs = explode(NEWLINE, bbcode_ead_encode($objCollection->getString('AccessRestrictions', 0, false, false)));
 ?>
                      <accessrestrict encodinganalog="506">
-                        <head>Conditions Governing Access:</head>
          <?php
                      if (!empty($arrAccessRestrictParagraphs)) {
                         foreach ($arrAccessRestrictParagraphs as $paragraph) {
@@ -763,7 +752,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                   if ($objCollection->OrigCopiesNote) {
             ?>
                   <altformavail encodinganalog="530">
-                     <head>Electronic Format:</head>
             <?php
                      $origCopiesNoteParagraphs = explode(NEWLINE, bbcode_ead_encode($objCollection->getString('OrigCopiesNote', 0, false, false)));
 
@@ -791,9 +779,8 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                   if ($objCollection->PreferredCitation) {
 ?>
                   <prefercite encodinganalog="524">
-                     <head>Preferred Citation:</head>
                      <p><?php echo(bbcode_ead_encode($objCollection->getString('PreferredCitation', 0, false, false))); ?></p>
-                     </prefercite>
+                  </prefercite>
          <?php
                   }
 
@@ -801,7 +788,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                      $arrRelMaterialsParagraphs = explode(NEWLINE, bbcode_ead_encode($objCollection->getString('RelatedMaterials', 0, false, false)));
          ?>
                      <relatedmaterial encodinganalog="5441_">
-                        <head>Related Materials:</head>
             <?php
                      if (!empty($arrRelMaterialsParagraphs)) {
                         foreach ($arrRelMaterialsParagraphs as $paragraph) {
@@ -826,7 +812,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                   if ($objCollection->PhysicalAccess || $objCollection->TechnicalAccess) {
          ?>
                      <phystech encodinganalog="340">
-                        <head>Physical Characteristics or Technical Requirements:</head>
             <?php
                      if ($objCollection->PhysicalAccess) {
                         $arrPhysicalAccessParagraphs = explode(NEWLINE, bbcode_ead_encode($objCollection->getString('PhysicalAccess', 0, false, false)));
@@ -866,7 +851,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                   $arrArrangementParagraphs = explode(NEWLINE, bbcode_ead_encode($objCollection->getString('Arrangement', 0, false, false)));
             ?>
                <arrangement encodinganalog="351">
-                  <head>Arrangement of Materials:</head>
          <?php
                   if (!empty($arrArrangementParagraphs)) {
                      foreach ($arrArrangementParagraphs as $paragraph) {
@@ -885,7 +869,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                if ($objCollection->Scope) {
 ?>
             <scopecontent encodinganalog="5202_">
-               <head>Scope and Contents</head>
          <?php
                   $arrScopeParagraphs = explode(NEWLINE, bbcode_ead_encode($objCollection->getString('Scope', 0, false, false)));
                   foreach ($arrScopeParagraphs as $paragraph) {
@@ -901,8 +884,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                }
             ?>
 
-
-
          <!-- END ADMINISTRATIVE INFORMATION -->
 
          <!-- END COLLECTION LEVEL METADATA -->
@@ -912,7 +893,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
             ?>
             <!-- BEGIN SUBORDINATE COMPONENTS -->
             <dsc type="combined">
-               <head>Detailed List of Contents</head>
                #CONTENT#
             </dsc>
          <?php
