@@ -144,7 +144,7 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
 
             if ($objCollection->Repository->URL) {
             ?>
-                <addressline>URL: <?php echo(bbcode_ead_encode($objCollection->Repository->getString('URL', 0, false, false))); ?></addressline>
+                <addressline>Web: <?php echo(bbcode_ead_encode($objCollection->Repository->getString('URL', 0, false, false))); ?></addressline>
             <?php
             }
 
@@ -161,7 +161,6 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
 
          </publicationstmt>
       </filedesc>
-
       <profiledesc>
          <creation>This finding aid was encoded in EAD by Archon <?php
            echo(bbcode_ead_encode($_ARCHON->getString('Version', 0, false, false))); ?> from an SQL database source on <date
@@ -175,43 +174,39 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                ?>
           <descrules>Finding aid based on DACS (<title render="italic">Describing Archives: A Content Standard, 2nd Edition</title>).</descrules>
       </profiledesc>
+      <?php
+      if (!empty($objCollection->RevisionHistory)) {
+      ?>
+      <revisiondesc>
+        <change encodinganalog="583">
+        <date type="encoded" normal="<?php echo(date('Y-m-d', time())); ?>"><?php echo(date('F jS, Y', time())); ?></date>
+        <?php
+        $revisionDescParagraphs = explode(NEWLINE, bbcode_ead_encode($objCollection->getString('RevisionHistory', 0, false, false)));
 
+        if (!empty($revisionDescParagraphs)) {
+          foreach ($revisionDescParagraphs as $paragraph) {
+            if (trim($paragraph)) {
+          ?>
+        <item><?php echo(trim($paragraph)); ?></item>
+        <?php
+            }
+          }
+        }
+        ?>
+        </change>
+      </revisiondesc>
+    <?php
+      }
+    ?>
+  </eadheader>
 
-               <?php
-               if (!empty($objCollection->RevisionHistory)) {
-               ?>
-         <revisiondesc>
-            <change encodinganalog="583">
-               <date type="encoded" normal="<?php echo(date('Y-m-d', time())); ?>"><?php echo(date('F jS, Y', time())); ?></date>
-               <?php
-                  $revisionDescParagraphs = explode(NEWLINE, bbcode_ead_encode($objCollection->getString('RevisionHistory', 0, false, false)));
-
-                  if (!empty($revisionDescParagraphs)) {
-                     foreach ($revisionDescParagraphs as $paragraph) {
-                        if (trim($paragraph)) {
-               ?>
-                        <item><?php echo(trim($paragraph)); ?></item>
-               <?php
-                        }
-                     }
-                  }
-               ?>
-              </change>
-          </revisiondesc>
-<?php
-               }
-?>
-
-      </eadheader>
-
-      <archdesc level="collection" type="inventory" audience="<?php echo($audience); ?>" relatedencoding="MARC21">
-               <did>
-                  <head>Overview of the Collection</head>
+      <archdesc level="collection" type="guide" relatedencoding="marc21">
+        <did>
             <?php
               if (!empty($objCollection->PrimaryCreator)) {
                 $objCreator = $objCollection->PrimaryCreator;
             ?>
-                  <origination>
+          <origination>
             <?php
                 if ($objCreator->CreatorType->CreatorType == 'Corporate Name') {
                   $type = 'corp';
@@ -234,67 +229,61 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                 }
                 $source = $objCreator->CreatorSource->getString('SourceAbbreviation');
             ?>
-                    <<?php echo($type); ?>name role="creator"<?php echo($encodinganalog); ?>><?php echo($string); ?></<?php echo($type); ?>name>
-                  </origination>
+            <<?php echo($type); ?>name role="creator"<?php echo($encodinganalog); ?>><?php echo($string); ?></<?php echo($type); ?>name>
+          </origination>
             <?php
               }
             ?>
 
-            <?php
-               if ($objCollection->Title) {
-            ?>
-               <unittitle label="Collection Title" encodinganalog="245"><?php echo(bbcode_ead_encode($objCollection->getString('Title', 0, false, false))); ?>
-            <?php
-               }
+        <?php
+          if ($objCollection->Title) {
+        ?>
+          <unittitle encodinganalog="245$a"><?php echo(bbcode_ead_encode($objCollection->getString('Title', 0, false, false))); ?></unittitle>
+        <?php
+          }
 
-               if ($objCollection->InclusiveDates) {
-                  $normal = ($normalDate) ? ' normal="' . $normalDate . '"' : '';
-            ?>
-                  <unitdate label="Dates" encodinganalog="245$f" type="inclusive"<?php echo($normal); ?>><?php echo(bbcode_ead_encode($objCollection->getString('InclusiveDates', 0, false, false))); ?></unitdate>
-            <?php
-               }
+        if ($objCollection->InclusiveDates) {
+          $normal = ($normalDate) ? ' normal="' . $normalDate . '"' : '';
+        ?>
+          <unitdate encodinganalog="245$f" type="inclusive"<?php echo($normal); ?> era="ce" calendar="gregorian"><?php echo(bbcode_ead_encode($objCollection->getString('InclusiveDates', 0, false, false))); ?></unitdate>
+        <?php
+          }
 
-               if ($objCollection->PredominantDates) {
-            ?>
-                  <unitdate label="Bulk Dates" encodinganalog="245$g" type="bulk"><?php echo(bbcode_ead_encode($objCollection->getString('PredominantDates', 0, false, false))); ?></unitdate>
-<?php
-               }
-?>
-                  </unittitle>
-                  <unitid encodinganalog="035" label="Identification" repositorycode="US-<?php echo($objCollection->Repository->Code); ?>" countrycode="<?php echo($objCollection->Repository->Country->ISOAlpha2) ?>"><?php echo($collectionidentifier); ?></unitid>
-<?php
+          if ($objCollection->PredominantDates) {
+            $normal = ($normalDate) ? ' normal="' . $normalDate . '"' : '';
+        ?>
+          <unitdate encodinganalog="245$g" type="bulk" era="ce" calendar="gregorian"<?php echo($normal); ?>><?php echo(bbcode_ead_encode($objCollection->getString('PredominantDates', 0, false, false))); ?></unitdate>
+        <?php
+          }
+        ?>
+          <unitid encodinganalog="099" repositorycode="orcs" countrycode="us"><?php echo $objCollection->Classification->ClassificationIdentifier . ' ' . $objCollection->CollectionIdentifier ; ?></unitid>
+        <?php
 
-               if ($objCollection->Extent && $objCollection->ExtentUnit->ExtentUnit) {
-            ?>
-               <physdesc label="Physical Description"><extent encodinganalog="300" type="<?php echo($objCollection->ExtentUnit->toString()); ?>"><?php echo(bbcode_ead_encode($objCollection->getString('Extent', 0, false, false))); ?></extent></physdesc>
-            <?php
-               }
-               if ($objCollection->AltExtentStatement) {
-            ?>
-               <physdesc label="Alternate Extent Statement" encodinganalog="300$a"><?php echo(bbcode_ead_encode($objCollection->getString('AltExtentStatement', 0, false, false))); ?></physdesc>
-         <?php
-               }
-         ?>
+          if ($objCollection->Extent && $objCollection->ExtentUnit->ExtentUnit) {
+        ?>
+          <physdesc>
+            <extent encodinganalog="300$a"><?php echo(bbcode_ead_encode($objCollection->getString('Extent', 0, false, false))); ?> <?php echo($objCollection->ExtentUnit->toString()); ?>, including <?php echo(bbcode_ead_encode($objCollection->getString('AltExtentStatement', 0, false, false))); ?></extent>
+          </physdesc>
+        <?php
+          }
 
-<?php
-               if (!empty($objCollection->Languages)) {
-                  if ($objCollection->PrimaryCreator && $objCollection->PrimaryCreator->CreatorType->CreatorType == "Corporate Name") {
-                     $stuff = "records";
-                  } else {
-                     $stuff = "papers";
-                  }
-?>
-               <langmaterial encodinganalog="546" label="Language of Materials">
-            <?php
-                  foreach ($objCollection->Languages as $objLanguage) {
-                     echo("		<language encodinganalog=\"041\" langcode=\"{$objLanguage->getString('LanguageShort', 0, false)}\">{$objLanguage->getString('LanguageLong', 0, false)}</language>\n");
-                  }
+        if (!empty($objCollection->Languages)) {
+
+          $langMaterial = '';
+          $languages = count($objCollection->Languages);
+          foreach ($objCollection->Languages as $objLanguage) {
+            $langMaterial .= "<language encodinganalog=\"546\" langcode=\"{$objLanguage->getString('LanguageShort', 0, false)}\">{$objLanguage->getString('LanguageLong', 0, false)}</language>";
+            $languages--;
+            if ($languages > 0) {
+              $langMaterial .= ' and ';
+            }
+          }
             ?>
-               </langmaterial>
+          <langmaterial>Materials in <?php echo $langMaterial; ?>.</langmaterial>
             <?php
-               }
+        }
             ?>
-            <repository encodinganalog="852$b" label="Repository">
+            <repository encodinganalog="852$b">
             <?php
                if ($objCollection->Repository->Name) {
             ?>
@@ -324,23 +313,23 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
          <?php
                   }
 
+            if ($objCollection->Repository->Phone) {
+              ?>
+              <addressline>Phone: <?php echo(bbcode_ead_encode($objCollection->Repository->getString('Phone', 0, false, false))); ?></addressline>
+              <?php
+            }
+            if ($objCollection->Repository->Email) {
+              ?>
+              <addressline>Email: <?php echo(bbcode_ead_encode($objCollection->Repository->getString('Email', 0, false, false))); ?></addressline>
+              <?php
+            }
                   if ($objCollection->Repository->URL) {
          ?>
-                           <addressline>URL: <?php echo(bbcode_ead_encode($objCollection->Repository->getString('URL', 0, false, false))); ?></addressline>
+                           <addressline>Web: <?php echo(bbcode_ead_encode($objCollection->Repository->getString('URL', 0, false, false))); ?></addressline>
          <?php
                   }
 
-                  if ($objCollection->Repository->Email) {
-         ?>
-                           <addressline>Email: <?php echo(bbcode_ead_encode($objCollection->Repository->getString('Email', 0, false, false))); ?></addressline>
-         <?php
-                  }
 
-                  if ($objCollection->Repository->Phone) {
-         ?>
-                           <addressline>Phone: <?php echo(bbcode_ead_encode($objCollection->Repository->getString('Phone', 0, false, false))); ?></addressline>
-         <?php
-                  }
 
                   if ($objCollection->Repository->Fax) {
          ?>
@@ -358,7 +347,7 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
             <?php
                if ($objCollection->Abstract) {
             ?>
-                  <abstract encodinganalog="520$a" label="Abstract"><?php echo(str_replace(NEWLINE, '<lb/>', bbcode_ead_encode($objCollection->getString('Abstract', 0, false, false)))); ?></abstract>
+                  <abstract encodinganalog="5203_"><?php echo(str_replace(NEWLINE, '<lb/>', bbcode_ead_encode($objCollection->getString('Abstract', 0, false, false)))); ?></abstract>
          <?php
                }
          ?>
@@ -366,7 +355,7 @@ $collectionidentifier = $objCollection->CollectionIdentifier;
                if (!empty($objCollection->OtherNote) || !empty($objCollection->OtherURL)) {
                   $arrOtherNoteParagraphs = explode(NEWLINE, bbcode_ead_encode($objCollection->getString('OtherNote', 0, false, false)));
             ?>
-               <note encodinganalog="500" label="Note">
+               <note encodinganalog="500">
                   <p>Other Information:</p>
             <?php
                   if (!empty($arrOtherNoteParagraphs)) {
