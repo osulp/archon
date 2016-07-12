@@ -231,17 +231,16 @@ if(!$Content['IntellectualLevel'])
 }
 else
 {
-
-//   print_r($Content);
-
-   ?>
+?>
 <c#EADCLevel# level="<?php echo($Content['EADLevel']); ?>">
    <did>
-      <?php if ('series' == $Content['EADLevel']) {
-         ?>
-         <unitid>Series <?php echo $Content['LevelContainerIdentifier']; ?></unitid>
-         <?php
-      }
+      <?php
+         if ('series' == $Content['EADLevel'] || 'item' == $Content['EADLevel']) {
+            $prefix = ('series' == $Content['EADLevel']) ? 'Series ' : '';
+            ?>
+            <unitid><?php echo $prefix . $Content['LevelContainerIdentifier']; ?></unitid>
+            <?php
+         }
 
          if(!empty($EADContainers))
          {
