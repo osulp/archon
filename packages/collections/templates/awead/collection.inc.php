@@ -409,7 +409,7 @@ echo '<?xml version="1.0" encoding="utf-8"?>'."\n";
                      $head = "Biographical Information";
                   }
 
-                  $enc = ($use_subfields) ? '545$a' : '5451_';
+                  $enc = ($use_subfields) ? '545$a' : '5450_';
                ?>
         <bioghist encodinganalog="<?php echo($enc); ?>"><head><?php echo($head); ?>:</head>
 <?php
@@ -431,7 +431,7 @@ echo '<?xml version="1.0" encoding="utf-8"?>'."\n";
 
                if ($bioghist_b) {
                   $head = "Administrative History";
-                  $enc = ($use_subfields) ? '545$b' : '5450_';
+                  $enc = ($use_subfields) ? '545$b' : '5451_';
          ?>
         <bioghist encodinganalog="<?php echo($enc); ?>"><head><?php echo($head); ?>:</head>
             <?php
