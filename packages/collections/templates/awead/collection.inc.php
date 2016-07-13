@@ -56,8 +56,8 @@ if ($objCollection->ArkID) {
 }
 
 $collectionidentifier = $objCollection->CollectionIdentifier;
+echo '<?xml version="1.0" encoding="utf-8"?>'."\n";
 ?>
-<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE ead PUBLIC "+//ISBN 1-931666-00-8//DTD ead.dtd (Encoded Archival Description (EAD) Version 2002)//EN" "ead.dtd">
 <ead>
   <eadheader langencoding="iso639-2b" countryencoding="iso3166-1" dateencoding="iso8601" repositoryencoding="iso15511" scriptencoding="iso15924" relatedencoding="dc">
