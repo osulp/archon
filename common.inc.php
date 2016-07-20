@@ -286,8 +286,8 @@ function bbcode_ead_encode($string)
    $string = preg_replace('/\[sub\](.+?)\[\/sub\]/u', '<emph render="sub">$1</emph>', $string);
 
    //convert links
-   $string = preg_replace('/\[url=(.+?)\](.+?)\[\/url]/u', '<extref linktype="simple" audience="external" show="embed" actuate="onrequest" href="$1">$2</extref>', $string);
-   $string = preg_replace('/\[url\](.+?)\[\/url]/u', '<extref linktype="simple" audience="external" show="embed" actuate="onrequest" href="$1">$1</extref>', $string);
+   $string = preg_replace('/\[url=(.+?)\](.+?)\[\/url]/u', '<extref show="new" actuate="onrequest" href="$1" role="text/html">$2</extref>', $string);
+   $string = preg_replace('/\[url\](.+?)\[\/url]/u', '<extref show="new" actuate="onrequest" href="$1" role="text/html">$1</extref>', $string);
 
    return $string;
 }

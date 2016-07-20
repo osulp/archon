@@ -522,7 +522,7 @@ abstract class Collections_Collection
 
             if(CONFIG_CORE_ESCAPE_XML)
             {
-               $description = encode($description, ENCODE_BBCODE);
+               $description = bbcode_ead_encode($description, ENCODE_BBCODE);
             }
             $this->Content[$row['ID']]['Description'] = $description;
             $this->Content[$row['ID']]['Title'] = $title;
@@ -2471,8 +2471,8 @@ abstract class Collections_Collection
       }
 
       $date = $this->PublicationDateYear;
-      $date = ($this->PublicationDateMonth) ? $date . "-" . $this->PublicationDateMonth : $date;
-      $date = ($this->PublicationDateDay) ? $date . "-" . $this->PublicationDateDay : $date;
+      $date = ($this->PublicationDateMonth && '00' != $this->PublicationDateMonth ) ? $date . "-" . $this->PublicationDateMonth : $date;
+      $date = ($this->PublicationDateDay && '00' != $this->PublicationDateDay) ? $date . "-" . $this->PublicationDateDay : $date;
 
       return $date;
    }
