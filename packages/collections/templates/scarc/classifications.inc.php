@@ -47,7 +47,6 @@ if(!empty($arrCollections))
     $strRecordsFiledUnder = $objRecordsFiledUnderPhrase ? $objRecordsFiledUnderPhrase->getPhraseValue(ENCODE_HTML) : 'Records filed under "$1"';
     $strRecordsFiledUnder = str_replace('$1', $objClassification->toString(LINK_NONE, false, true, false, false), $strRecordsFiledUnder);
 
-	echo("<br/><div class='listitemhead bold'>$strRecordsFiledUnder</div><br/><br/>");
 	echo("<div id='recordsunderlist' class='bground'><div class='listitemcover'></div>");
     foreach($arrCollections as $objCollection)
     {
