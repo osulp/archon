@@ -321,6 +321,9 @@
 				</phrase>
 				<phrase name='export_collectionlocations_csv' regularexpression=''>
 					Exports a list of the locations in each collection.
+        </phrase>
+				<phrase name='export_collection_new_csv' regularexpression=''>
+					Exports a list of collections
 				</phrase>
 				<phrase name='firstname' regularexpression=''>
 					Use this field to record the first name of the researcher.
@@ -426,6 +429,9 @@
 				</phrase>
 				<phrase name='export_collectionlocations_csv' regularexpression=''>
 					Collection Locations CSV
+        </phrase>
+				<phrase name='export_collection_new_csv' regularexpression=''>
+					Collection Data CSV (dev)
 				</phrase>
 				<phrase name='export_ead' regularexpression=''>
 					EAD Archive (zip)
