@@ -564,7 +564,9 @@ function admin_ui_hierarchicalchange(wholefieldname, changedselect)
       loadparams[selfFieldName] = $(changedselect).val();
    }
 
-   admin_ui_reloadfield(wholefieldname, loadparams);
+   if (idName.endsWith('ClassificationID')) {
+      admin_ui_reloadfield(wholefieldname, loadparams);
+   }
 
    if(typeof useBrowseFilter == 'function')
    {
