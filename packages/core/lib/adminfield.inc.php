@@ -593,9 +593,9 @@ abstract class Core_AdminField
                foreach($arrSelectChoices as $ID => $objSelectChoice)
                {
                   $optionString = is_string($objSelectChoice) ? $objSelectChoice : $objSelectChoice->toString();
-
-                  $selected = ($ID == $FieldValues[$key]) ? " selected='selected'" : '';
-                  echo("<option value='$ID'$selected>" . caplength($optionString, $this->MaxLength) . "</option>\n");
+                  $optionID = is_string($objSelectChoice) ? $ID : $objSelectChoice->ID;
+                  $selected = ($optionID == $FieldValues[$key]) ? " selected='selected'" : '';
+                  echo("<option value='$optionID'$selected>" . caplength($optionString, $this->MaxLength) . "</option>\n");
                }
                echo("</select>");
             }
