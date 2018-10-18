@@ -3,3 +3,5 @@
 incoming/
 config.inc.php
 robots.txt
+ead-download/
+.env
