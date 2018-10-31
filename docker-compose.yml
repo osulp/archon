@@ -3,7 +3,7 @@ version: "3"
 services:
   webserver:
     build: .
-    command: /var/www/html/docker-setup.sh
+    command: /var/www/html/docker-entrypoint.sh
     ports:
       - "8080:80"
       - "443:443"
