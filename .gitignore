@@ -6,3 +6,4 @@ packages/core/install/install.php
 robots.txt
 ead-download/
 .env
+db/
