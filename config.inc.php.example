@@ -76,8 +76,7 @@
    //       $_ARCHON->db->ServerAddrses = '127.0.0.1';
    //
 
-//   $_ARCHON->db->ServerAddress = $_SERVER['DB_HOST'];
-   $_ARCHON->db->ServerAddress = "172.17.0.1:3307";
+   $_ARCHON->db->ServerAddress = getenv("DB_HOST");
 
    // ### REQUIRED ###
    // ********************************************
@@ -96,8 +95,7 @@
    //       $_ARCHON->db->ServerAddress = 'ArchonWebUser';
    //
 
-//   $_ARCHON->db->Login = $_SERVER['DB_USER'];
-   $_ARCHON->db->Login = "archon";
+   $_ARCHON->db->Login = getenv("DB_USER");
 
    // ### REQUIRED ###
    // ********************************************
@@ -116,8 +114,7 @@
    //       $_ARCHON->db->Password = 'Archon';
    //
 
-   $_ARCHON->db->Password = $_SERVER['DB_PASS'];
-   $_ARCHON->db->Password = "archon";
+   $_ARCHON->db->Password = getenv("DB_PASS");
 
    // ### REQUIRED ###
    // ********************************************
@@ -143,10 +140,7 @@
    //       $_ARCHON->db->DatabaseName = 'Archon';
    //
 
-//   $_ARCHON->db->DatabaseName = $_SERVER['DB_NAME'];
-   $_ARCHON->db->DatabaseName = "archon_dev";
-
-
+   $_ARCHON->db->DatabaseName = getenv("DB_NAME");
 
 // ***********************************************
 // * Google Analytics Configuration              *
@@ -156,17 +150,12 @@
 //   $_ARCHON->config->GACollectionsURL = "/downloads/pdfsfa";
 //   $_ARCHON->config->GADigContentPrefix = "/digcontent";
 
-
-
 // ***********************************************
 // * Security Configuration                      *
 // ***********************************************
 
 //   $_ARCHON->config->ForceHTTPS = true;
 
-
-   
-   
 // ***********************************************
 // * File Cache Configuration                    *
 // ***********************************************
@@ -174,6 +163,9 @@
 //   $_ARCHON->config->CacheFiles = true;
 //   $_ARCHON->config->CachePermissions = 0755;
 
-
+// Set default timezone to prevent PHP warnings
+if( ! ini_get('date.timezone') ) {
+  date_default_timezone_set('GMT');
+}
 
 ?>

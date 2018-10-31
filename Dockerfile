@@ -1,7 +1,8 @@
-FROM php:5.3-apache
+# See: https://hub.docker.com/r/prodamin/php-5.3-apache/
+FROM eugeneware/php-5.3
 
 RUN apt-get update && \
-    apt-get install -y php5-mysql php-xml-dtd php-xml-parser libxml2-dev
+  apt-get install -y libxml2-dev
 
 # Works only with PHP 5.4 and higher
 # RUN docker-php-ext-install mysql xml
