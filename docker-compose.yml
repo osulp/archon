@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  webserver:
+    build: .
+    command: /var/www/html/docker-entrypoint.sh
+    ports:
+      - "8080:80"
+      - "443:443"
+    volumes:
+      - .:/var/www/html
+    links:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_NAME=archon_dev
+      - DB_USER=archon
+      - DB_PASS=archon
+    networks:
+      internal:
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=docker
+      - MYSQL_DATABASE=archon_dev
+      - MYSQL_USER=archon
+      - MYSQL_PASSWORD=archon
+    networks:
+      internal:
+
+networks:
+  internal:

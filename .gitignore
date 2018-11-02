@@ -2,6 +2,9 @@
 .htaccess
 incoming/
 config.inc.php
+packages/core/install/install.php
+packages/core/install/install.php.done
 robots.txt
 ead-download/
 .env
+db/
