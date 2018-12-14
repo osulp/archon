@@ -154,7 +154,8 @@ abstract class Accessions_Archon
             $wherevars = array();
          }
 
-         $prepQuery->query = "SELECT tblAccessions_Accessions.* FROM tblAccessions_Accessions $wherequery ORDER BY tblAccessions_Accessions.Title, tblAccessions_Accessions.Identifier";
+         // Change Accession Browse list to sort descending by Accession ID - Issue #154
+         $prepQuery->query = "SELECT tblAccessions_Accessions.* FROM tblAccessions_Accessions $wherequery ORDER BY tblAccessions_Accessions.Identifier DESC";
          $prepQuery->types = $wheretypes;
          $prepQuery->vars = $wherevars;
          $arrPrepQueries[] = $prepQuery;
