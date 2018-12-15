@@ -1525,19 +1525,16 @@ abstract class Accessions_Accession
          $String .= " <a href='?p=accessions/accession&amp;id={$this->ID}{$q}'> ";
       }
 
+      # Remove Inclusive Dates from being appended in Accession Title - Issue #153
+      # Prepend Accession Identifier to Accession Title
+
       if($this->Title)
       {
-         $String .= $this->getString('Title');
+         $String .= $this->getString('Identifier') . " - " . $this->getString('Title');
       }
       else
       {
          $String .= $this->getString('Identifier');
-      }
-
-
-      if($this->InclusiveDates)
-      {
-         $String .= ', ' . $this->getString('InclusiveDates');
       }
 
       if($MakeIntoLink == LINK_EACH || $MakeIntoLink == LINK_TOTAL)
@@ -1727,6 +1724,7 @@ abstract class Accessions_Accession
    public $PrimaryCreator = NULL;
 
    public $ToStringFields = array('ID', 'Title', 'InclusiveDates');
+
 }
 
 $_ARCHON->mixClasses('Accession', 'Accessions_Accession');
