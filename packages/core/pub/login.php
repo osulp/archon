@@ -72,8 +72,11 @@ $inputs[] = array(
 	'template' => 'FieldCheckbox',
 );
 
-$form = "<input type=\"hidden\" name=\"p\" value=\"$_REQUEST[p]\" />\n";
-$form .= "<input type=\"hidden\" name=\"go\" value=\"{$_REQUEST['go']}\" />\n";
+$query_p = htmlspecialchars($_REQUEST['p'], ENT_COMPAT, "UTF-8");
+$query_go = htmlspecialchars($_REQUEST['go'], ENT_COMPAT, "UTF-8");
+
+$form = "<input type=\"hidden\" name=\"p\" value=\"{$query_p}\" />\n";
+$form .= "<input type=\"hidden\" name=\"go\" value=\"{$query_go}\" />\n";
 
 foreach($inputs as $input)
 {
