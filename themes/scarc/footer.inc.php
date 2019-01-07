@@ -14,8 +14,8 @@ isset($_ARCHON) or die();
   <div class="col-md-1"></div>
   <div class="col-md-6">
     <p>
-      <a class="footer" href="http://scarc.library.oregonstate.edu">Special Collections &amp; Archives Research Center</a><br />
-      <a class="footer" href="http://library.oregonstate.edu">Oregon State University Libraries</a><br />
+      <a class="footer" href="http://scarc.library.oregonstate.edu">Special Collections and Archives Research Center</a><br />
+      <a class="footer" href="https://library.oregonstate.edu">Oregon State University Libraries</a><br />
       <a class="footer" href="mailto:scarc@oregonstate.edu">scarc@oregonstate.edu</a><br />
       <a class="footer" href="tel:+15417372075">541-737-2075</a><br />
       <br />

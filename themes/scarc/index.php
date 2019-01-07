@@ -18,7 +18,7 @@ if (isset($_REQUEST['f']) && in_array($_REQUEST['f'], $pages)) {
 <div class="row">
   <div class="col-md-6">
     <h1>Welcome</h1>
-    <p>Welcome to the OSU Libraries Special Collections & Archives Research
+    <p>Welcome to the OSU Libraries Special Collections and Archives Research
       Center’s collections portal, home to detailed description of
       the more than 1,200 archival collections held by SCARC. Use the
       Collections menu above to navigate by collection title, collection
