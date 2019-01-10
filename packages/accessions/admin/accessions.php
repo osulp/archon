@@ -56,23 +56,20 @@ function accessions_ui_main()
    $generalSection->getRow('accessiondate')->insertTextField('AccessionDateDay', 2, 2)->required();
    $generalSection->getRow('accessiondate')->insertHTML(' / ');
    $generalSection->getRow('accessiondate')->insertTextField('AccessionDateYear', 4, 4)->required();
-   $generalSection->insertRow('title')->insertNameField('Title');
+
+   $generalSection->insertRow('title')->insertNameField('Title')->required();
    $generalSection->insertRow('identifier')->insertTextField('Identifier', 10, 50)->required();
    $generalSection->insertRow('inclusivedates')->insertTextField('InclusiveDates', 25, 75);
-   $generalSection->insertRow('receivedextent')->insertTextField('ReceivedExtent', 5, 9);
-   $generalSection->getRow('receivedextent')->insertSelect('ReceivedExtentUnitID', 'getAllExtentUnits');
-   $generalSection->insertRow('unprocessedextent')->insertTextField('UnprocessedExtent', 5, 9);
-   $generalSection->getRow('unprocessedextent')->insertSelect('UnprocessedExtentUnitID', 'getAllExtentUnits');
+
+   $generalSection->insertRow('receivedextent')->insertTextField('ReceivedExtent', 5, 9)->required();
+   $generalSection->getRow('receivedextent')->insertSelect('ReceivedExtentUnitID', 'getAllExtentUnits')->required();
+//   $generalSection->insertRow('unprocessedextent')->insertTextField('UnprocessedExtent', 5, 9);
+//   $generalSection->getRow('unprocessedextent')->insertSelect('UnprocessedExtentUnitID', 'getAllExtentUnits');
 
 
-   $generalSection->insertRow('materialtypeid')->insertSelect('MaterialTypeID', 'getAllMaterialTypes');
-   $generalSection->insertRow('processingpriorityid')->insertSelect('ProcessingPriorityID', 'getAllProcessingPriorities');
-   $generalSection->insertRow('expectedcompletiondate')->insertTextField('ExpectedCompletionDateMonth', 2, 2);
-   $generalSection->getRow('expectedcompletiondate')->insertHTML(' / ');
-   $generalSection->getRow('expectedcompletiondate')->insertTextField('ExpectedCompletionDateDay', 2, 2);
-   $generalSection->getRow('expectedcompletiondate')->insertHTML(' / ');
-   $generalSection->getRow('expectedcompletiondate')->insertTextField('ExpectedCompletionDateYear', 4, 4);
-
+//   $generalSection->insertRow('materialtypeid')->insertSelect('MaterialTypeID', 'getAllMaterialTypes');
+   //   Processing Priority reworked to A/D Status
+   $generalSection->insertRow('processingpriorityid')->insertSelect('ProcessingPriorityID', 'getAllProcessingPriorities')->required();
 
    $generalSection->insertRow('creators')->insertAdvancedSelect('Creators',
            array(
@@ -101,6 +98,12 @@ function accessions_ui_main()
    }
 
    $generalSection->insertRow('primary_creator')->insertSelect('PrimaryCreatorID', $arrCreators);
+
+   $generalSection->insertRow('expectedcompletiondate')->insertTextField('ExpectedCompletionDateMonth', 2, 2);
+   $generalSection->getRow('expectedcompletiondate')->insertHTML(' / ');
+   $generalSection->getRow('expectedcompletiondate')->insertTextField('ExpectedCompletionDateDay', 2, 2);
+   $generalSection->getRow('expectedcompletiondate')->insertHTML(' / ');
+   $generalSection->getRow('expectedcompletiondate')->insertTextField('ExpectedCompletionDateYear', 4, 4);
 
 
    $locationSection = $_ARCHON->AdministrativeInterface->insertSection('locations', 'multiple');
@@ -137,14 +140,15 @@ function accessions_ui_main()
    );
 
    $donorInfoSection = $_ARCHON->AdministrativeInterface->insertSection('donor');
-   $donorInfoSection->insertRow('donor_donor')->insertTextField('Donor');
+   $donorInfoSection->insertRow('donor_donor')->insertTextField('Donor')->required();
    $donorInfoSection->insertRow('donor_donorcontactinformation')->insertTextArea('DonorContactInformation');
    $donorInfoSection->insertRow('donor_donornotes')->insertTextArea('DonorNotes');
 
    $accessionDescriptionSection = $_ARCHON->AdministrativeInterface->insertSection('description');
-   $accessionDescriptionSection->insertRow('description_physicaldescription')->insertTextArea('PhysicalDescription');
-   $accessionDescriptionSection->insertRow('description_scopecontent')->insertTextArea('ScopeContent');
+   $accessionDescriptionSection->insertRow('description_scopecontent')->insertTextArea('ScopeContent')->required();
+   // Comments was reworked to Biographical/Historical Note
    $accessionDescriptionSection->insertRow('description_comments')->insertTextArea('Comments');
+   $accessionDescriptionSection->insertRow('description_physicaldescription')->insertTextArea('PhysicalDescription');
 
    $subjectTypes = $_ARCHON->getSubjectTypeJSONList();
 
