@@ -7,7 +7,7 @@
 					Accession
 				</phrase>
 				<phrase name='accessiondate' regularexpression=''>
-					Accession Date
+					Accession Received
 				</phrase>
 				<phrase name='accessionlocationentry' regularexpression=''>
 					Accession Location Entry
@@ -28,10 +28,10 @@
 					Collection or Classification
 				</phrase>
 				<phrase name='identifier' regularexpression=''>
-					Identifier
+					Accession Number
 				</phrase>
 				<phrase name='processingpriority' regularexpression=''>
-					Processing Priority
+          A/D Status
 				</phrase>
 				<phrase name='receivedextent' regularexpression=''>
 					Received Extent
@@ -100,13 +100,13 @@
 					Display Order
 				</phrase>
 				<phrase name='header' regularexpression=''>
-					Processing Priorities Manager
+          A/D Status Manager
 				</phrase>
 				<phrase name='module_name' regularexpression=''>
-					Processing Priorities Manager
+          A/D Status Manager
 				</phrase>
 				<phrase name='processingpriority' regularexpression=''>
-					Processing Priority
+          A/D Status
 				</phrase>
 			</phrasetype>
 		</module>
@@ -212,7 +212,7 @@
 			</phrasetype>
 			<phrasetype name='Administrative Phrase'>
 				<phrase name='accessiondate' regularexpression=''>
-					Accession Date
+					Accession Received
 				</phrase>
 				<phrase name='collections' regularexpression=''>
 					Collections/Classifications Information
@@ -230,7 +230,7 @@
 					Accession Description
 				</phrase>
 				<phrase name='description_comments' regularexpression=''>
-					Comments
+          Biographical / Historical Note
 				</phrase>
 				<phrase name='description_physicaldescription' regularexpression=''>
 					Physical Description
@@ -254,13 +254,13 @@
 					Enable Web Output
 				</phrase>
 				<phrase name='expectedcompletiondate' regularexpression=''>
-					Expected Date of Completion
+					Accession Completed
 				</phrase>
 				<phrase name='header' regularexpression=''>
 					Accessions Manager
 				</phrase>
 				<phrase name='identifier' regularexpression=''>
-					Identifier
+					Accession Number
 				</phrase>
 				<phrase name='inclusivedates' regularexpression=''>
 					Inclusive Dates
@@ -296,7 +296,7 @@
 					Primary Creator
 				</phrase>
 				<phrase name='processingpriorityid' regularexpression=''>
-					Processing Priority
+          A/D Status
 				</phrase>
 				<phrase name='receivedextent' regularexpression=''>
 					Received Extent
@@ -308,7 +308,7 @@
 					Subjects
 				</phrase>
 				<phrase name='title' regularexpression=''>
-					Title
+					Accession Title
 				</phrase>
 				<phrase name='unprocessedextent' regularexpression=''>
 					Unprocessed Extent
