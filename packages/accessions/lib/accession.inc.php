@@ -1578,6 +1578,11 @@ abstract class Accessions_Accession
    /**
     * @var string
     */
+   public $Accessioner = '';
+
+   /**
+    * @var string
+    */
    public $Title = '';
 
    /**
@@ -1590,6 +1595,11 @@ abstract class Accessions_Accession
     * @var string
     */
    public $InclusiveDates = '';
+
+   /**
+    * @var string
+    */
+   public $BulkDates = '';
 
    /**
     * @var float
@@ -1662,6 +1672,21 @@ abstract class Accessions_Accession
     * @var string
     */
    public $PhysicalDescription = '';
+
+   /**
+    * @var string
+    */
+   public $ArrangementCondition = '';
+
+   /**
+    * @var string
+    */
+   public $TransferNote = '';
+
+   /**
+    * @var string
+    */
+   public $AccessStatement = '';
 
    /**
     * @var string

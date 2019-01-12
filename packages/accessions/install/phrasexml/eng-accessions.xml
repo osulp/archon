@@ -113,8 +113,14 @@
 		<module script='accessions'>
 			<phrasetype name='Description'>
 				<phrase name='accessiondate' regularexpression=''>
-					Use this field to record the date the accession was received in the repository, in mm/dd/yyyy format.
+          Use this field to record the date the materials arrived in SCARC, in the mm/dd/yyyy format.
 				</phrase>
+				<phrase name='accessioner' regularexpression=''>
+					Use this field to record the name of the SCARC staff member responsible for the accession.
+				</phrase>
+				<phrase name='bulkdates' regularexpression=''>
+          Use this field to record the date(s) that pertain to the majority of the documents in the collection being described, when those differ significantly from the inclusive dates.  
+        </phrase>
 				<phrase name='collections' regularexpression=''>
 					Open this area to associate new accession to existing collections or record series classifications.
 					
@@ -124,10 +130,16 @@
 					Use this field to select a related collection.
 				</phrase>
 				<phrase name='creators' regularexpression=''>
-					Open this section to link creator authority records to this accession.
+					Use this field to link an existing creator to the accession.
 				</phrase>
 				<phrase name='description' regularexpression=''>
 					Open this section to record descriptive information for the accession such as a physical description, scope and content note, or comments.
+				</phrase>
+				<phrase name='description_accessstatement' regularexpression=''>
+          Use this field to record information about access restrictions, such as those imposed by the donor, repository, or statutory/regulatory requirements and/or identify any restritions on reproduction due to copyright or other reasons (See DACS Rules 4.1 and 4.4 for more information.)
+				</phrase>
+				<phrase name='description_arrangementcondition' regularexpression=''>
+					Use this field to record information about the physical arrangement of the accession, including box contents, physical order, etc. as well as physical condition.
 				</phrase>
 				<phrase name='description_comments' regularexpression=''>
 					Use this field to record additional comments about the accession that may not be pertinent in other fields.
@@ -138,11 +150,14 @@
 				<phrase name='description_scopecontent' regularexpression=''>
 					Use this field to provide a scope note, i.e. information about the overall nature of the materials and activities reflected in the materials accessioned. (See DACS Rule 3.1 for more information.)
 				</phrase>
+				<phrase name='description_transfernote' regularexpression=''>
+					Use this field to record transfers from this accession.
+				</phrase>
 				<phrase name='donor' regularexpression=''>
 					Open this section to record information about the donor of this accession.
 				</phrase>
 				<phrase name='donor_donor' regularexpression=''>
-					Use this field to name the person or organization that offered the accession to your institution.
+          Use this field to record the name of the person and/or organization that donated this accesion.
 				</phrase>
 				<phrase name='donor_donorcontactinformation' regularexpression=''>
 					Use this field to provide contact information for the person or organization that offered the accession to your institution.
@@ -154,7 +169,7 @@
 					Changing this radio button to 'no' will suppress the public view of the accession's existence.
 				</phrase>
 				<phrase name='expectedcompletiondate' regularexpression=''>
-					Use this field to record the expected date of completion for the accession's processing.
+          Use this field to record the date the accession process is completed (including full paperwork and final steps), in the mm/dd/yyyy.
 				</phrase>
 				<phrase name='header' regularexpression=''>
 					Use the Accessions Manager to describe newly acquired materials that have not been processed and cataloged.  
@@ -192,19 +207,19 @@
 					Use this field to appropriately describe the type of materials found in the accession.
 				</phrase>
 				<phrase name='primary_creator' regularexpression=''>
-					Use this field to select a creator record to associate as the primary creator for the records/collections.
+					Use this field to select an existing creator as a primary creator for the accession.
 				</phrase>
 				<phrase name='processingpriorityid' regularexpression=''>
-					Use this field to select the appropriate level of urgency and care required for processing the accession.
+					Use this field to indicate whether the accession has been processed, described, and fully incorporated into the collection.
 				</phrase>
 				<phrase name='receivedextent' regularexpression=''>
 					Use these fields to describe the physical extent of the accession at the time it was received.
 				</phrase>
 				<phrase name='subjects' regularexpression=''>
-					Open this section to link an existing subject authority record to the accession.
+					Use this field to link an existing subject term to the accession.
 				</phrase>
 				<phrase name='title' regularexpression=''>
-					Use this field to give a unique title to the accession.
+					Use this field to record the full title including the collection title and collection ID (ex. Bioresource Engineering Department Records (RG 001)).
 				</phrase>
 				<phrase name='unprocessedextent' regularexpression=''>
 					Use this field to record the physical extent of the accession that remains unprocessed.
@@ -213,6 +228,12 @@
 			<phrasetype name='Administrative Phrase'>
 				<phrase name='accessiondate' regularexpression=''>
 					Accession Received
+				</phrase>
+				<phrase name='accessioner' regularexpression=''>
+					Accessioner
+				</phrase>
+				<phrase name='bulkdates' regularexpression=''>
+					Bulk Dates
 				</phrase>
 				<phrase name='collections' regularexpression=''>
 					Collections/Classifications Information
@@ -229,6 +250,12 @@
 				<phrase name='description' regularexpression=''>
 					Accession Description
 				</phrase>
+				<phrase name='description_accessstatement' regularexpression=''>
+          Access Statement
+				</phrase>
+				<phrase name='description_arrangementcondition' regularexpression=''>
+          Arrangement and Condition
+				</phrase>
 				<phrase name='description_comments' regularexpression=''>
           Biographical / Historical Note
 				</phrase>
@@ -237,6 +264,9 @@
 				</phrase>
 				<phrase name='description_scopecontent' regularexpression=''>
 					Scope Content
+				</phrase>
+				<phrase name='description_transfernote' regularexpression=''>
+          Transfer Note
 				</phrase>
 				<phrase name='donor' regularexpression=''>
 					Donor Information

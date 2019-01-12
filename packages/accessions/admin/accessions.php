@@ -57,9 +57,11 @@ function accessions_ui_main()
    $generalSection->getRow('accessiondate')->insertHTML(' / ');
    $generalSection->getRow('accessiondate')->insertTextField('AccessionDateYear', 4, 4)->required();
 
+   $generalSection->insertRow('accessioner')->insertNameField('Accessioner')->required();
    $generalSection->insertRow('title')->insertNameField('Title')->required();
    $generalSection->insertRow('identifier')->insertTextField('Identifier', 10, 50)->required();
    $generalSection->insertRow('inclusivedates')->insertTextField('InclusiveDates', 25, 75);
+   $generalSection->insertRow('bulkdates')->insertTextField('BulkDates', 25, 75);
 
    $generalSection->insertRow('receivedextent')->insertTextField('ReceivedExtent', 5, 9)->required();
    $generalSection->getRow('receivedextent')->insertSelect('ReceivedExtentUnitID', 'getAllExtentUnits')->required();
@@ -149,6 +151,9 @@ function accessions_ui_main()
    // Comments was reworked to Biographical/Historical Note
    $accessionDescriptionSection->insertRow('description_comments')->insertTextArea('Comments');
    $accessionDescriptionSection->insertRow('description_physicaldescription')->insertTextArea('PhysicalDescription');
+   $accessionDescriptionSection->insertRow('description_arrangementcondition')->insertTextArea('ArrangementCondition');
+   $accessionDescriptionSection->insertRow('description_transfernote')->insertTextArea('TransferNote');
+   $accessionDescriptionSection->insertRow('description_accessstatement')->insertTextArea('AccessStatement');
 
    $subjectTypes = $_ARCHON->getSubjectTypeJSONList();
 
