@@ -54,7 +54,8 @@ if($objCollection->TemplateSet && $_REQUEST['templateset'] != 'EAD')
 
 if(!$_ARCHON->PublicInterface->Templates['collections']['Collection'])
 {
-   $_ARCHON->declareError("Could not display FindingAid: Collection template not defined for template set {$_ARCHON->PublicInterface->TemplateSet}.");
+   $query_TemplateSet = htmlspecialchars($_ARCHON->PublicInterface->TemplateSet, ENT_COMPAT, "UTF-8");
+   $_ARCHON->declareError("Could not display FindingAid: Collection template not defined for template set {$query_TemplateSet}.");
 }
 
 $_ARCHON->PublicInterface->Title = $objCollection->toString();

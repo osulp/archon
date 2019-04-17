@@ -2793,7 +2793,9 @@ abstract class Core_Archon
 
       if(preg_match('/[\\/\\\\]/u', $TemplateSet))
       {
-         $this->declareError("Could not load Templates: Invalid TemplateSet $TemplateSet.");
+         $query_TemplateSet = htmlspecialchars($TemplateSet, ENT_COMPAT, "UTF-8");
+
+         $this->declareError("Could not load Templates: Invalid TemplateSet $query_TemplateSet.");
          return false;
       }
 
