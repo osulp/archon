@@ -376,6 +376,7 @@ abstract class Core_AdminField
       }
       else // Find out if an id has been set in the database
       {
+         $tempClassificationIdValue = NULL;
          foreach($this->FieldNames as $key => $FieldName)
          {
             $tempValue = $this->getFieldValue($FieldName);
@@ -384,6 +385,10 @@ abstract class Core_AdminField
             {
                $MasterFieldName = $FieldName;
                $MasterFieldValue = $tempValue;
+               if (strcmp($FieldName, "ClassificationID") == 0)
+               {
+                   $tempClassificationIdValue = $tempValue;
+               }
             }
          }
       }
@@ -446,6 +451,10 @@ abstract class Core_AdminField
          else if(count($this->FieldNames) > 1) // The field's class has no hierarchy
          {
             $tempTopObject = New $this->ClassNames[$key]($FieldValues[$key]);
+             if (isset($tempClassificationIdValue))
+             {
+                 $tempTopObject->ClassificationID = $tempClassificationIdValue;
+             }
             $tempTopObject->dbLoad();
             $TopObjects[$key] = $tempTopObject;
          }
@@ -584,9 +593,9 @@ abstract class Core_AdminField
                foreach($arrSelectChoices as $ID => $objSelectChoice)
                {
                   $optionString = is_string($objSelectChoice) ? $objSelectChoice : $objSelectChoice->toString();
-
-                  $selected = ($ID == $FieldValues[$key]) ? " selected='selected'" : '';
-                  echo("<option value='$ID'$selected>" . caplength($optionString, $this->MaxLength) . "</option>\n");
+                  $optionID = is_string($objSelectChoice) ? $ID : $objSelectChoice->ID;
+                  $selected = ($optionID == $FieldValues[$key]) ? " selected='selected'" : '';
+                  echo("<option value='$optionID'$selected>" . caplength($optionString, $this->MaxLength) . "</option>\n");
                }
                echo("</select>");
             }
