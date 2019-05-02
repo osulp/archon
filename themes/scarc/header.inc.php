@@ -70,8 +70,9 @@ if (empty($_ARCHON->PublicInterface->Title)) {
         <link rel="stylesheet" type="text/css" href="themes/<?php echo($_ARCHON->PublicInterface->Theme); ?>/ie.css" />
         <link rel="stylesheet" type="text/css" href="themes/<?php echo($_ARCHON->PublicInterface->ThemeJavascriptPath); ?>/cluetip/jquery.cluetip.ie.css" />
       <![endif]-->
-     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-     <script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-3.0.1.min.js"></script>
+     <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
      <?php echo($_ARCHON->getJavascriptTags('jquery-expander')); ?>
       <script type="text/javascript" src="<?php echo($_ARCHON->PublicInterface->ThemeJavascriptPath); ?>/jquery.hoverIntent.js"></script>
       <script type="text/javascript" src="<?php echo($_ARCHON->PublicInterface->ThemeJavascriptPath); ?>/cluetip/jquery.cluetip.js"></script>
