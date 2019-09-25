@@ -19,7 +19,7 @@ isset($_ARCHON) or die();
       <a class="footer" href="mailto:scarc@oregonstate.edu">scarc@oregonstate.edu</a><br />
       <a class="footer" href="tel:+15417372075">541-737-2075</a><br />
       <br />
-      Normal Operating Hours: 9a.m. - 5p.m. Mon-Fri <br />
+      Normal Operating Hours: 10:00 am-4:00 pm, Mon-Fri <br />
       <br />
       121 The Valley Library<br />
       Oregon State University<br />
