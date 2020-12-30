@@ -10,4 +10,5 @@ Custom theme: scarc
 * follow instructions in Archon installer
 * when successful, run `docker exec archon_webserver_1 ./docker-installdone.sh`
 * login using created user
-* visit Archon Administration > Archon Configuration > Default Theme > change to 'scarc'
+* visit Archon Administration > Archon Configuration > Default Theme > change Value to 'scarc'
+* visit Archon Administration > Archon Configuration > Default Template Set > change Value to 'scarc'
