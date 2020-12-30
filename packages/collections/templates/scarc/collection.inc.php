@@ -296,6 +296,18 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
   }
 
   /**
+   * Statement on Description / Processing Info
+   */
+  if ($objCollection->ProcessingInfo) {
+    ?>
+    <div class='ccardcontent'><span
+        class='ccardlabel'><?php echo $_ARCHON->getPhrase('processing_note', PACKAGE_COLLECTIONS, 0, PHRASETYPE_PUBLIC)
+          ->getPhraseValue(ENCODE_HTML); ?></span> <?php echo($objCollection->getString('ProcessingInfo')); ?>
+    </div>
+  <?php
+  }
+
+  /**
    * More Information
    */
   if ($objCollection->Arrangement) {
