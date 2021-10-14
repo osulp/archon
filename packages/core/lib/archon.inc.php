@@ -1764,62 +1764,8 @@ abstract class Core_Archon
     */
    public function getLatestArchonVersion()
    {
-      if(CONFIG_CORE_CHECK_FOR_UPDATES)
-      {
-         $date = date('Y-m-d');
-
-         $result = $this->mdb2->query("SELECT LastUpdated,VersionNumber FROM tblCore_VersionCache WHERE VersionName = 'Version';");
-         
-         if(!PEAR::isError($result) && $result->numRows())
-         {
-            $row = $result->fetchRow();
-            if($date > $row['LastUpdated'])
-            {
-               $version = @file_get_contents($this->ArchonURL . 'sys/version.php?aprcode=core');
-               $query = "UPDATE tblCore_VersionCache SET VersionNumber = ?, LastUpdated = ?  WHERE VersionName = ? ";
-               $prep = $this->mdb2->prepare($query, array('text', 'date', 'text'), MDB2_PREPARE_MANIP);
-               if(PEAR::isError($prep))
-               {
-                  trigger_error($prep->getMessage(), E_USER_ERROR);
-               }
-
-               $affected = $prep->execute(array($version, $date, 'Version'));
-               if(PEAR::isError($affected))
-               {
-                  trigger_error($affected->getMessage(), E_USER_ERROR);
-               }
-
-               $prep->free();
-            }
-            else
-            {
-               $version = $row['VersionNumber'];
-            }
-         }
-         else
-         {
-
-            $version = @file_get_contents($this->ArchonURL . 'sys/version.php?aprcode=core');
-
-            $query = "INSERT INTO tblCore_VersionCache (VersionName, VersionNumber, LastUpdated) VALUES (?, ?, ?)";
-            $prep = $this->mdb2->prepare($query, array('text', 'text', 'date'), MDB2_PREPARE_MANIP);
-            if(!PEAR::isError($prep))
-            {
-               $affected = $prep->execute(array('Version', $version, $date));
-               if(PEAR::isError($affected))
-               {
-                  trigger_error($affected->getMessage(), E_USER_ERROR);
-               }
-               $prep->free();
-            }
-         }
-
-         return $version;
-      }
-      else
-      {
-         return $this->Version;
-      }
+      // code removed to prevent external update checks that fail - Issue #167 
+      return $this->Version;
    }
 
    /**
@@ -1829,64 +1775,8 @@ abstract class Core_Archon
     */
    public function getLatestArchonRevision()
    {
-      if(CONFIG_CORE_CHECK_FOR_UPDATES)
-      {
-         $date = date('Y-m-d');
-
-         $result = $this->mdb2->query("SELECT LastUpdated,VersionNumber FROM tblCore_VersionCache WHERE VersionName = 'Revision';");
-         if($result->numRows())
-         {
-            $row = $result->fetchRow();
-            if($date > $row['LastUpdated'])
-            {
-               $revision = @file_get_contents($this->ArchonURL . 'sys/version.php?type=revision');
-               $query = "UPDATE tblCore_VersionCache SET VersionNumber = ?, LastUpdated = ?  WHERE VersionName = ? ";
-               $prep = $this->mdb2->prepare($query, array('text', 'date', 'text'), MDB2_PREPARE_MANIP);
-               if(PEAR::isError($prep))
-               {
-                  trigger_error($prep->getMessage(), E_USER_ERROR);
-               }
-
-               $affected = $prep->execute(array($revision, $date, 'Revision'));
-               if(PEAR::isError($affected))
-               {
-                  trigger_error($prep->getMessage(), E_USER_ERROR);
-               }
-
-               $prep->free();
-            }
-            else
-            {
-               $revision = $row['VersionNumber'];
-            }
-         }
-         else
-         {
-
-            $revision = @file_get_contents($this->ArchonURL . 'sys/version.php?type=revision');
-
-            $query = "INSERT INTO tblCore_VersionCache (VersionName, VersionNumber, LastUpdated) VALUES (?, ?, ?)";
-            $prep = $this->mdb2->prepare($query, array('text', 'text', 'date'), MDB2_PREPARE_MANIP);
-            if(PEAR::isError($prep))
-            {
-               trigger_error($prep->getMessage(), E_USER_ERROR);
-            }
-
-            $affected = $prep->execute(array('Revision', $revision, $date));
-            if(PEAR::isError($affected))
-            {
-               trigger_error($affected->getMessage(), E_USER_ERROR);
-            }
-
-            $prep->free();
-         }
-
-         return $revision;
-      }
-      else
-      {
-         return $this->Revision;
-      }
+      // code removed to prevent external update checks that fail - Issue #167
+      return $this->Revision;
    }
 
    /**
@@ -1896,64 +1786,8 @@ abstract class Core_Archon
     */
    public function getLatestPackageVersionFromAPRCode($APRCode)
    {
-      if(CONFIG_CORE_CHECK_FOR_UPDATES)
-      {
-         $date = date('Y-m-d');
-
-         $result = $this->mdb2->query("SELECT LastUpdated,VersionNumber FROM tblCore_VersionCache WHERE VersionName = '$APRCode';");
-         if($result->numRows())
-         {
-            $row = $result->fetchRow();
-            if($date > $row['LastUpdated'])
-            {
-               $version = @file_get_contents($this->ArchonURL . 'sys/version.php?aprcode=' . $APRCode);
-               $query = "UPDATE tblCore_VersionCache SET VersionNumber = ?, LastUpdated = ?  WHERE VersionName = ? ";
-               $prep = $this->mdb2->prepare($query, array('text', 'date', 'text'), MDB2_PREPARE_MANIP);
-               if(PEAR::isError($prep))
-               {
-                  trigger_error($prep->getMessage(), E_USER_ERROR);
-               }
-
-               $affected = $prep->execute(array($version, $date, $APRCode));
-               if(PEAR::isError($affected))
-               {
-                  trigger_error($affected->getMessage(), E_USER_ERROR);
-               }
-
-               $prep->free();
-            }
-            else
-            {
-               $version = $row['VersionNumber'];
-            }
-         }
-         else
-         {
-
-            $version = @file_get_contents($this->ArchonURL . 'sys/version.php?aprcode=' . $APRCode);
-
-            $query = "INSERT INTO tblCore_VersionCache (VersionName, VersionNumber, LastUpdated) VALUES (?, ?, ?)";
-            $prep = $this->mdb2->prepare($query, array('text', 'text', 'date'), MDB2_PREPARE_MANIP);
-            if(PEAR::isError($prep))
-            {
-               trigger_error($prep->getMessage(), E_USER_ERROR);
-            }
-
-            $affected = $prep->execute(array($APRCode, $version, $date));
-            if(PEAR::isError($affected))
-            {
-               trigger_error($affected->getMessage(), E_USER_ERROR);
-            }
-
-            $prep->free();
-         }
-
-         return $version;
-      }
-      else
-      {
-         return $this->Version;
-      }
+      // code removed to prevent external update checks that fail - Issue #167
+      return $this->Version;
    }
 
    /**
