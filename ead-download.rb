@@ -54,7 +54,11 @@ list.each_with_index do |l, index|
 
   puts (index + 1).to_s + ") Archon ID " + archon_id + ": " + l
 
+  # Write out EAD XML file
   File.write("#{export_directory}/#{archon_id}.xml", ead.body)
+
+  # Write out Collection HTML file
+  File.write("#{export_directory}/#{archon_id}.html", collection.body)
 
   sleep 3
 end
