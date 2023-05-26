@@ -40,12 +40,8 @@ research_displaycart();
 if(!$_ARCHON->Security->isAuthenticated())
 {
 ?>
-   <span class='bold'><a href="?p=core/register">Register an account to set up a research appointment</a></span>
-   <br/><br/>
-   <p>Registering an account and submitting research requests through this system
-     helps us to have your materials ready for you before you arrive for your appointment.
-     We require at least 24 hours notice before your arrival, and we will page up to five boxes in advance.</p>
-   <p>(If you already have an account, please <a href="?p=core/login">login</a>.)</p>
+
+<span class='bold'>To learn more about our by-appointment hours, and the logistics of in-person research, please visit the <a href="https://guides.library.oregonstate.edu/guidetoscarc/engaging">Conducting In-person Research</a> page of our <a href="https://guides.library.oregonstate.edu/guidetoscarc/welcome">Guide to SCARC</a>.</span>
 
 <?php
 }
