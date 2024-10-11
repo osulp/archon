@@ -118,7 +118,7 @@ if(defined('PACKAGE_DIGITALLIBRARY'))
       ?>
       <div class="ccardcontent" id="other_guides">
         <span class="ccardlabel">
-          <a href="#" onclick="toggleDisplay('OtherGuides'); return false;"><span id="OtherGuidesImage" class="glyphicon glyphicon-plus-sign"></span> Other Reference Guides (PDF)</a>
+          <a href="#" onclick="toggleDisplay('OtherGuides'); return false;"><span id="OtherGuidesImage" class="glyphicon glyphicon-plus-sign"></span> Preliminary Collection Inventory</a>
         </span>
         <div class="ccardshowlist" style="display:none" id="OtherGuidesResults">
           <div id="acrobatDownload">
